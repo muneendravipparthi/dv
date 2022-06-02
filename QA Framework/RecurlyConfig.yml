@@ -1,0 +1,89 @@
+
+####### Customers mapping #####################
+Customers Automation Configuration:
+  CustomerAddressOfAccount:
+    - 'account_first_name'
+    - 'account_last_name'
+    - 'account_address1'
+    - 'account_address2'
+    - 'account_city'
+    - 'account_state'
+    - 'account_country'
+    - 'account_postal_code'
+    - 'account_phone'
+    - 'account_vat_number'
+
+  CustomerAddressOfBilling:
+    - 'billing_first_name'
+    - 'billing_last_name'
+    - 'billing_address1'
+    - 'billing_address2'
+    - 'billing_city'
+    - 'billing_state'
+    - 'billing_country'
+    - 'billing_postal_code'
+    - 'billing_phone'
+    - 'billing_vat_number'
+
+
+####### subscriptions mapping #####################
+Subscriptions Automation Configuration:
+  Subscription_UUID: 'uuid'
+  Subscriptions_Merge_Key: 'subscription_id'
+
+  No_of_Addons: 5
+  Addon_Merge_Key: 'subscription_uuid'
+  Addon_Columns:
+    - 'add_on_add_on_code'
+    - 'subscription_add_on_quantity'
+    - 'subscription_add_on_unit_amount_in_cents'
+
+  Coupon_ID: 'id'
+  Coupon_Merge_ID: 'coupon_id'
+  Customer_Account_Code: 'account_code'
+  Coupon_Code: 'coupon_code'
+  Subscription_Mapping:
+    Addon : True
+    Redemption : False
+    Coupon : False
+
+  Redemption_Date: 'expires_at'
+  Coupon_Date: 'deactivated_at'
+  Coupon_Redemption_Merge_Key:
+    - 'coupon_id'
+  Coupon_Columns:
+    - 'coupon_code'
+    - 'account_code'
+    - 'coupon_id'
+    - 'subscription_id'
+
+
+################## Invoices ############################
+
+Invoices Automation Configuration:
+  No_Of_LineItems: 2
+  Invoice_Key: 'invoice_number'
+  Invoice_Merge_Key: 'invoice_number_id'
+  Invoice_Tax_Column_Rename: 'Tax_Total : tax_amount_adjMod'
+
+  Adjustment_Tax_Column_Rename: 'tax_amount : tax_amount_adjMod'
+  Adjustment_Total_Column_Rename: 'total : adjustment_total'
+  Invoice_Adjustment_Columns:
+    - 'adjustment_amount'
+    - 'adjustment_product_code'
+    - 'adjustment_quantity'
+  Adjustment_Discount: 'adjustment_discount'
+  Adjustment_Coupon_Code : 'adjustment_coupon_code'
+  Adjustment_Merge_Columns:
+    - 'billed_date'
+    - 'status'
+  Payment_Merge_Columns:
+    - 'payments_amount'
+    - 'payments_date'
+    - 'payments_method'
+  Doc_Type:
+    - invoice_doc_type: 'legacy,charge'
+
+  Discounts_Entity_Type : 'discounts_entity_type_0'
+  Discounts_Entity_ID: 'discounts_entity_id_0'
+  Discounts_Amount: 'discounts_amount_0'
