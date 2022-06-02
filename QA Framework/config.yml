@@ -17,7 +17,7 @@ ChargeBee Automation Configuration:
   # Mapping Source Columns vs : Destination Columns
   Customers_Validation: True
   Customers_SourceFile:
-    "/Users/cb-muneendra/Desktop/popmenu_customers_expected.xlsx"
+    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/popmenu_AllCustomers.xlsx"
 #    "/Users/cb-muneendra/Desktop/framerytradeoy_customers_expected.xlsx"
   Customers_DestinationFile:
     "/Users/cb-muneendra/cb_data_validation/readAPI/popmenu_AllCustomers.xlsx"
