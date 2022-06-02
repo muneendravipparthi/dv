@@ -28,8 +28,8 @@ def customer_prevalidation_check(src_df, columns):
                 src_df[col] = pd.to_datetime(src_df[col])
                 src_df[col] = src_df[col].apply(
                     lambda x: pd.Timestamp(x).strftime(dateformet))
-            except:
-                print("Exception for ", col)
+            except Exception as e:
+                print("Exception for column : {} and exception is : {}".format(col,e))
 
     # precondition for email
     for col in columns:
@@ -39,8 +39,8 @@ def customer_prevalidation_check(src_df, columns):
                 src_df[col] = src_df[col].replace('_AT_', '@', regex=True)
                 src_df[col] = src_df[col].replace('@example.com', '', regex=True)
                 src_df[col] = src_df[col].str.lower()
-            except:
-                print("Exception for ", col)
+            except Exception as e:
+                print("Exception for column : {} and exception is : {}".format(col,e))
 
     # precondition for int
     for col in columns:
@@ -48,17 +48,18 @@ def customer_prevalidation_check(src_df, columns):
             try:
                 print()
                 if 'phone' in col:
+                    src_df[col] = src_df[col].str.lower()
                     src_df[col] = re.sub('[^A-Za-z0-9]+', '', src_df[col])
-            except:
-                print("Exception for ", col)
+            except Exception as e:
+                print("Exception for column : {} and exception is : {}".format(col,e))
 
     # precondition for float
     for col in columns:
         if ((col in list(src_df.columns.values)) and (col in float_columns)):
             try:
                 print()
-            except:
-                print("Exception for ", col)
+            except Exception as e:
+                print("Exception for column : {} and exception is : {}".format(col,e))
 
     # precondition for zip
     for col in columns:
@@ -70,15 +71,16 @@ def customer_prevalidation_check(src_df, columns):
                 src_df[col] = src_df[col].replace(' ', '')
                 src_df[col] = src_df[col].str.zfill(5)
                 src_df[col] = src_df[col].replace('00000', 'False')
-            except:
-                print("Exception for ", col)
+            except Exception as e:
+                print("Exception for column : {} and exception is : {}".format(col,e))
 
     # precondition for string
     for col in columns:
         if ((col in list(src_df.columns.values)) and (col in str_columns)):
             try:
                 src_df[col] = src_df[col].str.lower()
-            except:
-                print("Exception for ", col)
+                src_df[col] = src_df[col].astype(str).apply(lambda x: x.replace('.0', ''))
+            except Exception as e:
+                print("Exception for column : {} and exception is : {}".format(col,e))
 
     return src_df

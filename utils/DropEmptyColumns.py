@@ -3,11 +3,8 @@
 import numpy as np
 import pandas as pd
 
-#/Users/cb-muneendra/Downloads/Exsalerate- Copy of Chargebee Migration Template (PC 2.0) - Subscriptions for customers.csv
-# /Users/cb-muneendra/Downloads/Exsalerate- Copy of Chargebee Migration Template (PC 2.0) - Customers.csv
-# dataFile = '/Users/cb-muneendra/Desktop/Foreup_customer_expected.xlsx'
-# dataFile = '/Users/cb-muneendra/Desktop/Foreup_subscription_expected.xlsx'
-dataFile = '/Users/cb-muneendra/Desktop/popmenu_subscription_expected.xlsx'
+
+dataFile = '/Users/cb-muneendra/Desktop/maxdesign_subscription_expected.xlsx'
 
 
 if dataFile.endswith('csv'):

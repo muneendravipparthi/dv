@@ -4,6 +4,8 @@ import pandas as pd
 def compare_data(src_df, des_df):
     print('src_df rows::: ', len(src_df), '; src_df Columns::: ', len(src_df.columns))
     print('des_df rows:::', len(des_df), '; des_df Columns::: ', len(des_df.columns))
+    src_df = src_df.replace(r'^\s*$', np.nan, regex=True)
+    des_df = des_df.replace(r'^\s*$', np.nan, regex=True)
     des_df.equals(src_df)
     comparison_values = des_df.values == src_df.values
     rows, cols = np.where(comparison_values == False)

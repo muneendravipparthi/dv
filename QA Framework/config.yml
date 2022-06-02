@@ -1,6 +1,6 @@
 ChargeBee Automation Configuration:
   Site: 'test'
-  ClientName: 'popmenu'
+  ClientName: 'maxadesigns'
   IsRecurly: False
   IsRecurlyDS1vsDS2: False
   type:
@@ -13,57 +13,67 @@ ChargeBee Automation Configuration:
 
   # ------------------   CUSTOMER INFORMATION   ------------------
   # Mapping Source Columns vs : Destination Columns
-  Customers_Validation: True
+  Customers_Validation: False
   Customers_SourceFile:
-    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/popmenu_AllCustomers.xlsx"
+    "/Users/cb-muneendra/Desktop/maxdesign_customer_expected.xlsx"
   Customers_DestinationFile:
-    "/Users/cb-muneendra/cb_data_validation/readAPI/popmenu_AllCustomers.xlsx"
+    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/maxadesigns_AllCustomers.xlsx"
 
   Customers_KeyColumns:
     - "customer[id] : customer_id"
 
   Customers_Columns:
     - "customer[id] : customer_id"
-    - "customer[cf_zoho_account_id] : customer_cf_zoho_account_id"
+    - "customer[first_name] : customer_first_name"
+    - "customer[last_name] : customer_last_name"
+    - "customer[phone] : customer_phone"
     - "customer[company] : customer_company"
-    - "customer[preferred_currency_code] : customer_preferred_currency_code"
     - "customer[email] : customer_email"
-    - "payment_method[type] : customer_payment_method_type"
-    - "payment_method[gateway_account_id] : customer_payment_method_gateway_account_id"
-    - "payment_method[reference_id] : customer_payment_method_reference_id"
-    - "customer[allow_direct_debit] : customer_allow_direct_debit"
+    - "e_payment_method[type] : customer_payment_method_type"
+    - "e_payment_method[gateway_account_id] : customer_payment_method_gateway_account_id"
+    - "e_payment_method[reference_id] : customer_payment_method_reference_id"
+    - "billing_address[first_name] : customer_billing_address_first_name"
+    - "billing_address[last_name] : customer_billing_address_last_name"
+    - "billing_address[email] : customer_billing_address_email"
+    - "billing_address[company] : customer_billing_address_company"
+    - "billing_address[phone] : customer_billing_address_phone"
     - "billing_address[line1] : customer_billing_address_line1"
+    - "billing_address[line2] : customer_billing_address_line2"
     - "billing_address[city] : customer_billing_address_city"
     - "billing_address[state_code] : customer_billing_address_state_code"
+    - "billing_address[state] : customer_billing_address_state"
     - "billing_address[zip] : customer_billing_address_zip"
     - "billing_address[country] : customer_billing_address_country"
 
 
+
+
   # ------------------   SUBSCRIPTIONS INFORMATION   ------------------
   # Mapping Source Columns vs : Destination Columns
-  Subscriptions_Validation: False
+  Subscriptions_Validation: True
   Subscriptions_SourceFile:
-    "/Users/cb-muneendra/Desktop/popmenu_subscription_expected.xlsx"
+    "/Users/cb-muneendra/Desktop/maxdesign_subscription_expected.xlsx"
 
   Subscriptions_DestinationFile:
-    "/Users/cb-muneendra/cb_data_validation/readAPI/popmenu_AllSubscriptions.xlsx"
+    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/maxadesigns_AllSubscriptions.xlsx"
 
   Subscriptions_KeyColumns:
-    - "subscription[id] : subscription_id"
+    - "customer[id] : customer_id"
+#    - "subscription[id] : subscription_id"
 
   Subscriptions_Columns:
     - "subscription[id] : subscription_id"
     - "customer[id] : customer_id"
+    - "Client_Name : customer_company"
     - "subscription[status] : subscription_status"
-    - "subscription[start_date] : subscription_start_date"
     - "subscription[started_at] : subscription_started_at"
     - "subscription[current_term_start] : subscription_current_term_start"
     - "subscription[current_term_end] : subscription_current_term_end"
     - "subscription_items[item_price_id][0] : item_price_id[0]"
-    - "subscription_items[unit_price][0] : item_unit_price[0]"
-    - "subscription_items[item_price_id][1] : item_price_id[1]"
-    - "subscription_items[quantity][1] : item_quantity[1]"
-    - "subscription_items[unit_price][1] : item_unit_price[1]"
+    - "subscription_items[quantity][0] : item_quantity[0]"
+    - "subscription[cf_msa_terms] : subscription_cf_msa_terms"
+    - "subscription[cf_max_users] : subscription_cf_max_users"
+    - "subscription[cf_current_active_users] : subscription_cf_current_active_users"
 
 
   # ------------------   INVOICES INFORMATION   ------------------
@@ -517,6 +527,8 @@ ChargeBee Automation Configuration:
     - 'lines.data[3].period.end : line_items[date_to][3]'
 
   Int_Columns:
+    - "customer[phone] : customer_phone"
+    - "billing_address[phone] : customer_billing_address_phone"
     - "payments[amount][0] : payments_txn_amount[0]"
     - "line_items[unit_amount][0] : line_item_unit_amount[0]"
     - "line_items[quantity][1] : line_item_quantity[1]"
