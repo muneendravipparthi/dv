@@ -1,31 +1,27 @@
 ChargeBee Automation Configuration:
   Site: 'test'
-#  ClientName: 'framerytradeoy'
   ClientName: 'popmenu'
-#  ClientName: 'frameryoy'
   IsRecurly: False
   IsRecurlyDS1vsDS2: False
   type:
 #    - DS1vsDS2
     - DS2vsDS3
   dateFormet:
-#    - "%Y-%m-%d %H:%M:%S"
+    - "%Y-%m-%d %H:%M:%S"
 #    - "%Y-%m-%d %H:%M"
-    - "%Y-%m-%d"
+#    - "%Y-%m-%d"
 
   # ------------------   CUSTOMER INFORMATION   ------------------
   # Mapping Source Columns vs : Destination Columns
   Customers_Validation: True
   Customers_SourceFile:
     "/Users/cb-muneendra/Git/cb_data_validation/readAPI/popmenu_AllCustomers.xlsx"
-#    "/Users/cb-muneendra/Desktop/framerytradeoy_customers_expected.xlsx"
   Customers_DestinationFile:
     "/Users/cb-muneendra/cb_data_validation/readAPI/popmenu_AllCustomers.xlsx"
-#    "/Users/cb-muneendra/cb_data_validation/readAPI/framerytradeoy_AllCustomers.xlsx"
+
   Customers_KeyColumns:
     - "customer[id] : customer_id"
-#    - "customer[id] : customer_id"
-#    - "customer[ref] : customer_id"
+
   Customers_Columns:
     - "customer[id] : customer_id"
     - "customer[cf_zoho_account_id] : customer_cf_zoho_account_id"
@@ -43,64 +39,21 @@ ChargeBee Automation Configuration:
     - "billing_address[country] : customer_billing_address_country"
 
 
-  #    - "customer[id] : customer_id"
-#    - "customer[created_at] : customer_created_at"
-#    - "customer[first_name] : customer_first_name"
-#    - "customer[last_name] : customer_last_name"
-#    - "customer[email] : customer_email"
-#    - "customer[phone] : customer_phone"
-#    - "customer[preferred_currency_code] : customer_preferred_currency_code"
-#    - "customer[locale] : customer_locale"
-#    - "customer[meta_data] : customer_meta_data"
-#    - "billing_address[first_name] : customer_billing_address_first_name"
-#    - "billing_address[last_name] : customer_billing_address_last_name"
-#    - "billing_address[line1] : customer_billing_address_line1"
-#    - "billing_address[line2] : customer_billing_address_line2"
-#    - "billing_address[state] : customer_billing_address_state"
-#    - "billing_address[zip] : customer_billing_address_zip"
-#    - "billing_address[country] : customer_billing_address_country"
-
-
-  #    - "customer[ref] : customer_id"
-#    - "NetSuite Internal ID : customer_cf_ns_customer_id"
-#    - "customer[company] : customer_company"
-#    - "customer[preferred_currency_code] : customer_preferred_currency_code"
-#    - "customer[email] : customer_email"
-#    - "customer[allow_direct_debit] : customer_allow_direct_debit"
-#    - "customer[auto_collection] : customer_auto_collection"
-#    - "customer[taxability] : customer_taxability"
-#    - "customer[vat_number] : customer_vat_number"
-#    - "customer[net_term_days] : customer_net_term_days"
-#    - "billing_address[company] : customer_billing_address_company"
-#    - "billing_address[line1] : customer_billing_address_line1"
-#    - "billing_address[city] : customer_billing_address_city"
-#    - "billing_address[zip] : customer_billing_address_zip"
-#    - "billing_address[country] : customer_billing_address_country"
-#    - "cf_subscribed_contract_type : customer_cf_subscribed_contract_type"
-
-
   # ------------------   SUBSCRIPTIONS INFORMATION   ------------------
   # Mapping Source Columns vs : Destination Columns
   Subscriptions_Validation: False
   Subscriptions_SourceFile:
     "/Users/cb-muneendra/Desktop/popmenu_subscription_expected.xlsx"
-#    "/Users/cb-muneendra/Desktop/frameryoy_subscription_expected.xlsx"
-#    "/Users/cb-muneendra/Desktop/framerytrade_expectd_subscriptions.xlsx"
 
   Subscriptions_DestinationFile:
-#    "/Users/cb-muneendra/Downloads/subscriptions_pixellu_25_May_2022_07_36_48/Subscriptions.csv"
     "/Users/cb-muneendra/cb_data_validation/readAPI/popmenu_AllSubscriptions.xlsx"
-#    "/Users/cb-muneendra/cb_data_validation/readAPI/framerytradeoy_AllSubscriptions.xlsx"
-#    "/Users/cb-muneendra/cb_data_validation/readAPI/frameryoy_AllSubscriptions.xlsx"
 
   Subscriptions_KeyColumns:
-    - "customer[id] : customer_id"
-#    - "subscription[id] : subscriptions.id"
-#    - "subscription[id] : subscription_id"
-#    - "subscription[ref] : subscription_id"
-  Subscriptions_Columns:
-    - "customer[id] : customer_id"
     - "subscription[id] : subscription_id"
+
+  Subscriptions_Columns:
+    - "subscription[id] : subscription_id"
+    - "customer[id] : customer_id"
     - "subscription[status] : subscription_status"
     - "subscription[start_date] : subscription_start_date"
     - "subscription[started_at] : subscription_started_at"
@@ -112,110 +65,19 @@ ChargeBee Automation Configuration:
     - "subscription_items[quantity][1] : item_quantity[1]"
     - "subscription_items[unit_price][1] : item_unit_price[1]"
 
-  #    - "subscription[id] : subscriptions.id"
-#    - "customer[id] : customers.id"
-#    - "subscription[created_at] : subscriptions.created_at"
-#    - "subscription_items[item_price_id][0] : subscriptions.plan_id"
-#    - "subscription_items[quantity][0] : subscriptions.plan_quantity"
-#    - "subscription_items[unit_price][0] : subscriptions.plan_unit_price"
-#    - "subscription[status] : subscriptions.status"
-#    - "subscription[started_at] : subscriptions.started_at"
-#    - "subscription[cancelled_at] : subscriptions.cancelled_at"
-#    - "subscription[auto_collection] : customers.auto_collection"
-#    - "subscription[current_term_start] : subscriptions.current_term_start"
-#    - "subscription[current_term_end] : subscriptions.current_term_end"
-
-#    - "subscription[id] : subscription_id"
-#    - "customer[id] : customer_id"
-#    - "subscription[created_at] : subscription_created_at"
-#    - "subscription_items[item_price_id][0] : item_price_id[0]"
-#    - "subscription_items[quantity][0] : item_quantity[0]"
-#    - "subscription_items[unit_price][0] : item_unit_price[0]"
-#    - "subscription[status] : subscription_status"
-#    - "subscription[started_at] : subscription_started_at"
-#    - "subscription[cancelled_at] : subscription_cancelled_at"
-#    - "subscription[auto_collection] : subscription_auto_collection"
-#    - "coupon_ids[0] : subscription_coupon"
-#    - "subscription[meta_data] : subscription_meta_data"
-#    - "subscription[current_term_start] : subscription_current_term_start"
-#    - "subscription[current_term_end] : subscription_current_term_end"
-
-  #    - "subscription[id] : subscription_id"
-#    - "customer[id] : customer_id"
-#    - "subscription[created_at] : subscription_created_at"
-#    - "stripesubscription[plan_id] : stripesubscription_plan_id"
-#    - "subscription[plan_id] : subscription_plan_id"
-#    - "subscription[plan_quantity] : subscription_plan_quantity"
-#    - "subscription[plan_unit_price] : subscription_plan_unit_price"
-#    - "subscription[status] : subscription_status"
-#    - "subscription[started_at] : subscription_started_at"
-#    - "subscription[current_term_start] : subscription_current_term_start"
-#    - "subscription[current_term_end] : subscription_current_term_end"
-#    - "subscription[cancelled_at] : subscription_cancelled_at"
-#    - "subscription[auto_collection] : subscription_auto_collection"
-#    - "subscription[meta_data] : subscription_meta_data"
-#    - "shipping_address[first_name] : subscription_shipping_address_first_name"
-#    - "shipping_address[last_name] : subscription_shipping_address_last_name"
-#    - "shipping_address[line1] : subscription_shipping_address_line1"
-#    - "shipping_address[city] : subscription_shipping_address_city"
-#    - "shipping_address[zip] : subscription_shipping_address_zip"
-#    - "shipping_address[country] : subscription_shipping_address_country"
-#    - "addons[id][0] : addon_id[0]"
-#    - "addons[quantity][0] : addon_quantity[0]"
-#    - "addons[unit_price][0] : addon_unit_price[0]"
-#    - "subscription[cf_migrated] : subscription_cf_migrated"
-
-
-  #    - "subscription[ref] : subscription_id"
-#    - "customer[ref] : customer_id"
-#    - "subscription[status] : subscription_status"
-#    - "subscription[created_at] : subscription_created_at"
-##    - "subscription[started_at] : subscription_started_at"
-#    - "subscription[current_term_start] : subscription_current_term_start"
-#    - "subscription[current_term_end] : subscription_current_term_end"
-#    - "subscription_items[item_price_id][0] : item_price_id[0]"
-#    - "subscription_items[quantity][0] : item_quantity[0]"
-#    - "subscription_items[unit_price][0] : item_unit_price[0]"
-#    - "subscription_items[item_price_id][1] : item_price_id[1]"
-#    - "subscription_items[quantity][1] : item_quantity[1]"
-#    - "subscription_items[unit_price][1] : item_unit_price[1]"
-#    - "subscription_items[item_price_id][2] : item_price_id[2]"
-#    - "subscription_items[quantity][2] : item_quantity[2]"
-#    - "subscription_items[unit_price][2] : item_unit_price[2]"
-#    - "subscription_items[item_price_id][3] : item_price_id[3]"
-#    - "subscription_items[quantity][3] : item_quantity[3]"
-#    - "subscription_items[unit_price][3] : item_unit_price[3]"
-#    - "shipping_address[company] : subscription_shipping_address_company"
-#    - "shipping_address[line1] : subscription_shipping_address_line1"
-#    - "shipping_address[city] : subscription_shipping_address_city"
-#    - "shipping_address[zip] : subscription_shipping_address_zip"
-#    - "shipping_address[country] : subscription_shipping_address_country"
-#    - "subscription[po_number] : subscription_po_number"
-
-
-
 
   # ------------------   INVOICES INFORMATION   ------------------
   # Mapping Source Columns vs : Destination Columns
   Invoices_Validation: False
   Invoices_SourceFile:
-#    "/Users/cb-muneendra/cb_data_validation/utils/output.xlsx"
     "/Users/cb-muneendra/cb_data_validation/utils/pixellu_Live_invoice14.xlsx"
-#    "/Users/cb-muneendra/Desktop/framerytradeoy_invoice_expected.xlsx"
-#    "/Users/cb-muneendra/Desktop/frameryoy_invoice_expected.xlsx"
-  #    ./TestData/Source/Input2.xlsx,
-  #    ./TestData/Source/Input3.xlsx"
+
   Invoices_DestinationFile:
     "/Users/cb-muneendra/Desktop/ds3_pavilion.xlsx"
-#    "/Users/cb-muneendra/cb_data_validation/readAPI/framerytradeoy_AllInvoices.xlsx"
-#    "/Users/cb-muneendra/cb_data_validation/readAPI/frameryoy_AllInvoices.xlsx"
-  #    "./TestData/Destination/Output1.xlsx,
-  #    ./TestData/Destination/Output2.xlsx"
+
   Invoices_KeyColumns:
     - "invoice[id] : invoice[id]"
-#    - "line_items[id] : Line_Item_Id"
-#    - "invoice[id] : invoice_id"
-#    - "invoice[grouping_ref] : invoice_id"
+
   Invoices_Columns:
     - "invoice[id] : invoice[id]"
     - "invoice[currency_code] : invoice[currency_code]"
@@ -266,108 +128,6 @@ ChargeBee Automation Configuration:
     - "line_items[entity_type][4] : line_items[entity_type][4]"
     - "line_items[quantity][3] : line_items[quantity][3]"
     - "line_items[quantity][4] : line_items[quantity][4]"
-  #    - "line_items[id] : Line_Item_Id"
-#    - "invoice[id] : Invoice_Number"
-#    - "invoice[customer_id] : Customer_Id"
-#    - "invoice[subscription_id] : Subscription_Id"
-#    - "line_items[amount] : Amount"
-#    - "line_items[date_from] : Date_From"
-#    - "line_items[date_to] : Date_To"
-#    - "line_items[description] : Description"
-#    - "line_items[entity_id] : Entity_Id"
-#    - "line_items[entity_type] : Entity_Type"
-#    - "line_items[quantity] : Quantity"
-
-  #    - "invoice[id] : invoice_id"
-#    - "invoice[customer_id] : invoice_customer_id"
-#    - "invoice[subscription_id] : invoice_subscription_id"
-#    - "invoice[status] : invoice_status"
-#    - "invoice[total] : invoice_total"
-#    - "invoice[date] : invoice_date"
-#    - "invoice[currency_code] : invoice_currency_code"
-#    - "line_items[amount][0] : line_item_amount[0]"
-#    - "line_items[date_from][0] : line_item_date_from[0]"
-#    - "line_items[date_to][0] : line_item_date_to[0]"
-#    - "line_items[description][0] : line_item_description[0]"
-#    - "line_items[entity_id][0] : line_item_entity_id[0]"
-#    - "line_items[entity_type][0] : line_item_entity_type[0]"
-#    - "line_items[id][0] : line_item_id[0]"
-#    - "line_items[quantity][0] : line_item_quantity[0]"
-#    - "line_items[amount][1] : line_item_amount[1]"
-#    - "line_items[date_from][1] : line_item_date_from[1]"
-#    - "line_items[date_to][1] : line_item_date_to[1]"
-#    - "line_items[description][1] : line_item_description[1]"
-#    - "line_items[entity_id][1] : line_item_entity_id[1]"
-#    - "line_items[entity_type][1] : line_item_entity_type[1]"
-#    - "line_items[id][1] : line_item_id[1]"
-#    - "line_items[quantity][1] : line_item_quantity[1]"
-#    - "payments[amount][0] : payments_txn_amount[0]"
-#    - "payments[date][0] : payments_txn_date[0]"
-#    - "payments[payment_method][0] : payments_payment_method[0]"
-#    - "billing_address[city] : invoice_billing_address_city"
-#    - "billing_address[country] : invoice_billing_address_country"
-#    - "billing_address[first_name] : invoice_billing_address_first_name"
-#    - "billing_address[last_name] : invoice_billing_address_last_name"
-#    - "billing_address[line1] : invoice_billing_address_line1"
-#    - "billing_address[line2] : invoice_billing_address_line2"
-#    - "billing_address[state] : invoice_billing_address_state"
-#    - "billing_address[zip] : invoice_billing_address_zip"
-#    - "shipping_address[country] : invoice_shipping_address_country"
-#    - "shipping_address[first_name] : invoice_shipping_address_first_name"
-#    - "shipping_address[last_name] : invoice_shipping_address_last_name"
-#    - "shipping_address[phone] : invoice_shipping_address_phone"
-
-
-
-  #    - "invoice[grouping_ref] : invoice_id"
-#    - "invoice[currency_code] : invoice_currency_code"
-#    - "invoice[customer_ref] : invoice_customer_id"
-#    - "invoice[subscription_ref] : invoice_subscription_id"
-#    - "invoice[status] : invoice_status"
-#    - "invoice[date] : invoice_date"
-#    - "invoice[po_number] : invoice_po_number"
-#    - "invoice[price_type] : invoice_price_type"
-#    - "invoice[total] : invoice_total"
-#    - "invoice[due_date] : invoice_due_date"
-#    - "line_items[entity_type][0] : line_item_entity_type[0]"
-#    - "line_items[entity_id][0] : line_item_entity_id[0]"
-#    - "line_items[description][0] : line_item_description[0]"
-#    - "line_items[date_from][0] : line_item_date_from[0]"
-#    - "line_items[date_to][0] : line_item_date_to[0]"
-#    - "line_items[quantity][0] : line_item_quantity[0]"
-#    - "line_items[unit_amount][0] : line_item_unit_amount[0]"
-#    - "line_items[tax1_name][0] : line_item_taxes_tax_name[0]"
-#    - "line_items[tax1_amount][0] : line_item_taxes_tax_amount[0]"
-#    - "line_items[entity_type][1] : line_item_entity_type[1]"
-#    - "line_items[entity_id][1] : line_item_entity_id[1]"
-#    - "line_items[description][1] : line_item_description[1]"
-#    - "line_items[date_from][1] : line_item_date_from[1]"
-#    - "line_items[date_to][1] : line_item_date_to[1]"
-#    - "line_items[quantity][1] : line_item_quantity[1]"
-#    - "line_items[unit_amount][1] : line_item_unit_amount[1]"
-#    - "line_items[tax1_name][1] : line_item_taxes_tax_name[1]"
-#    - "line_items[tax1_amount][1] : line_item_taxes_tax_amount[1]"
-#    - "line_items[entity_type][2] : line_item_entity_type[2]"
-#    - "line_items[entity_id][2] : line_item_entity_id[2]"
-#    - "line_items[description][2] : line_item_description[2]"
-#    - "line_items[date_from][2] : line_item_date_from[2]"
-#    - "line_items[date_to][2] : line_item_date_to[2]"
-#    - "line_items[quantity][2] : line_item_quantity[2]"
-#    - "line_items[unit_amount][2] : line_item_unit_amount[2]"
-#    - "line_items[tax1_name][2] : line_item_taxes_tax_name[2]"
-#    - "line_items[tax1_amount][2] : line_item_taxes_tax_amount[2]"
-#    - "line_items[entity_type][3] : line_item_entity_type[3]"
-#    - "line_items[entity_id][3] : line_item_entity_id[3]"
-#    - "line_items[description][3] : line_item_description[3]"
-#    - "line_items[date_from][3] : line_item_date_from[3]"
-#    - "line_items[date_to][3] : line_item_date_to[3]"
-#    - "line_items[quantity][3] : line_item_quantity[3]"
-#    - "line_items[unit_amount][3] : line_item_unit_amount[3]"
-#    - "line_items[tax1_amount][3] : line_item_taxes_tax_amount[3]"
-#    - "payments[amount][0] : payments_txn_amount[0]"
-#    - "payments[date][0] : payments_txn_date[0]"
-
-
 
   String_Columns:
     - "line_items[id] : Line_Item_Id"
@@ -590,7 +350,7 @@ ChargeBee Automation Configuration:
     - "customer[ref] : customer_id"
     - "subscription[status] : subscription_status"
     - "subscription[created_at] : subscription_created_at"
-#    - "subscription[started_at] : subscription_started_at"
+    - "subscription[started_at] : subscription_started_at"
     - "subscription[current_term_start] : subscription_current_term_start"
     - "subscription[current_term_end] : subscription_current_term_end"
     - "subscription_items[item_price_id][0] : item_price_id[0]"
@@ -658,7 +418,6 @@ ChargeBee Automation Configuration:
     - "line_items[tax1_amount][3] : line_item_taxes_tax_amount[3]"
     - "payments[amount][0] : payments_txn_amount[0]"
     - "payments[date][0] : payments_txn_date[0]"
-
 
   Date_Columns:
     - "subscription[start_date] : subscription_start_date"
