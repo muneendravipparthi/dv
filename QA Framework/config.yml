@@ -58,13 +58,14 @@ ChargeBee Automation Configuration:
     "/Users/cb-muneendra/Git/cb_data_validation/readAPI/maxadesigns_AllSubscriptions.xlsx"
 
   Subscriptions_KeyColumns:
-    - "customer[id] : customer_id"
+    - "Client_Name : customer_company"
+#    - "customer[id] : customer_id"
 #    - "subscription[id] : subscription_id"
 
   Subscriptions_Columns:
+    - "Client_Name : customer_company"
     - "subscription[id] : subscription_id"
     - "customer[id] : customer_id"
-    - "Client_Name : customer_company"
     - "subscription[status] : subscription_status"
     - "subscription[started_at] : subscription_started_at"
     - "subscription[current_term_start] : subscription_current_term_start"
