@@ -1,11 +1,13 @@
 ChargeBee Automation Configuration:
   Site: 'test'
-  ClientName: 'maxadesigns'
+  ClientName: 'Xpendy'
   IsRecurly: False
   IsRecurlyDS1vsDS2: False
+  IsMollie: True
+  IsMollieDS1vsDS2: True
   type:
-#    - DS1vsDS2
-    - DS2vsDS3
+    - DS1vsDS2
+#    - DS2vsDS3
   dateFormet:
     - "%Y-%m-%d %H:%M:%S"
 #    - "%Y-%m-%d %H:%M"
@@ -15,130 +17,107 @@ ChargeBee Automation Configuration:
   # Mapping Source Columns vs : Destination Columns
   Customers_Validation: False
   Customers_SourceFile:
-    "/Users/cb-muneendra/Desktop/maxdesign_customer_expected.xlsx"
+    "/Users/cb-muneendra/Git/cb_data_validation/utils/customers.xlsx, /Users/cb-muneendra/Downloads/FinalPayments.csv"
   Customers_DestinationFile:
-    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/maxadesigns_AllCustomers.xlsx"
+    "/Users/cb-muneendra/Downloads/output_22_ xpendy_data_1 2/customer_output18953261103180001/customer_cb_template.csv"
 
   Customers_KeyColumns:
-    - "customer[id] : customer_id"
+    - "External_ID : Custom_Field_1"
 
   Customers_Columns:
-    - "customer[id] : customer_id"
-    - "customer[first_name] : customer_first_name"
-    - "customer[last_name] : customer_last_name"
-    - "customer[phone] : customer_phone"
-    - "customer[company] : customer_company"
-    - "customer[email] : customer_email"
-    - "e_payment_method[type] : customer_payment_method_type"
-    - "e_payment_method[gateway_account_id] : customer_payment_method_gateway_account_id"
-    - "e_payment_method[reference_id] : customer_payment_method_reference_id"
-    - "billing_address[first_name] : customer_billing_address_first_name"
-    - "billing_address[last_name] : customer_billing_address_last_name"
-    - "billing_address[email] : customer_billing_address_email"
-    - "billing_address[company] : customer_billing_address_company"
-    - "billing_address[phone] : customer_billing_address_phone"
-    - "billing_address[line1] : customer_billing_address_line1"
-    - "billing_address[line2] : customer_billing_address_line2"
-    - "billing_address[city] : customer_billing_address_city"
-    - "billing_address[state_code] : customer_billing_address_state_code"
-    - "billing_address[state] : customer_billing_address_state"
-    - "billing_address[zip] : customer_billing_address_zip"
-    - "billing_address[country] : customer_billing_address_country"
-
-
+    - "Customer_ID : customer[id]"
+    - "First_name : customer[first_name]"
+    - "Last_name : customer[last_name]"
+    - "Email_address : customer[email]"
+    - "Method : payment_method[type]"
+    - "mandateId : payment_method[reference_id]"
+    - "First_name : billing_address[first_name]"
+    - "Last_name : billing_address[last_name]"
+    - "Email_address : billing_address[email]"
+    - "Street : billing_address[line3]"
+    - "City : billing_address[city]"
+    - "Zipcode : billing_address[zip]"
+    - "Country : billing_address[country]"
+    - "Created_at : created_at"
+    - "External_ID : Custom_Field_1"
+    - "auto_collection : customer[auto_collection]"
+    - "allow_direct_debit : customer[allow_direct_debit]"
 
 
   # ------------------   SUBSCRIPTIONS INFORMATION   ------------------
   # Mapping Source Columns vs : Destination Columns
   Subscriptions_Validation: True
   Subscriptions_SourceFile:
-    "/Users/cb-muneendra/Desktop/maxdesign_subscription_expected.xlsx"
+    "/Users/cb-muneendra/Git/cb_data_validation/utils/subscriptions.xlsx,  /Users/cb-muneendra/Git/cb_data_validation/utils/transactions.xlsx"
+#    "/Users/cb-muneendra/Git/cb_data_validation/utils/subscriptions.xlsx,  /Users/cb-muneendra/Desktop/transactions2.xlsx"
 
   Subscriptions_DestinationFile:
-    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/maxadesigns_AllSubscriptions.xlsx"
+    "/Users/cb-muneendra/Downloads/output_22_ xpendy_data_1 2/subscription_cb_template.csv"
 
   Subscriptions_KeyColumns:
-    - "Client_Name : customer_company"
-#    - "customer[id] : customer_id"
-#    - "subscription[id] : subscription_id"
+    - "Subscription_ID : subscription[id]"
 
   Subscriptions_Columns:
-    - "Client_Name : customer_company"
-    - "subscription[id] : subscription_id"
-    - "customer[id] : customer_id"
-    - "subscription[status] : subscription_status"
-    - "subscription[started_at] : subscription_started_at"
-    - "subscription[current_term_start] : subscription_current_term_start"
-    - "subscription[current_term_end] : subscription_current_term_end"
-    - "subscription_items[item_price_id][0] : item_price_id[0]"
-    - "subscription_items[quantity][0] : item_quantity[0]"
-    - "subscription[cf_msa_terms] : subscription_cf_msa_terms"
-    - "subscription[cf_max_users] : subscription_cf_max_users"
-    - "subscription[cf_current_active_users] : subscription_cf_current_active_users"
+    - "Subscription_ID : subscription[id]"
+    - "Customer_ID : customer[id]"
+    - "Status : subscription[status]"
+    - "Start_date : subscription[start_date]"
+    - "Activated_on_(CEST) : subscription[started_at]"
+    - "current_term_start : subscription[current_term_start]"
+    - "current_term_end : subscription[current_term_end]"
+    - "(Will_be)_Cancelled_on : subscription[cancelled_at]"
+    - "First_name : shipping_address[first_name]"
+    - "Last_name : shipping_address[last_name]"
+    - "Email : shipping_address[email]"
+    - "Street : shipping_address[line1]"
+    - "City : shipping_address[city]"
+    - "Zipcode : shipping_address[zip]"
+    - "Country : shipping_address[country]"
+    - "Mandate_type : Custom_Field_1"
+    - "Mandate_code : Custom_Field_2"
+    - "Subscriptionplan_ID : subscription_items[item_price_id][0]"
+    - "amount_incl : subscription_items[unit_price][0]"
+
 
 
   # ------------------   INVOICES INFORMATION   ------------------
   # Mapping Source Columns vs : Destination Columns
-  Invoices_Validation: False
+  Invoices_Validation: True
   Invoices_SourceFile:
-    "/Users/cb-muneendra/cb_data_validation/utils/pixellu_Live_invoice14.xlsx"
+    "/Users/cb-muneendra/Git/cb_data_validation/utils/invoice.xlsx, /Users/cb-muneendra/Git/cb_data_validation/utils/subscriptions.xlsx,  /Users/cb-muneendra/Desktop/transactions2.xlsx"
 
   Invoices_DestinationFile:
-    "/Users/cb-muneendra/Desktop/ds3_pavilion.xlsx"
+    "/Users/cb-muneendra/Downloads/output_22_ xpendy_data_1 2/invoice_output6936678840555499885/invoice_cb_template.csv"
 
   Invoices_KeyColumns:
-    - "invoice[id] : invoice[id]"
+    - "Invoice_Number : invoice[id]"
 
   Invoices_Columns:
-    - "invoice[id] : invoice[id]"
-    - "invoice[currency_code] : invoice[currency_code]"
-    - "invoice[customer_id] : invoice[customer_id]"
-    - "invoice[date] : invoice[date]"
-    - "invoice[status] : invoice[status]"
-    - "invoice[subscription_id] : invoice[subscription_id]"
-    - "invoice[total] : invoice[total]"
-    - "line_items[amount][0] : line_items[amount][0]"
-    - "line_items[date_from][0] : line_items[date_from][0]"
-    - "line_items[date_to][0] : line_items[date_to][0]"
-    - "line_items[description][0] : line_items[description][0]"
-    - "line_items[entity_id][0] : line_items[entity_id][0]"
-    - "line_items[entity_type][0] : line_items[entity_type][0]"
-    - "line_items[id][0] : line_items[id][0]"
-    - "line_items[quantity][0] : line_items[quantity][0]"
-    - "payments[amount][0] : payments[amount][0]"
-    - "payments[date][0] : payments[date][0]"
-    - "use_for_proration : use_for_proration"
-    - "discounts[amount][0] : discounts[amount][0]"
-    - "discounts[entity_id][0] : discounts[entity_id][0]"
-    - "discounts[entity_type][0] : discounts[entity_type][0]"
-    - "line_items[amount][1] : line_items[amount][1]"
-    - "line_items[date_from][1] : line_items[date_from][1]"
-    - "line_items[date_to][1] : line_items[date_to][1]"
-    - "line_items[description][1] : line_items[description][1]"
-    - "line_items[entity_id][1] : line_items[entity_id][1]"
-    - "line_items[entity_type][1] : line_items[entity_type][1]"
-    - "line_items[quantity][1] : line_items[quantity][1]"
-    - "line_items[amount][2] : line_items[amount][2]"
-    - "line_items[date_from][2] : line_items[date_from][2]"
-    - "line_items[date_to][2] : line_items[date_to][2]"
-    - "line_items[description][2] : line_items[description][2]"
-    - "line_items[entity_id][2] : line_items[entity_id][2]"
-    - "line_items[entity_type][2] : line_items[entity_type][2]"
-    - "line_items[quantity][2] : line_items[quantity][2]"
-    - "line_items[amount][3] : line_items[amount][3]"
-    - "line_items[amount][4] : line_items[amount][4]"
-    - "line_items[date_from][3] : line_items[date_from][3]"
-    - "line_items[date_from][4] : line_items[date_from][4]"
-    - "line_items[date_to][3] : line_items[date_to][3]"
-    - "line_items[date_to][4] : line_items[date_to][4]"
-    - "line_items[description][3] : line_items[description][3]"
-    - "line_items[description][4] : line_items[description][4]"
-    - "line_items[entity_id][3] : line_items[entity_id][3]"
-    - "line_items[entity_id][4] : line_items[entity_id][4]"
-    - "line_items[entity_type][3] : line_items[entity_type][3]"
-    - "line_items[entity_type][4] : line_items[entity_type][4]"
-    - "line_items[quantity][3] : line_items[quantity][3]"
-    - "line_items[quantity][4] : line_items[quantity][4]"
+    - "Invoice_Number : invoice[id]"
+    - "Customer_ID : invoice[customer_id]"
+    - "Subscription_ID : invoice[subscription_id]"
+    - "Status : invoice[status]"
+    - "Created_Date : invoice[date]"
+    - "Amount_Incl. : invoice[total]"
+    - "Zipcode : billing_address[zip]"
+    - "Country : billing_address[country]"
+    - "First_Name : shipping_address[first_name]"
+    - "Last_Name : shipping_address[last_name]"
+    - "Street : shipping_address[line2]"
+    - "City : shipping_address[city]"
+    - "Zipcode : shipping_address[zip]"
+    - "Country : shipping_address[country]"
+    - "VAT_% : taxes[rate][0]"
+    - "VAT : taxes[amount][0]"
+    - "Subscriptionplan_ID : line_items[entity_id][0]"
+    - "Description : line_items[description][0]"
+    - "current_term_start : line_items[date_from][0]"
+    - "current_term_end : line_items[date_to][0]"
+    - "Quantity : line_items[quantity][0]"
+    - "Amount_Excl. : line_items[unit_amount][0]"
+    - "Amount_Excl. : line_items[amount][0]"
+    - "VAT : line_items[tax_amount][0]"
+
 
   String_Columns:
     - "line_items[id] : Line_Item_Id"
@@ -431,6 +410,15 @@ ChargeBee Automation Configuration:
     - "payments[date][0] : payments_txn_date[0]"
 
   Date_Columns:
+    - "(Will_be)_Cancelled_on : subscription[cancelled_at]"
+    - "current_term_start : subscription[current_term_start]"
+    - "current_term_end : subscription[current_term_end]"
+    - "Created_at : created_at"
+    - "Created_Date : invoice[date]"
+    - "Start_date : subscription[start_date]"
+    - "Activated_on_(CEST) : subscription[started_at]"
+    - "scheduled_for : subscription[current_term_start]"
+    - "scheduled_for : subscription[current_term_end]"
     - "subscription[start_date] : subscription_start_date"
     - "invoice[date] : invoice[date]"
     - "line_items[date_from][0] : line_items[date_from][0]"
@@ -613,6 +601,7 @@ ChargeBee Automation Configuration:
     - "billing_address[email] : customer_billing_address_email"
 
   Zip_Columns:
+    - "Zipcode : billing_address[zip]"
     - "billing_address[zip] : customer_billing_address_zip"
     - "billing_address[zip] : Billing_Address_Zip"
     - "shipping_address[zip] : subscription_shipping_address_zip"

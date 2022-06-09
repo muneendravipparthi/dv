@@ -1,0 +1,104 @@
+
+####### Customers mapping #####################
+Customers Automation Configuration:
+  Customers:
+    - 'Customer_ID'
+    - 'External_ID'
+    - 'First_name'
+    - 'Last_name'
+    - 'Full_name'
+    - 'Gender'
+    - 'Email_address'
+    - 'Created_at'
+    - 'Street'
+    - 'House_number'
+    - 'House_number_addition'
+    - 'Zipcode'
+    - 'City'
+    - 'Country'
+    - 'Phone_number'
+    - 'VAT_number'
+    - 'Company_name'
+    - 'Language'
+
+  FinalPayments:
+    - 'customerId'
+    - 'mandateId'
+    - 'Method'
+    - 'createdAt'
+
+
+####### subscriptions mapping #####################
+Subscriptions Automation Configuration:
+  Subscriptions:
+    - 'Subscription_ID'
+    - 'Customer_ID'
+    - 'First_name'
+    - 'Last_name'
+    - 'Full_name'
+    - 'Subscriptionplan_ID'
+    - 'Subscriptionplan'
+    - 'Mandate_type'
+    - 'Mandate_code'
+    - 'Status'
+    - 'Email'
+    - 'Street'
+    - 'House_no.'
+    - 'House_no._addition'
+    - 'Zipcode'
+    - 'City'
+    - 'Country'
+    - 'Start_date'
+    - 'Activated_on_(CEST)'
+    - '(Will_be)_Resumed_at'
+    - '(Will_be)_Cancelled_on'
+
+  Transactions:
+    - 'scheduled_for'
+    - 'amount_incl'
+    - 'subscription_plan_id'
+    - 'customer_id'
+
+
+################## Invoices ############################
+
+Invoices Automation Configuration:
+  invoice-lines:
+    - 'Invoice_Number'
+    - 'Customer_ID'
+    - 'Full_Name'
+    - 'First_Name'
+    - 'Middle_Name'
+    - 'Last_Name'
+    - 'Company_name'
+    - 'VAT_number'
+    - 'Street'
+    - 'Housenumber'
+    - 'Addition'
+    - 'Zipcode'
+    - 'City'
+    - 'Country'
+    - 'Description'
+    - 'Amount_Excl.'
+    - 'VAT_%'
+    - 'VAT'
+    - 'Amount_Incl.'
+    - 'Quantity'
+    - 'Created_Date'
+    - 'Product_ID'
+    - 'Product_Name'
+    - 'Product_Description'
+    - 'Status'
+    - 'Reason_Manual_Payment'
+
+  Transactions:
+    - 'scheduled_for'
+    - 'amount_incl'
+    - 'subscription_plan_id'
+    - 'customer_id'
+
+  Subscriptions:
+    - 'Customer_ID'
+    - 'Subscription_ID'
+    - 'Subscriptionplan_ID'
+    - 'Subscriptionplan'
