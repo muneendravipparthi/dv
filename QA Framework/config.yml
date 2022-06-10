@@ -52,7 +52,7 @@ ChargeBee Automation Configuration:
 #    "/Users/cb-muneendra/Git/cb_data_validation/utils/subscriptions.xlsx,  /Users/cb-muneendra/Desktop/transactions2.xlsx"
 
   Subscriptions_DestinationFile:
-    "/Users/cb-muneendra/Downloads/output_22_ xpendy_data_1 2/subscription_cb_template.csv"
+    "/Users/cb-muneendra/Downloads/output_23_xpendy_data_4/subscription_cb_template.csv"
 
   Subscriptions_KeyColumns:
     - "Subscription_ID : subscription[id]"
@@ -84,10 +84,11 @@ ChargeBee Automation Configuration:
   # Mapping Source Columns vs : Destination Columns
   Invoices_Validation: True
   Invoices_SourceFile:
-    "/Users/cb-muneendra/Git/cb_data_validation/utils/invoice.xlsx, /Users/cb-muneendra/Git/cb_data_validation/utils/subscriptions.xlsx,  /Users/cb-muneendra/Desktop/transactions2.xlsx"
+    "/Users/cb-muneendra/Git/cb_data_validation/utils/invoice.xlsx, /Users/cb-muneendra/Git/cb_data_validation/utils/subscriptions.xlsx,  /Users/cb-muneendra/Git/cb_data_validation/utils/transactions.xlsx"
+#    "/Users/cb-muneendra/Git/cb_data_validation/utils/invoice.xlsx, /Users/cb-muneendra/Git/cb_data_validation/utils/subscriptions.xlsx,  /Users/cb-muneendra/Desktop/transactions2.xlsx"
 
   Invoices_DestinationFile:
-    "/Users/cb-muneendra/Downloads/output_22_ xpendy_data_1 2/invoice_output6936678840555499885/invoice_cb_template.csv"
+    "/Users/cb-muneendra/Downloads/output_23_xpendy_data_4/invoice_output753125253261490215/invoice_cb_template.csv"
 
   Invoices_KeyColumns:
     - "Invoice_Number : invoice[id]"
