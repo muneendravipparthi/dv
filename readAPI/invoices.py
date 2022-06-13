@@ -102,7 +102,7 @@ class InvoiceExecution:
                                      "line_item_amount[4]", "line_item_tax_amount[4]", "line_item_unit_amount[5]",
                                      "line_item_amount[5]", "line_item_tax_amount[5]", "line_item_unit_amount[6]",
                                      "line_item_amount[6]", "line_item_tax_amount[6]", "line_item_unit_amount[7]",
-                                     "line_item_amount[7]", "line_item_tax_amount[7]", "applied_amount", "txn_amount"]
+                                     "line_item_amount[7]", "line_item_tax_amount[7]", "applied_amount", "txn_amount", "payments_txn_amount[0]"]
                 for col in centsToDollerlist:
                     if col in list(tdf.head()):
                         centsToDoller[col] = centsToDoller[col].div(100)
@@ -123,8 +123,8 @@ class InvoiceExecution:
         df['invoice_line_items'] = df['invoice_line_items'].replace(": True,", ': "True",', regex=True)
         for i, j in zip(df['invoice_id'], df['invoice_line_items']):
             print("splitting for '{}' invoice id and the date is :{}".format(i,j))
-            if "INVFI026771" in i:
-                print("getting isssue here after")
+            # if "INVFI026771" in i:
+            #     print("getting isssue here after")
             if not pd.isna(j):
                 data = json.loads(j)
                 for k in range(len(data)):

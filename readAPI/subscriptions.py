@@ -114,7 +114,7 @@ class SubscriptionExecution:
                                      "subscription_cancelled_at",
                                      "customer_created_at", "customer_updated_at", "card_created_at", "card_updated_at",
                                      "subscription_contract_term_contract_start",
-                                     "subscription_contract_term_contract_end"]
+                                     "subscription_contract_term_contract_end", "subscription_contract_term_created_at"]
             for col in dateconvertioncollist:
                 if col in list(tdf.head()):
                     tdf[col] = tdf[col].apply(

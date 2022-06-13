@@ -42,13 +42,12 @@ logger = logging.getLogger()
 
 # Now we are going to Set the threshold of logger to DEBUG
 logger.setLevel(logging.DEBUG)
-
+# customerid = ["PTA300", "16CGhWT6Vri6qMkhc", "PSA003", "PSA004", "PSA006", "PSA001", "PSA005"]
+customerid = ["PTA300", "16CGhWT6Vri6qMkhc", "PSA003", "PSA004", "PSA006", "PSA001", "PSA005"]
 
 class ReadAPIExecution:
     def epoch_To_Datetime_Convert(self, epochtimestamp, timezoneOfCustomer):
         my_datetime = datetime.fromtimestamp(epochtimestamp, tz=pytz.timezone(timezoneOfCustomer))
-        # my_datetime = datetime.fromtimestamp(epochtimestamp, tz=pytz.timezone("UTC"))
-        # my_datetime = datetime.fromtimestamp(epochtimestamp)
         modified = my_datetime.strftime(datetimeformat)
         if modified.endswith(':59') and addonesecond == "True":
             expected_date = datetime.strptime(modified, '%Y-%m-%d %H:%M:%S')
@@ -58,27 +57,14 @@ class ReadAPIExecution:
 
     def getDataFromAPI(self, url, user):
         page = 0
-        offsetData = ''
-        # offsetData = '["1541245200000","229501294"]'
 
-        def callAPI(url, user, offsetValue):
-            print(page)
-            if (offsetValue != ''):
-                resp = requests.get(url + '&offset=' + offsetValue, auth=HTTPBasicAuth(user, user))
-                jsonresp = json.loads(resp.text)
-                # with open("/Users/cb-muneendra/cb_data_validation/readAPI/pixelluJson/pixellu_b2_"+ str(timer()) +"_Invoices.json", "w") as responseFile:
-                #     json.dump(jsonresp, responseFile)
-                return jsonresp
-            else:
-                resp = requests.get(url, auth=HTTPBasicAuth(user, user))
-                jsonresp = json.loads(resp.text)
-                # with open("/Users/cb-muneendra/cb_data_validation/readAPI/pixelluJson/pixellu_b2_"+ str(timer()) +"_Invoices.json", "w") as responseFile:
-                #     json.dump(jsonresp, responseFile)
-                return jsonresp
+        def callAPI(url, user, cusid):
+            resp = requests.get(url + '?customer_id[is]=' + cusid, auth=HTTPBasicAuth(user, user))
+            jsonresp = json.loads(resp.text)
+            return jsonresp
 
-        while True:
-            jsonpathresponse = callAPI(url, user, offsetData)
-            isOffsetPresent = "next_offset" in jsonpathresponse
+        for cusid in customerid:
+            jsonpathresponse = callAPI(url, user, cusid)
             if page == 0:
                 TotalResponse = jsonpathresponse['list']
             if page != 0:
@@ -91,39 +77,7 @@ class ReadAPIExecution:
                     except Exception as e:
                         logger.info("element missing in list" + str(e))
             page += 1
-            if (isOffsetPresent):
-                offsetValue = jsonpath.jsonpath(jsonpathresponse, "next_offset")
-                offsetValue[0].replace('"', '\\"')
-                offsetData = offsetValue[0]
-                logger.info("offset value : {}".format(offsetData))
-                if(executionmode == "DEBUG"):
-                    logger.info("Executed in DEBUG Mode")
-                    print("Executed in DEBUG Mode")
-                    break
-            else:
-                break
-        logger.info('Execution completed. and Total no of pages :' + str(page))
         return TotalResponse
 
 
-# obj = ReadAPIExecution()
-# if len(sys.argv) >= 2:
-#     for arg in range(1, len(sys.argv)):
-#         logger.info('=======Executing for :' + str(sys.argv[arg]) + '=======')
-#         print('=======Executing for :', sys.argv[arg], '=======')
-#         if sys.argv[arg] == 'c':
-#             obj.getAllCustomers()
-#         elif sys.argv[arg] == 's':
-#             obj.getAllSubscriptions()
-#         elif sys.argv[arg] == 'i':
-#             obj.getAllInvoices()
-#         elif sys.argv[arg] == 'cn':
-#             obj.getAllCreditNotes()
-#         elif sys.argv[arg] == 't':
-#             obj.getAllTransactions()
-# else:
-#     # obj.getAllCustomers()
-#     # obj.getAllSubscriptions()
-#     # obj.getAllInvoices()
-#     # obj.getAllCreditNotes()
-#     # obj.getAllTransactions()
+
