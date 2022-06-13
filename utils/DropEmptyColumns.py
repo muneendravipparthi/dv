@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 
 
-dataFile = '/Users/cb-muneendra/Desktop/maxdesign_subscription_expected.xlsx'
+dataFile = '/Users/cb-muneendra/Desktop/leeto_customer_expected.xlsx'
 
 
 if dataFile.endswith('csv'):

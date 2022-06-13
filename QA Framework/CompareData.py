@@ -19,9 +19,11 @@ def compare_data(src_df, des_df):
 def filterData(src_df, des_df, src_key, des_key):
     srchead = list(src_df.head())
     deshead = list(des_df.head())
-    src_df[src_key] = src_df[src_key].str.lower()
-    des_df[des_key] = des_df[des_key].str.lower()
-
+    try:
+        src_df[src_key] = src_df[src_key].str.lower()
+        des_df[des_key] = des_df[des_key].str.lower()
+    except Exception as e:
+        print("exception in :",e)
     srcmerged = pd.merge(src_df, des_df, how='inner', left_on=[src_key],
                       right_on=[des_key], suffixes=('', '_DROP')).filter(regex='^(?!.*_DROP)')
     desmerged = pd.merge(des_df, src_df, how='inner', left_on=[des_key],
