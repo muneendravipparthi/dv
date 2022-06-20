@@ -1,6 +1,6 @@
 ChargeBee Automation Configuration:
   Site: 'test'
-  ClientName: 'Aylalegal'
+  ClientName: 'aylalegal'
   IsRecurly: False
   IsRecurlyDS1vsDS2: False
   type:
