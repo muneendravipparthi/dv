@@ -54,6 +54,7 @@ Subscriptions Automation Configuration:
     - '(Will_be)_Cancelled_on'
 
   Transactions:
+    - 'invoice_number'
     - 'scheduled_for'
     - 'amount_incl'
     - 'subscription_plan_id'

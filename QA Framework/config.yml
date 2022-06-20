@@ -46,7 +46,7 @@ ChargeBee Automation Configuration:
 
   # ------------------   SUBSCRIPTIONS INFORMATION   ------------------
   # Mapping Source Columns vs : Destination Columns
-  Subscriptions_Validation: True
+  Subscriptions_Validation: False
   Subscriptions_SourceFile:
     "/Users/cb-muneendra/Git/cb_data_validation/utils/subscriptions.xlsx,  /Users/cb-muneendra/Git/cb_data_validation/utils/transactions.xlsx"
 #    "/Users/cb-muneendra/Git/cb_data_validation/utils/subscriptions.xlsx,  /Users/cb-muneendra/Desktop/transactions2.xlsx"

@@ -148,7 +148,7 @@ def get_invoices_data(source_files, source_columns):
         #                     suffixes=('', '_drop'))
         # merge_df.drop([col for col in merge_df.columns if 'drop' in col], axis=1, inplace=True)
 
-        merge_df1 = pd.merge(invoice_df, merge_df, left_on=['Customer_ID'], right_on=['Customer_ID'], how="left",
+        merge_df1 = pd.merge(invoice_df, merge_df, left_on=['Customer_ID','Product_Description'], right_on=['Customer_ID', 'Subscriptionplan'], how="left",
                             suffixes=('', '_drop'))
         merge_df1.drop([col for col in merge_df.columns if 'drop' in col], axis=1, inplace=True)
         merge_df1.drop("customer_id", axis=1, inplace=True)
@@ -158,9 +158,10 @@ def get_invoices_data(source_files, source_columns):
     # return merge_df[source_columns]
     return merge_df1
 
+
 def get_currenttermdate_data(transaction_df):
     print("working on currentterm dates")
-    systemdate = datetime.datetime.today() - datetime.timedelta(days=1)
+    systemdate = datetime.datetime.today() - datetime.timedelta(days=5)
     today = systemdate.strftime('%Y-%m-%d')
     Previous_Date = (systemdate - datetime.timedelta(days=31)).strftime('%Y-%m-%d')
     Next_Date = (systemdate + datetime.timedelta(days=31)).strftime('%Y-%m-%d')
@@ -184,9 +185,10 @@ def get_currenttermdate_data(transaction_df):
     mergedf.to_excel('transactionmergedf.xlsx', index=False)
     return mergedf
 
+
 def get_current_term_dates_data(transaction_df):
     print("working on get_current_term_dates_data function")
-    systemdate = datetime.datetime.today() - datetime.timedelta(days=1)
+    systemdate = datetime.datetime.today() - datetime.timedelta(days=5)
     today = systemdate.strftime('%Y-%m-%d')
     transaction_df['system_date'] = systemdate
 
@@ -206,4 +208,9 @@ def get_current_term_dates_data(transaction_df):
                      suffixes=('', '_drop'))
     mergedf.drop([col for col in mergedf.columns if 'drop' in col], axis=1, inplace=True)
     mergedf.to_excel('transactionmergedf.xlsx', index=False)
+    mergedf["Duplicate"] = mergedf.duplicated(['customer_id'], keep=False)
+    mergedf['current_term_end'] = mergedf[['current_term_end', 'Duplicate']].apply(
+        lambda x: x['current_term_end'] if x['Duplicate'] == False else None, axis=1)
+    mergedf = mergedf.drop_duplicates(subset=['customer_id'])
+    mergedf.to_excel('aftertransactionmergedf.xlsx', index=False)
     return mergedf
