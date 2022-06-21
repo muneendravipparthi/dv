@@ -29,6 +29,7 @@ def customer_prevalidation_check(src_df, columns):
                 src_df[col] = src_df[col].apply(
                     lambda x: pd.Timestamp(x).strftime(dateformet))
             except Exception as e:
+                src_df[col] = pd.to_datetime(src_df[col], errors='coerce').dt.strftime(dateformet)
                 print("Exception for column : {} and exception is : {}".format(col,e))
 
     # precondition for email
