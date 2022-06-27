@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 
 
-dataFile = '/Users/cb-muneendra/Desktop/Tile_subscription_expected.xlsx'
+dataFile = '/Users/cb-muneendra/Desktop/Foreup_currentInvoice_expected.xlsx'
 
 
 if dataFile.endswith('csv'):
@@ -30,4 +30,11 @@ for col in list(df.head()):
     col = col.replace("_0","[0]")
     col = col.replace("_1","[1]")
     col = col.replace("_2","[2]")
+    col = col.replace("_3", "[3]")
+    col = col.replace("_4", "[4]")
+    col = col.replace("_5", "[5]")
+    col = col.replace("_6", "[6]")
+    col = col.replace("_7", "[7]")
+    col = col.replace("_8", "[8]")
+    col = col.replace("_9", "[9]")
     print(col)

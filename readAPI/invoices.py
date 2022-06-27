@@ -102,7 +102,7 @@ class InvoiceExecution:
                                      "line_item_amount[4]", "line_item_tax_amount[4]", "line_item_unit_amount[5]",
                                      "line_item_amount[5]", "line_item_tax_amount[5]", "line_item_unit_amount[6]",
                                      "line_item_amount[6]", "line_item_tax_amount[6]", "line_item_unit_amount[7]",
-                                     "line_item_amount[7]", "line_item_tax_amount[7]", "applied_amount", "txn_amount"]
+                                     "line_item_amount[7]", "line_item_tax_amount[7]", "applied_amount", "txn_amount", "payments_txn_amount[0]", "payments_txn_amount[1]", "payments_txn_amount[2]"]
                 for col in centsToDollerlist:
                     if col in list(tdf.head()):
                         centsToDoller[col] = centsToDoller[col].div(100)
