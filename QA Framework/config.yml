@@ -39,13 +39,14 @@ ChargeBee Automation Configuration:
   # Mapping Source Columns vs : Destination Columns
   Subscriptions_Validation: True
   Subscriptions_SourceFile:
-    "/Users/cb-muneendra/Desktop/DS1_perUnit_Active.xlsx"
+    "/Users/cb-muneendra/Desktop/1_Eloomi_flat_expected_DS1.xlsx"
 
   Subscriptions_DestinationFile:
     "/Users/cb-muneendra/Desktop/Flatfeefulldata1_10.xlsx"
 
   Subscriptions_KeyColumns:
-    - "Customer_Id : customer[id]"
+    - "econ_id : econ_id"
+#    - "Customer_Id : customer[id]"
 
   Subscriptions_Columns:
     - "econ_id : econ_id"
