@@ -33,15 +33,6 @@ executionmode = configs.get('executionmode').data
 addonesecond = configs.get('addonesecond').data
 datetimeformat = configs.get('datetimeformat').data
 cents = configs.get('cents').data
-# now we will Create and configure logger
-logging.basicConfig(filename=os.getcwd() + "/ReadAPI.log",
-                    format='[%(asctime)s] %(lineno)d %(levelname)s - %(message)s',
-                    filemode='w')
-# Let us Create an object
-logger = logging.getLogger()
-
-# Now we are going to Set the threshold of logger to DEBUG
-logger.setLevel(logging.DEBUG)
 
 
 class ReadAPIExecution:
@@ -56,7 +47,7 @@ class ReadAPIExecution:
             modified = expected_date.strftime(datetimeformat)
         return modified
 
-    def getDataFromAPI(self, url, user):
+    def getDataFromAPI(self, url, user, logger):
         page = 0
         offsetData = ''
         # offsetData = '["1541245200000","229501294"]'
