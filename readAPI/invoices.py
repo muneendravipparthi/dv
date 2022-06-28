@@ -4,6 +4,7 @@ import os
 
 import pandas as pd
 from jproperties import Properties
+from tqdm import tqdm
 
 from readAPI.ReadAPI import ReadAPIExecution
 
@@ -62,7 +63,7 @@ class InvoiceExecution:
                 newheaders[ch] = ch.replace(".", "_")
             df_nested_list.rename(columns=newheaders, inplace=True)
             df_nested_list.to_excel(excelDir + '/' + configs.get("clientName").data + outputFile, index=False)
-            if "invoice_line_item" in list(df_nested_list.head()):
+            if "invoice_line_items" in list(df_nested_list.head()):
                 df_splitlineitems = pd.read_excel(excelDir + '/' + configs.get("clientName").data + outputFile)
                 df_splitlineitems = self.invoice_lineitem_split(df_splitlineitems)
                 df_splitlineitems.to_excel(excelDir + '/' + configs.get("clientName").data + outputFile, index=False)
@@ -91,7 +92,7 @@ class InvoiceExecution:
                                      "line_items_date_to[9]", "line_items_date_from[10]",
                                      "line_items_date_to[10]", "applied_at", "txn_date", "payments_txn_date[0]",
                                      "payments_txn_date[1]", ]
-            for col in dateconvertioncollist:
+            for col in tqdm(dateconvertioncollist, desc='dateconvertioncollist'):
                 if col in list(tdf.head()):
                     tdf[col] = tdf[col].apply(
                         lambda x: ReadAPIExecution.epoch_To_Datetime_Convert(self, x, clienttimezone) if pd.isna(
@@ -112,7 +113,7 @@ class InvoiceExecution:
                                      "line_items_amount[6]", "line_items_tax_amount[6]", "line_items_unit_amount[7]",
                                      "line_items_amount[7]", "line_items_tax_amount[7]", "applied_amount", "txn_amount",
                                      "payments_txn_amount[0]", "payments_txn_amount[1]"]
-                for col in centsToDollerlist:
+                for col in tqdm(centsToDollerlist, desc='centsToDollerlist'):
                     if col in list(tdf.head()):
                         centsToDoller[col] = centsToDoller[col].div(100)
                 centsToDoller.to_excel(excelDir + '/' + configs.get("clientName").data + outputFile, index=False)
@@ -123,17 +124,16 @@ class InvoiceExecution:
             logger.exception(e)
 
     def invoice_lineitem_split(self, dfdata):
-        df = dfdata[["invoice_id", "invoice_line_item"]]
+        df = dfdata[["invoice_id", "invoice_line_items"]]
         dfs = pd.DataFrame
         dfl = pd.DataFrame
-        df['invoice_line_item'] = df['invoice_line_item'].replace("Tiina's addon", "Tiina^s addon", regex=True)
-        df['invoice_line_item'] = df['invoice_line_item'].replace("'", '"', regex=True)
-        df['invoice_line_item'] = df['invoice_line_item'].replace(": False,", ': "False",', regex=True)
-        df['invoice_line_item'] = df['invoice_line_item'].replace(": True,", ': "True",', regex=True)
-        for i, j in zip(df['invoice_id'], df['invoice_line_items']):
-            print("splitting for '{}' invoice id and the date is :{}".format(i, j))
-            if "INVFI026771" in i:
-                print("getting isssue here after")
+        df['invoice_line_items'] = df['invoice_line_items'].replace("Tiina's addon", "Tiina^s addon", regex=True)
+        df['invoice_line_items'] = df['invoice_line_items'].replace("'", '"', regex=True)
+        df['invoice_line_items'] = df['invoice_line_items'].replace(": False,", ': "False",', regex=True)
+        df['invoice_line_items'] = df['invoice_line_items'].replace(": True,", ': "True",', regex=True)
+        for i, j in tqdm(zip(df['invoice_id'], df['invoice_line_items']), total=len(df['invoice_id']),
+                         desc='invoice_line_items'):
+            logger.info("splitting for '{}' invoice id and the date is :{}".format(i, j))
             if not pd.isna(j):
                 data = json.loads(j)
                 for k in range(len(data)):
@@ -172,8 +172,9 @@ class InvoiceExecution:
         df['invoice_line_item_taxes'] = df['invoice_line_item_taxes'].replace(": False}", ': "False"}', regex=True)
         df['invoice_line_item_taxes'] = df['invoice_line_item_taxes'].replace(": True}", ': "True"}', regex=True)
         df['invoice_line_item_taxes'] = df['invoice_line_item_taxes'].replace(": True,", ': "True",', regex=True)
-        for i, j in zip(df['invoice_id'], df['invoice_line_item_taxes']):
-            print("splitting for '{}' invoice id and the date is :{}".format(i, j))
+        for i, j in tqdm(zip(df['invoice_id'], df['invoice_line_item_taxes']), total=len(df['invoice_id']),
+                         desc='invoice_line_item_taxes'):
+            logger.info("splitting for '{}' invoice id and the date is :{}".format(i, j))
             if not pd.isna(j):
                 data = json.loads(j)
                 for k in range(len(data)):
@@ -208,8 +209,9 @@ class InvoiceExecution:
         df['invoice_linked_payments'] = df['invoice_linked_payments'].replace("'", '"', regex=True)
         df['invoice_linked_payments'] = df['invoice_linked_payments'].replace(": False,", ': "False",', regex=True)
         df['invoice_linked_payments'] = df['invoice_linked_payments'].replace(": True,", ': "True",', regex=True)
-        for i, j in zip(df['invoice_id'], df['invoice_linked_payments']):
-            print("splitting for '{}' invoice id and the date is :{}".format(i, j))
+        for i, j in tqdm(zip(df['invoice_id'], df['invoice_linked_payments']), total=len(df['invoice_id']),
+                         desc='invoice_linked_payments'):
+            logger.info("splitting for '{}' invoice id and the date is :{}".format(i, j))
             if not pd.isna(j) and j != '[]':
                 data = json.loads(j)
                 for k in range(len(data)):
@@ -246,8 +248,9 @@ class InvoiceExecution:
                                                                                       regex=True)
         df['invoice_line_item_discounts'] = df['invoice_line_item_discounts'].replace(": True,", ': "True",',
                                                                                       regex=True)
-        for i, j in zip(df['invoice_id'], df['invoice_line_item_discounts']):
-            print("splitting for '{}' invoice id and the date is :{}".format(i, j))
+        for i, j in tqdm(zip(df['invoice_id'], df['invoice_line_item_discounts']), total=len(df['invoice_id']),
+                         desc='invoice_line_item_discounts'):
+            logger.info("splitting for '{}' invoice id and the date is :{}".format(i, j))
             if not pd.isna(j) and j != '[]':
                 data = json.loads(j)
                 for k in range(len(data)):
