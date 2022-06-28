@@ -4,6 +4,7 @@ import os
 
 import pandas as pd
 from jproperties import Properties
+from tqdm import tqdm
 
 from readAPI.ReadAPI import ReadAPIExecution
 
@@ -73,7 +74,7 @@ class CustomerExecution:
                     tdf[col] = tdf[col].replace('_AT_', '@', regex=True)
                     tdf[col] = tdf[col].replace('@example.com', '', regex=True)
             dateconvertioncollist = ["customer_created_at", "customer_updated_at", "card_created_at", "card_updated_at"]
-            for col in dateconvertioncollist:
+            for col in tqdm(dateconvertioncollist, desc='dateconvertioncollist'):
                 if col in list(tdf.head()):
                     tdf[col] = tdf[col].apply(
                         lambda x: ReadAPIExecution.epoch_To_Datetime_Convert(self, x, clienttimezone) if pd.isna(
@@ -81,6 +82,8 @@ class CustomerExecution:
             tdf.to_excel(excelDir + '/' + configs.get("clientName").data + outputFile, index=False)
         except Exception as e:
             logger.error("exception in customers:" + str(e))
+            logger.info("Something failed during data convertion from Json to Excel")
+            logger.exception(e)
 
 
 customerobj = CustomerExecution()

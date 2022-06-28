@@ -4,6 +4,7 @@ import os
 
 import pandas as pd
 from jproperties import Properties
+from tqdm import tqdm
 
 from readAPI.ReadAPI import ReadAPIExecution
 
@@ -34,6 +35,7 @@ logger = logging.getLogger()
 # Now we are going to Set the threshold of logger to DEBUG
 logger.setLevel(logging.DEBUG)
 outputFile = "_AllSubscriptions.xlsx"
+
 
 class SubscriptionExecution:
     def getAllSubscriptions(self):
@@ -119,7 +121,7 @@ class SubscriptionExecution:
                                      "customer_created_at", "customer_updated_at", "card_created_at", "card_updated_at",
                                      "subscription_contract_term_contract_start",
                                      "subscription_contract_term_contract_end"]
-            for col in dateconvertioncollist:
+            for col in tqdm(dateconvertioncollist, desc='dateconvertioncollist'):
                 if col in list(tdf.head()):
                     tdf[col] = tdf[col].apply(
                         lambda x: ReadAPIExecution.epoch_To_Datetime_Convert(self, x, clienttimezone) if pd.isna(
@@ -127,16 +129,17 @@ class SubscriptionExecution:
             tdf.to_excel(excelDir + '/' + configs.get("clientName").data + outputFile, index=False)
             # configure cents : False to execute below block
             if cents == 'False':
-                print("convertingtocents")
+                logger.info("convertingtocents")
                 centsToDoller = pd.read_excel(excelDir + '/' + configs.get("clientName").data + outputFile)
-                centsToDollerlist = ["subscription_mrr", "items_unit_price[0]", "items_amount[0]", "items_unit_price[1]",
+                centsToDollerlist = ["subscription_mrr", "items_unit_price[0]", "items_amount[0]",
+                                     "items_unit_price[1]",
                                      "items_amount[1]", "items_unit_price[2]", "items_amount[2]"]
-                for col in centsToDollerlist:
+                for col in tqdm(centsToDollerlist, desc='centsToDollerlist'):
                     if col in list(centsToDoller.head()):
                         centsToDoller[col] = centsToDoller[col].div(100)
                 centsToDoller.to_excel(excelDir + '/' + configs.get("clientName").data + outputFile, index=False)
         except Exception as e:
-            print(e)
+            logger.info(e)
             logger.error("exception in subscriptions:" + str(e))
             logger.exception(e)
 
@@ -147,8 +150,9 @@ class SubscriptionExecution:
         df['subscription_addons'] = df['subscription_addons'].replace("'", '"', regex=True)
         df['subscription_addons'] = df['subscription_addons'].replace(": False,", ': "False",', regex=True)
         df['subscription_addons'] = df['subscription_addons'].replace(": True,", ': "True",', regex=True)
-        for i, j in zip(df['subscription_id'], df['subscription_addons']):
-            print("splitting for '{}' subscription_id and the date is :{}".format(i, j))
+        for i, j in tqdm(zip(df['subscription_id'], df['subscription_addons']), total=len(df['subscription_id']),
+                         desc='subscription_addons'):
+            logger.info("splitting for '{}' subscription_id and the date is :{}".format(i, j))
             if not pd.isna(j) and j != '[]':
                 data = json.loads(j)
                 for k in range(len(data)):
