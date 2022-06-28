@@ -1,6 +1,6 @@
 ChargeBee Automation Configuration:
   Site: 'test'
-  ClientName: 'tiletestmigration'
+  ClientName: 'augment-eco'
   IsRecurly: False
   IsRecurlyDS1vsDS2: False
   type:

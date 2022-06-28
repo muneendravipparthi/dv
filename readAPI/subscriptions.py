@@ -1,7 +1,8 @@
 import json
 import logging
 import os
-
+from tqdm import tqdm
+from time import sleep
 import pandas as pd
 from jproperties import Properties
 
@@ -66,18 +67,18 @@ class SubscriptionExecution:
                 acol = len(dftemp.columns)
 
                 lineitemslist = []
-                for i in range(acol):
+                for i in tqdm(range(acol),desc='lineitemslist'):
                     lineitemslist.append('lineitem' + str(i))
 
                 df_splitlineitems[lineitemslist] = df_splitlineitems['subscription_subscription_items'].str.split('}, {', -1, expand=True)
-                for item in lineitemslist:
+                for item in tqdm(lineitemslist,desc='df_splitlineitems'):
                     df_splitlineitems[item] = df_splitlineitems[item].str.replace(r'(?s), \'free_quantity.*', '',
                                                                                   regex=True)
                     df_splitlineitems[item] = df_splitlineitems[item].str.replace(r'(?s), \'object.*', '', regex=True)
                     df_splitlineitems[item] = df_splitlineitems[item].str.replace('[{', '', regex=False)
                     df_splitlineitems[item] = df_splitlineitems[item].str.replace('\'', '', regex=False)
                 count = 0
-                for item in lineitemslist:
+                for item in tqdm(lineitemslist,desc='lineitemslist'):
                     clist = ['item_price_id[' + str(count) + ']', 'item_type[' + str(count) + ']',
                              'item_quantity[' + str(count) + ']', 'item_unit_price[' + str(count) + ']',
                              'item_amount[' + str(count) + ']']
@@ -115,7 +116,7 @@ class SubscriptionExecution:
                                      "customer_created_at", "customer_updated_at", "card_created_at", "card_updated_at",
                                      "subscription_contract_term_contract_start",
                                      "subscription_contract_term_contract_end"]
-            for col in dateconvertioncollist:
+            for col in tqdm(dateconvertioncollist,desc='dateconvertioncollist'):
                 if col in list(tdf.head()):
                     tdf[col] = tdf[col].apply(
                         lambda x: ReadAPIExecution.epoch_To_Datetime_Convert(self, x, clienttimezone) if pd.isna(
@@ -127,7 +128,7 @@ class SubscriptionExecution:
                 centsToDoller = pd.read_excel(configs.get("clientName").data + "_AllSubscriptions.xlsx")
                 centsToDollerlist = ["subscription_mrr", "item_unit_price[0]", "item_amount[0]", "item_unit_price[1]",
                                      "item_amount[1]", "item_unit_price[2]", "item_amount[2]"]
-                for col in centsToDollerlist:
+                for col in tqdm(centsToDollerlist,desc='centsToDollerlist'):
                     if col in list(centsToDoller.head()):
                         centsToDoller[col] = centsToDoller[col].div(100)
                 centsToDoller.to_excel(configs.get("clientName").data + "_AllSubscriptions.xlsx", index=False)
@@ -143,7 +144,7 @@ class SubscriptionExecution:
         df['subscription_addons'] = df['subscription_addons'].replace("'", '"', regex=True)
         df['subscription_addons'] = df['subscription_addons'].replace(": False,", ': "False",', regex=True)
         df['subscription_addons'] = df['subscription_addons'].replace(": True,", ': "True",', regex=True)
-        for i, j in zip(df['subscription_id'], df['subscription_addons']):
+        for i, j in tqdm(zip(df['subscription_id'], df['subscription_addons']),desc='subscription_addons_split'):
             print("splitting for '{}' subscription_id and the date is :{}".format(i, j))
             if not pd.isna(j) and j != '[]':
                 data = json.loads(j)
