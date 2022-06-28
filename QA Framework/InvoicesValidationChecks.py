@@ -2,6 +2,7 @@ import re
 
 from SupportingFunctions import *
 
+
 def invoices_prevalidation_check(src_df, columns):
     print("In src_invoices_prevalidation_check function")
     pass

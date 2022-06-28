@@ -1,7 +1,7 @@
 import re
-import numpy as np
 
 from SupportingFunctions import *
+
 
 def subscriptions_prevalidation_check(src_df, columns):
     print("Currently we are in src_subscriptions_prevalidation_check")

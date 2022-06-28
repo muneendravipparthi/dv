@@ -1,17 +1,17 @@
 import datetime
-import pandas as pd
+
+import numpy as np
 import openpyxl
-from openpyxl.utils.cell import get_column_letter
-from openpyxl.styles import Font, Alignment, PatternFill
-from openpyxl.styles.borders import Border, Side, BORDER_THIN
+import pandas as pd
 from openpyxl import load_workbook
 from openpyxl.chart import (
     PieChart,
     Reference
 )
-
 from openpyxl.chart.series import DataPoint
-import numpy as np
+from openpyxl.styles import Font, Alignment, PatternFill
+from openpyxl.styles.borders import Border, Side, BORDER_THIN
+from openpyxl.utils.cell import get_column_letter
 
 
 def report_generation(type_in, df1, site_name, client_name,module,sheet_name):

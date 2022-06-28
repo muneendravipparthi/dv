@@ -1,7 +1,9 @@
 from re import search
+
 import numpy as np
 import pandas as pd
 import yaml
+
 dateToFillNan = pd.Timestamp(year=1970,  month=1, day=1)
 
 

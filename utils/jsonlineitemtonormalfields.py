@@ -2,10 +2,10 @@ import json
 import logging
 import os
 from datetime import datetime, timedelta
-import pandas as pd
-from jproperties import Properties
-import pytz
 
+import pandas as pd
+import pytz
+from jproperties import Properties
 
 configs = Properties()
 home_folder = os.getenv('HOME')
