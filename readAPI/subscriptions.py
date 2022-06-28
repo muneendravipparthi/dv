@@ -36,7 +36,7 @@ logger.setLevel(logging.DEBUG)
 class SubscriptionExecution:
     def getAllSubscriptions(self):
         url = clientSite + subscriptionextenction
-        TotalSubscriptionResponse = ReadAPIExecution.getDataFromAPI(self, url, user)
+        TotalSubscriptionResponse = ReadAPIExecution.getDataFromAPI(self, url, user, logger)
         Subscriptiondictionary = {
             "list": TotalSubscriptionResponse
         }

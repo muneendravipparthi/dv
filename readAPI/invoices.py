@@ -37,7 +37,7 @@ class InvoiceExecution:
     def getAllInvoices(self):
         logger.info("Executiong Extraction of Invoices")
         url = clientSite + invoiceextenction
-        TotalInvoicesResponse = ReadAPIExecution.getDataFromAPI(self, url, user)
+        TotalInvoicesResponse = ReadAPIExecution.getDataFromAPI(self, url, user, logger)
         Invoicedictionary = {
             "list": TotalInvoicesResponse
         }

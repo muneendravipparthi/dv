@@ -1,6 +1,6 @@
 ChargeBee Automation Configuration:
-  Site: 'test'
-  ClientName: 'Aylalegal'
+  Site: 'live'
+  ClientName: 'Leeto'
   IsRecurly: False
   IsRecurlyDS1vsDS2: False
   type:
@@ -13,43 +13,46 @@ ChargeBee Automation Configuration:
 
   # ------------------   CUSTOMER INFORMATION   ------------------
   # Mapping Source Columns vs : Destination Columns
-  Customers_Validation: True
+  Customers_Validation: False
   Customers_SourceFile:
-    "/Users/cb-muneendra/Desktop/aylalegal_cusomer_expected.xlsx"
+    "/Users/cb-muneendra/Desktop/Leeto_Live_Customers_expected.xlsx"
   Customers_DestinationFile:
-    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/Aylalegal_AllCustomers.xlsx"
+    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/Leeto_AllCustomers.xlsx"
 
   Customers_KeyColumns:
     - "customer[id] : customer_id"
 
   Customers_Columns:
     - "customer[id] : customer_id"
+    - "customer[created_at] : customer_created_at"
     - "customer[first_name] : customer_first_name"
     - "customer[last_name] : customer_last_name"
     - "customer[company] : customer_company"
     - "customer[preferred_currency_code] : customer_preferred_currency_code"
     - "customer[email] : customer_email"
-    - "payment_method[type] : customer_payment_method_type"
-    - "payment_method[gateway_account_id] : customer_payment_method_gateway_account_id"
-    - "payment_method[reference_id] : customer_payment_method_reference_id"
+    - "customer[allow_direct_debit] : customer_allow_direct_debit"
+    - "customer[auto_collection] : customer_auto_collection"
     - "customer[taxability] : customer_taxability"
+    - "customer[net_term_days] : customer_net_term_days"
+    - "customer[locale] : customer_locale"
     - "billing_address[first_name] : customer_billing_address_first_name"
     - "billing_address[last_name] : customer_billing_address_last_name"
     - "billing_address[email] : customer_billing_address_email"
     - "billing_address[company] : customer_billing_address_company"
     - "billing_address[line1] : customer_billing_address_line1"
     - "billing_address[city] : customer_billing_address_city"
-    - "billing_address[state_code] : customer_billing_address_state_code"
     - "billing_address[state] : customer_billing_address_state"
     - "billing_address[zip] : customer_billing_address_zip"
     - "billing_address[country] : customer_billing_address_country"
+    - "customer[cf_siren] : customer_cf_siren"
+
 
 
   # ------------------   SUBSCRIPTIONS INFORMATION   ------------------
   # Mapping Source Columns vs : Destination Columns
-  Subscriptions_Validation: False
+  Subscriptions_Validation: True
   Subscriptions_SourceFile:
-    "/Users/cb-muneendra/Desktop/leeto_subscription_expected.xlsx"
+    "/Users/cb-muneendra/Downloads/LiveMigration-Leeto - Subscriptions_new.csv"
 
   Subscriptions_DestinationFile:
     "/Users/cb-muneendra/Git/cb_data_validation/readAPI/Leeto_AllSubscriptions.xlsx"
@@ -57,12 +60,15 @@ ChargeBee Automation Configuration:
   Subscriptions_KeyColumns:
     - "subscription[id] : subscription_id"
 
-
   Subscriptions_Columns:
     - "subscription[id] : subscription_id"
+    - "subscription[cf_contract_number_sf] : subscription_cf_contract_number_sf"
     - "customer[id] : customer_id"
+    - "subscription[cf_siren] : subscription_cf_siren"
+    - "subscription[cf_original_opportunity_sf] : subscription_cf_original_opportunity_sf"
     - "subscription[status] : subscription_status"
     - "subscription[created_at] : subscription_created_at"
+    - "subscription[start_date] : subscription_start_date"
     - "subscription[started_at] : subscription_started_at"
     - "subscription[current_term_start] : subscription_current_term_start"
     - "subscription[current_term_end] : subscription_current_term_end"
@@ -70,6 +76,7 @@ ChargeBee Automation Configuration:
     - "subscription_items[item_price_id][0] : item_price_id[0]"
     - "subscription_items[quantity][0] : item_quantity[0]"
     - "subscription_items[unit_price][0] : item_unit_price[0]"
+
 
 
   # ------------------   INVOICES INFORMATION   ------------------

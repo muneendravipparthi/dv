@@ -40,7 +40,7 @@ class CustomerExecution:
     def getAllCustomers(self):
         url = clientSite + customerextenction
         newjson = ''
-        TotalCustomerResponse = ReadAPIExecution.getDataFromAPI(self, url, user)
+        TotalCustomerResponse = ReadAPIExecution.getDataFromAPI(self, url, user, logger)
         Customerdictionary = {
             "list": TotalCustomerResponse
         }

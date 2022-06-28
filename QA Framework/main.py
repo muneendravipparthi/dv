@@ -46,8 +46,8 @@ def main():
 
             destination_df = read_data_from_file(destination_files, destination_columns)
 
-            # Filter src and dst
-            source_df, destination_df = filterData(source_df, destination_df, src_key, des_key)
+            # # Filter src and dst
+            # source_df, destination_df = filterData(source_df, destination_df, src_key, des_key)
 
             # pre-validation an d formatting of the data is common
             source_df, destination_df = pre_validation_check(type_in, source_df, source_columns, destination_df, destination_columns)
@@ -57,8 +57,9 @@ def main():
 
             # Missing Data Capture Information
 
-            # #Filter src and dst
-            # source_df, destination_df = filterData(source_df, destination_df,src_key,des_key)
+            #Filter src and dst
+            source_df, destination_df = filterData(source_df, destination_df,src_key,des_key)
+
             # compare and report  code is common
             diff_df = compare_data(source_df, destination_df)  # compare
             site_name, client_name = get_details('Site', 'ClientName')
