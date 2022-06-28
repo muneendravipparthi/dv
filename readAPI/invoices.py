@@ -62,7 +62,7 @@ class InvoiceExecution:
                 newheaders[ch] = ch.replace(".", "_")
             df_nested_list.rename(columns=newheaders, inplace=True)
             df_nested_list.to_excel(excelDir + '/' + configs.get("clientName").data + outputFile, index=False)
-            if "invoice_line_items" in list(df_nested_list.head()):
+            if "invoice_line_item" in list(df_nested_list.head()):
                 df_splitlineitems = pd.read_excel(excelDir + '/' + configs.get("clientName").data + outputFile)
                 df_splitlineitems = self.invoice_lineitem_split(df_splitlineitems)
                 df_splitlineitems.to_excel(excelDir + '/' + configs.get("clientName").data + outputFile, index=False)
@@ -81,15 +81,15 @@ class InvoiceExecution:
                 df_splitdiscounts.to_excel(excelDir + '/' + configs.get("clientName").data + outputFile, index=False)
             tdf = pd.read_excel(excelDir + '/' + configs.get("clientName").data + outputFile)
             dateconvertioncollist = ["invoice_date", "invoice_due_date", "invoice_paid_at", "invoice_updated_at",
-                                     "invoice_generated_at", "line_item_date_from[0]", "line_item_date_to[0]",
-                                     "line_item_date_from[1]", "line_item_date_to[1]", "line_item_date_from[2]",
-                                     "line_item_date_to[2]", "line_item_date_from[3]", "line_item_date_to[3]",
-                                     "line_item_date_from[4]", "line_item_date_to[4]", "line_item_date_from[5]",
-                                     "line_item_date_to[5]", "line_item_date_from[6]", "line_item_date_to[6]",
-                                     "line_item_date_from[7]", "line_item_date_to[7]", "line_item_date_from[8]",
-                                     "line_item_date_to[8]", "line_item_date_from[9]",
-                                     "line_item_date_to[9]", "line_item_date_from[10]",
-                                     "line_item_date_to[10]", "applied_at", "txn_date", "payments_txn_date[0]",
+                                     "invoice_generated_at", "line_items_date_from[0]", "line_items_date_to[0]",
+                                     "line_items_date_from[1]", "line_items_date_to[1]", "line_items_date_from[2]",
+                                     "line_items_date_to[2]", "line_items_date_from[3]", "line_items_date_to[3]",
+                                     "line_items_date_from[4]", "line_items_date_to[4]", "line_items_date_from[5]",
+                                     "line_items_date_to[5]", "line_items_date_from[6]", "line_items_date_to[6]",
+                                     "line_items_date_from[7]", "line_items_date_to[7]", "line_items_date_from[8]",
+                                     "line_items_date_to[8]", "line_items_date_from[9]",
+                                     "line_items_date_to[9]", "line_items_date_from[10]",
+                                     "line_items_date_to[10]", "applied_at", "txn_date", "payments_txn_date[0]",
                                      "payments_txn_date[1]", ]
             for col in dateconvertioncollist:
                 if col in list(tdf.head()):
@@ -102,15 +102,15 @@ class InvoiceExecution:
                 centsToDollerlist = ["invoice_total", "invoice_amount_paid", "invoice_amount_adjusted",
                                      "invoice_write_off_amount", "invoice_credits_applied", "invoice_amount_due",
                                      "invoice_amount_to_collect", "invoice_new_sales_amount",
-                                     "line_item_unit_amount[0]",
-                                     "line_item_amount[0]", "line_item_tax_amount[0]", "line_item_unit_amount[1]",
-                                     "line_item_amount[1]", "line_item_tax_amount[1]", "line_item_unit_amount[2]",
-                                     "line_item_amount[2]", "line_item_tax_amount[2]", "line_item_unit_amount[3]",
-                                     "line_item_amount[3]", "line_item_tax_amount[3]", "line_item_unit_amount[4]",
-                                     "line_item_amount[4]", "line_item_tax_amount[4]", "line_item_unit_amount[5]",
-                                     "line_item_amount[5]", "line_item_tax_amount[5]", "line_item_unit_amount[6]",
-                                     "line_item_amount[6]", "line_item_tax_amount[6]", "line_item_unit_amount[7]",
-                                     "line_item_amount[7]", "line_item_tax_amount[7]", "applied_amount", "txn_amount",
+                                     "line_items_unit_amount[0]",
+                                     "line_items_amount[0]", "line_items_tax_amount[0]", "line_items_unit_amount[1]",
+                                     "line_items_amount[1]", "line_items_tax_amount[1]", "line_items_unit_amount[2]",
+                                     "line_items_amount[2]", "line_items_tax_amount[2]", "line_items_unit_amount[3]",
+                                     "line_items_amount[3]", "line_items_tax_amount[3]", "line_items_unit_amount[4]",
+                                     "line_items_amount[4]", "line_items_tax_amount[4]", "line_items_unit_amount[5]",
+                                     "line_items_amount[5]", "line_items_tax_amount[5]", "line_items_unit_amount[6]",
+                                     "line_items_amount[6]", "line_items_tax_amount[6]", "line_items_unit_amount[7]",
+                                     "line_items_amount[7]", "line_items_tax_amount[7]", "applied_amount", "txn_amount",
                                      "payments_txn_amount[0]", "payments_txn_amount[1]"]
                 for col in centsToDollerlist:
                     if col in list(tdf.head()):
@@ -123,13 +123,13 @@ class InvoiceExecution:
             logger.exception(e)
 
     def invoice_lineitem_split(self, dfdata):
-        df = dfdata[["invoice_id", "invoice_line_items"]]
+        df = dfdata[["invoice_id", "invoice_line_item"]]
         dfs = pd.DataFrame
         dfl = pd.DataFrame
-        df['invoice_line_items'] = df['invoice_line_items'].replace("Tiina's addon", "Tiina^s addon", regex=True)
-        df['invoice_line_items'] = df['invoice_line_items'].replace("'", '"', regex=True)
-        df['invoice_line_items'] = df['invoice_line_items'].replace(": False,", ': "False",', regex=True)
-        df['invoice_line_items'] = df['invoice_line_items'].replace(": True,", ': "True",', regex=True)
+        df['invoice_line_item'] = df['invoice_line_item'].replace("Tiina's addon", "Tiina^s addon", regex=True)
+        df['invoice_line_item'] = df['invoice_line_item'].replace("'", '"', regex=True)
+        df['invoice_line_item'] = df['invoice_line_item'].replace(": False,", ': "False",', regex=True)
+        df['invoice_line_item'] = df['invoice_line_item'].replace(": True,", ': "True",', regex=True)
         for i, j in zip(df['invoice_id'], df['invoice_line_items']):
             print("splitting for '{}' invoice id and the date is :{}".format(i, j))
             if "INVFI026771" in i:
@@ -137,7 +137,7 @@ class InvoiceExecution:
             if not pd.isna(j):
                 data = json.loads(j)
                 for k in range(len(data)):
-                    prefix = "line_item_"
+                    prefix = "line_items_"
                     dfli = pd.json_normalize(data[k])
                     sufix = "[" + str(k) + "]"
                     headers = list(dfli.head())
@@ -177,7 +177,7 @@ class InvoiceExecution:
             if not pd.isna(j):
                 data = json.loads(j)
                 for k in range(len(data)):
-                    prefix = "line_item_taxes_"
+                    prefix = "line_items_taxes_"
                     dfli = pd.json_normalize(data[k])
                     sufix = "[" + str(k) + "]"
                     headers = list(dfli.head())
@@ -238,7 +238,7 @@ class InvoiceExecution:
         return dfpayment
 
     def invoice_discount_split(self, dfdata):
-        df = dfdata[["invoice_id", "invoice_line_item_discounts"]]
+        df = dfdata[["invoice_id", "invoice_line_items_discounts"]]
         dfs = pd.DataFrame
         dfl = pd.DataFrame
         df['invoice_line_item_discounts'] = df['invoice_line_item_discounts'].replace("'", '"', regex=True)

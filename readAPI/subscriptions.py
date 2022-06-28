@@ -81,9 +81,9 @@ class SubscriptionExecution:
                     df_splitlineitems[item] = df_splitlineitems[item].str.replace('\'', '', regex=False)
                 count = 0
                 for item in lineitemslist:
-                    clist = ['item_price_id[' + str(count) + ']', 'item_type[' + str(count) + ']',
-                             'item_quantity[' + str(count) + ']', 'item_unit_price[' + str(count) + ']',
-                             'item_amount[' + str(count) + ']']
+                    clist = ['item_price_id[' + str(count) + ']', 'items_type[' + str(count) + ']',
+                             'items_quantity[' + str(count) + ']', 'items_unit_price[' + str(count) + ']',
+                             'items_amount[' + str(count) + ']']
                     df_splitlineitems['item_price_id[' + str(count) + ']'] = df_splitlineitems[item].str.extract(
                         r"item_price_id: (.*?),")
                     df_splitlineitems['item_type[' + str(count) + ']'] = df_splitlineitems[item].str.extract(
@@ -129,8 +129,8 @@ class SubscriptionExecution:
             if cents == 'False':
                 print("convertingtocents")
                 centsToDoller = pd.read_excel(excelDir + '/' + configs.get("clientName").data + outputFile)
-                centsToDollerlist = ["subscription_mrr", "item_unit_price[0]", "item_amount[0]", "item_unit_price[1]",
-                                     "item_amount[1]", "item_unit_price[2]", "item_amount[2]"]
+                centsToDollerlist = ["subscription_mrr", "items_unit_price[0]", "items_amount[0]", "items_unit_price[1]",
+                                     "items_amount[1]", "items_unit_price[2]", "items_amount[2]"]
                 for col in centsToDollerlist:
                     if col in list(centsToDoller.head()):
                         centsToDoller[col] = centsToDoller[col].div(100)
