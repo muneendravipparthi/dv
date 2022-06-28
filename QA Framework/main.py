@@ -1,7 +1,7 @@
 from CompareData import *
+from MollieData import *
 from PrevalidationChecks import *
 from RecurlyData import *
-from MollieData import *
 from ReportGeneration import *
 
 
@@ -10,10 +10,6 @@ from ReportGeneration import *
 # all the Columns data to single DataFrame  -- > DONE
 # Do the cell to Cell Compare  - > Done
 # generate the report  - > Done
-
-
-
-
 
 
 def main():
@@ -56,15 +52,16 @@ def main():
             # source_df, destination_df = filterData(source_df, destination_df, src_key, des_key)
 
             # pre-validation an d formatting of the data is common
-            source_df, destination_df = pre_validation_check(type_in, source_df, source_columns, destination_df, destination_columns)
+            source_df, destination_df = pre_validation_check(type_in, source_df, source_columns, destination_df,
+                                                             destination_columns)
 
             source_df = source_df.sort_values(by=src_key)
             destination_df = destination_df.sort_values(by=des_key)
 
             # Missing Data Capture Information
 
-            #Filter src and dst
-            source_df, destination_df = filterData(source_df, destination_df,src_key,des_key)
+            # Filter src and dst
+            source_df, destination_df = filterData(source_df, destination_df, src_key, des_key)
 
             if is_mollie and is_mollie_ds1vsds2:
                 source_df = source_df[source_columns]

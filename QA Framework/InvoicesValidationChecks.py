@@ -34,8 +34,8 @@ def invoices_prevalidation_check(src_df, columns):
     #             print("Converting ", col)
     #             src_df[col] = src_df[col].apply(
     #                 lambda x: x*100 if pd.isna(x) != True else None)
-            # except:
-            #     print("Exception for ", col)
+    # except:
+    #     print("Exception for ", col)
 
     # Precondition for dates
     for col in tqdm(columns, desc='Precondition for dates'):
@@ -101,5 +101,3 @@ def invoices_prevalidation_check(src_df, columns):
                 print("Exception for ", col)
 
     return src_df
-
-

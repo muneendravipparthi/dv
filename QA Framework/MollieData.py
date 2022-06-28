@@ -1,9 +1,10 @@
+import datetime
 from re import search
-import numpy as np
+
 import pandas as pd
 import yaml
-import datetime
-dateToFillNan = pd.Timestamp(year=1970,  month=1, day=1)
+
+dateToFillNan = pd.Timestamp(year=1970, month=1, day=1)
 
 
 def extract_str_from_value(str_value):
@@ -72,12 +73,14 @@ def get_customers_data(source_files, source_columns):
                 payment_df = pd.read_excel(source_files[i])
 
     if len(source_files) >= 2:
-        merge_df = pd.merge(customer_df, payment_df, left_on='External_ID', right_on='customerId', how = 'left', suffixes=('', '_drop'))
+        merge_df = pd.merge(customer_df, payment_df, left_on='External_ID', right_on='customerId', how='left',
+                            suffixes=('', '_drop'))
         merge_df.drop([col for col in merge_df.columns if 'drop' in col], axis=1, inplace=True)
         customers_columns, customer_payment_columns = read_customers_mapping_info()
-        merge_df['mandateId'] = merge_df[['External_ID', 'mandateId']].apply(lambda x: "/".join(x) if pd.isna(x.mandateId) != True else None, axis =1)
+        merge_df['mandateId'] = merge_df[['External_ID', 'mandateId']].apply(
+            lambda x: "/".join(x) if pd.isna(x.mandateId) != True else None, axis=1)
         merge_df['auto_collection'] = merge_df['mandateId'].apply(lambda x: 'OFF' if pd.isna(x) else 'ON')
-        merge_df['allow_direct_debit'] = merge_df['Method'].apply(lambda x: 'TRUE' if x =='directdebit' else None)
+        merge_df['allow_direct_debit'] = merge_df['Method'].apply(lambda x: 'TRUE' if x == 'directdebit' else None)
     else:
         merge_df = customer_df
     # return merge_df[source_columns]
@@ -104,12 +107,12 @@ def get_subscriptions_data(source_files, source_columns):
         subscription_df = subscription_df[subscription_columns]
         temp_transaction_df = transaction_df[transaction_columns]
         transaction_df = get_current_term_dates_data(temp_transaction_df)
-        merge_df = pd.merge(subscription_df, transaction_df, left_on=['Customer_ID', 'Subscriptionplan_ID'], right_on=['customer_id','subscription_plan_id'],how="left", suffixes=('', '_drop'))
+        merge_df = pd.merge(subscription_df, transaction_df, left_on=['Customer_ID', 'Subscriptionplan_ID'],
+                            right_on=['customer_id', 'subscription_plan_id'], how="left", suffixes=('', '_drop'))
         merge_df.drop([col for col in merge_df.columns if 'drop' in col], axis=1, inplace=True)
     else:
         merge_df = subscription_df
     return merge_df
-
 
 
 def get_invoices_data(source_files, source_columns):
@@ -148,8 +151,9 @@ def get_invoices_data(source_files, source_columns):
         #                     suffixes=('', '_drop'))
         # merge_df.drop([col for col in merge_df.columns if 'drop' in col], axis=1, inplace=True)
 
-        merge_df1 = pd.merge(invoice_df, merge_df, left_on=['Customer_ID','Product_Description'], right_on=['Customer_ID', 'Subscriptionplan'], how="left",
-                            suffixes=('', '_drop'))
+        merge_df1 = pd.merge(invoice_df, merge_df, left_on=['Customer_ID', 'Product_Description'],
+                             right_on=['Customer_ID', 'Subscriptionplan'], how="left",
+                             suffixes=('', '_drop'))
         merge_df1.drop([col for col in merge_df.columns if 'drop' in col], axis=1, inplace=True)
         merge_df1.drop("customer_id", axis=1, inplace=True)
         merge_df1.to_excel('1merge_df1.xlsx', index=False)
@@ -169,7 +173,7 @@ def get_currenttermdate_data(transaction_df):
 
     transaction_df['scheduled_for'] = pd.to_datetime(transaction_df['scheduled_for'], format='%Y-%m-%d')
 
-    current_term_start = (transaction_df['scheduled_for'] < today) & (transaction_df['scheduled_for']  > Previous_Date)
+    current_term_start = (transaction_df['scheduled_for'] < today) & (transaction_df['scheduled_for'] > Previous_Date)
     # locate rows and access them using .loc() function
     current_term_start = transaction_df.loc[current_term_start]
     current_term_start = current_term_start.rename(columns={'scheduled_for': 'current_term_start'})
@@ -179,8 +183,8 @@ def get_currenttermdate_data(transaction_df):
     # locate rows and access them using .loc() function
     current_term_end = transaction_df.loc[current_term_end]
     current_term_end = current_term_end.rename(columns={'scheduled_for': 'current_term_end'})
-    mergedf = pd.merge(current_term_start, current_term_end, on=['customer_id','subscription_plan_id'], how='inner',
-                     suffixes=('', '_drop'))
+    mergedf = pd.merge(current_term_start, current_term_end, on=['customer_id', 'subscription_plan_id'], how='inner',
+                       suffixes=('', '_drop'))
     mergedf.drop([col for col in mergedf.columns if 'drop' in col], axis=1, inplace=True)
     mergedf.to_excel('transactionmergedf.xlsx', index=False)
     return mergedf
@@ -194,18 +198,20 @@ def get_current_term_dates_data(transaction_df):
 
     transaction_df['scheduled_for'] = pd.to_datetime(transaction_df['scheduled_for'], format='%Y-%m-%d')
     transaction_df['system_date'] = pd.to_datetime(transaction_df['system_date'], format='%Y-%m-%d')
-    current_term_start = (transaction_df['scheduled_for'] <= today) & ((transaction_df['system_date'] - transaction_df['scheduled_for']).dt.days < 31)
+    current_term_start = (transaction_df['scheduled_for'] <= today) & (
+                (transaction_df['system_date'] - transaction_df['scheduled_for']).dt.days < 31)
     # locate rows and access them using .loc() function
     current_term_start = transaction_df.loc[current_term_start]
     current_term_start = current_term_start.rename(columns={'scheduled_for': 'current_term_start'})
 
     # filter rows on the basis of date
-    current_term_end = (transaction_df['scheduled_for'] > today) & ((transaction_df['scheduled_for'] - transaction_df['system_date']).dt.days < 31)
+    current_term_end = (transaction_df['scheduled_for'] > today) & (
+                (transaction_df['scheduled_for'] - transaction_df['system_date']).dt.days < 31)
     # locate rows and access them using .loc() function
     current_term_end = transaction_df.loc[current_term_end]
     current_term_end = current_term_end.rename(columns={'scheduled_for': 'current_term_end'})
-    mergedf = pd.merge(current_term_start, current_term_end, on=['customer_id','subscription_plan_id'], how='inner',
-                     suffixes=('', '_drop'))
+    mergedf = pd.merge(current_term_start, current_term_end, on=['customer_id', 'subscription_plan_id'], how='inner',
+                       suffixes=('', '_drop'))
     mergedf.drop([col for col in mergedf.columns if 'drop' in col], axis=1, inplace=True)
     mergedf.to_excel('transactionmergedf.xlsx', index=False)
     mergedf["Duplicate"] = mergedf.duplicated(['customer_id'], keep=False)

@@ -14,11 +14,12 @@ from openpyxl.styles.borders import Border, Side, BORDER_THIN
 from openpyxl.utils.cell import get_column_letter
 
 
-def report_generation(type_in, df1, site_name, client_name,module,sheet_name):
+def report_generation(type_in, df1, site_name, client_name, module, sheet_name):
     # sheet_name = 'DS2VsDS3Subscription_diff'
     validation_type = (str(type_in)).split("_")
     now = datetime.datetime.now()
-    file_name = "./TestResults/" + client_name + "_" + site_name + "_" + validation_type[0] + "_" + now.strftime("%Y%m%d%H%M%S") + "_Diff.xlsx"
+    file_name = "./TestResults/" + client_name + "_" + site_name + "_" + validation_type[0] + "_" + now.strftime(
+        "%Y%m%d%H%M%S") + "_Diff.xlsx"
 
     df1 = df1.replace(to_replace='nan --> False', value='')
     df1 = df1.replace(to_replace='nan --> nan', value='')
@@ -67,7 +68,6 @@ def report_generation(type_in, df1, site_name, client_name,module,sheet_name):
     df1 = df1.replace(to_replace='None --> BLANK', value='')
     # df1['invoice[stripe_id]'] = df1['invoice[stripe_id]'].replace(to_replace=' --> ', value='')
 
-
     # Insert an empty column to write the formulas
     df1.insert(len(df1.columns), 'Execution_Status', np.nan)
 
@@ -82,8 +82,8 @@ def report_generation(type_in, df1, site_name, client_name,module,sheet_name):
     worksheet.freeze_panes(1, 1)
 
     # Create a for loop to start writing the formulas to each row
-    for row in range(2, df1.shape[0]+2):
-        formula = f'=IF(COUNTIF(A{row}: {get_column_letter(len(df1.columns)-1)}{row}, "*-->*"), "FAIL", "PASS")'
+    for row in range(2, df1.shape[0] + 2):
+        formula = f'=IF(COUNTIF(A{row}: {get_column_letter(len(df1.columns) - 1)}{row}, "*-->*"), "FAIL", "PASS")'
 
         worksheet.write_formula(f"{get_column_letter(len(df1.columns))}{row}", formula)
 
@@ -95,10 +95,10 @@ def report_generation(type_in, df1, site_name, client_name,module,sheet_name):
 
     # Apply a conditional format to the cell range.
     worksheet.conditional_format(1, 0, len(df1), len(df1.columns),
-                                 {'type':     'text',
+                                 {'type': 'text',
                                   'criteria': 'containing',
-                                  'value':    '-->',
-                                  'format':   format1})
+                                  'value': '-->',
+                                  'format': format1})
 
     worksheet.conditional_format(1, 0, len(df1), len(df1.columns),
                                  {'type': 'text',
@@ -107,28 +107,28 @@ def report_generation(type_in, df1, site_name, client_name,module,sheet_name):
                                   'format': format5})
 
     # Add a format. Blue fill with White text.
-    format2 = workbook.add_format({'bg_color':   '#1589FF', 'font_color': '#FFFFFF'})
+    format2 = workbook.add_format({'bg_color': '#1589FF', 'font_color': '#FFFFFF'})
 
-    worksheet.conditional_format(0, 0, 0, len(df1.columns)-1,
-                                 {'type':     'text', 'criteria': 'not containing', 'value': '-->', 'format':   format2})
+    worksheet.conditional_format(0, 0, 0, len(df1.columns) - 1,
+                                 {'type': 'text', 'criteria': 'not containing', 'value': '-->', 'format': format2})
 
     # Add a format. Green fill with White text.
-    format3 = workbook.add_format({'bg_color':   '#41A317', 'font_color': '#FFFFFF'})
+    format3 = workbook.add_format({'bg_color': '#41A317', 'font_color': '#FFFFFF'})
 
     # Add a format. Red fill with White text.
-    format4 = workbook.add_format({'bg_color':   '#E41B17', 'font_color': '#FFFFFF'})
+    format4 = workbook.add_format({'bg_color': '#E41B17', 'font_color': '#FFFFFF'})
 
-    worksheet.conditional_format(1, len(df1.columns)-1, len(df1), len(df1.columns)-1,
-                                 {'type':     'text',
+    worksheet.conditional_format(1, len(df1.columns) - 1, len(df1), len(df1.columns) - 1,
+                                 {'type': 'text',
                                   'criteria': 'containing',
-                                  'value':    'PASS',
-                                  'format':   format3})
+                                  'value': 'PASS',
+                                  'format': format3})
 
-    worksheet.conditional_format(1, len(df1.columns)-1, len(df1), len(df1.columns)-1,
-                                 {'type':     'text',
+    worksheet.conditional_format(1, len(df1.columns) - 1, len(df1), len(df1.columns) - 1,
+                                 {'type': 'text',
                                   'criteria': 'containing',
-                                  'value':    'FAIL',
-                                  'format':   format4})
+                                  'value': 'FAIL',
+                                  'format': format4})
 
     # Close the Pandas Excel writer and output the Excel file.
     writer.save()
@@ -139,8 +139,8 @@ def report_generation(type_in, df1, site_name, client_name,module,sheet_name):
 
     # set the font style to bold and column and row width
     for j in range(number_columns):
-        sheet.cell(row=1, column=j+1).font = Font(size=14, bold=True)
-        sheet.column_dimensions[get_column_letter(j+1)].width = 30
+        sheet.cell(row=1, column=j + 1).font = Font(size=14, bold=True)
+        sheet.column_dimensions[get_column_letter(j + 1)].width = 30
 
     sheet.row_dimensions[1].height = 20
 
@@ -157,7 +157,8 @@ def report_generation(type_in, df1, site_name, client_name,module,sheet_name):
     other_formula = '=B4-(C4+D4)'
     total_deviations = '="Total no of mismatches  : "&COUNTIF(' + sheet_name + '!A:' + status_column_position + ',"* --> *")'
 
-    farm_1 = {'Total No Of Records Validated': no_of_executions_formula, 'No Of Records Pass': pass_formula, 'No Of Records Fail': fail_formula,
+    farm_1 = {'Total No Of Records Validated': no_of_executions_formula, 'No Of Records Pass': pass_formula,
+              'No Of Records Fail': fail_formula,
               'Other': other_formula}
 
     df3 = pd.DataFrame([farm_1], index=['Farm 1'])
@@ -169,7 +170,7 @@ def report_generation(type_in, df1, site_name, client_name,module,sheet_name):
     columns_data = list(df1.columns.values)
     del columns_data[-1]
     length_of_coulmns = len(columns_data)
-    list_str_sno = list(range(1, length_of_coulmns+1))
+    list_str_sno = list(range(1, length_of_coulmns + 1))
 
     lst = [None] * length_of_coulmns
 
@@ -178,16 +179,16 @@ def report_generation(type_in, df1, site_name, client_name,module,sheet_name):
     colwithf = []
 
     for col in range(len(columns_data)):
-        c_letter = get_column_letter(col+1)
-        link = '#'+sheet_name+'!' + c_letter + '1:' + c_letter+str(len(df1)+1)
+        c_letter = get_column_letter(col + 1)
+        link = '#' + sheet_name + '!' + c_letter + '1:' + c_letter + str(len(df1) + 1)
         colwithf.append('=HYPERLINK("{}", "{}")'.format(link, columns_data[col]))
 
     for col in list_str_sno:
         c_letter = get_column_letter(col)
-        no_of_mismatch_formula = '=COUNTIF('+sheet_name+'!' + c_letter + ':' + c_letter + ',"* --> *")'
+        no_of_mismatch_formula = '=COUNTIF(' + sheet_name + '!' + c_letter + ':' + c_letter + ',"* --> *")'
         # NoOfMismathesformula = '=COUNTIF(DS2vsDS3_Subscription_diff!'+cLetter+':'+cLetter+',"* --> *")'
         no_of_mismatch_data.append(no_of_mismatch_formula)
-        qaupdateformula = '=IF(D'+str(col + 1)+'>0,"Fail","Pass")'
+        qaupdateformula = '=IF(D' + str(col + 1) + '>0,"Fail","Pass")'
         qa_updates.append(qaupdateformula)
 
     data = {'SNo': list_str_sno,
