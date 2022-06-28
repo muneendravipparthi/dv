@@ -1,0 +1,1 @@
+This directory is to store Json files which are exported for Chargbee site using API
