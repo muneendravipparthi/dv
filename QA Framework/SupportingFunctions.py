@@ -1,5 +1,5 @@
-import yaml
 import pandas as pd
+import yaml
 
 account_type = ['Customers_Validation', 'Subscriptions_Validation', 'Invoices_Validation']
 sort_key = ['Customers_KeyColumns', 'Subscriptions_KeyColumns', 'Invoices_KeyColumns']
@@ -8,8 +8,10 @@ type_source_files = ['Customers_SourceFile', 'Subscriptions_SourceFile', 'Invoic
 type_destination_files = ['Customers_DestinationFile', 'Subscriptions_DestinationFile', 'Invoices_DestinationFile']
 type_columns_names = ['Customers_Columns', 'Subscriptions_Columns', 'Invoices_Columns']
 comment_type = ["CUSTOMERS INFORMATION", "SUBSCRIPTIONS INFORMATION", "INVOICES INFORMATION"]
-module =["Customers Execution Report", "Subscription Execution Report", "Invoice Execution Report"]
-sheetname = ["Customer_diff","Subscription_diff","Invoice_diff"]
+module = ["Customers Execution Report", "Subscription Execution Report", "Invoice Execution Report"]
+sheetname = ["Customer_diff", "Subscription_diff", "Invoice_diff"]
+
+
 # typeOfExecution = ["DS1vsDS2", "DS2vsDS3", "DS1vsDS3"]
 
 def read_mapping_info():
@@ -79,7 +81,7 @@ def get_key_columns(key_columns):
     print("=====")
     des_key = key_column[1]
     src_key = str(src_key[2::])
-    des_key = str(des_key[0:len(des_key)-2:])
+    des_key = str(des_key[0:len(des_key) - 2:])
 
     return src_key, des_key
 

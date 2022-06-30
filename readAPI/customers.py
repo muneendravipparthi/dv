@@ -4,6 +4,7 @@ import os
 
 import pandas as pd
 from jproperties import Properties
+from tqdm import tqdm
 
 from readAPI.ReadAPI import ReadAPIExecution
 
@@ -12,6 +13,8 @@ home_folder = os.getenv('HOME')
 ROOT_DIR1 = os.path.abspath(os.curdir)
 ROOT_DIR = ROOT_DIR1.replace('readAPI', 'configuration.properties')
 jsonDir = ROOT_DIR1 + '/jsonfiles'
+excelDir = ROOT_DIR1 + '/ds3files'
+logDir = ROOT_DIR1 + '/logfiles'
 with open(ROOT_DIR, 'rb') as config_file:
     configs.load(config_file)
 
@@ -24,7 +27,7 @@ addonesecond = configs.get('addonesecond').data
 datetimeformat = configs.get('datetimeformat').data
 cents = configs.get('cents').data
 # now we will Create and configure logger
-logging.basicConfig(filename=os.getcwd() + "/customer.log",
+logging.basicConfig(filename=logDir + "/customer.log",
                     format='[%(asctime)s] %(lineno)d %(levelname)s - %(message)s',
                     filemode='w')
 # Let us Create an object
@@ -32,7 +35,7 @@ logger = logging.getLogger()
 
 # Now we are going to Set the threshold of logger to DEBUG
 logger.setLevel(logging.DEBUG)
-
+outputFile = "_AllCustomers.xlsx"
 
 
 class CustomerExecution:
@@ -40,7 +43,7 @@ class CustomerExecution:
     def getAllCustomers(self):
         url = clientSite + customerextenction
         newjson = ''
-        TotalCustomerResponse = ReadAPIExecution.getDataFromAPI(self, url, user)
+        TotalCustomerResponse = ReadAPIExecution.getDataFromAPI(self, url, user, logger)
         Customerdictionary = {
             "list": TotalCustomerResponse
         }
@@ -54,33 +57,33 @@ class CustomerExecution:
             df_nested_list = pd.json_normalize(data, record_path=['list'])
             df_nested_list_temp = pd.json_normalize(data, record_path=['list'], max_level=1)
             if 'customer.meta_data' in list(df_nested_list_temp.head()):
-                df_nested_list_temp = df_nested_list_temp[['customer.id','customer.meta_data']]
-                df_nested_list = pd.merge(df_nested_list,df_nested_list_temp,how='inner', left_on=['customer.id'],
-                          right_on=['customer.id'])
+                df_nested_list_temp = df_nested_list_temp[['customer.id', 'customer.meta_data']]
+                df_nested_list = pd.merge(df_nested_list, df_nested_list_temp, how='inner', left_on=['customer.id'],
+                                          right_on=['customer.id'])
             headers = list(df_nested_list.head())
             newheaders = {}
             for ch in headers:
                 newheaders[ch] = ch.replace(".", "_")
             df_nested_list.rename(columns=newheaders, inplace=True)
-            df_nested_list.to_excel(configs.get("clientName").data + "_AllCustomers.xlsx", index=False)
-            # df_nested_list.to_csv(configs.get("clientName").data + "_AllCustomers.csv", index=False)
+            df_nested_list.to_excel(excelDir + '/' + configs.get("clientName").data + outputFile, index=False)
 
-            tdf = pd.read_excel(configs.get("clientName").data + "_AllCustomers.xlsx")
-            # tdf = pd.read_csv(configs.get("clientName").data + "_AllCustomers.csv")
+            tdf = pd.read_excel(excelDir + '/' + configs.get("clientName").data + outputFile)
             emaillist = ['customer_email', 'customer_billing_address_email']
             for col in emaillist:
                 if col in list(tdf.head()):
                     tdf[col] = tdf[col].replace('_AT_', '@', regex=True)
                     tdf[col] = tdf[col].replace('@example.com', '', regex=True)
             dateconvertioncollist = ["customer_created_at", "customer_updated_at", "card_created_at", "card_updated_at"]
-            for col in dateconvertioncollist:
+            for col in tqdm(dateconvertioncollist, desc='dateconvertioncollist'):
                 if col in list(tdf.head()):
                     tdf[col] = tdf[col].apply(
-                        lambda x: ReadAPIExecution.epoch_To_Datetime_Convert(self, x, clienttimezone) if pd.isna(x) != True else None)
-            tdf.to_excel(configs.get("clientName").data + "_AllCustomers.xlsx", index=False)
-            # tdf.to_csv(configs.get("clientName").data + "_AllCustomers.csv", index=False)
+                        lambda x: ReadAPIExecution.epoch_To_Datetime_Convert(self, x, clienttimezone) if pd.isna(
+                            x) != True else None)
+            tdf.to_excel(excelDir + '/' + configs.get("clientName").data + outputFile, index=False)
         except Exception as e:
             logger.error("exception in customers:" + str(e))
+            logger.info("Something failed during data convertion from Json to Excel")
+            logger.exception(e)
 
 
 customerobj = CustomerExecution()

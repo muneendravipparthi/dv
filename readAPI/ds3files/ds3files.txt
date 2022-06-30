@@ -1,0 +1,4 @@
+This directory is to store DS3 files which are exported for Chargbee site using API
+
+Vcv_71103
+vnet123

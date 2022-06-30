@@ -1,4 +1,3 @@
-
 ####### Customers mapping #####################
 Customers Automation Configuration:
   CustomerAddressOfAccount:
@@ -43,9 +42,9 @@ Subscriptions Automation Configuration:
   Customer_Account_Code: 'account_code'
   Coupon_Code: 'coupon_code'
   Subscription_Mapping:
-    Addon : True
-    Redemption : False
-    Coupon : False
+    Addon: True
+    Redemption: False
+    Coupon: False
 
   Redemption_Date: 'expires_at'
   Coupon_Date: 'deactivated_at'
@@ -73,7 +72,7 @@ Invoices Automation Configuration:
     - 'adjustment_product_code'
     - 'adjustment_quantity'
   Adjustment_Discount: 'adjustment_discount'
-  Adjustment_Coupon_Code : 'adjustment_coupon_code'
+  Adjustment_Coupon_Code: 'adjustment_coupon_code'
   Adjustment_Merge_Columns:
     - 'billed_date'
     - 'status'
@@ -84,6 +83,6 @@ Invoices Automation Configuration:
   Doc_Type:
     - invoice_doc_type: 'legacy,charge'
 
-  Discounts_Entity_Type : 'discounts_entity_type_0'
+  Discounts_Entity_Type: 'discounts_entity_type_0'
   Discounts_Entity_ID: 'discounts_entity_id_0'
   Discounts_Amount: 'discounts_amount_0'
