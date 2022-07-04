@@ -9,11 +9,11 @@ ChargeBee Automation Configuration:
 
   IsRecurly: False
   IsRecurlyDS1vsDS2: False
-  IsMollie: True
-  IsMollieDS1vsDS2: True
+  IsMollie: False
+  IsMollieDS1vsDS2: False
   type:
-    - DS1vsDS2
-#    - DS2vsDS3
+#    - DS1vsDS2
+    - DS2vsDS3
   dateFormet:
 #    - "%Y-%m-%d %H:%M:%S"
 #    - "%Y-%m-%d %H:%M"
@@ -57,30 +57,93 @@ ChargeBee Automation Configuration:
   # ------------------   SUBSCRIPTIONS INFORMATION   ------------------
   # Mapping Source Columns vs : Destination Columns
   Subscriptions_SourceFile:
-    "/Users/cb-muneendra/Downloads/LiveMigration-Leeto - Subscriptions_new.csv"
+    "/Users/cb-muneendra/Desktop/Eloomi_ds2-subs.xlsx"
 
   Subscriptions_DestinationFile:
-    "/Users/cb-muneendra/Desktop/Flatfeefulldata1_10.xlsx"
+    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/Eloomi_AllSubscriptions.xlsx"
 
   Subscriptions_KeyColumns:
     - "subscription[id] : subscription_id"
 
   Subscriptions_Columns:
     - "subscription[id] : subscription_id"
-    - "subscription[cf_contract_number_sf] : subscription_cf_contract_number_sf"
     - "customer[id] : customer_id"
-    - "subscription[cf_siren] : subscription_cf_siren"
-    - "subscription[cf_original_opportunity_sf] : subscription_cf_original_opportunity_sf"
     - "subscription[status] : subscription_status"
-    - "subscription[created_at] : subscription_created_at"
+    - "subscription_items[item_price_id][0] : item_price_id[0]"
+    - "subscription_items[quantity][0] : item_quantity[0]"
     - "subscription[start_date] : subscription_start_date"
     - "subscription[started_at] : subscription_started_at"
     - "subscription[current_term_start] : subscription_current_term_start"
     - "subscription[current_term_end] : subscription_current_term_end"
     - "subscription[cancelled_at] : subscription_cancelled_at"
-    - "subscription_items[item_price_id][0] : item_price_id[0]"
-    - "subscription_items[quantity][0] : item_quantity[0]"
+    - "subscription[cf_committed_since] : subscription_cf_committed_since"
     - "subscription_items[unit_price][0] : item_unit_price[0]"
+    - "item_tiers[item_price_id][0] : item_tiers_item_price_id[0]"
+    - "item_tiers[starting_unit][0] : item_tiers_starting_unit[0]"
+    - "item_tiers[ending_unit][0] : item_tiers_ending_unit[0]"
+    - "item_tiers[price][0] : item_tiers_price[0]"
+    - "item_tiers[item_price_id][1] : item_tiers_item_price_id[1]"
+    - "item_tiers[starting_unit][1] : item_tiers_starting_unit[1]"
+    - "item_tiers[ending_unit][1] : item_tiers_ending_unit[1]"
+    - "item_tiers[price][1] : item_tiers_price[1]"
+    - "item_tiers[item_price_id][2] : item_tiers_item_price_id[2]"
+    - "item_tiers[starting_unit][2] : item_tiers_starting_unit[2]"
+    - "item_tiers[ending_unit][2] : item_tiers_ending_unit[2]"
+    - "item_tiers[price][2] : item_tiers_price[2]"
+    - "item_tiers[item_price_id][3] : item_tiers_item_price_id[3]"
+    - "item_tiers[starting_unit][3] : item_tiers_starting_unit[3]"
+    - "item_tiers[ending_unit][3] : item_tiers_ending_unit[3]"
+    - "item_tiers[price][3] : item_tiers_price[3]"
+    - "item_tiers[item_price_id][4] : item_tiers_item_price_id[4]"
+    - "item_tiers[starting_unit][4] : item_tiers_starting_unit[4]"
+    - "item_tiers[ending_unit][4] : item_tiers_ending_unit[4]"
+    - "item_tiers[price][4] : item_tiers_price[4]"
+    - "item_tiers[item_price_id][5] : item_tiers_item_price_id[5]"
+    - "item_tiers[starting_unit][5] : item_tiers_starting_unit[5]"
+    - "item_tiers[ending_unit][5] : item_tiers_ending_unit[5]"
+    - "item_tiers[price][5] : item_tiers_price[5]"
+    - "item_tiers[item_price_id][6] : item_tiers_item_price_id[6]"
+    - "item_tiers[starting_unit][6] : item_tiers_starting_unit[6]"
+    - "item_tiers[ending_unit][6] : item_tiers_ending_unit[6]"
+    - "item_tiers[price][6] : item_tiers_price[6]"
+    - "item_tiers[item_price_id][7] : item_tiers_item_price_id[7]"
+    - "item_tiers[starting_unit][7] : item_tiers_starting_unit[7]"
+    - "item_tiers[ending_unit][7] : item_tiers_ending_unit[7]"
+    - "item_tiers[price][7] : item_tiers_price[7]"
+    - "item_tiers[item_price_id][8] : item_tiers_item_price_id[8]"
+    - "item_tiers[starting_unit][8] : item_tiers_starting_unit[8]"
+    - "item_tiers[ending_unit][8] : item_tiers_ending_unit[8]"
+    - "item_tiers[price][8] : item_tiers_price[8]"
+    - "item_tiers[item_price_id][9] : item_tiers_item_price_id[9]"
+    - "item_tiers[starting_unit][9] : item_tiers_starting_unit[9]"
+    - "item_tiers[ending_unit][9] : item_tiers_ending_unit[9]"
+    - "item_tiers[price][9] : item_tiers_price[9]"
+    - "item_tiers[item_price_id][10] : item_tiers_item_price_id[10]"
+    - "item_tiers[starting_unit][10] : item_tiers_starting_unit[10]"
+    - "item_tiers[ending_unit][10] : item_tiers_ending_unit[10]"
+    - "item_tiers[price][10] : item_tiers_price[10]"
+    - "item_tiers[item_price_id][11] : item_tiers_item_price_id[11]"
+    - "item_tiers[starting_unit][11] : item_tiers_starting_unit[11]"
+    - "item_tiers[ending_unit][11] : item_tiers_ending_unit[11]"
+    - "item_tiers[price][11] : item_tiers_price[11]"
+    - "item_tiers[item_price_id][12] : item_tiers_item_price_id[12]"
+    - "item_tiers[starting_unit][12] : item_tiers_starting_unit[12]"
+    - "item_tiers[ending_unit][12] : item_tiers_ending_unit[12]"
+    - "item_tiers[price][12] : item_tiers_price[12]"
+    - "item_tiers[item_price_id][13] : item_tiers_item_price_id[13]"
+    - "item_tiers[starting_unit][13] : item_tiers_starting_unit[13]"
+    - "item_tiers[ending_unit][13] : item_tiers_ending_unit[13]"
+    - "item_tiers[price][13] : item_tiers_price[13]"
+    - "item_tiers[item_price_id][14] : item_tiers_item_price_id[14]"
+    - "item_tiers[starting_unit][14] : item_tiers_starting_unit[14]"
+    - "item_tiers[price][14] : item_tiers_price[14]"
+    - "contract_term[created_at] : subscription_contract_term_created_at"
+    - "contract_term[contract_start] : subscription_contract_term_contract_start"
+    - "contract_term[billing_cycle] : subscription_contract_term_billing_cycle"
+    - "contract_term[total_amount_raised] : subscription_contract_term_total_contract_value"
+    - "contract_term[action_at_term_end] : subscription_contract_term_action_at_term_end"
+    - "contract_term[cancellation_cutoff_period] : subscription_contract_term_cancellation_cutoff_period"
+
 
 
 
@@ -153,6 +216,9 @@ ChargeBee Automation Configuration:
     - "invoice[id] : Invoice_Number"
 
   Date_Columns:
+    - "contract_term[created_at] : subscription_contract_term_created_at"
+    - "contract_term[contract_start] : subscription_contract_term_contract_start"
+    - "subscription[cf_committed_since] : subscription_cf_committed_since"
     - "committed_since : subscription_items[quantity_in_decimal][0]"
     - "current_contract_start : subscription[started_at]"
     - "current_contract_start : subscription[current_term_start]ref"

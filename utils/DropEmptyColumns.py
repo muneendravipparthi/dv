@@ -2,7 +2,7 @@
 import pandas as pd
 
 
-dataFile = '/Users/cb-muneendra/Desktop/leeto_Live_subscription_expected.xlsx'
+dataFile = '/Users/cb-muneendra/Desktop/Eloomi_ds2-subs.xlsx'
 
 
 if dataFile.endswith('csv'):
