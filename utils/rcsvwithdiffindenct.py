@@ -2,11 +2,11 @@ import pandas as pd
 
 # inputfiles ="/Users/cb-muneendra/Downloads/input 2/subscriptions/subscriptions.csv"
 # inputfiles = "/Users/cb-muneendra/Downloads/input 2/transactions/transactions.csv"
-inputfiles = "/Users/cb-muneendra/Downloads/input 2/invoices/invoice-lines.csv"
+inputfiles = "/Users/cb-muneendra/Downloads/2022-07-04/inputs/invoices.csv"
 # outputfile = 'customers.xlsx'
 # outputfile = 'subscriptions.xlsx'
 # outputfile = 'transactions.xlsx'
-outputfile = 'invoice.xlsx'
+outputfile = 'invoices.xlsx'
 
 if inputfiles.endswith('csv'):
     df = pd.read_csv(inputfiles, sep = ';', engine = 'python')

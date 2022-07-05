@@ -24,7 +24,7 @@ Customers Automation Configuration:
   FinalPayments:
     - 'customerId'
     - 'mandateId'
-    - 'Method'
+    - 'method'
     - 'createdAt'
 
 

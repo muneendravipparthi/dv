@@ -17,9 +17,9 @@ ChargeBee Automation Configuration:
   # Mapping Source Columns vs : Destination Columns
   Customers_Validation: False
   Customers_SourceFile:
-    "/Users/cb-muneendra/Git/cb_data_validation/utils/customers.xlsx, /Users/cb-muneendra/Downloads/FinalPayments.csv"
+    "/Users/cb-muneendra/Downloads/customers.csv, /Users/cb-muneendra/Downloads/FinalPayments 2.csv"
   Customers_DestinationFile:
-    "/Users/cb-muneendra/Downloads/output_22_ xpendy_data_1 2/customer_output18953261103180001/customer_cb_template.csv"
+    "/Users/cb-muneendra/Downloads/2022-07-04/output/customer_output4580860140628516282/customer_cb_template.csv"
 
   Customers_KeyColumns:
     - "External_ID : Custom_Field_1"
@@ -29,7 +29,7 @@ ChargeBee Automation Configuration:
     - "First_name : customer[first_name]"
     - "Last_name : customer[last_name]"
     - "Email_address : customer[email]"
-    - "Method : payment_method[type]"
+    - "method : payment_method[type]"
     - "mandateId : payment_method[reference_id]"
     - "First_name : billing_address[first_name]"
     - "Last_name : billing_address[last_name]"
@@ -48,11 +48,11 @@ ChargeBee Automation Configuration:
   # Mapping Source Columns vs : Destination Columns
   Subscriptions_Validation: False
   Subscriptions_SourceFile:
-    "/Users/cb-muneendra/Git/cb_data_validation/utils/subscriptions.xlsx,  /Users/cb-muneendra/Git/cb_data_validation/utils/transactions.xlsx"
+    "/Users/cb-muneendra/Downloads/subscriptions - subscriptions.csv,  /Users/cb-muneendra/Git/cb_data_validation/utils/transactions.xlsx"
 #    "/Users/cb-muneendra/Git/cb_data_validation/utils/subscriptions.xlsx,  /Users/cb-muneendra/Desktop/transactions2.xlsx"
 
   Subscriptions_DestinationFile:
-    "/Users/cb-muneendra/Downloads/output_23_xpendy_data_4/subscription_cb_template.csv"
+    "/Users/cb-muneendra/Downloads/2022-07-04/output/subscription_cb_template.csv"
 
   Subscriptions_KeyColumns:
     - "Subscription_ID : subscription[id]"
@@ -84,11 +84,11 @@ ChargeBee Automation Configuration:
   # Mapping Source Columns vs : Destination Columns
   Invoices_Validation: True
   Invoices_SourceFile:
-    "/Users/cb-muneendra/Git/cb_data_validation/utils/invoice.xlsx, /Users/cb-muneendra/Git/cb_data_validation/utils/subscriptions.xlsx,  /Users/cb-muneendra/Git/cb_data_validation/utils/transactions.xlsx"
+    "/Users/cb-muneendra/Git/cb_data_validation/utils/invoices.xlsx, /Users/cb-muneendra/Downloads/subscriptions - subscriptions.csv,  /Users/cb-muneendra/Git/cb_data_validation/utils/transactions.xlsx"
 #    "/Users/cb-muneendra/Git/cb_data_validation/utils/invoice.xlsx, /Users/cb-muneendra/Git/cb_data_validation/utils/subscriptions.xlsx,  /Users/cb-muneendra/Desktop/transactions2.xlsx"
 
   Invoices_DestinationFile:
-    "/Users/cb-muneendra/Downloads/output_23_xpendy_data_4/invoice_output753125253261490215/invoice_cb_template.csv"
+    "/Users/cb-muneendra/Downloads/2022-07-04/output/invoice_output9210661970999695758/invoice_cb_template.csv"
 
   Invoices_KeyColumns:
     - "Invoice_Number : invoice[id]"

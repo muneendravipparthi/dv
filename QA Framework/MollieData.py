@@ -77,7 +77,7 @@ def get_customers_data(source_files, source_columns):
         customers_columns, customer_payment_columns = read_customers_mapping_info()
         merge_df['mandateId'] = merge_df[['External_ID', 'mandateId']].apply(lambda x: "/".join(x) if pd.isna(x.mandateId) != True else None, axis =1)
         merge_df['auto_collection'] = merge_df['mandateId'].apply(lambda x: 'OFF' if pd.isna(x) else 'ON')
-        merge_df['allow_direct_debit'] = merge_df['Method'].apply(lambda x: 'TRUE' if x =='directdebit' else None)
+        merge_df['allow_direct_debit'] = merge_df['method'].apply(lambda x: 'TRUE' if x =='directdebit' else None)
     else:
         merge_df = customer_df
     # return merge_df[source_columns]
@@ -104,6 +104,10 @@ def get_subscriptions_data(source_files, source_columns):
         subscription_df = subscription_df[subscription_columns]
         temp_transaction_df = transaction_df[transaction_columns]
         transaction_df = get_current_term_dates_data(temp_transaction_df)
+        subscription_df['Customer_ID'] = subscription_df['Customer_ID'].astype(str)
+        subscription_df['Subscriptionplan_ID'] = subscription_df['Subscriptionplan_ID'].astype(str)
+        transaction_df['customer_id'] = transaction_df['customer_id'].astype(str)
+        transaction_df['subscription_plan_id'] = transaction_df['subscription_plan_id'].astype(str)
         merge_df = pd.merge(subscription_df, transaction_df, left_on=['Customer_ID', 'Subscriptionplan_ID'], right_on=['customer_id','subscription_plan_id'],how="left", suffixes=('', '_drop'))
         merge_df.drop([col for col in merge_df.columns if 'drop' in col], axis=1, inplace=True)
     else:
