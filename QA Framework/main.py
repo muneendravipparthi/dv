@@ -22,6 +22,8 @@ def main():
     is_mollie = mapping_data['IsMollie']
     is_mollie_ds1vsds2 = mapping_data['IsMollieDS1vsDS2']
     print("is_mollie = {} and is_mollie_ds1vsds2 = {}".format(is_mollie, is_mollie_ds1vsds2))
+    is_eloomi = mapping_data['IsEloomi']
+    print("is_eloomi = {}".format(is_eloomi))
     type_of_execution = str(mapping_data['type'])
     type_of_execution = re.sub('[^A-Za-z0-9]+', '', type_of_execution)
     print(type_of_execution)
@@ -45,69 +47,74 @@ def main():
             else:
                 print(" ------ IT's NON - RECURLY and DS1vsDS2 or DS2vsDS3 DATA VALIDATION -----------------")
                 source_df = read_data_from_file(source_files, source_columns)
+                destination_df = read_data_from_file(destination_files, destination_columns)
 
-            destination_df = read_data_from_file(destination_files, destination_columns)
-            # #For Eloomi
-            # itemids = ["1_9", "3_3", "1_18", "1_8", "3_72", "1_15", "1_6", "1_10", "1_16", "3_71", "1_19", "1_13", "6_3", "3_74", "3_65", "1_11", "3_66", "8_2", "6_1", "1_17", "5_1", "1_14", "8_1", "6_4", "8_3", "3_61", "1_20", "3_73", "3_67", "6_2", "3_40"]
-            # source_df_temp = source_df.copy()
-            # destination_df_temp = destination_df.copy()
-            # overalldiff = pd.DataFrame()
-            # for itemid in itemids:
-            # # itemid = '1_13'
-            #     source_df = source_df[source_df['Item_ID'] == itemid]
-            #     destination_df = destination_df[destination_df['Item_Id'] == itemid]
-            #
-            #     # Filter src and dst
-            #     source_df, destination_df = filterData(source_df, destination_df, src_key, des_key)
-            #
-            #     # pre-validation an d formatting of the data is common
-            #     source_df, destination_df = pre_validation_check(type_in, source_df, source_columns, destination_df, destination_columns)
-            #
-            #     source_df = source_df.sort_values(by=src_key)
-            #     destination_df = destination_df.sort_values(by=des_key)
-            #
-            #     # Missing Data Capture Information
-            #
-            #     # #Filter src and dst
-            #     # source_df, destination_df = filterData(source_df, destination_df,src_key,des_key)
-            #     # compare and report  code is common
-            #     diff_df = compare_data(source_df, destination_df)  # compare
-            #     overalldiff = overalldiff.append(diff_df)
-            #     source_df = source_df_temp.copy()
-            #     destination_df = destination_df_temp.copy()
-            #     print("---------------validation_",itemid,"_completed-----------------")
+            #For Eloomi
+            if is_eloomi:
+                itemids = ["1_9", "3_3", "1_18", "1_8", "3_72", "1_15", "1_6", "1_10", "1_16", "1_13", "5_1", "7_1", "1_19", "3_71", "1_17", "3_74", "3_65", "6_1", "8_2", "6_3", "1_11", "3_68", "3_66", "6_2", "3_70", "3_67", "1_14", "8_1", "1_20", "6_4", "8_3", "1_21", "3_61", "3_64", "3_40", "3_73"]
+                source_df_temp = source_df.copy()
+                destination_df_temp = destination_df.copy()
+                overalldiff = pd.DataFrame()
+                for itemid in itemids:
+                # itemid = '1_13'
+                    source_df = source_df[source_df['Item_Id'] == itemid]
+                    destination_df = destination_df[destination_df['Item_Id'] == itemid]
 
-            # # Filter src and dst
-            # source_df, destination_df = filterData(source_df, destination_df, src_key, des_key)
+                    # Filter src and dst
+                    source_df, destination_df = filterData(source_df, destination_df, src_key, des_key)
 
-            # pre-validation an d formatting of the data is common
-            source_df, destination_df = pre_validation_check(type_in, source_df, source_columns, destination_df,
-                                                             destination_columns)
+                    # pre-validation an d formatting of the data is common
+                    source_df, destination_df = pre_validation_check(type_in, source_df, source_columns, destination_df, destination_columns)
 
-            source_df = source_df.sort_values(by=src_key)
-            destination_df = destination_df.sort_values(by=des_key)
+                    source_df = source_df.sort_values(by=src_key)
+                    destination_df = destination_df.sort_values(by=des_key)
 
-            # Missing Data Capture Information
+                    # Missing Data Capture Information
 
-            # Filter src and dst
-            source_df, destination_df = filterData(source_df, destination_df, src_key, des_key)
+                    # #Filter src and dst
+                    # source_df, destination_df = filterData(source_df, destination_df,src_key,des_key)
+                    # compare and report  code is common
+                    diff_df = compare_data(source_df, destination_df)  # compare
+                    overalldiff = overalldiff.append(diff_df)
+                    source_df = source_df_temp.copy()
+                    destination_df = destination_df_temp.copy()
+                    print("---------------validation_",itemid,"_completed-----------------")
 
-            if is_mollie and is_mollie_ds1vsds2:
-                source_df = source_df[source_columns]
-                sourceheaders = list(source_df.head())
-                destheaders = list(destination_df.head())
-                newheaders = {}
-                for i in range(len(sourceheaders)):
-                    newheaders[sourceheaders[i]] = destheaders[i]
-                source_df.rename(columns=newheaders, inplace=True)
+                # Filter src and dst
+                source_df, destination_df = filterData(source_df, destination_df, src_key, des_key)
+                site_name, client_name = get_details('Site', 'ClientName')
+                sheet_name = str(type_of_execution) + str(sheetname[counter])
+                report_generation(type_in, overalldiff, site_name, client_name, module[counter], sheet_name)  # Report
+                print("--------------------------------")
+            else:
+                # pre-validation an d formatting of the data is common
+                source_df, destination_df = pre_validation_check(type_in, source_df, source_columns, destination_df,
+                                                                 destination_columns)
 
-            # compare and report  code is common
-            diff_df = compare_data(source_df, destination_df)  # compare
+                source_df = source_df.sort_values(by=src_key)
+                destination_df = destination_df.sort_values(by=des_key)
 
-            site_name, client_name = get_details('Site', 'ClientName')
-            sheet_name = str(type_of_execution) + str(sheetname[counter])
-            report_generation(type_in, diff_df, site_name, client_name, module[counter], sheet_name)  # Report
-            print("--------------------------------")
+                # Missing Data Capture Information
+
+                # Filter src and dst
+                source_df, destination_df = filterData(source_df, destination_df, src_key, des_key)
+
+                if is_mollie and is_mollie_ds1vsds2:
+                    source_df = source_df[source_columns]
+                    sourceheaders = list(source_df.head())
+                    destheaders = list(destination_df.head())
+                    newheaders = {}
+                    for i in range(len(sourceheaders)):
+                        newheaders[sourceheaders[i]] = destheaders[i]
+                    source_df.rename(columns=newheaders, inplace=True)
+
+                # compare and report  code is common
+                diff_df = compare_data(source_df, destination_df)  # compare
+
+                site_name, client_name = get_details('Site', 'ClientName')
+                sheet_name = str(type_of_execution) + str(sheetname[counter])
+                report_generation(type_in, diff_df, site_name, client_name, module[counter], sheet_name)  # Report
+                print("--------------------------------")
 
         else:
             print('Reading and validation is SET to FALSE')
