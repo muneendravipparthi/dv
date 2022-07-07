@@ -2,6 +2,7 @@ import re
 
 from SupportingFunctions import *
 
+
 def invoices_prevalidation_check(src_df, columns):
     print("In src_invoices_prevalidation_check function")
     pass
@@ -31,8 +32,8 @@ def invoices_prevalidation_check(src_df, columns):
     #             print("Converting ", col)
     #             src_df[col] = src_df[col].apply(
     #                 lambda x: x*100 if pd.isna(x) != True else None)
-            # except:
-            #     print("Exception for ", col)
+    # except:
+    #     print("Exception for ", col)
 
     # Precondition for dates
     for col in columns:
@@ -93,10 +94,8 @@ def invoices_prevalidation_check(src_df, columns):
         if ((col in list(src_df.columns.values)) and (col in str_columns)):
             try:
                 src_df[col] = src_df[col].str.lower()
-                src_df[col] = src_df[col].astype(str).apply(lambda x: x.replace('.0', ''))
+                # src_df[col] = src_df[col].astype(str).apply(lambda x: x.replace('.0', ''))
             except:
                 print("Exception for ", col)
 
     return src_df
-
-

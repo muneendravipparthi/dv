@@ -7,19 +7,19 @@ ChargeBee Automation Configuration:
   IsMollieDS1vsDS2: True
   type:
     - DS1vsDS2
-#    - DS2vsDS3
+  #    - DS2vsDS3
   dateFormet:
-    - "%Y-%m-%d %H:%M:%S"
-#    - "%Y-%m-%d %H:%M"
-#    - "%Y-%m-%d"
+#    - "%Y-%m-%d %H:%M:%S"
+      - "%Y-%m-%d %H:%M"
+  #    - "%Y-%m-%d"
 
   # ------------------   CUSTOMER INFORMATION   ------------------
   # Mapping Source Columns vs : Destination Columns
   Customers_Validation: False
   Customers_SourceFile:
-    "/Users/cb-muneendra/Downloads/customers.csv, /Users/cb-muneendra/Downloads/FinalPayments 2.csv"
+    "/Users/cb-muneendra/Downloads/input_comma_seperated/customers.csv, /Users/cb-muneendra/Downloads/input_comma_seperated/FinalPayments.csv"
   Customers_DestinationFile:
-    "/Users/cb-muneendra/Downloads/2022-07-04/output/customer_output4580860140628516282/customer_cb_template.csv"
+    "/Users/cb-muneendra/Downloads/outputv0.2/customer_output3467230206269283133/customer_cb_template.csv"
 
   Customers_KeyColumns:
     - "External_ID : Custom_Field_1"
@@ -48,11 +48,11 @@ ChargeBee Automation Configuration:
   # Mapping Source Columns vs : Destination Columns
   Subscriptions_Validation: False
   Subscriptions_SourceFile:
-    "/Users/cb-muneendra/Downloads/subscriptions - subscriptions.csv,  /Users/cb-muneendra/Git/cb_data_validation/utils/transactions.xlsx"
-#    "/Users/cb-muneendra/Git/cb_data_validation/utils/subscriptions.xlsx,  /Users/cb-muneendra/Desktop/transactions2.xlsx"
+    "/Users/cb-muneendra/Downloads/input_comma_seperated/subscriptions.csv,  /Users/cb-muneendra/Downloads/input_comma_seperated/transactions.csv"
+  #    "/Users/cb-muneendra/Git/cb_data_validation/utils/subscriptions.xlsx,  /Users/cb-muneendra/Desktop/transactions2.xlsx"
 
   Subscriptions_DestinationFile:
-    "/Users/cb-muneendra/Downloads/2022-07-04/output/subscription_cb_template.csv"
+    "/Users/cb-muneendra/Downloads/outputv0.2/subscription_cb_template.csv"
 
   Subscriptions_KeyColumns:
     - "Subscription_ID : subscription[id]"
@@ -62,10 +62,10 @@ ChargeBee Automation Configuration:
     - "Customer_ID : customer[id]"
     - "Status : subscription[status]"
     - "Start_date : subscription[start_date]"
-    - "Activated_on_(CEST) : subscription[started_at]"
+    - "Activated_on__CEST_ : subscription[started_at]"
     - "current_term_start : subscription[current_term_start]"
     - "current_term_end : subscription[current_term_end]"
-    - "(Will_be)_Cancelled_on : subscription[cancelled_at]"
+    - "_Will_be__Cancelled_on : subscription[cancelled_at]"
     - "First_name : shipping_address[first_name]"
     - "Last_name : shipping_address[last_name]"
     - "Email : shipping_address[email]"
@@ -78,17 +78,38 @@ ChargeBee Automation Configuration:
     - "Subscriptionplan_ID : subscription_items[item_price_id][0]"
     - "amount_incl : subscription_items[unit_price][0]"
 
+  #  Subscriptions_Columns:
+  #    - "Subscription_ID : subscription[id]"
+  #    - "Customer_ID : customer[id]"
+  #    - "Status : subscription[status]"
+  #    - "Start_date : subscription[start_date]"
+  #    - "Activated_on_(CEST) : subscription[started_at]"
+  #    - "current_term_start : subscription[current_term_start]"
+  #    - "current_term_end : subscription[current_term_end]"
+  #    - "(Will_be)_Cancelled_on : subscription[cancelled_at]"
+  #    - "First_name : shipping_address[first_name]"
+  #    - "Last_name : shipping_address[last_name]"
+  #    - "Email : shipping_address[email]"
+  #    - "Street : shipping_address[line1]"
+  #    - "City : shipping_address[city]"
+  #    - "Zipcode : shipping_address[zip]"
+  #    - "Country : shipping_address[country]"
+  #    - "Mandate_type : Custom_Field_1"
+  #    - "Mandate_code : Custom_Field_2"
+  #    - "Subscriptionplan_ID : subscription_items[item_price_id][0]"
+  #    - "amount_incl : subscription_items[unit_price][0]"
+
 
 
   # ------------------   INVOICES INFORMATION   ------------------
   # Mapping Source Columns vs : Destination Columns
   Invoices_Validation: True
   Invoices_SourceFile:
-    "/Users/cb-muneendra/Git/cb_data_validation/utils/invoices.xlsx, /Users/cb-muneendra/Downloads/subscriptions - subscriptions.csv,  /Users/cb-muneendra/Git/cb_data_validation/utils/transactions.xlsx"
-#    "/Users/cb-muneendra/Git/cb_data_validation/utils/invoice.xlsx, /Users/cb-muneendra/Git/cb_data_validation/utils/subscriptions.xlsx,  /Users/cb-muneendra/Desktop/transactions2.xlsx"
+    "/Users/cb-muneendra/Downloads/input_comma_seperated/invoice_lines.csv, /Users/cb-muneendra/Downloads/input_comma_seperated/subscriptions.csv,  /Users/cb-muneendra/Downloads/input_comma_seperated/transactions.csv"
+  #    "/Users/cb-muneendra/Git/cb_data_validation/utils/invoice.xlsx, /Users/cb-muneendra/Git/cb_data_validation/utils/subscriptions.xlsx,  /Users/cb-muneendra/Desktop/transactions2.xlsx"
 
   Invoices_DestinationFile:
-    "/Users/cb-muneendra/Downloads/2022-07-04/output/invoice_output9210661970999695758/invoice_cb_template.csv"
+    "/Users/cb-muneendra/Downloads/invoice_output_20220707/invoice_cb_template.csv"
 
   Invoices_KeyColumns:
     - "Invoice_Number : invoice[id]"
@@ -99,7 +120,7 @@ ChargeBee Automation Configuration:
     - "Subscription_ID : invoice[subscription_id]"
     - "Status : invoice[status]"
     - "Created_Date : invoice[date]"
-    - "Amount_Incl. : invoice[total]"
+    - "amount_incl_ : invoice[total]"
     - "Zipcode : billing_address[zip]"
     - "Country : billing_address[country]"
     - "First_Name : shipping_address[first_name]"
@@ -108,16 +129,42 @@ ChargeBee Automation Configuration:
     - "City : shipping_address[city]"
     - "Zipcode : shipping_address[zip]"
     - "Country : shipping_address[country]"
-    - "VAT_% : taxes[rate][0]"
+#    - "VAT_% : taxes[rate][0]"
     - "VAT : taxes[amount][0]"
     - "Subscriptionplan_ID : line_items[entity_id][0]"
-    - "Description : line_items[description][0]"
+#    - "Description : line_items[description][0]"
     - "current_term_start : line_items[date_from][0]"
     - "current_term_end : line_items[date_to][0]"
-    - "Quantity : line_items[quantity][0]"
-    - "Amount_Excl. : line_items[unit_amount][0]"
-    - "Amount_Excl. : line_items[amount][0]"
+#    - "Quantity : line_items[quantity][0]"
+    - "amount_excl_ : line_items[unit_amount][0]"
+    - "amount_excl_ : line_items[amount][0]"
     - "VAT : line_items[tax_amount][0]"
+
+#  Invoices_Columns:
+#    - "Invoice_Number : invoice[id]"
+#    - "Customer_ID : invoice[customer_id]"
+#    - "Subscription_ID : invoice[subscription_id]"
+#    - "Status : invoice[status]"
+#    - "Created_Date : invoice[date]"
+#    - "Amount_Incl. : invoice[total]"
+#    - "Zipcode : billing_address[zip]"
+#    - "Country : billing_address[country]"
+#    - "First_Name : shipping_address[first_name]"
+#    - "Last_Name : shipping_address[last_name]"
+#    - "Street : shipping_address[line2]"
+#    - "City : shipping_address[city]"
+#    - "Zipcode : shipping_address[zip]"
+#    - "Country : shipping_address[country]"
+##    - "VAT_% : taxes[rate][0]"
+#    - "VAT : taxes[amount][0]"
+#    - "Subscriptionplan_ID : line_items[entity_id][0]"
+#    - "Description : line_items[description][0]"
+#    - "current_term_start : line_items[date_from][0]"
+#    - "current_term_end : line_items[date_to][0]"
+#    - "Quantity : line_items[quantity][0]"
+#    - "Amount_Excl. : line_items[unit_amount][0]"
+#    - "Amount_Excl. : line_items[amount][0]"
+#    - "VAT : line_items[tax_amount][0]"
 
 
   String_Columns:
@@ -140,7 +187,7 @@ ChargeBee Automation Configuration:
     - "invoice[total] : invoice_total"
     - "invoice[date] : invoice_date"
     - "invoice[currency_code] : invoice_currency_code"
-    - "line_items[amount][0] : line_item_amount[0]"
+#    - "line_items[amount][0] : line_item_amount[0]"
     - "line_items[date_from][0] : line_item_date_from[0]"
     - "line_items[date_to][0] : line_item_date_to[0]"
     - "line_items[description][0] : line_item_description[0]"
@@ -224,7 +271,7 @@ ChargeBee Automation Configuration:
     - "line_items[description][0] : line_item_description[0]"
     - "line_items[date_from][0] : line_item_date_from[0]"
     - "line_items[date_to][0] : line_item_date_to[0]"
-    - "line_items[unit_amount][0] : line_item_unit_amount[0]"
+#    - "line_items[unit_amount][0] : line_item_unit_amount[0]"
     - "line_items[entity_type][1] : line_item_entity_type[1]"
     - "line_items[entity_id][1] : line_item_entity_id[1]"
     - "line_items[description][1] : line_item_description[1]"
@@ -378,7 +425,7 @@ ChargeBee Automation Configuration:
     - "line_items[date_from][0] : line_item_date_from[0]"
     - "line_items[date_to][0] : line_item_date_to[0]"
     - "line_items[quantity][0] : line_item_quantity[0]"
-    - "line_items[unit_amount][0] : line_item_unit_amount[0]"
+#    - "line_items[unit_amount][0] : line_item_unit_amount[0]"
     - "line_items[tax1_name][0] : line_item_taxes_tax_name[0]"
     - "line_items[tax1_amount][0] : line_item_taxes_tax_amount[0]"
     - "line_items[entity_type][1] : line_item_entity_type[1]"
@@ -411,6 +458,8 @@ ChargeBee Automation Configuration:
     - "payments[date][0] : payments_txn_date[0]"
 
   Date_Columns:
+    - "_Will_be__Cancelled_on : subscription[cancelled_at]"
+    - "Activated_on__CEST_ : subscription[started_at]"
     - "(Will_be)_Cancelled_on : subscription[cancelled_at]"
     - "current_term_start : subscription[current_term_start]"
     - "current_term_end : subscription[current_term_end]"

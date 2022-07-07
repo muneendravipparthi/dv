@@ -29,7 +29,7 @@ def customer_prevalidation_check(src_df, columns):
                 src_df[col] = src_df[col].apply(
                     lambda x: pd.Timestamp(x).strftime(dateformet))
             except Exception as e:
-                print("Exception for column : {} and exception is : {}".format(col,e))
+                print("Exception for column : {} and exception is : {}".format(col, e))
 
     # precondition for email
     for col in columns:
@@ -40,7 +40,7 @@ def customer_prevalidation_check(src_df, columns):
                 src_df[col] = src_df[col].replace('@example.com', '', regex=True)
                 src_df[col] = src_df[col].str.lower()
             except Exception as e:
-                print("Exception for column : {} and exception is : {}".format(col,e))
+                print("Exception for column : {} and exception is : {}".format(col, e))
 
     # precondition for int
     for col in columns:
@@ -51,7 +51,7 @@ def customer_prevalidation_check(src_df, columns):
                     src_df[col] = src_df[col].str.lower()
                     src_df[col] = re.sub('[^A-Za-z0-9]+', '', src_df[col])
             except Exception as e:
-                print("Exception for column : {} and exception is : {}".format(col,e))
+                print("Exception for column : {} and exception is : {}".format(col, e))
 
     # precondition for float
     for col in columns:
@@ -59,7 +59,7 @@ def customer_prevalidation_check(src_df, columns):
             try:
                 print()
             except Exception as e:
-                print("Exception for column : {} and exception is : {}".format(col,e))
+                print("Exception for column : {} and exception is : {}".format(col, e))
 
     # precondition for zip
     for col in columns:
@@ -72,7 +72,7 @@ def customer_prevalidation_check(src_df, columns):
                 src_df[col] = src_df[col].str.zfill(5)
                 src_df[col] = src_df[col].replace('00000', 'False')
             except Exception as e:
-                print("Exception for column : {} and exception is : {}".format(col,e))
+                print("Exception for column : {} and exception is : {}".format(col, e))
 
     # precondition for string
     for col in columns:
@@ -81,6 +81,6 @@ def customer_prevalidation_check(src_df, columns):
                 src_df[col] = src_df[col].str.lower()
                 src_df[col] = src_df[col].astype(str).apply(lambda x: x.replace('.0', ''))
             except Exception as e:
-                print("Exception for column : {} and exception is : {}".format(col,e))
+                print("Exception for column : {} and exception is : {}".format(col, e))
 
     return src_df

@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+
 dropduplicates = True
 
 
@@ -33,9 +34,9 @@ def filterData(src_df, des_df, src_key, des_key):
         src_df[src_key] = src_df[src_key].astype(str)
         des_df[des_key] = des_df[des_key].astype(str)
         srcmerged = pd.merge(src_df, des_df, how='inner', left_on=[src_key],
-                          right_on=[des_key], suffixes=('', '_DROP')).filter(regex='^(?!.*_DROP)')
+                             right_on=[des_key], suffixes=('', '_DROP')).filter(regex='^(?!.*_DROP)')
         desmerged = pd.merge(des_df, src_df, how='inner', left_on=[des_key],
-                          right_on=[src_key], suffixes=('', '_DROP')).filter(regex='^(?!.*_DROP)')
+                             right_on=[src_key], suffixes=('', '_DROP')).filter(regex='^(?!.*_DROP)')
 
     elif dropduplicates is True:
         src_df[src_key] = src_df[src_key].astype(str)

@@ -1,21 +1,15 @@
-import re
-
-from SupportingFunctions import *
 from CompareData import *
-from ReportGeneration import *
-from RecurlyData import *
 from MollieData import *
 from PrevalidationChecks import *
+from RecurlyData import *
+from ReportGeneration import *
+
 
 # Get the Columns Information from Config  - >Done
 # Get respective Columns from the files  --> DONE
 # all the Columns data to single DataFrame  -- > DONE
 # Do the cell to Cell Compare  - > Done
 # generate the report  - > Done
-
-
-
-
 
 
 def main():
@@ -47,7 +41,7 @@ def main():
             elif is_mollie and is_mollie_ds1vsds2:
                 print(" ------ IT's MOILLE DATA VALIDATION -----------------")
                 source_df = get_mollie_source_data(type_in, source_files, source_columns)
-                source_df.to_excel("moille.xlsx",index=False)
+                source_df.to_excel("moille.xlsx", index=False)
             else:
                 print(" ------ IT's NON - RECURLY and DS1vsDS2 or DS2vsDS3 DATA VALIDATION -----------------")
                 source_df = read_data_from_file(source_files, source_columns)
@@ -58,7 +52,8 @@ def main():
             source_df, destination_df = filterData(source_df, destination_df, src_key, des_key)
 
             # pre-validation an d formatting of the data is common
-            source_df, destination_df = pre_validation_check(type_in, source_df, source_columns, destination_df, destination_columns)
+            source_df, destination_df = pre_validation_check(type_in, source_df, source_columns, destination_df,
+                                                             destination_columns)
 
             source_df = source_df.sort_values(by=src_key)
             destination_df = destination_df.sort_values(by=des_key)
