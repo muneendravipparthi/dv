@@ -40,6 +40,10 @@ outputFile = "_AllInvoices.xlsx"
 class InvoiceExecution:
 
     def getAllInvoices(self):
+        """
+
+        :rtype: object
+        """
         logger.info("Executiong Extraction of Invoices")
         url = clientSite + invoiceextenction
         TotalInvoicesResponse = ReadAPIExecution.getDataFromAPI(self, url, user, logger)
@@ -124,6 +128,10 @@ class InvoiceExecution:
             logger.exception(e)
 
     def invoice_lineitem_split(self, dfdata):
+        """
+
+        :rtype: object
+        """
         df = dfdata[["invoice_id", "invoice_line_items"]]
         dfs = pd.DataFrame
         dfl = pd.DataFrame
@@ -164,6 +172,10 @@ class InvoiceExecution:
         return dflineitem
 
     def invoice_lineitemtaxes_split(self, dfdata):
+        """
+
+        :rtype: object
+        """
         df = dfdata[["invoice_id", "invoice_line_item_taxes"]]
         dfs = pd.DataFrame
         dfl = pd.DataFrame
@@ -203,6 +215,10 @@ class InvoiceExecution:
         return dflineitemtax
 
     def invoice_payment_split(self, dfdata):
+        """
+
+        :rtype: object
+        """
         df = dfdata[["invoice_id", "invoice_linked_payments"]]
         dfs = pd.DataFrame
         dfl = pd.DataFrame
@@ -240,6 +256,11 @@ class InvoiceExecution:
         return dfpayment
 
     def invoice_discount_split(self, dfdata):
+        """
+
+        :param dfdata: 
+        :return: 
+        """
         df = dfdata[["invoice_id", "invoice_line_items_discounts"]]
         dfs = pd.DataFrame
         dfl = pd.DataFrame

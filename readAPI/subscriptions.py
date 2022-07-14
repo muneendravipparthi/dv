@@ -39,6 +39,10 @@ outputFile = "_AllSubscriptions.xlsx"
 
 class SubscriptionExecution:
     def getAllSubscriptions(self):
+        """
+        :rtype: object
+
+        """
         url = clientSite + subscriptionextenction
         TotalSubscriptionResponse = ReadAPIExecution.getDataFromAPI(self, url, user, logger)
         Subscriptiondictionary = {
@@ -144,6 +148,11 @@ class SubscriptionExecution:
             logger.exception(e)
 
     def subscription_addons_split(self, dfdata):
+        """
+        :rtype: object
+        :param dfdata:
+        :return:
+        """
         df = dfdata[["subscription_id", "subscription_addons"]]
         dfs = pd.DataFrame
         dfl = pd.DataFrame
