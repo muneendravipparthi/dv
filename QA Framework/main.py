@@ -48,8 +48,8 @@ def main():
 
             destination_df = read_data_from_file(destination_files, destination_columns)
 
-            # Filter src and dst
-            source_df, destination_df = filterData(source_df, destination_df, src_key, des_key)
+            # # Filter src and dst
+            # source_df, destination_df = filterData(source_df, destination_df, src_key, des_key)
 
             # pre-validation an d formatting of the data is common
             source_df, destination_df = pre_validation_check(type_in, source_df, source_columns, destination_df,
@@ -67,8 +67,18 @@ def main():
                 source_df.rename(columns=newheaders, inplace=True)
             # Missing Data Capture Information
 
-            # #Filter src and dst
-            # source_df, destination_df = filterData(source_df, destination_df,src_key,des_key)
+            # Filter src and dst
+            source_df, destination_df = filterData(source_df, destination_df, src_key, des_key)
+
+            if is_mollie and is_mollie_ds1vsds2:
+                source_df = source_df[source_columns]
+                sourceheaders = list(source_df.head())
+                destheaders = list(destination_df.head())
+                newheaders = {}
+                for i in range(len(sourceheaders)):
+                    newheaders[sourceheaders[i]] = destheaders[i]
+                source_df.rename(columns=newheaders, inplace=True)
+
             # compare and report  code is common
             diff_df = compare_data(source_df, destination_df)  # compare
             site_name, client_name = get_details('Site', 'ClientName')

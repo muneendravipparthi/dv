@@ -1,9 +1,15 @@
+<<<<<<< HEAD
 import pandas as pd
 import  numpy as np
 import datetime
 
 transaction_df = pd.read_excel('/Users/cb-muneendra/Git/cb_data_validation/utils/transactions.xlsx')
 # transaction_df = pd.read_excel('/Users/cb-muneendra/Desktop/transactions2.xlsx')
+=======
+import json
+
+import jsonpath
+>>>>>>> f1a384507cd0cbec2ed866de7e9594e19ed64e6f
 
 print("working on get_current_term_dates_data function")
 systemdate = datetime.datetime.today() - datetime.timedelta(days=5)

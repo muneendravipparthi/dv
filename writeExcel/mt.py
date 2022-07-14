@@ -1,16 +1,12 @@
 # Python program to illustrate the concept
 # of threading
+import os
 import threading
-import os
-import json
-import os
 from timeit import default_timer as timer
 
 import jsonpath
 import openpyxl
 from jproperties import Properties
-
-from utils.Ephoc2DateTime import Ephoc2DateTime as tzconverter
 
 configs = Properties()
 ROOT_DIR1 = os.path.abspath(os.curdir)

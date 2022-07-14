@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 
 # file = "/Users/cb-muneendra/Downloads/invoices.csv"
 file = "/Users/cb-muneendra/Downloads/invoices (1).csv"

@@ -1,4 +1,9 @@
 import re
+<<<<<<< HEAD
+=======
+
+from tqdm import tqdm
+>>>>>>> f1a384507cd0cbec2ed866de7e9594e19ed64e6f
 
 from SupportingFunctions import *
 
@@ -22,7 +27,7 @@ def subscriptions_prevalidation_check(src_df, columns):
     print("Currently we are in src_customer_prevalidation_check")
 
     # Precondition for dates
-    for col in columns:
+    for col in tqdm(columns, desc='Precondition for dates'):
         if ((col in list(src_df.columns.values)) and (col in date_columns)):
             try:
                 print("Converting ", col)
@@ -33,7 +38,7 @@ def subscriptions_prevalidation_check(src_df, columns):
                 print("Exception for ", col)
 
     # precondition for email
-    for col in columns:
+    for col in tqdm(columns, desc='precondition for email'):
         if (col in list(src_df.columns.values) and (col in email_columns)):
             try:
                 print("Updating ", col)
@@ -44,7 +49,7 @@ def subscriptions_prevalidation_check(src_df, columns):
                 print("Exception for ", col)
 
     # precondition for int
-    for col in columns:
+    for col in tqdm(columns, desc='precondition for int'):
         if ((col in list(src_df.columns.values)) and (col in int_columns)):
             try:
                 src_df[col] = src_df[col].astype(int)
@@ -57,7 +62,7 @@ def subscriptions_prevalidation_check(src_df, columns):
                 print("Exception for ", col)
 
     # precondition for float
-    for col in columns:
+    for col in tqdm(columns, desc='precondition for float'):
         if ((col in list(src_df.columns.values)) and (col in float_columns)):
             try:
                 print()
@@ -67,7 +72,7 @@ def subscriptions_prevalidation_check(src_df, columns):
                 print("Exception for ", col)
 
     # precondition for zip
-    for col in columns:
+    for col in tqdm(columns, desc='precondition for zip'):
         if ((col in list(src_df.columns.values)) and (col in zip_columns)):
             try:
                 print('zip code column type', src_df.dtypes[col])
@@ -80,7 +85,7 @@ def subscriptions_prevalidation_check(src_df, columns):
                 print("Exception for ", col)
 
     # precondition for string
-    for col in columns:
+    for col in tqdm(columns, desc='precondition for string'):
         if ((col in list(src_df.columns.values)) and (col in str_columns)):
             try:
                 src_df[col] = src_df[col].str.lower()

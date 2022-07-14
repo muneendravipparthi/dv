@@ -1,21 +1,24 @@
 ChargeBee Automation Configuration:
   Site: 'test'
-  ClientName: 'Xpendy'
+  ClientName: 'stormboard'
+  Customers_Validation: False
+  Subscriptions_Validation: True
+  Invoices_Validation: False
   IsRecurly: False
   IsRecurlyDS1vsDS2: False
   IsMollie: True
   IsMollieDS1vsDS2: True
   type:
-    - DS1vsDS2
-  #    - DS2vsDS3
+    #    - DS1vsDS2
+    - DS2vsDS3
   dateFormet:
-#    - "%Y-%m-%d %H:%M:%S"
-      - "%Y-%m-%d %H:%M"
+    - "%Y-%m-%d %H:%M:%S"
+  #    - "%Y-%m-%d %H:%M"
   #    - "%Y-%m-%d"
 
   # ------------------   CUSTOMER INFORMATION   ------------------
   # Mapping Source Columns vs : Destination Columns
-  Customers_Validation: False
+
   Customers_SourceFile:
     "/Users/cb-muneendra/Downloads/input_comma_seperated/customers.csv, /Users/cb-muneendra/Downloads/input_comma_seperated/FinalPayments.csv"
   Customers_DestinationFile:
@@ -44,9 +47,9 @@ ChargeBee Automation Configuration:
     - "allow_direct_debit : customer[allow_direct_debit]"
 
 
+
   # ------------------   SUBSCRIPTIONS INFORMATION   ------------------
   # Mapping Source Columns vs : Destination Columns
-  Subscriptions_Validation: False
   Subscriptions_SourceFile:
     "/Users/cb-muneendra/Downloads/input_comma_seperated/subscriptions.csv,  /Users/cb-muneendra/Downloads/input_comma_seperated/transactions.csv"
   #    "/Users/cb-muneendra/Git/cb_data_validation/utils/subscriptions.xlsx,  /Users/cb-muneendra/Desktop/transactions2.xlsx"
@@ -101,9 +104,9 @@ ChargeBee Automation Configuration:
 
 
 
+
   # ------------------   INVOICES INFORMATION   ------------------
   # Mapping Source Columns vs : Destination Columns
-  Invoices_Validation: True
   Invoices_SourceFile:
     "/Users/cb-muneendra/Downloads/input_comma_seperated/invoice_lines.csv, /Users/cb-muneendra/Downloads/input_comma_seperated/subscriptions.csv,  /Users/cb-muneendra/Downloads/input_comma_seperated/transactions.csv"
   #    "/Users/cb-muneendra/Git/cb_data_validation/utils/invoice.xlsx, /Users/cb-muneendra/Git/cb_data_validation/utils/subscriptions.xlsx,  /Users/cb-muneendra/Desktop/transactions2.xlsx"
@@ -456,6 +459,7 @@ ChargeBee Automation Configuration:
     - "line_items[tax1_amount][3] : line_item_taxes_tax_amount[3]"
     - "payments[amount][0] : payments_txn_amount[0]"
     - "payments[date][0] : payments_txn_date[0]"
+
 
   Date_Columns:
     - "_Will_be__Cancelled_on : subscription[cancelled_at]"

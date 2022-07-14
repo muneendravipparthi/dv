@@ -1,6 +1,8 @@
+from timeit import default_timer as timer
+
 import pandas as pd
 from pandas import ExcelWriter
-from timeit import default_timer as timer
+
 df = pd.read_csv("/Users/cb-muneendra/Downloads/invoices_pixellu-test_09_May_2022_13_14_21/LineItems.csv")
 
 print(df.shape[0])

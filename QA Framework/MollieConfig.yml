@@ -23,7 +23,11 @@ Customers Automation Configuration:
   FinalPayments:
     - 'customerId'
     - 'mandateId'
+<<<<<<< HEAD
     - 'method'
+=======
+    - 'Method'
+>>>>>>> f1a384507cd0cbec2ed866de7e9594e19ed64e6f
     - 'createdAt'
 
 
@@ -42,12 +46,18 @@ Subscriptions Automation Configuration:
     - 'Status'
     - 'Email'
     - 'Street'
+<<<<<<< HEAD
     - 'house_no_'
     - 'house_no__addition'
+=======
+    - 'House_no.'
+    - 'House_no._addition'
+>>>>>>> f1a384507cd0cbec2ed866de7e9594e19ed64e6f
     - 'Zipcode'
     - 'City'
     - 'Country'
     - 'Start_date'
+<<<<<<< HEAD
     - 'Activated_on__CEST_'
     - '_Will_be__Resumed_at'
     - '_Will_be__Cancelled_on'
@@ -74,6 +84,11 @@ Subscriptions Automation Configuration:
   #    - 'Activated_on_(CEST)'
   #    - '(Will_be)_Resumed_at'
   #    - '(Will_be)_Cancelled_on'
+=======
+    - 'Activated_on_(CEST)'
+    - '(Will_be)_Resumed_at'
+    - '(Will_be)_Cancelled_on'
+>>>>>>> f1a384507cd0cbec2ed866de7e9594e19ed64e6f
 
   Transactions:
     - 'invoice_number'
@@ -89,7 +104,10 @@ Invoices Automation Configuration:
   invoice-lines:
     - 'Invoice_Number'
     - 'Customer_ID'
+<<<<<<< HEAD
 #    - 'Subscription_ID'
+=======
+>>>>>>> f1a384507cd0cbec2ed866de7e9594e19ed64e6f
     - 'Full_Name'
     - 'First_Name'
     - 'Middle_Name'
@@ -102,18 +120,28 @@ Invoices Automation Configuration:
     - 'Zipcode'
     - 'City'
     - 'Country'
+<<<<<<< HEAD
 #    - 'Description'
     - 'amount_excl_'
 #    - 'VAT_%'
     - 'VAT'
     - 'amount_incl_'
 #    - 'Quantity'
+=======
+    - 'Description'
+    - 'Amount_Excl.'
+    - 'VAT_%'
+    - 'VAT'
+    - 'Amount_Incl.'
+    - 'Quantity'
+>>>>>>> f1a384507cd0cbec2ed866de7e9594e19ed64e6f
     - 'Created_Date'
     - 'Product_ID'
     - 'Product_Name'
     - 'Product_Description'
     - 'Status'
     - 'Reason_Manual_Payment'
+<<<<<<< HEAD
 #  invoice-lines:
 #    - 'Invoice_Number'
 #    - 'Customer_ID'
@@ -141,6 +169,8 @@ Invoices Automation Configuration:
 #    - 'Product_Description'
 #    - 'Status'
 #    - 'Reason_Manual_Payment'
+=======
+>>>>>>> f1a384507cd0cbec2ed866de7e9594e19ed64e6f
 
   Transactions:
     - 'invoice_number'

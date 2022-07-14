@@ -1,17 +1,13 @@
 import datetime
 import json
-import logging
 import os
-import sys
-from datetime import datetime
-from timeit import default_timer as timer
+from datetime import datetime, timedelta
+
 import jsonpath
-import pandas as pd
 import pytz
 import requests
 from jproperties import Properties
 from requests.auth import HTTPBasicAuth
-from datetime import datetime, timedelta
 
 configs = Properties()
 home_folder = os.getenv('HOME')
@@ -33,15 +29,6 @@ executionmode = configs.get('executionmode').data
 addonesecond = configs.get('addonesecond').data
 datetimeformat = configs.get('datetimeformat').data
 cents = configs.get('cents').data
-# now we will Create and configure logger
-logging.basicConfig(filename=os.getcwd() + "/ReadAPI.log",
-                    format='[%(asctime)s] %(lineno)d %(levelname)s - %(message)s',
-                    filemode='w')
-# Let us Create an object
-logger = logging.getLogger()
-
-# Now we are going to Set the threshold of logger to DEBUG
-logger.setLevel(logging.DEBUG)
 
 
 class ReadAPIExecution:
@@ -56,9 +43,10 @@ class ReadAPIExecution:
             modified = expected_date.strftime(datetimeformat)
         return modified
 
-    def getDataFromAPI(self, url, user):
+    def getDataFromAPI(self, url, user, logger):
         page = 0
         offsetData = ''
+
         # offsetData = '["1541245200000","229501294"]'
 
         def callAPI(url, user, offsetValue):
@@ -96,7 +84,7 @@ class ReadAPIExecution:
                 offsetValue[0].replace('"', '\\"')
                 offsetData = offsetValue[0]
                 logger.info("offset value : {}".format(offsetData))
-                if(executionmode == "DEBUG"):
+                if (executionmode == "DEBUG"):
                     logger.info("Executed in DEBUG Mode")
                     print("Executed in DEBUG Mode")
                     break
@@ -104,7 +92,6 @@ class ReadAPIExecution:
                 break
         logger.info('Execution completed. and Total no of pages :' + str(page))
         return TotalResponse
-
 
 # obj = ReadAPIExecution()
 # if len(sys.argv) >= 2:

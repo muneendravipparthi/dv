@@ -14,6 +14,7 @@ def extract_str_from_value(str_value):
         return ''
 
 
+<<<<<<< HEAD
 def header_space_changer(df):
     headers = list(df.head())
     newheaders = {}
@@ -24,6 +25,8 @@ def header_space_changer(df):
     return df
 
 
+=======
+>>>>>>> f1a384507cd0cbec2ed866de7e9594e19ed64e6f
 def get_mollie_source_data(type_in, source_files, source_columns):
     print(" ---  get_mollie_source_data  ---")
     source_df = pd.DataFrame()
@@ -74,6 +77,7 @@ def get_customers_data(source_files, source_columns):
         if search("customers", filename):
             if source_files[i].endswith('csv'):
                 customer_df = pd.read_csv(source_files[i], dtype='unicode')
+<<<<<<< HEAD
                 headers = list(customer_df.head())
                 newheaders = {}
                 for ch in headers:
@@ -101,6 +105,15 @@ def get_customers_data(source_files, source_columns):
                 for ch in headers:
                     newheaders[ch] = ch.replace(" ", "_")
                 payment_df.rename(columns=newheaders, inplace=True)
+=======
+            elif source_files[i].endswith('xlsx'):
+                customer_df = pd.read_excel(source_files[i])
+        if search("FinalPayments", filename):
+            if source_files[i].endswith('csv'):
+                payment_df = pd.read_csv(source_files[i], dtype='unicode')
+            elif source_files[i].endswith('xlsx'):
+                payment_df = pd.read_excel(source_files[i])
+>>>>>>> f1a384507cd0cbec2ed866de7e9594e19ed64e6f
 
     if len(source_files) >= 2:
         merge_df = pd.merge(customer_df, payment_df, left_on='External_ID', right_on='customerId', how='left',
@@ -110,7 +123,11 @@ def get_customers_data(source_files, source_columns):
         merge_df['mandateId'] = merge_df[['External_ID', 'mandateId']].apply(
             lambda x: "/".join(x) if pd.isna(x.mandateId) != True else None, axis=1)
         merge_df['auto_collection'] = merge_df['mandateId'].apply(lambda x: 'OFF' if pd.isna(x) else 'ON')
+<<<<<<< HEAD
         merge_df['allow_direct_debit'] = merge_df['method'].apply(lambda x: 'TRUE' if x == 'directdebit' else None)
+=======
+        merge_df['allow_direct_debit'] = merge_df['Method'].apply(lambda x: 'TRUE' if x == 'directdebit' else None)
+>>>>>>> f1a384507cd0cbec2ed866de7e9594e19ed64e6f
     else:
         merge_df = customer_df
     # return merge_df[source_columns]
@@ -125,6 +142,7 @@ def get_subscriptions_data(source_files, source_columns):
         if search("subscriptions", filename):
             if source_files[i].endswith('csv'):
                 subscription_df = pd.read_csv(source_files[i], dtype='unicode')
+<<<<<<< HEAD
                 subscription_df = header_space_changer(subscription_df)
             elif source_files[i].endswith('xlsx'):
                 subscription_df = pd.read_excel(source_files[i])
@@ -136,10 +154,20 @@ def get_subscriptions_data(source_files, source_columns):
             elif source_files[i].endswith('xlsx'):
                 transaction_df = pd.read_excel(source_files[i])
                 transaction_df = header_space_changer(transaction_df)
+=======
+            elif source_files[i].endswith('xlsx'):
+                subscription_df = pd.read_excel(source_files[i])
+        if search("transactions", filename):
+            if source_files[i].endswith('csv'):
+                transaction_df = pd.read_csv(source_files[i], dtype='unicode')
+            elif source_files[i].endswith('xlsx'):
+                transaction_df = pd.read_excel(source_files[i])
+>>>>>>> f1a384507cd0cbec2ed866de7e9594e19ed64e6f
     if len(source_files) >= 2:
         subscription_columns, transaction_columns = read_subscriptions_mapping_info()
         subscription_df = subscription_df[subscription_columns]
         temp_transaction_df = transaction_df[transaction_columns]
+<<<<<<< HEAD
         amount_transaction_df = transaction_df[["customer_id", "subscription_plan_id", "amount_incl"]]
         amount_transaction_df["amount_incl"] = amount_transaction_df["amount_incl"].replace(",", ".", regex=True)
         transaction_df = get_current_term_dates_data(temp_transaction_df)
@@ -154,6 +182,12 @@ def get_subscriptions_data(source_files, source_columns):
         merge_df = pd.merge(merge_df, amount_transaction_df, left_on=['Customer_ID', 'Subscriptionplan_ID'],
                             right_on=['customer_id', 'subscription_plan_id'], how="left", suffixes=('', '_drop'))
         merge_df.drop([col for col in merge_df.columns if 'drop' in col], axis=1, inplace=True)
+=======
+        transaction_df = get_current_term_dates_data(temp_transaction_df)
+        merge_df = pd.merge(subscription_df, transaction_df, left_on=['Customer_ID', 'Subscriptionplan_ID'],
+                            right_on=['customer_id', 'subscription_plan_id'], how="left", suffixes=('', '_drop'))
+        merge_df.drop([col for col in merge_df.columns if 'drop' in col], axis=1, inplace=True)
+>>>>>>> f1a384507cd0cbec2ed866de7e9594e19ed64e6f
     else:
         merge_df = subscription_df
     return merge_df
@@ -167,6 +201,7 @@ def get_invoices_data(source_files, source_columns):
         if search("invoice", filename):
             if source_files[i].endswith('csv'):
                 invoice_df = pd.read_csv(source_files[i], dtype='unicode')
+<<<<<<< HEAD
                 invoice_df = header_space_changer(invoice_df)
             elif source_files[i].endswith('xlsx'):
                 invoice_df = pd.read_excel(source_files[i])
@@ -185,6 +220,20 @@ def get_invoices_data(source_files, source_columns):
             elif source_files[i].endswith('xlsx'):
                 subscription_df = pd.read_excel(source_files[i])
                 subscription_df = header_space_changer(subscription_df)
+=======
+            elif source_files[i].endswith('xlsx'):
+                invoice_df = pd.read_excel(source_files[i])
+        if search("transactions", filename):
+            if source_files[i].endswith('csv'):
+                transaction_df = pd.read_csv(source_files[i], dtype='unicode')
+            elif source_files[i].endswith('xlsx'):
+                transaction_df = pd.read_excel(source_files[i])
+        if search("subscriptions", filename):
+            if source_files[i].endswith('csv'):
+                subscription_df = pd.read_csv(source_files[i], dtype='unicode')
+            elif source_files[i].endswith('xlsx'):
+                subscription_df = pd.read_excel(source_files[i])
+>>>>>>> f1a384507cd0cbec2ed866de7e9594e19ed64e6f
     if len(source_files) >= 3:
         invoice_columns, transaction_columns, subscription_columns = read_invoice_mapping_info()
         invoice_df = invoice_df[invoice_columns]
@@ -204,9 +253,12 @@ def get_invoices_data(source_files, source_columns):
         merge_df1 = pd.merge(invoice_df, merge_df, left_on=['Customer_ID', 'Product_Description'],
                              right_on=['Customer_ID', 'Subscriptionplan'], how="left",
                              suffixes=('', '_drop'))
+<<<<<<< HEAD
         # merge_df1 = pd.merge(invoice_df, merge_df, left_on=['Customer_ID', 'Subscription_ID', 'Product_Description'],
         #                      right_on=['Customer_ID', 'Subscription_ID', 'Subscriptionplan'], how="left",
         #                      suffixes=('', '_drop'))
+=======
+>>>>>>> f1a384507cd0cbec2ed866de7e9594e19ed64e6f
         merge_df1.drop([col for col in merge_df.columns if 'drop' in col], axis=1, inplace=True)
         merge_df1.drop("customer_id", axis=1, inplace=True)
         merge_df1.to_excel('1merge_df1.xlsx', index=False)
@@ -218,9 +270,14 @@ def get_invoices_data(source_files, source_columns):
 
 def get_currenttermdate_data(transaction_df):
     print("working on currentterm dates")
+<<<<<<< HEAD
     systemdate = datetime.datetime.today() - datetime.timedelta(days=0)
     today = systemdate.strftime('%Y-%m-%d')
     print("system date considering in get_currenttermdate_data function {}".format(today))
+=======
+    systemdate = datetime.datetime.today() - datetime.timedelta(days=5)
+    today = systemdate.strftime('%Y-%m-%d')
+>>>>>>> f1a384507cd0cbec2ed866de7e9594e19ed64e6f
     Previous_Date = (systemdate - datetime.timedelta(days=31)).strftime('%Y-%m-%d')
     Next_Date = (systemdate + datetime.timedelta(days=31)).strftime('%Y-%m-%d')
     print(today, Previous_Date, Next_Date)
@@ -246,22 +303,35 @@ def get_currenttermdate_data(transaction_df):
 
 def get_current_term_dates_data(transaction_df):
     print("working on get_current_term_dates_data function")
+<<<<<<< HEAD
     systemdate = datetime.datetime.today() - datetime.timedelta(days=0)
     today = systemdate.strftime('%Y-%m-%d')
     print("system date considering in get_current_term_dates_data function {}".format(today))
+=======
+    systemdate = datetime.datetime.today() - datetime.timedelta(days=5)
+    today = systemdate.strftime('%Y-%m-%d')
+>>>>>>> f1a384507cd0cbec2ed866de7e9594e19ed64e6f
     transaction_df['system_date'] = systemdate
 
     transaction_df['scheduled_for'] = pd.to_datetime(transaction_df['scheduled_for'], format='%Y-%m-%d')
     transaction_df['system_date'] = pd.to_datetime(transaction_df['system_date'], format='%Y-%m-%d')
     current_term_start = (transaction_df['scheduled_for'] <= today) & (
+<<<<<<< HEAD
             (transaction_df['system_date'] - transaction_df['scheduled_for']).dt.days <= 31)
+=======
+                (transaction_df['system_date'] - transaction_df['scheduled_for']).dt.days < 31)
+>>>>>>> f1a384507cd0cbec2ed866de7e9594e19ed64e6f
     # locate rows and access them using .loc() function
     current_term_start = transaction_df.loc[current_term_start]
     current_term_start = current_term_start.rename(columns={'scheduled_for': 'current_term_start'})
 
     # filter rows on the basis of date
     current_term_end = (transaction_df['scheduled_for'] > today) & (
+<<<<<<< HEAD
             (transaction_df['scheduled_for'] - transaction_df['system_date']).dt.days <= 31)
+=======
+                (transaction_df['scheduled_for'] - transaction_df['system_date']).dt.days < 31)
+>>>>>>> f1a384507cd0cbec2ed866de7e9594e19ed64e6f
     # locate rows and access them using .loc() function
     current_term_end = transaction_df.loc[current_term_end]
     current_term_end = current_term_end.rename(columns={'scheduled_for': 'current_term_end'})
@@ -270,8 +340,11 @@ def get_current_term_dates_data(transaction_df):
     mergedf.drop([col for col in mergedf.columns if 'drop' in col], axis=1, inplace=True)
     mergedf.to_excel('transactionmergedf.xlsx', index=False)
     mergedf["Duplicate"] = mergedf.duplicated(['customer_id'], keep=False)
+<<<<<<< HEAD
     mergedf['current_term_start'] = mergedf[['current_term_start', 'Duplicate']].apply(
         lambda x: x['current_term_start'] if x['Duplicate'] == False else None, axis=1)
+=======
+>>>>>>> f1a384507cd0cbec2ed866de7e9594e19ed64e6f
     mergedf['current_term_end'] = mergedf[['current_term_end', 'Duplicate']].apply(
         lambda x: x['current_term_end'] if x['Duplicate'] == False else None, axis=1)
     mergedf = mergedf.drop_duplicates(subset=['customer_id'])

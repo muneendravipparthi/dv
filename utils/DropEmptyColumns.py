@@ -1,11 +1,13 @@
-
 # importing libraries
-import numpy as np
 import pandas as pd
 
+<<<<<<< HEAD
 
 dataFile = '/Users/cb-muneendra/Downloads/output_22_ xpendy_data_1 2/invoice_output6936678840555499885/invoice_cb_template.csv'
 
+=======
+dataFile = '/Users/cb-muneendra/Desktop/leeto_Live_subscription_expected.xlsx'
+>>>>>>> f1a384507cd0cbec2ed866de7e9594e19ed64e6f
 
 if dataFile.endswith('csv'):
     df = pd.read_csv(dataFile)
@@ -17,11 +19,26 @@ print(dic)
 
 for col in columnsData:
     if dic.get(col) <= 0:
-        df = df.drop(col,axis = 1)
+        df = df.drop(col, axis=1)
 # print(list(df.head()))
 # df.to_excel("Inv_liv1.xlsx", index=False)
-print("===================")
+
+print("========DS2==========")
 for col in list(df.head()):
     print(col)
 
-
+print("========DS3==========")
+for col in list(df.head()):
+    col = col.replace("[", "_")
+    col = col.replace("]", "")
+    col = col.replace("_0", "[0]")
+    col = col.replace("_1", "[1]")
+    col = col.replace("_2", "[2]")
+    col = col.replace("_3", "[3]")
+    col = col.replace("_4", "[4]")
+    col = col.replace("_5", "[5]")
+    col = col.replace("_6", "[6]")
+    col = col.replace("_7", "[7]")
+    col = col.replace("_8", "[8]")
+    col = col.replace("_9", "[9]")
+    print(col)
