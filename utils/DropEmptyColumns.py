@@ -2,7 +2,7 @@
 import pandas as pd
 
 
-dataFile = '/Users/cb-muneendra/Desktop/Eloomi_ds2-subs.xlsx'
+dataFile = '/Users/cb-muneendra/Downloads/Eloomi TEST QA - Copy of Eloomi Data Transformation.xlsx'
 
 
 if dataFile.endswith('csv'):

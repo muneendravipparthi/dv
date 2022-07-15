@@ -97,7 +97,7 @@ def main():
                 # Missing Data Capture Information
 
                 # Filter src and dst
-                source_df, destination_df = filterData(source_df, destination_df, src_key, des_key)
+                # source_df, destination_df = filterData(source_df, destination_df, src_key, des_key)
 
                 if is_mollie and is_mollie_ds1vsds2:
                     source_df = source_df[source_columns]

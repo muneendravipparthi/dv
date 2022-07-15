@@ -39,15 +39,15 @@ outputFile = "_AllSubscriptions.xlsx"
 
 class SubscriptionExecution:
     def getAllSubscriptions(self):
-        # url = clientSite + subscriptionextenction
-        # TotalSubscriptionResponse = ReadAPIExecution.getDataFromAPI(self, url, user, logger)
-        # Subscriptiondictionary = {
-        #     "list": TotalSubscriptionResponse
-        # }
-        #
-        # with open(jsonDir + '/' + configs.get("clientName").data + "_AllSubscriptions.json", "w") as outfile:
-        #     json.dump(Subscriptiondictionary, outfile)
-        # logger.info("Final Json File" + str(Subscriptiondictionary))
+        url = clientSite + subscriptionextenction
+        TotalSubscriptionResponse = ReadAPIExecution.getDataFromAPI(self, url, user, logger)
+        Subscriptiondictionary = {
+            "list": TotalSubscriptionResponse
+        }
+
+        with open(jsonDir + '/' + configs.get("clientName").data + "_AllSubscriptions.json", "w") as outfile:
+            json.dump(Subscriptiondictionary, outfile)
+        logger.info("Final Json File" + str(Subscriptiondictionary))
         try:
             with open(jsonDir + '/' + configs.get("clientName").data + "_AllSubscriptions.json", 'r') as f:
                 data = json.loads(f.read())
