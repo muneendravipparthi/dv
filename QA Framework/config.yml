@@ -1,14 +1,14 @@
 ChargeBee Automation Configuration:
   Site: 'test'
-  ClientName: 'tiletestmigration'
+  ClientName: 'stormboard'
   IsRecurly: False
   IsRecurlyDS1vsDS2: False
   type:
 #    - DS1vsDS2
     - DS2vsDS3
   dateFormet:
-#    - "%Y-%m-%d %H:%M:%S"
-    - "%Y-%m-%d %H:%M"
+    - "%Y-%m-%d %H:%M:%S"
+#    - "%Y-%m-%d %H:%M"
 #    - "%Y-%m-%d"
 
   # ------------------   CUSTOMER INFORMATION   ------------------
@@ -39,10 +39,10 @@ ChargeBee Automation Configuration:
   # Mapping Source Columns vs : Destination Columns
   Subscriptions_Validation: True
   Subscriptions_SourceFile:
-    "/Users/cb-muneendra/Desktop/Tile_subscription_expected.xlsx"
+    "/Users/cb-muneendra/Desktop/stormboard_subscriptions_expected.xlsx"
 
   Subscriptions_DestinationFile:
-    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/tiletestmigration_AllSubscriptions.xlsx"
+    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/stormboard_AllSubscriptions.xlsx"
 
   Subscriptions_KeyColumns:
     - "subscription[id] : subscription_id"
@@ -51,19 +51,20 @@ ChargeBee Automation Configuration:
   Subscriptions_Columns:
     - "subscription[id] : subscription_id"
     - "customer[id] : customer_id"
-    - "subscription[created_at] : subscription_created_at"
-    - "subscription[plan_id] : subscription_plan_id"
-    - "subscription[plan_quantity] : subscription_plan_quantity"
-    - "subscription[plan_unit_price] : subscription_plan_unit_price"
     - "subscription[status] : subscription_status"
-    - "subscription[trial_start] : subscription_trial_start"
-    - "subscription[trial_end] : subscription_trial_end"
     - "subscription[started_at] : subscription_started_at"
+    - "subscription[cancelled_at] : subscription_cancelled_at"
     - "subscription[current_term_start] : subscription_current_term_start"
     - "subscription[current_term_end] : subscription_current_term_end"
-    - "subscription[cancelled_at] : subscription_cancelled_at"
-    - "subscription[auto_collection] : subscription_auto_collection"
-    - "subscription[meta_data] : subscription_meta_data"
+    - "subscription_items[item_price_id][0] : item_price_id[0]"
+    - "subscription_items[quantity][0] : item_quantity[0]"
+    - "subscription_items[unit_price][0] : item_unit_price[0]"
+    - "subscription[cf_stormboard_team_id] : subscription_cf_stormboard_team_id"
+    - "subscription[cf_stormboard_tenant] : subscription_cf_stormboard_tenant"
+    - "subscription[cf_stormboard_team_name] : subscription_cf_stormboard_team_name"
+    - "subscription[cf_sa_team_link] : subscription_cf_sa_team_link"
+    - "subscription[cf_billing_group] : subscription_cf_billing_group"
+    - "subscription[cf_delinquent] : subscription_cf_delinquent"
 
 
 
