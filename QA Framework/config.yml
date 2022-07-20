@@ -1,57 +1,41 @@
 ChargeBee Automation Configuration:
-  Site: 'live'
-  ClientName: 'Leeto'
+  Site: 'test'
+  ClientName: 'Stormboard'
 
   Customers_Validation: False
-  Subscriptions_Validation: True
-  Invoices_Validation: False
+  Subscriptions_Validation: False
+  Invoices_Validation: True
 
   IsRecurly: False
   IsRecurlyDS1vsDS2: False
-  IsMollie: True
-  IsMollieDS1vsDS2: True
+  IsMollie: False
+  IsMollieDS1vsDS2: False
   type:
     #    - DS1vsDS2
     - DS2vsDS3
   dateFormet:
-    - "%Y-%m-%d %H:%M:%S"
+#    - "%Y-%m-%d %H:%M:%S"
   #    - "%Y-%m-%d %H:%M"
-  #    - "%Y-%m-%d"
+      - "%Y-%m-%d"
 
   # ------------------   CUSTOMER INFORMATION   ------------------
   # Mapping Source Columns vs : Destination Columns
 
   Customers_SourceFile:
-    "/Users/cb-muneendra/Desktop/Leeto_Live_Customers_expected.xlsx"
+    "/Users/cb-muneendra/Desktop/stormboard_customer_DS2.xlsx"
   Customers_DestinationFile:
-    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/Leeto_AllCustomers.xlsx"
+    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/stormboard_AllSubscriptions.xlsx"
 
   Customers_KeyColumns:
     - "customer[id] : customer_id"
 
   Customers_Columns:
     - "customer[id] : customer_id"
-    - "customer[created_at] : customer_created_at"
     - "customer[first_name] : customer_first_name"
     - "customer[last_name] : customer_last_name"
-    - "customer[company] : customer_company"
-    - "customer[preferred_currency_code] : customer_preferred_currency_code"
+    - "customer[phone] : customer_phone"
+    - "customer[created_at] : customer_created_at"
     - "customer[email] : customer_email"
-    - "customer[allow_direct_debit] : customer_allow_direct_debit"
-    - "customer[auto_collection] : customer_auto_collection"
-    - "customer[taxability] : customer_taxability"
-    - "customer[net_term_days] : customer_net_term_days"
-    - "customer[locale] : customer_locale"
-    - "billing_address[first_name] : customer_billing_address_first_name"
-    - "billing_address[last_name] : customer_billing_address_last_name"
-    - "billing_address[email] : customer_billing_address_email"
-    - "billing_address[company] : customer_billing_address_company"
-    - "billing_address[line1] : customer_billing_address_line1"
-    - "billing_address[city] : customer_billing_address_city"
-    - "billing_address[state] : customer_billing_address_state"
-    - "billing_address[zip] : customer_billing_address_zip"
-    - "billing_address[country] : customer_billing_address_country"
-    - "customer[cf_siren] : customer_cf_siren"
 
 
 
@@ -90,64 +74,31 @@ ChargeBee Automation Configuration:
   # Mapping Source Columns vs : Destination Columns
 
   Invoices_SourceFile:
-    "/Users/cb-muneendra/cb_data_validation/utils/pixellu_Live_invoice14.xlsx"
+    "/Users/cb-muneendra/Desktop/stormboard_invoice_expected.xlsx"
 
   Invoices_DestinationFile:
-    "/Users/cb-muneendra/Desktop/ds3_pavilion.xlsx"
+    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/stormboard_AllInvoices.xlsx"
 
   Invoices_KeyColumns:
-    - "invoice[id] : invoice[id]"
+    - "invoice[id] : invoice_id"
 
   Invoices_Columns:
-    - "invoice[id] : invoice[id]"
-    - "invoice[currency_code] : invoice[currency_code]"
-    - "invoice[customer_id] : invoice[customer_id]"
-    - "invoice[date] : invoice[date]"
-    - "invoice[status] : invoice[status]"
-    - "invoice[subscription_id] : invoice[subscription_id]"
-    - "invoice[total] : invoice[total]"
-    - "line_items[amount][0] : line_items[amount][0]"
-    - "line_items[date_from][0] : line_items[date_from][0]"
-    - "line_items[date_to][0] : line_items[date_to][0]"
-    - "line_items[description][0] : line_items[description][0]"
-    - "line_items[entity_id][0] : line_items[entity_id][0]"
-    - "line_items[entity_type][0] : line_items[entity_type][0]"
-    - "line_items[id][0] : line_items[id][0]"
-    - "line_items[quantity][0] : line_items[quantity][0]"
-    - "payments[amount][0] : payments[amount][0]"
-    - "payments[date][0] : payments[date][0]"
-    - "use_for_proration : use_for_proration"
-    - "discounts[amount][0] : discounts[amount][0]"
-    - "discounts[entity_id][0] : discounts[entity_id][0]"
-    - "discounts[entity_type][0] : discounts[entity_type][0]"
-    - "line_items[amount][1] : line_items[amount][1]"
-    - "line_items[date_from][1] : line_items[date_from][1]"
-    - "line_items[date_to][1] : line_items[date_to][1]"
-    - "line_items[description][1] : line_items[description][1]"
-    - "line_items[entity_id][1] : line_items[entity_id][1]"
-    - "line_items[entity_type][1] : line_items[entity_type][1]"
-    - "line_items[quantity][1] : line_items[quantity][1]"
-    - "line_items[amount][2] : line_items[amount][2]"
-    - "line_items[date_from][2] : line_items[date_from][2]"
-    - "line_items[date_to][2] : line_items[date_to][2]"
-    - "line_items[description][2] : line_items[description][2]"
-    - "line_items[entity_id][2] : line_items[entity_id][2]"
-    - "line_items[entity_type][2] : line_items[entity_type][2]"
-    - "line_items[quantity][2] : line_items[quantity][2]"
-    - "line_items[amount][3] : line_items[amount][3]"
-    - "line_items[amount][4] : line_items[amount][4]"
-    - "line_items[date_from][3] : line_items[date_from][3]"
-    - "line_items[date_from][4] : line_items[date_from][4]"
-    - "line_items[date_to][3] : line_items[date_to][3]"
-    - "line_items[date_to][4] : line_items[date_to][4]"
-    - "line_items[description][3] : line_items[description][3]"
-    - "line_items[description][4] : line_items[description][4]"
-    - "line_items[entity_id][3] : line_items[entity_id][3]"
-    - "line_items[entity_id][4] : line_items[entity_id][4]"
-    - "line_items[entity_type][3] : line_items[entity_type][3]"
-    - "line_items[entity_type][4] : line_items[entity_type][4]"
-    - "line_items[quantity][3] : line_items[quantity][3]"
-    - "line_items[quantity][4] : line_items[quantity][4]"
+    - "invoice[id] : invoice_id"
+    - "invoice[currency_code] : invoice_currency_code"
+    - "invoice[customer_id] : invoice_customer_id"
+    - "invoice[subscription_id] : invoice_subscription_id"
+    - "invoice[status] : invoice_status"
+    - "invoice[date] : invoice_date"
+    - "invoice[total] : invoice_total"
+    - "line_items[entity_type][0] : line_items_entity_type[0]"
+    - "line_items[entity_id][0] : line_items_entity_id[0]"
+    - "line_items[description][0] : line_items_description[0]"
+    - "line_items[quantity][0] : line_items_quantity[0]"
+    - "line_items[date_from][0] : line_items_date_from[0]"
+    - "line_items[date_to][0] : line_items_date_to[0]"
+    - "line_items[amount][0] : line_items_amount[0]"
+    - "payments[amount][0] : payments_txn_amount[0]"
+    - "payments[date][0] : payments_txn_date[0]"
 
   String_Columns:
     - "line_items[id] : Line_Item_Id"

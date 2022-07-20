@@ -143,23 +143,27 @@ class InvoiceExecution:
                          desc='invoice_line_items'):
             logger.info("splitting for '{}' invoice id and the date is :{}".format(i, j))
             if not pd.isna(j):
-                data = json.loads(j)
-                for k in range(len(data)):
-                    prefix = "line_items_"
-                    dfli = pd.json_normalize(data[k])
-                    sufix = "[" + str(k) + "]"
-                    headers = list(dfli.head())
-                    newheaders = {}
-                    for ch in headers:
-                        newheaders[ch] = prefix + ch + sufix
-                    dfli.rename(columns=newheaders, inplace=True)
-                    dfli['invoice_id'] = [i]
-                    if k == 0:
-                        # dfli['invoice_id'] = [i]
-                        dfl = dfli
-                    else:
-                        dfl = pd.merge(dfl, dfli, left_on="invoice_id", right_on="invoice_id", how='inner')
-                        # dfl = dfl.append(dfli)
+                try:
+                    data = json.loads(j)
+                    for k in range(len(data)):
+                        prefix = "line_items_"
+                        dfli = pd.json_normalize(data[k])
+                        sufix = "[" + str(k) + "]"
+                        headers = list(dfli.head())
+                        newheaders = {}
+                        for ch in headers:
+                            newheaders[ch] = prefix + ch + sufix
+                        dfli.rename(columns=newheaders, inplace=True)
+                        dfli['invoice_id'] = [i]
+                        if k == 0:
+                            # dfli['invoice_id'] = [i]
+                            dfl = dfli
+                        else:
+                            dfl = pd.merge(dfl, dfli, left_on="invoice_id", right_on="invoice_id", how='inner')
+                            # dfl = dfl.append(dfli)
+                except:
+                    wdata = {'invoice_id': [i]}
+                    dfl = pd.DataFrame(wdata)
             else:
                 wdata = {'invoice_id': [i]}
                 dfl = pd.DataFrame(wdata)
