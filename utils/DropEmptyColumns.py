@@ -1,7 +1,7 @@
 # importing libraries
 import pandas as pd
 
-dataFile = '/Users/cb-muneendra/Desktop/lymb-io_DS2_Sub.xlsx'
+dataFile = '/Users/cb-muneendra/Desktop/lymb.io_live_Cus_DS2.xlsx'
 
 if dataFile.endswith('csv'):
     df = pd.read_csv(dataFile)

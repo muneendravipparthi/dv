@@ -28,7 +28,7 @@ def customer_prevalidation_check(src_df, columns):
             try:
                 print("Converting ", col)
                 src_df[col] = pd.to_datetime(src_df[col])
-                src_df[col] = src_df[col].apply(lambda x: pd.Timestamp(x).strftime(dateformet))
+                src_df[col] = src_df[col].apply(lambda x: pd.Timestamp(x).strftime(dateformet) if pd.isna(x) != True else None)
             except Exception as e:
                 print("Exception for column : {} and exception is : {}".format(col, e))
 

@@ -1,8 +1,8 @@
 ChargeBee Automation Configuration:
-  Site: 'test'
+  Site: 'Live'
   ClientName: 'lymb-io'
 
-  Customers_Validation: True
+  Customers_Validation: False
   Subscriptions_Validation: True
   Invoices_Validation: False
 
@@ -22,7 +22,7 @@ ChargeBee Automation Configuration:
   # Mapping Source Columns vs : Destination Columns
 
   Customers_SourceFile:
-    "/Users/cb-muneendra/Desktop/lymb-io_DS2.xlsx"
+    "/Users/cb-muneendra/Desktop/lymb.io_live_Cus_DS2.xlsx"
   Customers_DestinationFile:
     "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/lymb-io_AllCustomers.xlsx"
 
@@ -56,7 +56,7 @@ ChargeBee Automation Configuration:
   # Mapping Source Columns vs : Destination Columns
 
   Subscriptions_SourceFile:
-    "/Users/cb-muneendra/Desktop/lymb-io_DS2_Sub.xlsx"
+    "/Users/cb-muneendra/Desktop/Lymb.io_live_Sub_DS2.xlsx"
 
   Subscriptions_DestinationFile:
     "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/lymb-io_AllSubscriptions.xlsx"
