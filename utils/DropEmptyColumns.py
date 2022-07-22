@@ -1,7 +1,8 @@
 # importing libraries
 import pandas as pd
 
-dataFile = '/Users/cb-muneendra/Desktop/Dropix_Invoice_DS2.xlsx'
+# dataFile = '/Users/cb-muneendra/Desktop/Dropix_Invoice_DS2.xlsx'
+dataFile = '/Users/cb-muneendra/Downloads/stripe_data/1657688785632_invoices_1.csv'
 #
 #
 #
