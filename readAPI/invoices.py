@@ -44,17 +44,17 @@ class InvoiceExecution:
 
         :rtype: object
         """
-        logger.info("Executiong Extraction of Invoices")
-        url = clientSite + invoiceextenction
-        TotalInvoicesResponse = ReadAPIExecution.getDataFromAPI(self, url, user, logger)
-        Invoicedictionary = {
-            "list": TotalInvoicesResponse
-        }
-
-        with open(jsonDir + '/' + configs.get("clientName").data + "_AllInvoices.json", "w") as outfile:
-            json.dump(Invoicedictionary, outfile)
-        logger.info("Final Json File" + str(Invoicedictionary))
-        logger.info("Execution Completed for Extraction of Invoices")
+        # logger.info("Executiong Extraction of Invoices")
+        # url = clientSite + invoiceextenction
+        # TotalInvoicesResponse = ReadAPIExecution.getDataFromAPI(self, url, user, logger)
+        # Invoicedictionary = {
+        #     "list": TotalInvoicesResponse
+        # }
+        #
+        # with open(jsonDir + '/' + configs.get("clientName").data + "_AllInvoices.json", "w") as outfile:
+        #     json.dump(Invoicedictionary, outfile)
+        # logger.info("Final Json File" + str(Invoicedictionary))
+        # logger.info("Execution Completed for Extraction of Invoices")
         try:
             logger.info("Converting Json data to Excel data Initiated")
             with open(jsonDir + '/' + configs.get("clientName").data + "_AllInvoices.json", 'r') as f:
@@ -67,23 +67,40 @@ class InvoiceExecution:
                 newheaders[ch] = ch.replace(".", "_")
             df_nested_list.rename(columns=newheaders, inplace=True)
             df_nested_list.to_excel(excelDir + '/' + configs.get("clientName").data + outputFile, index=False)
-            if "invoice_line_items" in list(df_nested_list.head()):
-                df_splitlineitems = pd.read_excel(excelDir + '/' + configs.get("clientName").data + outputFile)
-                df_splitlineitems = self.invoice_lineitem_split(df_splitlineitems)
-                df_splitlineitems.to_excel(excelDir + '/' + configs.get("clientName").data + outputFile, index=False)
-            if "invoice_line_item_taxes" in list(df_nested_list.head()):
-                df_splitlineitemtaxes = pd.read_excel(excelDir + '/' + configs.get("clientName").data + outputFile)
-                df_splitlineitemtaxes = self.invoice_lineitemtaxes_split(df_splitlineitemtaxes)
-                df_splitlineitemtaxes.to_excel(excelDir + '/' + configs.get("clientName").data + outputFile,
-                                               index=False)
-            if "invoice_linked_payments" in list(df_nested_list.head()):
-                df_splitpayments = pd.read_excel(excelDir + '/' + configs.get("clientName").data + outputFile)
-                df_splitpayments = self.invoice_payment_split(df_splitpayments)
-                df_splitpayments.to_excel(excelDir + '/' + configs.get("clientName").data + outputFile, index=False)
-            if "invoice_line_item_discounts" in list(df_nested_list.head()):
-                df_splitdiscounts = pd.read_excel(excelDir + '/' + configs.get("clientName").data + outputFile)
-                df_splitdiscounts = self.invoice_discount_split(df_splitdiscounts)
-                df_splitdiscounts.to_excel(excelDir + '/' + configs.get("clientName").data + outputFile, index=False)
+
+            try:
+                if "invoice_line_items" in list(df_nested_list.head()):
+                    df_splitlineitems = pd.read_excel(excelDir + '/' + configs.get("clientName").data + outputFile)
+                    df_splitlineitems = self.invoice_lineitem_split(df_splitlineitems)
+                    df_splitlineitems.to_excel(excelDir + '/' + configs.get("clientName").data + outputFile, index=False)
+            except Exception as e:
+                logger.error(e)
+                print(e)
+            try:
+                if "invoice_line_item_taxes" in list(df_nested_list.head()):
+                    df_splitlineitemtaxes = pd.read_excel(excelDir + '/' + configs.get("clientName").data + outputFile)
+                    df_splitlineitemtaxes = self.invoice_lineitemtaxes_split(df_splitlineitemtaxes)
+                    df_splitlineitemtaxes.to_excel(excelDir + '/' + configs.get("clientName").data + outputFile,
+                                                   index=False)
+            except Exception as e:
+                logger.error(e)
+                print(e)
+            try:
+                if "invoice_linked_payments" in list(df_nested_list.head()):
+                    df_splitpayments = pd.read_excel(excelDir + '/' + configs.get("clientName").data + outputFile)
+                    df_splitpayments = self.invoice_payment_split(df_splitpayments)
+                    df_splitpayments.to_excel(excelDir + '/' + configs.get("clientName").data + outputFile, index=False)
+            except Exception as e:
+                logger.error(e)
+                print(e)
+            try:
+                if "invoice_line_item_discounts" in list(df_nested_list.head()):
+                    df_splitdiscounts = pd.read_excel(excelDir + '/' + configs.get("clientName").data + outputFile)
+                    df_splitdiscounts = self.invoice_discount_split(df_splitdiscounts)
+                    df_splitdiscounts.to_excel(excelDir + '/' + configs.get("clientName").data + outputFile, index=False)
+            except Exception as e:
+                logger.error(e)
+                print(e)
             tdf = pd.read_excel(excelDir + '/' + configs.get("clientName").data + outputFile)
             dateconvertioncollist = ["invoice_date", "invoice_due_date", "invoice_paid_at", "invoice_updated_at",
                                      "invoice_generated_at", "line_items_date_from[0]", "line_items_date_to[0]",
