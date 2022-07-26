@@ -3,8 +3,8 @@ ChargeBee Automation Configuration:
   ClientName: 'stormboard'
 
   Customers_Validation: False
-  Subscriptions_Validation: False
-  Invoices_Validation: True
+  Subscriptions_Validation: True
+  Invoices_Validation: False
 
   IsRecurly: False
   IsRecurlyDS1vsDS2: False
@@ -59,10 +59,13 @@ ChargeBee Automation Configuration:
   # Mapping Source Columns vs : Destination Columns
 
   Subscriptions_SourceFile:
-    "/Users/cb-muneendra/Downloads/LiveMigration-Leeto - Subscriptions_new.csv"
+    "/Users/cb-muneendra/Desktop/dfsa_sub_DS1.xlsx"
+
+#    "/Users/cb-muneendra/Downloads/LiveMigration-Leeto - Subscriptions_new.csv"
 
   Subscriptions_DestinationFile:
-    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/Leeto_AllSubscriptions.xlsx"
+    "/Users/cb-muneendra/Desktop/dfsa_sub_DS2.xlsx"
+#    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/Leeto_AllSubscriptions.xlsx"
 
   Subscriptions_KeyColumns:
     - "subscription[id] : subscription_id"
