@@ -1,5 +1,6 @@
 import datetime
-
+import json
+from tqdm import tqdm
 import numpy as np
 import openpyxl
 import pandas as pd
@@ -13,6 +14,10 @@ from openpyxl.styles import Font, Alignment, PatternFill
 from openpyxl.styles.borders import Border, Side, BORDER_THIN
 from openpyxl.utils.cell import get_column_letter
 
+def read_mapping_info(getObjs):
+    with open('IgnoreErrors.json') as c:
+        data = json.load(c)
+    return data[getObjs]
 
 def report_generation(type_in, df1, site_name, client_name, module, sheet_name):
     # sheet_name = 'DS2VsDS3Subscription_diff'
@@ -21,53 +26,17 @@ def report_generation(type_in, df1, site_name, client_name, module, sheet_name):
     file_name = "./TestResults/" + client_name + "_" + site_name + "_" + validation_type[0] + "_" + now.strftime(
         "%Y%m%d%H%M%S") + "_Diff.xlsx"
 
-    df1 = df1.replace(to_replace='nan --> False', value='')
-    df1 = df1.replace(to_replace='nan --> nan', value='')
-    df1 = df1.replace(to_replace=' --> nan', value=' --> BLANK')
-    df1 = df1.replace(to_replace='nan --> ', value='BLANK --> ')
-    df1 = df1.replace(to_replace='nan --> 0', value='')
-    df1 = df1.replace(to_replace='0 --> False', value='')
-    df1 = df1.replace(to_replace='nan [-->]', value='BLANK -', regex=True)
-    df1 = df1.replace(to_replace='False [-->]', value='BLANK -', regex=True)
-    df1 = df1.replace(to_replace='false [-->]', value='BLANK -', regex=True)
-    df1 = df1.replace(to_replace='[-->] nan', value='> BLANK', regex=True)
-    df1 = df1.replace(to_replace='[-->] False', value='> BLANK', regex=True)
-    df1 = df1.replace(to_replace='[-->] false', value='> BLANK', regex=True)
-    df1 = df1.replace(to_replace='False', value='')
-    df1 = df1.replace(to_replace='false', value='')
-    df1 = df1.replace(to_replace='BLANK --> nan', value='')
-    df1 = df1.replace(to_replace='BLANK --> BLANK', value='')
-    df1 = df1.replace(to_replace='on --> off', value='on <ignore> off')
-    df1 = df1.replace(to_replace=' --> False', value=' --> BLANK')
-    df1 = df1.replace(to_replace='BLANK --> None', value='')
-    df1 = df1.replace(to_replace='--> None', value='')
-    df1 = df1.replace(to_replace='Paid --> PAID', value='PAID')
-    df1 = df1.replace(to_replace='Payment Due --> PAYMENT_DUE', value='PAYMENT_DUE')
-    df1 = df1.replace(to_replace='Active --> active', value='Active')
-    df1 = df1.replace(to_replace='Cancelled --> cancelled', value='Cancelled')
-    df1 = df1.replace(to_replace='0 --> BLANK', value='')
-    # df1 = df1.replace(to_replace=' --> BLANK', value='')
-    # df1 = df1.replace(to_replace=' --> false', value='')
-    df1 = df1.replace(to_replace='false --> ', value='Blank --> ')
-    df1 = df1.replace(to_replace='PAYMENT_DUE --> payment_due', value='PAYMENT_DUE')
-    df1 = df1.replace(to_replace='NaT --> False', value='')
-    df1 = df1.replace(to_replace='eur --> EUR', value='EUR')
-    df1 = df1.replace(to_replace='usd --> USD', value='USD')
-    # df1 = df1.replace(to_replace=' --> IT', value='USD')
-    df1 = df1.replace(to_replace='charge --> charge_item_price', value='charge_item_price')
-    df1 = df1.replace(to_replace='plan --> plan_item_price', value='plan_item_price')
-    df1 = df1.replace(to_replace='directdebit --> direct_debit', value='direct_debit')
-    df1 = df1.replace(to_replace='creditcard --> card', value='creditcard <ignore> card')
-    df1 = df1.replace(to_replace='addon --> addon_item_price', value='addon_item_price')
-    df1 = df1.replace(to_replace='None --> ', value='')
-    df1 = df1.replace(to_replace='1.0 --> 1', value='1')
-    df1 = df1.replace(to_replace='2.0 --> 2', value='2')
-    df1 = df1.replace(to_replace='3.0 --> 3', value='3')
-    df1 = df1.replace(to_replace='4.0 --> 4', value='4')
-    # df1 = df1.replace(to_replace='None', value='')
-    df1 = df1.replace(to_replace='None --> BLANK', value='')
-    df1 = df1.replace(to_replace='none --> BLANK', value='')
-    # df1['invoice[stripe_id]'] = df1['invoice[stripe_id]'].replace(to_replace=' --> ', value='')
+    for keydata, valuedata in tqdm(read_mapping_info("withRegEx").items(), desc='Conv expected errors withRegEx'):
+        df1 = df1.replace(to_replace = keydata, value = valuedata, regex=True)
+
+    for keydata, valuedata in tqdm(read_mapping_info("withoutRegEx").items(), desc='Conv expected errors withoutRegEx'):
+        df1 = df1.replace(to_replace = keydata, value = valuedata)
+
+    for keydata, valuedata in tqdm(read_mapping_info("countries").items(), desc='Conv expected country mismatch'):
+        df1 = df1.replace(to_replace = keydata, value = valuedata)
+
+    for keydata, valuedata in tqdm(read_mapping_info("states").items(), desc='Conv expected state mismatch'):
+        df1 = df1.replace(to_replace = keydata, value = valuedata)
 
     # Insert an empty column to write the formulas
     df1.insert(len(df1.columns), 'Execution_Status', np.nan)

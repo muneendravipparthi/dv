@@ -69,50 +69,52 @@ ChargeBee Automation Configuration:
   # Mapping Source Columns vs : Destination Columns
 
   Subscriptions_SourceFile:
-#    "/Users/cb-muneendra/dataValidation/data_validation_qa/ds1Tods2/DFSArmy_DS1_Subs.xlsx"
-    "/Users/cb-muneendra/Desktop/dfsa_sub_DS2.xlsx"
+    "/Users/cb-muneendra/Desktop/dfsa_sub_DS1.xlsx"
+
+#    "/Users/cb-muneendra/Downloads/LiveMigration-Leeto - Subscriptions_new.csv"
 
   Subscriptions_DestinationFile:
-#    "/Users/cb-muneendra/dataValidation/data_validation_qa/ds1Tods2/DFSArmy_DS2_Subs.xlsx"
-    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/dfsarmy_AllSubscriptions.xlsx"
+    "/Users/cb-muneendra/Desktop/dfsa_sub_DS2.xlsx"
+#    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/Leeto_AllSubscriptions.xlsx"
+
 
   Subscriptions_KeyColumns:
-    - "subscription[id] : subscription_id"
-#    - "id : subscription[id]"
-
-  Subscriptions_Columns:
-    - "customer[id] : customer_id"
-    - "subscription[id] : subscription_id"
-    - "subscription[created_at] : subscription_created_at"
-    - "subscription_items[item_price_id][0] : item_price_id[0]"
-    - "subscription_items[quantity][0] : item_quantity[0]"
-    - "subscription_items[unit_price][0] : item_unit_price[0]"
-    - "subscription[status] : subscription_status"
-    - "subscription[trial_start] : subscription_trial_start"
-    - "subscription[trial_end] : subscription_trial_end"
-    - "subscription[started_at] : subscription_started_at"
-    - "subscription[current_term_start] : subscription_current_term_start"
-    - "subscription[current_term_end] : subscription_current_term_end"
-    - "subscription[auto_collection] : subscription_auto_collection"
-    - "coupon_ids[0] : subscription_coupon"
-    - "subscription[meta_data] : subscription_meta_data"
+#    - "subscription[id] : subscription_id"
+    - "id : subscription[id]"
 
 #  Subscriptions_Columns:
-#    - "customer : customer[id]"
-#    - "id : subscription[id]"
-#    - "created : subscription[created_at]"
-#    - "items.data[0].price.id : subscription_items[item_price_id][0]"
-#    - "items.data[0].quantity : subscription_items[quantity][0]"
-#    - "items.data[0].price.unit_amount : subscription_items[unit_price][0]"
-#    - "status : subscription[status]"
-#    - "trial_start : subscription[trial_start]"
-#    - "trial_end : subscription[trial_end]"
-#    - "start_date : subscription[started_at]"
-#    - "current_period_start : subscription[current_term_start]"
-#    - "current_period_end : subscription[current_term_end]"
-#    - "collection_method : subscription[auto_collection]"
-#    - "discount.coupon.id : coupon_ids[0]"
-#    - "metadata : subscription[meta_data]"
+#    - "customer[id] : customer_id"
+#    - "subscription[id] : subscription_id"
+#    - "subscription[created_at] : subscription_created_at"
+#    - "subscription_items[item_price_id][0] : item_price_id[0]"
+#    - "subscription_items[quantity][0] : item_quantity[0]"
+#    - "subscription_items[unit_price][0] : item_unit_price[0]"
+#    - "subscription[status] : subscription_status"
+#    - "subscription[trial_start] : subscription_trial_start"
+#    - "subscription[trial_end] : subscription_trial_end"
+#    - "subscription[started_at] : subscription_started_at"
+#    - "subscription[current_term_start] : subscription_current_term_start"
+#    - "subscription[current_term_end] : subscription_current_term_end"
+#    - "subscription[auto_collection] : subscription_auto_collection"
+#    - "coupon_ids[0] : subscription_coupon"
+#    - "subscription[meta_data] : subscription_meta_data"
+
+  Subscriptions_Columns:
+    - "customer : customer[id]"
+    - "id : subscription[id]"
+    - "created : subscription[created_at]"
+    - "items.data[0].price.id : subscription_items[item_price_id][0]"
+    - "items.data[0].quantity : subscription_items[quantity][0]"
+    - "items.data[0].price.unit_amount : subscription_items[unit_price][0]"
+    - "status : subscription[status]"
+    - "trial_start : subscription[trial_start]"
+    - "trial_end : subscription[trial_end]"
+    - "start_date : subscription[started_at]"
+    - "current_period_start : subscription[current_term_start]"
+    - "current_period_end : subscription[current_term_end]"
+    - "collection_method : subscription[auto_collection]"
+    - "discount.coupon.id : coupon_ids[0]"
+    - "metadata : subscription[meta_data]"
 
 
   # ------------------   INVOICES INFORMATION   ------------------
