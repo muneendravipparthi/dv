@@ -33,7 +33,9 @@
     "2.0 --> 2": "2",
     "3.0 --> 3": "3",
     "4.0 --> 4": "4",
-    "None --> BLANK": ""
+    "None --> BLANK": "",
+    "none --> None": "",
+    "charge_automatically --> on": "on"
   },
   "withRegEx": {
     "nan [-->]": "BLANK -",
