@@ -66,6 +66,7 @@ def report_generation(type_in, df1, site_name, client_name, module, sheet_name):
     df1 = df1.replace(to_replace='4.0 --> 4', value='4')
     # df1 = df1.replace(to_replace='None', value='')
     df1 = df1.replace(to_replace='None --> BLANK', value='')
+    df1 = df1.replace(to_replace='none --> BLANK', value='')
     # df1['invoice[stripe_id]'] = df1['invoice[stripe_id]'].replace(to_replace=' --> ', value='')
 
     # Insert an empty column to write the formulas
