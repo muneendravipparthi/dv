@@ -132,8 +132,9 @@ class SubscriptionExecution:
                 logger.info("convertingtocents")
                 centsToDoller = pd.read_excel(excelDir + '/' + configs.get("clientName").data + outputFile)
                 centsToDollerlist = ["subscription_mrr", "items_unit_price[0]", "items_amount[0]",
-                                     "items_unit_price[1]",
-                                     "items_amount[1]", "items_unit_price[2]", "items_amount[2]"]
+                                     "items_unit_price[1]", "items_amount[1]", "items_unit_price[2]", "items_amount[2]",
+                                     "item_unit_price[0]", "item_amount[0]", "item_unit_price[1]", "item_amount[1]",
+                                     "item_unit_price[2]", "item_amount[2]"]
                 for col in tqdm(centsToDollerlist, desc='centsToDollerlist'):
                     if col in list(centsToDoller.head()):
                         centsToDoller[col] = centsToDoller[col].div(100)

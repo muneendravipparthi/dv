@@ -1,6 +1,6 @@
 ChargeBee Automation Configuration:
   Site: 'test'
-  ClientName: 'stormboard'
+  ClientName: 'willislawnservices'
 
   Customers_Validation: False
   Subscriptions_Validation: True
@@ -14,44 +14,33 @@ ChargeBee Automation Configuration:
     #    - DS1vsDS2
     - DS2vsDS3
   dateFormet:
-    - "%Y-%m-%d %H:%M:%S"
-  #    - "%Y-%m-%d %H:%M"
+#    - "%Y-%m-%d %H:%M:%S"
+      - "%Y-%m-%d %H:%M"
   #    - "%Y-%m-%d"
 
   # ------------------   CUSTOMER INFORMATION   ------------------
   # Mapping Source Columns vs : Destination Columns
 
   Customers_SourceFile:
-    "/Users/cb-muneendra/Desktop/Leeto_Live_Customers_expected.xlsx"
+    "/Users/cb-muneendra/Downloads/willislawn_Cust_QA.csv"
   Customers_DestinationFile:
-    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/Leeto_AllCustomers.xlsx"
+    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/willislawnservices_AllCustomers.xlsx"
 
   Customers_KeyColumns:
     - "customer[id] : customer_id"
 
   Customers_Columns:
     - "customer[id] : customer_id"
-    - "customer[created_at] : customer_created_at"
     - "customer[first_name] : customer_first_name"
     - "customer[last_name] : customer_last_name"
     - "customer[company] : customer_company"
-    - "customer[preferred_currency_code] : customer_preferred_currency_code"
-    - "customer[email] : customer_email"
-    - "customer[allow_direct_debit] : customer_allow_direct_debit"
-    - "customer[auto_collection] : customer_auto_collection"
-    - "customer[taxability] : customer_taxability"
-    - "customer[net_term_days] : customer_net_term_days"
-    - "customer[locale] : customer_locale"
-    - "billing_address[first_name] : customer_billing_address_first_name"
-    - "billing_address[last_name] : customer_billing_address_last_name"
-    - "billing_address[email] : customer_billing_address_email"
-    - "billing_address[company] : customer_billing_address_company"
     - "billing_address[line1] : customer_billing_address_line1"
     - "billing_address[city] : customer_billing_address_city"
+    - "billing_address[state_code] : customer_billing_address_state_code"
     - "billing_address[state] : customer_billing_address_state"
     - "billing_address[zip] : customer_billing_address_zip"
-    - "billing_address[country] : customer_billing_address_country"
-    - "customer[cf_siren] : customer_cf_siren"
+    - "customer[email] : customer_email"
+    - "customer[phone] : customer_phone"
 
 
 
@@ -59,12 +48,12 @@ ChargeBee Automation Configuration:
   # Mapping Source Columns vs : Destination Columns
 
   Subscriptions_SourceFile:
-    "/Users/cb-muneendra/Desktop/dfsa_sub_DS1.xlsx"
+    "/Users/cb-muneendra/Desktop/Willslawnservices_subs_QA.xlsx"
 
 #    "/Users/cb-muneendra/Downloads/LiveMigration-Leeto - Subscriptions_new.csv"
 
   Subscriptions_DestinationFile:
-    "/Users/cb-muneendra/Desktop/dfsa_sub_DS2.xlsx"
+    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/willislawnservices_AllSubscriptions.xlsx"
 #    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/Leeto_AllSubscriptions.xlsx"
 
   Subscriptions_KeyColumns:
@@ -72,20 +61,38 @@ ChargeBee Automation Configuration:
 
   Subscriptions_Columns:
     - "subscription[id] : subscription_id"
-    - "subscription[cf_contract_number_sf] : subscription_cf_contract_number_sf"
     - "customer[id] : customer_id"
-    - "subscription[cf_siren] : subscription_cf_siren"
-    - "subscription[cf_original_opportunity_sf] : subscription_cf_original_opportunity_sf"
+    - "subscription[auto_collection] : subscription_auto_collection"
     - "subscription[status] : subscription_status"
-    - "subscription[created_at] : subscription_created_at"
-    - "subscription[start_date] : subscription_start_date"
-    - "subscription[started_at] : subscription_started_at"
-    - "subscription[current_term_start] : subscription_current_term_start"
     - "subscription[current_term_end] : subscription_current_term_end"
+    - "subscription[current_term_start] : subscription_current_term_start"
     - "subscription[cancelled_at] : subscription_cancelled_at"
+    - "subscription[started_at] : subscription_started_at"
     - "subscription_items[item_price_id][0] : item_price_id[0]"
     - "subscription_items[quantity][0] : item_quantity[0]"
     - "subscription_items[unit_price][0] : item_unit_price[0]"
+#    - "subscriptions[id] : subscription_id"
+#    - "customers[id] : customer_id"
+#    - "subscriptions[status] : subscription_status"
+#    - "subscriptions[created_at] : subscription_created_at"
+#    - "subscriptions[started_at] : subscription_started_at"
+#    - "subscriptions[activated_at] : subscription_activated_at"
+#    - "subscriptions[current_term_start] : subscription_current_term_start"
+#    - "subscriptions[current_term_end] : subscription_current_term_end"
+#    - "subscriptions[cancelled_at] : subscription_cancelled_at"
+#    - "subscriptions[plan_id] : item_price_id[0]"
+#    - "subscriptions[plan_quantity] : item_quantity[0]"
+#    - "subscriptions[plan_amount] : item_amount[0]"
+#    - "subscriptions[plan_unit_price] : item_unit_price[0]"
+#    - "subscriptions[auto_collection] : subscription_auto_collection"
+#    - "shipping_address[line1] : subscription_shipping_address_line1"
+#    - "shipping_address[city] : subscription_shipping_address_city"
+#    - "shipping_address[state_code] : subscription_shipping_address_state_code"
+#    - "billing_addresses[zip] : customer_billing_address_zip"
+#    - "billing_addresses[state_code] : customer_billing_address_state_code"
+#    - "customers[net_term_days] : customer_net_term_days"
+#    - "customers[taxability] : customer_taxability"
+#    - "subscriptions[next_billing_at] : subscription_next_billing_at"
 
 
 
@@ -124,7 +131,14 @@ ChargeBee Automation Configuration:
     - "invoice[id] : Invoice_Number"
 
   Date_Columns:
+    - "subscriptions[next_billing_at] : subscription_next_billing_at"
     - "subscription[start_date] : subscription_start_date"
+    - "subscriptions[created_at] : subscription_created_at"
+    - "subscriptions[started_at] : subscription_started_at"
+    - "subscriptions[activated_at] : subscription_activated_at"
+    - "subscriptions[current_term_start] : subscription_current_term_start"
+    - "subscriptions[current_term_end] : subscription_current_term_end"
+    - "subscriptions[cancelled_at] : subscription_cancelled_at"
     - "invoice[date] : invoice[date]"
     - "line_items[date_from][0] : line_items[date_from][0]"
     - "line_items[date_to][0] : line_items[date_to][0]"
@@ -166,30 +180,11 @@ ChargeBee Automation Configuration:
     - "subscription[started_at] : subscription_started_at"
     - "subscription[current_term_start] : subscription_current_term_start"
     - "subscription[current_term_end] : subscription_current_term_end"
-    - "invoice[date] : invoice_date"
     - "invoice[due_date] : invoice_due_date"
-    - "line_items[date_from][0] : line_item_date_from[0]"
-    - "line_items[date_to][0] : line_item_date_to[0]"
-    - "line_items[date_from][1] : line_item_date_from[1]"
-    - "line_items[date_to][1] : line_item_date_to[1]"
-    - "line_items[date_from][2] : line_item_date_from[2]"
-    - "line_items[date_to][2] : line_item_date_to[2]"
-    - "line_items[date_from][3] : line_item_date_from[3]"
-    - "line_items[date_to][3] : line_item_date_to[3]"
-    - "payments[date][0] : payments_txn_date[0]"
-    - "subscription[created_at] : subscription_created_at"
-    - "subscription[started_at] : subscription_started_at"
-    - "invoice[due_date] : invoice_due_date"
-    - "subscription[created_at] : subscription_created_at"
     - "subscription[trial_start] : subscription_trial_start"
     - "subscription[trial_end] : subscription_trial_end"
-    - "subscription[started_at] : subscription_started_at"
-    - "subscription[current_term_start] : subscription_current_term_start"
-    - "subscription[current_term_end] : subscription_current_term_end"
     - "subscription[cancelled_at] : subscription_cancelled_at"
     - "subscription[start_date] : subscription_started_at"
-    - "subscription[current_term_start] : subscription_current_term_start"
-    - "subscription[current_term_end] : subscription_current_term_end"
     - "subscription[pause_date] : subscription_pause_date"
     - "invoice[date] : Invoice_Date"
     - "payments[date][0] : Paid_On"
@@ -200,16 +195,7 @@ ChargeBee Automation Configuration:
     - "subscription[cancelled_at] : subscriptions.cancelled_at"
     - "customer[created_at] : Created_At"
     - "invoice[date] : date"
-    - "line_items[date_from][0] : line_items[date_from][0]"
-    - "line_items[date_to][0] : line_items[date_to][0]"
     - "payments[date][0] : payments_0_date"
-    - "subscription[created_at] : subscription_created_at"
-    - "customer[created_at] : customer_created_at"
-    - "subscription[started_at] : subscription_started_at"
-    - "subscription[current_term_start] : subscription_current_term_start"
-    - "subscription[current_term_end] : subscription_current_term_end"
-    - "subscription[cancelled_at] : subscription_cancelled_at"
-    - "customer[created_at] : customer_created_at"
     - 'created : invoice[date]'
     - 'lines.data[0].period.start : line_items[date_from][0]'
     - 'lines.data[0].period.end : line_items[date_to][0]'
@@ -219,7 +205,6 @@ ChargeBee Automation Configuration:
     - 'lines.data[2].period.end : line_items[date_to][2]'
     - 'lines.data[3].period.start : line_items[date_from][3]'
     - 'lines.data[3].period.end : line_items[date_to][3]'
-
   Int_Columns:
     - "customer[phone] : customer_phone"
     - "billing_address[phone] : customer_billing_address_phone"
