@@ -1,10 +1,10 @@
 ChargeBee Automation Configuration:
-  Site: 'test'
+  Site: 'Live'
   ClientName: 'dropix'
 
   Customers_Validation: False
-  Subscriptions_Validation: False
-  Invoices_Validation: True
+  Subscriptions_Validation: True
+  Invoices_Validation: False
 
   IsRecurly: False
   IsRecurlyDS1vsDS2: False
@@ -22,9 +22,9 @@ ChargeBee Automation Configuration:
   # Mapping Source Columns vs : Destination Columns
 
   Customers_SourceFile:
-    "/Users/cb-muneendra/dataValidation/data_validation_qa/ds1Tods2/dropix_DS1_Cus.xlsx"
+    "/Users/cb-muneendra/dataValidation/data_validation_qa/ds1Tods2/DropixLive_DS1_Cus.xlsx"
   Customers_DestinationFile:
-    "/Users/cb-muneendra/dataValidation/data_validation_qa/ds1Tods2/dropix_DS2_Cus.xlsx"
+    "/Users/cb-muneendra/dataValidation/data_validation_qa/ds1Tods2/DropixLive_DS2_Cus.xlsx"
 
   Customers_KeyColumns:
     - "id : customer[id]"
@@ -38,21 +38,21 @@ ChargeBee Automation Configuration:
     - "currency : customer[preferred_currency_code]"
     - "metadata : customer[meta_data]"
     - "billing_name : billing_address[name]"
-    - "shipping_address_line1 : billing_address[line1]"
-    - "shipping_address_line2 : billing_address[line2]"
-    - "shipping_address_city : billing_address[city]"
-    - "address_postal_code : billing_address[zip]"
-    - "shipping_address_country : billing_address[country]"
+#    - "shipping_address_line1 : billing_address[line1]"
+#    - "shipping_address_line2 : billing_address[line2]"
+#    - "shipping_address_city : billing_address[city]"
+#    - "address_postal_code : billing_address[zip]"
+#    - "shipping_address_country : billing_address[country]"
 
 
   # ------------------   SUBSCRIPTIONS INFORMATION   ------------------
   # Mapping Source Columns vs : Destination Columns
 
   Subscriptions_SourceFile:
-    "/Users/cb-muneendra/dataValidation/data_validation_qa/ds1Tods2/dropix_DS1_Subs.xlsx"
+    "/Users/cb-muneendra/dataValidation/data_validation_qa/ds1Tods2/Dropix_Live_DS1_Subs.xlsx"
 
   Subscriptions_DestinationFile:
-    "/Users/cb-muneendra/dataValidation/data_validation_qa/ds1Tods2/dropix_DS2_Subs.xlsx"
+    "/Users/cb-muneendra/dataValidation/data_validation_qa/ds1Tods2/Dropix_Live_DS2_Subs.xlsx"
 
   Subscriptions_KeyColumns:
     - "id : subscription[id]"
@@ -60,10 +60,10 @@ ChargeBee Automation Configuration:
   Subscriptions_Columns:
     - "id : subscription[id]"
     - "customer : customer[id]"
-    - "created : subscription[created_at]"
-    - "items_data[0]_price_id : subscription_items[item_price_id][0]"
-    - "items_data[0]_quantity : subscription_items[quantity][0]"
-    - "items_data[0]_price_unit_amount : subscription_items[unit_price][0]"
+#    - "created : subscription[created_at]"
+    - "items.data(0).plan.id : subscription_items[item_price_id][0]"
+    - "items.data(0).quantity : subscription_items[quantity][0]"
+    - "items.data(0).plan.amount : subscription_items[unit_price][0]"
     - "status : subscription[status]"
     - "trial_start : subscription[trial_start]"
     - "trial_end : subscription[trial_end]"
@@ -77,10 +77,10 @@ ChargeBee Automation Configuration:
   # Mapping Source Columns vs : Destination Columns
 
   Invoices_SourceFile:
-    "/Users/cb-muneendra/dataValidation/data_validation_qa/ds1Tods2/dropix_DS1_Inv.xlsx"
+    "/Users/cb-muneendra/dataValidation/data_validation_qa/ds1Tods2/dropix_Live_DS1_Inv.xlsx"
 
   Invoices_DestinationFile:
-    "/Users/cb-muneendra/dataValidation/data_validation_qa/ds1Tods2/dropix_ds2_Inv.xlsx"
+    "/Users/cb-muneendra/dataValidation/data_validation_qa/ds1Tods2/dropix_Live_ds2_Inv.xlsx"
 
   Invoices_KeyColumns:
     - "id : invoice[stripe_id]"
