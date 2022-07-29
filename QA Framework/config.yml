@@ -1,9 +1,9 @@
 ChargeBee Automation Configuration:
-  Site: 'test'
+  Site: 'Live'
   ClientName: 'dropix'
 
   Customers_Validation: False
-  Subscriptions_Validation: False
+  Subscriptions_Validation: True
   Invoices_Validation: True
 
   IsRecurly: False
@@ -14,17 +14,21 @@ ChargeBee Automation Configuration:
     #    - DS1vsDS2
     - DS2vsDS3
   dateFormet:
-#    - "%Y-%m-%d %H:%M:%S"
-      - "%Y-%m-%d %H:%M"
-  #    - "%Y-%m-%d"
+    - "%Y-%m-%d %H:%M:%S"
+#    - "%Y-%m-%d %H"
+#      - "%Y-%m-%d %H:%M"
+#      - "%Y-%m-%d"
 
   # ------------------   CUSTOMER INFORMATION   ------------------
   # Mapping Source Columns vs : Destination Columns
 
   Customers_SourceFile:
-    "/Users/cb-muneendra/Desktop/Dropix_Customer_DS2.xlsx"
+
+
+
+    "/Users/cb-muneendra/Desktop/Dropix_Live_DS2_Customers.xlsx"
   Customers_DestinationFile:
-    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/dropix_AllCustomers.xlsx"
+    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/dropix_Live_AllCustomers.xlsx"
 
   Customers_KeyColumns:
     - "customer[id] : customer_id"
@@ -52,10 +56,10 @@ ChargeBee Automation Configuration:
   # Mapping Source Columns vs : Destination Columns
 
   Subscriptions_SourceFile:
-    "/Users/cb-muneendra/Desktop/Dropix_Subscription_DS2.xlsx"
+    "/Users/cb-muneendra/Desktop/Dropix_Live_DS2_Subscription.xlsx"
 
   Subscriptions_DestinationFile:
-    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/dropix_AllSubscriptions.xlsx"
+    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/dropix_Live_AllSubscriptions.xlsx"
 
   Subscriptions_KeyColumns:
     - "subscription[id] : subscription_id"
@@ -76,15 +80,18 @@ ChargeBee Automation Configuration:
     - "subscription[cancelled_at] : subscription_cancelled_at"
     - "subscription[auto_collection] : subscription_auto_collection"
     - "subscription[meta_data] : subscription_meta_data"
+    - "shipping_address[first_name] : subscription_shipping_address_first_name"
+    - "shipping_address[last_name] : subscription_shipping_address_last_name"
+    - "shipping_address[country] : subscription_shipping_address_country"
 
   # ------------------   INVOICES INFORMATION   ------------------
   # Mapping Source Columns vs : Destination Columns
 
   Invoices_SourceFile:
-    "/Users/cb-muneendra/Desktop/Dropix_Invoice_DS2.xlsx"
+    "/Users/cb-muneendra/Desktop/Dropix_Live_DS2_Invoice.xlsx"
 
   Invoices_DestinationFile:
-    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/dropix_AllInvoices.xlsx"
+    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/dropix_Live_AllInvoices.xlsx"
 
   Invoices_KeyColumns:
     - "invoice[id] : invoice_id"
