@@ -35,7 +35,7 @@ logger = logging.getLogger()
 
 # Now we are going to Set the threshold of logger to DEBUG
 logger.setLevel(logging.DEBUG)
-outputFile = "_AllCreditNotes.xlsx"
+outputFile = "_DS3_AllCreditNotes.xlsx"
 
 class CreditnoteExecution:
     def getAllCreditNotes(self):

@@ -35,21 +35,24 @@ logger = logging.getLogger()
 
 # Now we are going to Set the threshold of logger to DEBUG
 logger.setLevel(logging.DEBUG)
-outputFile = "_AllCustomers.xlsx"
+outputFile = "_DS3_AllCustomers.xlsx"
+RequireAPIExecution = True
 
 
 class CustomerExecution:
 
     def getAllCustomers(self):
-        url = clientSite + customerextenction
-        newjson = ''
-        TotalCustomerResponse = ReadAPIExecution.getDataFromAPI(self, url, user, logger)
-        Customerdictionary = {
-            "list": TotalCustomerResponse
-        }
-        with open(jsonDir + '/' + configs.get("clientName").data + "_AllCustomers.json", "w") as outfile:
-            json.dump(Customerdictionary, outfile)
-        logger.info("Final Json File" + str(Customerdictionary))
+        if RequireAPIExecution:
+            logger.info("Executiong Extraction of Customers")
+            url = clientSite + customerextenction
+            newjson = ''
+            TotalCustomerResponse = ReadAPIExecution.getDataFromAPI(self, url, user, logger)
+            Customerdictionary = {
+                "list": TotalCustomerResponse
+            }
+            with open(jsonDir + '/' + configs.get("clientName").data + "_AllCustomers.json", "w") as outfile:
+                json.dump(Customerdictionary, outfile)
+            logger.info("Final Json File" + str(Customerdictionary))
         try:
             with open(jsonDir + '/' + configs.get("clientName").data + "_AllCustomers.json", 'r') as f:
                 data = json.loads(f.read())
