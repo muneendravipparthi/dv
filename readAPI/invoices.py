@@ -7,6 +7,7 @@ from jproperties import Properties
 from tqdm import tqdm
 
 from readAPI.ReadAPI import ReadAPIExecution
+from readAPI.splitHelper import SplitHelper
 
 configs = Properties()
 home_folder = os.getenv('HOME')
@@ -68,7 +69,7 @@ class InvoiceExecution:
             try:
                 if "invoice_line_items" in list(df_nested_list.head()):
                     df_splitlineitems = pd.read_excel(excelDir + '/' + configs.get("clientName").data + outputFile)
-                    df_splitlineitems = self.invoice_lineitem_split(df_splitlineitems)
+                    df_splitlineitems = SplitHelper.invoice_lineitem_split(self, df_splitlineitems)
                     df_splitlineitems.to_excel(excelDir + '/' + configs.get("clientName").data + outputFile,
                                                index=False)
             except Exception as e:
@@ -78,7 +79,7 @@ class InvoiceExecution:
             try:
                 if "invoice_line_item_taxes" in list(df_nested_list.head()):
                     df_splitlineitemtaxes = pd.read_excel(excelDir + '/' + configs.get("clientName").data + outputFile)
-                    df_splitlineitemtaxes = self.invoice_lineitemtaxes_split(df_splitlineitemtaxes)
+                    df_splitlineitemtaxes = SplitHelper.invoice_lineitemtaxes_split(self, df_splitlineitemtaxes)
                     df_splitlineitemtaxes.to_excel(excelDir + '/' + configs.get("clientName").data + outputFile,
                                                    index=False)
             except Exception as e:
@@ -88,7 +89,7 @@ class InvoiceExecution:
             try:
                 if "invoice_linked_payments" in list(df_nested_list.head()):
                     df_splitpayments = pd.read_excel(excelDir + '/' + configs.get("clientName").data + outputFile)
-                    df_splitpayments = self.invoice_payment_split(df_splitpayments)
+                    df_splitpayments = SplitHelper.invoice_payment_split(self, df_splitpayments)
                     df_splitpayments.to_excel(excelDir + '/' + configs.get("clientName").data + outputFile, index=False)
             except Exception as e:
                 logger.info(e)
@@ -97,7 +98,7 @@ class InvoiceExecution:
             try:
                 if "invoice_line_item_discounts" in list(df_nested_list.head()):
                     df_splitdiscounts = pd.read_excel(excelDir + '/' + configs.get("clientName").data + outputFile)
-                    df_splitdiscounts = self.invoice_discount_split(df_splitdiscounts)
+                    df_splitdiscounts = SplitHelper.invoice_discount_split(self, df_splitdiscounts)
                     df_splitdiscounts.to_excel(excelDir + '/' + configs.get("clientName").data + outputFile,
                                                index=False)
             except Exception as e:
@@ -143,166 +144,13 @@ class InvoiceExecution:
                     if col in list(tdf.head()):
                         centsToDoller[col] = centsToDoller[col].div(100)
                 centsToDoller.to_excel(excelDir + '/' + configs.get("clientName").data + outputFile, index=False)
-                logger.info("Converting Json data to Excel data Completed")
+                logger.info("Completed data conversion from Json to Excel")
         except Exception as e:
-            logger.info("Something failed during data convertion from Json to Excel")
+            logger.info("Something failed during data conversion from Json to Excel")
             logger.error("exception in invoices:" + str(e))
             logger.exception(e)
 
-    def invoice_lineitem_split(self, dfdata):
-        df = dfdata[["invoice_id", "invoice_line_items"]]
-        dfs = pd.DataFrame
-        dfl = pd.DataFrame
-        df['invoice_line_items'] = df['invoice_line_items'].replace("Tiina's addon", "Tiina^s addon", regex=True)
-        df['invoice_line_items'] = df['invoice_line_items'].replace("'", '"', regex=True)
-        df['invoice_line_items'] = df['invoice_line_items'].replace(": False,", ': "False",', regex=True)
-        df['invoice_line_items'] = df['invoice_line_items'].replace(": True,", ': "True",', regex=True)
-        for i, j in tqdm(zip(df['invoice_id'], df['invoice_line_items']), total=len(df['invoice_id']),
-                         desc='invoice_line_items'):
-            logger.info("splitting for '{}' invoice id and the date is :{}".format(i, j))
-            if not pd.isna(j):
-                data = json.loads(j)
-                for k in range(len(data)):
-                    prefix = "line_items_"
-                    dfli = pd.json_normalize(data[k])
-                    sufix = "[" + str(k) + "]"
-                    headers = list(dfli.head())
-                    newheaders = {}
-                    for ch in headers:
-                        newheaders[ch] = prefix + ch + sufix
-                    dfli.rename(columns=newheaders, inplace=True)
-                    dfli['invoice_id'] = [i]
-                    if k == 0:
-                        # dfli['invoice_id'] = [i]
-                        dfl = dfli
-                    else:
-                        dfl = pd.merge(dfl, dfli, left_on="invoice_id", right_on="invoice_id", how='inner')
-                        # dfl = dfl.append(dfli)
-            else:
-                wdata = {'invoice_id': [i]}
-                dfl = pd.DataFrame(wdata)
-            try:
-                dfs = dfs.append(dfl)
-            except:
-                dfs = dfl
-        dflineitem = pd.merge(dfdata, dfs, how='inner', left_on=['invoice_id'],
-                              right_on=['invoice_id'])
-        return dflineitem
 
-    def invoice_lineitemtaxes_split(self, dfdata):
-        df = dfdata[["invoice_id", "invoice_line_item_taxes"]]
-        dfs = pd.DataFrame
-        dfl = pd.DataFrame
-        df['invoice_line_item_taxes'] = df['invoice_line_item_taxes'].replace("'", '"', regex=True)
-        df['invoice_line_item_taxes'] = df['invoice_line_item_taxes'].replace(": False,", ': "False",', regex=True)
-        df['invoice_line_item_taxes'] = df['invoice_line_item_taxes'].replace(": False}", ': "False"}', regex=True)
-        df['invoice_line_item_taxes'] = df['invoice_line_item_taxes'].replace(": True}", ': "True"}', regex=True)
-        df['invoice_line_item_taxes'] = df['invoice_line_item_taxes'].replace(": True,", ': "True",', regex=True)
-        for i, j in tqdm(zip(df['invoice_id'], df['invoice_line_item_taxes']), total=len(df['invoice_id']),
-                         desc='invoice_line_item_taxes'):
-            logger.info("splitting for '{}' invoice id and the date is :{}".format(i, j))
-            if not pd.isna(j):
-                data = json.loads(j)
-                for k in range(len(data)):
-                    prefix = "line_items_taxes_"
-                    dfli = pd.json_normalize(data[k])
-                    sufix = "[" + str(k) + "]"
-                    headers = list(dfli.head())
-                    newheaders = {}
-                    for ch in headers:
-                        newheaders[ch] = prefix + ch + sufix
-                    dfli.rename(columns=newheaders, inplace=True)
-                    dfli['invoice_id'] = [i]
-                    if k == 0:
-                        dfl = dfli
-                    else:
-                        dfl = pd.merge(dfl, dfli, left_on="invoice_id", right_on="invoice_id", how='inner')
-                        # dfl = dfl.append(dfli)
-            else:
-                wdata = {'invoice_id': [i]}
-                dfl = pd.DataFrame(wdata)
-            try:
-                dfs = dfs.append(dfl)
-            except:
-                dfs = dfl
-        dflineitemtax = pd.merge(dfdata, dfs, how='inner', left_on=['invoice_id'], right_on=['invoice_id'])
-        return dflineitemtax
-
-    def invoice_payment_split(self, dfdata):
-        df = dfdata[["invoice_id", "invoice_linked_payments"]]
-        dfs = pd.DataFrame
-        dfl = pd.DataFrame
-        df['invoice_linked_payments'] = df['invoice_linked_payments'].replace("'", '"', regex=True)
-        df['invoice_linked_payments'] = df['invoice_linked_payments'].replace(": False,", ': "False",', regex=True)
-        df['invoice_linked_payments'] = df['invoice_linked_payments'].replace(": True,", ': "True",', regex=True)
-        for i, j in tqdm(zip(df['invoice_id'], df['invoice_linked_payments']), total=len(df['invoice_id']),
-                         desc='invoice_linked_payments'):
-            logger.info("splitting for '{}' invoice id and the date is :{}".format(i, j))
-            if not pd.isna(j) and j != '[]':
-                data = json.loads(j)
-                for k in range(len(data)):
-                    prefix = "payments_"
-                    dfli = pd.json_normalize(data[k])
-                    sufix = "[" + str(k) + "]"
-                    headers = list(dfli.head())
-                    newheaders = {}
-                    for ch in headers:
-                        newheaders[ch] = prefix + ch + sufix
-                    dfli.rename(columns=newheaders, inplace=True)
-                    dfli['invoice_id'] = [i]
-                    if k == 0:
-                        dfl = dfli
-                    else:
-                        dfl = pd.merge(dfl, dfli, left_on="invoice_id", right_on="invoice_id", how='inner')
-                        # dfl = dfl.append(dfli)
-            else:
-                wdata = {'invoice_id': [i]}
-                dfl = pd.DataFrame(wdata)
-            try:
-                dfs = dfs.append(dfl)
-            except:
-                dfs = dfl
-        dfpayment = pd.merge(dfdata, dfs, how='inner', left_on=['invoice_id'], right_on=['invoice_id'])
-        return dfpayment
-
-    def invoice_discount_split(self, dfdata):
-        df = dfdata[["invoice_id", "invoice_line_items_discounts"]]
-        dfs = pd.DataFrame
-        dfl = pd.DataFrame
-        df['invoice_line_item_discounts'] = df['invoice_line_item_discounts'].replace("'", '"', regex=True)
-        df['invoice_line_item_discounts'] = df['invoice_line_item_discounts'].replace(": False,", ': "False",',
-                                                                                      regex=True)
-        df['invoice_line_item_discounts'] = df['invoice_line_item_discounts'].replace(": True,", ': "True",',
-                                                                                      regex=True)
-        for i, j in tqdm(zip(df['invoice_id'], df['invoice_line_item_discounts']), total=len(df['invoice_id']),
-                         desc='invoice_line_item_discounts'):
-            logger.info("splitting for '{}' invoice id and the date is :{}".format(i, j))
-            if not pd.isna(j) and j != '[]':
-                data = json.loads(j)
-                for k in range(len(data)):
-                    prefix = "discounts_"
-                    dfli = pd.json_normalize(data[k])
-                    sufix = "[" + str(k) + "]"
-                    headers = list(dfli.head())
-                    newheaders = {}
-                    for ch in headers:
-                        newheaders[ch] = prefix + ch + sufix
-                    dfli.rename(columns=newheaders, inplace=True)
-                    dfli['invoice_id'] = [i]
-                    if k == 0:
-                        dfl = dfli
-                    else:
-                        dfl = pd.merge(dfl, dfli, left_on="invoice_id", right_on="invoice_id", how='inner')
-                        # dfl = dfl.append(dfli)
-            else:
-                wdata = {'invoice_id': [i]}
-                dfl = pd.DataFrame(wdata)
-            try:
-                dfs = dfs.append(dfl)
-            except:
-                dfs = dfl
-        dfpayment = pd.merge(dfdata, dfs, how='inner', left_on=['invoice_id'], right_on=['invoice_id'])
-        return dfpayment
 
 
 invoiceobj = InvoiceExecution()

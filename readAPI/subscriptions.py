@@ -7,6 +7,7 @@ from jproperties import Properties
 from tqdm import tqdm
 
 from readAPI.ReadAPI import ReadAPIExecution
+from readAPI.splitHelper import SplitHelper
 
 configs = Properties()
 home_folder = os.getenv('HOME')
@@ -35,7 +36,7 @@ logger = logging.getLogger()
 # Now we are going to Set the threshold of logger to DEBUG
 logger.setLevel(logging.DEBUG)
 outputFile = "_DS3_AllSubscriptions.xlsx"
-RequireAPIExecution = True
+RequireAPIExecution = False
 
 
 class SubscriptionExecution:
@@ -70,48 +71,56 @@ class SubscriptionExecution:
             df_splitlineitems = pd.read_excel(excelDir + '/' + configs.get("clientName").data + outputFile)
             try:
                 if "subscription_subscription_items" in list(df_nested_list.head()):
-                    dftemp = df_splitlineitems['subscription_subscription_items'].str.split('}, {', -1, expand=True)
-                    acol = len(dftemp.columns)
-
-                    lineitemslist = []
-                    for i in range(acol):
-                        lineitemslist.append('lineitem' + str(i))
-
-                    df_splitlineitems[lineitemslist] = df_splitlineitems['subscription_subscription_items'].str.split(
-                        '}, {', -1, expand=True)
-                    for item in lineitemslist:
-                        df_splitlineitems[item] = df_splitlineitems[item].str.replace(r'(?s), \'free_quantity.*', '',
-                                                                                      regex=True)
-                        df_splitlineitems[item] = df_splitlineitems[item].str.replace(r'(?s), \'object.*', '',
-                                                                                      regex=True)
-                        df_splitlineitems[item] = df_splitlineitems[item].str.replace('[{', '', regex=False)
-                        df_splitlineitems[item] = df_splitlineitems[item].str.replace('\'', '', regex=False)
-                    count = 0
-                    for item in lineitemslist:
-                        clist = ['item_price_id[' + str(count) + ']', 'items_type[' + str(count) + ']',
-                                 'items_quantity[' + str(count) + ']', 'items_unit_price[' + str(count) + ']',
-                                 'items_amount[' + str(count) + ']']
-                        df_splitlineitems['item_price_id[' + str(count) + ']'] = df_splitlineitems[item].str.extract(
-                            r"item_price_id: (.*?),")
-                        df_splitlineitems['item_type[' + str(count) + ']'] = df_splitlineitems[item].str.extract(
-                            r"item_type: (.*?),")
-                        df_splitlineitems['item_quantity[' + str(count) + ']'] = df_splitlineitems[item].str.extract(
-                            r"quantity: (.*?),")
-                        df_splitlineitems['item_unit_price[' + str(count) + ']'] = df_splitlineitems[item].str.extract(
-                            r"unit_price: (\d+)")
-                        df_splitlineitems['item_amount[' + str(count) + ']'] = df_splitlineitems[item].str.extract(
-                            r"amount: (\d+)")
-                        count += 1
-                    df_splitlineitems.to_excel(excelDir + '/' + configs.get("clientName").data + outputFile,
-                                               index=False)
+                    df_splitlineitems = SplitHelper.subscription_subscription_items_split(self, df_splitlineitems)
+                    df_splitlineitems.to_excel(excelDir + '/' + configs.get("clientName").data + outputFile, index=False)
             except Exception as e:
                 logger.info(e)
                 logger.error("exception at subscription_subscription_items:" + str(e))
                 logger.exception(e)
+            # try:
+            #     if "subscription_subscription_items" in list(df_nested_list.head()):
+            #         dftemp = df_splitlineitems['subscription_subscription_items'].str.split('}, {', -1, expand=True)
+            #         acol = len(dftemp.columns)
+            #
+            #         lineitemslist = []
+            #         for i in range(acol):
+            #             lineitemslist.append('lineitem' + str(i))
+            #
+            #         df_splitlineitems[lineitemslist] = df_splitlineitems['subscription_subscription_items'].str.split(
+            #             '}, {', -1, expand=True)
+            #         for item in lineitemslist:
+            #             df_splitlineitems[item] = df_splitlineitems[item].str.replace(r'(?s), \'free_quantity.*', '',
+            #                                                                           regex=True)
+            #             df_splitlineitems[item] = df_splitlineitems[item].str.replace(r'(?s), \'object.*', '',
+            #                                                                           regex=True)
+            #             df_splitlineitems[item] = df_splitlineitems[item].str.replace('[{', '', regex=False)
+            #             df_splitlineitems[item] = df_splitlineitems[item].str.replace('\'', '', regex=False)
+            #         count = 0
+            #         for item in lineitemslist:
+            #             clist = ['item_price_id[' + str(count) + ']', 'items_type[' + str(count) + ']',
+            #                      'items_quantity[' + str(count) + ']', 'items_unit_price[' + str(count) + ']',
+            #                      'items_amount[' + str(count) + ']']
+            #             df_splitlineitems['item_price_id[' + str(count) + ']'] = df_splitlineitems[item].str.extract(
+            #                 r"item_price_id: (.*?),")
+            #             df_splitlineitems['item_type[' + str(count) + ']'] = df_splitlineitems[item].str.extract(
+            #                 r"item_type: (.*?),")
+            #             df_splitlineitems['item_quantity[' + str(count) + ']'] = df_splitlineitems[item].str.extract(
+            #                 r"quantity: (.*?),")
+            #             df_splitlineitems['item_unit_price[' + str(count) + ']'] = df_splitlineitems[item].str.extract(
+            #                 r"unit_price: (\d+)")
+            #             df_splitlineitems['item_amount[' + str(count) + ']'] = df_splitlineitems[item].str.extract(
+            #                 r"amount: (\d+)")
+            #             count += 1
+            #         df_splitlineitems.to_excel(excelDir + '/' + configs.get("clientName").data + outputFile,
+            #                                    index=False)
+            # except Exception as e:
+            #     logger.info(e)
+            #     logger.error("exception at subscription_subscription_items:" + str(e))
+            #     logger.exception(e)
 
             try:
                 if "subscription_addons" in list(df_nested_list.head()):
-                    df_splitaddon = self.subscription_addons_split(df_splitlineitems)
+                    df_splitaddon = SplitHelper.subscription_addons_split(self, df_splitlineitems)
                     df_splitaddon.to_excel(excelDir + '/' + configs.get("clientName").data + outputFile, index=False)
             except Exception as e:
                 logger.info(e)
@@ -120,7 +129,7 @@ class SubscriptionExecution:
 
             try:
                 if "subscription_item_tiers" in list(df_nested_list.head()):
-                    df_splittiers = self.subscription_item_tiers(df_splitlineitems)
+                    df_splittiers = SplitHelper.subscription_item_tiers(self, df_splitlineitems)
                     df_splittiers.to_excel(excelDir + '/' + configs.get("clientName").data + outputFile, index=False)
             except Exception as e:
                 logger.info(e)
@@ -129,7 +138,7 @@ class SubscriptionExecution:
 
             try:
                 if "subscription_discounts" in list(df_nested_list.head()):
-                    df_splittiers = self.subscription_discounts(df_splitlineitems)
+                    df_splittiers = SplitHelper.subscription_discounts(self, df_splitlineitems)
                     df_splittiers.to_excel(excelDir + '/' + configs.get("clientName").data + outputFile, index=False)
             except Exception as e:
                 logger.info(e)
@@ -166,121 +175,12 @@ class SubscriptionExecution:
                     if col in list(centsToDoller.head()):
                         centsToDoller[col] = centsToDoller[col].div(100)
                 centsToDoller.to_excel(excelDir + '/' + configs.get("clientName").data + outputFile, index=False)
+                logger.info("Completed data conversion from Json to Excel")
         except Exception as e:
             logger.info(e)
             logger.error("exception in subscriptions:" + str(e))
             logger.exception(e)
 
-    def subscription_addons_split(self, dfdata):
-        df = dfdata[["subscription_id", "subscription_addons"]]
-        dfs = pd.DataFrame
-        dfl = pd.DataFrame
-        df['subscription_addons'] = df['subscription_addons'].replace("'", '"', regex=True)
-        df['subscription_addons'] = df['subscription_addons'].replace(": False,", ': "False",', regex=True)
-        df['subscription_addons'] = df['subscription_addons'].replace(": True,", ': "True",', regex=True)
-        for i, j in tqdm(zip(df['subscription_id'], df['subscription_addons']), total=len(df['subscription_id']),
-                         desc='subscription_addons'):
-            logger.info("splitting for '{}' subscription_id and the date is :{}".format(i, j))
-            if not pd.isna(j) and j != '[]':
-                data = json.loads(j)
-                for k in range(len(data)):
-                    prefix = "addon_"
-                    dfli = pd.json_normalize(data[k])
-                    sufix = "[" + str(k) + "]"
-                    headers = list(dfli.head())
-                    newheaders = {}
-                    for ch in headers:
-                        newheaders[ch] = prefix + ch + sufix
-                    dfli.rename(columns=newheaders, inplace=True)
-                    dfli['subscription_id'] = [i]
-                    if k == 0:
-                        dfl = dfli
-                    else:
-                        dfl = pd.merge(dfl, dfli, left_on="subscription_id", right_on="subscription_id", how='inner')
-                        # dfl = dfl.append(dfli)
-            else:
-                wdata = {'subscription_id': [i]}
-                dfl = pd.DataFrame(wdata)
-            try:
-                dfs = dfs.append(dfl)
-            except:
-                dfs = dfl
-        dfaddon = pd.merge(dfdata, dfs, how='inner', left_on=['subscription_id'], right_on=['subscription_id'])
-        return dfaddon
-
-    def subscription_item_tiers(self, dfdata):
-        df = dfdata[["subscription_id", "subscription_item_tiers"]]
-        dfs = pd.DataFrame
-        dfl = pd.DataFrame
-        df['subscription_item_tiers'] = df['subscription_item_tiers'].replace("'", '"', regex=True)
-        df['subscription_item_tiers'] = df['subscription_item_tiers'].replace(": False,", ': "False",', regex=True)
-        df['subscription_item_tiers'] = df['subscription_item_tiers'].replace(": True,", ': "True",', regex=True)
-        for i, j in tqdm(zip(df['subscription_id'], df['subscription_item_tiers']), total=len(df['subscription_id']),
-                         desc='subscription_item_tiers'):
-            logger.info("splitting for '{}' subscription_id and the date is :{}".format(i, j))
-            if not pd.isna(j) and j != '[]':
-                data = json.loads(j)
-                for k in range(len(data)):
-                    prefix = "item_tiers_"
-                    dfli = pd.json_normalize(data[k])
-                    sufix = "[" + str(k) + "]"
-                    headers = list(dfli.head())
-                    newheaders = {}
-                    for ch in headers:
-                        newheaders[ch] = prefix + ch + sufix
-                    dfli.rename(columns=newheaders, inplace=True)
-                    dfli['subscription_id'] = [i]
-                    if k == 0:
-                        dfl = dfli
-                    else:
-                        dfl = pd.merge(dfl, dfli, left_on="subscription_id", right_on="subscription_id", how='inner')
-                        # dfl = dfl.append(dfli)
-            else:
-                wdata = {'subscription_id': [i]}
-                dfl = pd.DataFrame(wdata)
-            try:
-                dfs = dfs.append(dfl)
-            except:
-                dfs = dfl
-        dftiers = pd.merge(dfdata, dfs, how='inner', left_on=['subscription_id'], right_on=['subscription_id'])
-        return dftiers
-
-    def subscription_discounts(self, dfdata):
-        df = dfdata[["subscription_id", "subscription_discounts"]]
-        dfs = pd.DataFrame
-        dfl = pd.DataFrame
-        df['subscription_discounts'] = df['subscription_discounts'].replace("'", '"', regex=True)
-        df['subscription_discounts'] = df['subscription_discounts'].replace(": False,", ': "False",', regex=True)
-        df['subscription_discounts'] = df['subscription_discounts'].replace(": True,", ': "True",', regex=True)
-        for i, j in tqdm(zip(df['subscription_id'], df['subscription_discounts']), total=len(df['subscription_id']),
-                         desc='subscription_discounts'):
-            logger.info("splitting for '{}' subscription_id and the date is :{}".format(i, j))
-            if not pd.isna(j) and j != '[]':
-                data = json.loads(j)
-                for k in range(len(data)):
-                    prefix = "discount_"
-                    dfli = pd.json_normalize(data[k])
-                    sufix = "[" + str(k) + "]"
-                    headers = list(dfli.head())
-                    newheaders = {}
-                    for ch in headers:
-                        newheaders[ch] = prefix + ch + sufix
-                    dfli.rename(columns=newheaders, inplace=True)
-                    dfli['subscription_id'] = [i]
-                    if k == 0:
-                        dfl = dfli
-                    else:
-                        dfl = pd.merge(dfl, dfli, left_on="subscription_id", right_on="subscription_id", how='inner')
-                        # dfl = dfl.append(dfli)
-            else:
-                wdata = {'subscription_id': [i]}
-                dfl = pd.DataFrame(wdata)
-            try:
-                dfs = dfs.append(dfl)
-            except:
-                dfs = dfl
-        dftiers = pd.merge(dfdata, dfs, how='inner', left_on=['subscription_id'], right_on=['subscription_id'])
-        return dftiers
 
 
 subscriptionobj = SubscriptionExecution()

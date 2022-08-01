@@ -83,9 +83,10 @@ class CustomerExecution:
                         lambda x: ReadAPIExecution.epoch_To_Datetime_Convert(self, x, clienttimezone) if pd.isna(
                             x) != True else None)
             tdf.to_excel(excelDir + '/' + configs.get("clientName").data + outputFile, index=False)
+            logger.info("Completed data conversion from Json to Excel")
         except Exception as e:
             logger.error("exception in customers:" + str(e))
-            logger.info("Something failed during data convertion from Json to Excel")
+            logger.info("Something failed during data conversion from Json to Excel")
             logger.exception(e)
 
 
