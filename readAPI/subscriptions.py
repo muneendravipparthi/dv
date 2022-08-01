@@ -113,6 +113,12 @@ class SubscriptionExecution:
             if "subscription_item_tiers" in list(df_nested_list.head()):
                 df_splittiers = self.subscription_item_tiers(df_splitlineitems)
                 df_splittiers.to_excel(excelDir + '/' + configs.get("clientName").data + outputFile, index=False)
+            try:
+                if "subscription_discounts" in list(df_nested_list.head()):
+                    df_splittiers = self.subscription_discounts(df_splitlineitems)
+                    df_splittiers.to_excel(excelDir + '/' + configs.get("clientName").data + outputFile, index=False)
+            except:
+                print("subscription_discounts failed")
             tdf = pd.read_excel(excelDir + '/' + configs.get("clientName").data + outputFile)
 
             dateconvertioncollist = ["subscription_start_date", "subscription_trial_start", "subscription_trial_end",
@@ -197,6 +203,43 @@ class SubscriptionExecution:
                 data = json.loads(j)
                 for k in range(len(data)):
                     prefix = "item_tiers_"
+                    dfli = pd.json_normalize(data[k])
+                    sufix = "[" + str(k) + "]"
+                    headers = list(dfli.head())
+                    newheaders = {}
+                    for ch in headers:
+                        newheaders[ch] = prefix + ch + sufix
+                    dfli.rename(columns=newheaders, inplace=True)
+                    dfli['subscription_id'] = [i]
+                    if k == 0:
+                        dfl = dfli
+                    else:
+                        dfl = pd.merge(dfl, dfli, left_on="subscription_id", right_on="subscription_id", how='inner')
+                        # dfl = dfl.append(dfli)
+            else:
+                wdata = {'subscription_id': [i]}
+                dfl = pd.DataFrame(wdata)
+            try:
+                dfs = dfs.append(dfl)
+            except:
+                dfs = dfl
+        dftiers = pd.merge(dfdata, dfs, how='inner', left_on=['subscription_id'], right_on=['subscription_id'])
+        return dftiers
+
+    def subscription_discounts(self, dfdata):
+        df = dfdata[["subscription_id", "subscription_discounts"]]
+        dfs = pd.DataFrame
+        dfl = pd.DataFrame
+        df['subscription_discounts'] = df['subscription_discounts'].replace("'", '"', regex=True)
+        df['subscription_discounts'] = df['subscription_discounts'].replace(": False,", ': "False",', regex=True)
+        df['subscription_discounts'] = df['subscription_discounts'].replace(": True,", ': "True",', regex=True)
+        for i, j in tqdm(zip(df['subscription_id'], df['subscription_discounts']), total=len(df['subscription_id']),
+                         desc='subscription_discounts'):
+            logger.info("splitting for '{}' subscription_id and the date is :{}".format(i, j))
+            if not pd.isna(j) and j != '[]':
+                data = json.loads(j)
+                for k in range(len(data)):
+                    prefix = "discount_"
                     dfli = pd.json_normalize(data[k])
                     sufix = "[" + str(k) + "]"
                     headers = list(dfli.head())
