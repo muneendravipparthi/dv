@@ -36,7 +36,7 @@ logger = logging.getLogger()
 # Now we are going to Set the threshold of logger to DEBUG
 logger.setLevel(logging.DEBUG)
 outputFile = "_DS3_AllSubscriptions.xlsx"
-RequireAPIExecution = False
+RequireAPIExecution = True
 
 
 class SubscriptionExecution:

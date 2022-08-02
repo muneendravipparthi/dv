@@ -1,10 +1,10 @@
 ChargeBee Automation Configuration:
   Site: 'test'
-  ClientName: 'stormboard'
+  ClientName: 'xpendy'
 
   Customers_Validation: False
   Subscriptions_Validation: True
-  Invoices_Validation: False
+  Invoices_Validation: True
 
   IsRecurly: False
   IsRecurlyDS1vsDS2: False
@@ -16,42 +16,39 @@ ChargeBee Automation Configuration:
   dateFormet:
     - "%Y-%m-%d %H:%M:%S"
   #    - "%Y-%m-%d %H:%M"
-  #    - "%Y-%m-%d"
+#      - "%Y-%m-%d"
 
   # ------------------   CUSTOMER INFORMATION   ------------------
   # Mapping Source Columns vs : Destination Columns
 
   Customers_SourceFile:
-    "/Users/cb-muneendra/Desktop/Leeto_Live_Customers_expected.xlsx"
+    "/Users/cb-muneendra/Downloads/SourceDataForQA/Customers.csv"
   Customers_DestinationFile:
-    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/Leeto_AllCustomers.xlsx"
+    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/Xpendy_DS3_AllCustomers.xlsx"
 
   Customers_KeyColumns:
     - "customer[id] : customer_id"
 
   Customers_Columns:
     - "customer[id] : customer_id"
-    - "customer[created_at] : customer_created_at"
+    - "billing_address[zip] : customer_billing_address_zip"
     - "customer[first_name] : customer_first_name"
     - "customer[last_name] : customer_last_name"
-    - "customer[company] : customer_company"
-    - "customer[preferred_currency_code] : customer_preferred_currency_code"
     - "customer[email] : customer_email"
-    - "customer[allow_direct_debit] : customer_allow_direct_debit"
+    - "customer[preferred_currency_code] : customer_preferred_currency_code"
     - "customer[auto_collection] : customer_auto_collection"
-    - "customer[taxability] : customer_taxability"
     - "customer[net_term_days] : customer_net_term_days"
-    - "customer[locale] : customer_locale"
+    - "customer[allow_direct_debit] : customer_allow_direct_debit"
+    - "customer[taxability] : customer_taxability"
+    - "payment_method[type]-skip : customer_payment_method_type"
+    - "payment_method[reference_id]-skip : customer_payment_method_reference_id"
     - "billing_address[first_name] : customer_billing_address_first_name"
     - "billing_address[last_name] : customer_billing_address_last_name"
     - "billing_address[email] : customer_billing_address_email"
-    - "billing_address[company] : customer_billing_address_company"
-    - "billing_address[line1] : customer_billing_address_line1"
+    - "billing_address[line3] : customer_billing_address_line3"
     - "billing_address[city] : customer_billing_address_city"
-    - "billing_address[state] : customer_billing_address_state"
-    - "billing_address[zip] : customer_billing_address_zip"
     - "billing_address[country] : customer_billing_address_country"
-    - "customer[cf_siren] : customer_cf_siren"
+    - "created_at : customer_created_at"
 
 
 
@@ -59,12 +56,12 @@ ChargeBee Automation Configuration:
   # Mapping Source Columns vs : Destination Columns
 
   Subscriptions_SourceFile:
-    "/Users/cb-muneendra/Desktop/dfsa_sub_DS1.xlsx"
+    "/Users/cb-muneendra/Downloads/SourceDataForQA/subscription_cb_template.csv"
 
 #    "/Users/cb-muneendra/Downloads/LiveMigration-Leeto - Subscriptions_new.csv"
 
   Subscriptions_DestinationFile:
-    "/Users/cb-muneendra/Desktop/dfsa_sub_DS2.xlsx"
+    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/Xpendy_DS3_AllSubscriptions.xlsx"
 #    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/Leeto_AllSubscriptions.xlsx"
 
   Subscriptions_KeyColumns:
@@ -72,31 +69,32 @@ ChargeBee Automation Configuration:
 
   Subscriptions_Columns:
     - "subscription[id] : subscription_id"
-    - "subscription[cf_contract_number_sf] : subscription_cf_contract_number_sf"
     - "customer[id] : customer_id"
-    - "subscription[cf_siren] : subscription_cf_siren"
-    - "subscription[cf_original_opportunity_sf] : subscription_cf_original_opportunity_sf"
     - "subscription[status] : subscription_status"
-    - "subscription[created_at] : subscription_created_at"
-    - "subscription[start_date] : subscription_start_date"
     - "subscription[started_at] : subscription_started_at"
     - "subscription[current_term_start] : subscription_current_term_start"
     - "subscription[current_term_end] : subscription_current_term_end"
     - "subscription[cancelled_at] : subscription_cancelled_at"
-    - "subscription_items[item_price_id][0] : item_price_id[0]"
+    - "currency : subscription_currency_code"
+    - "shipping_address[first_name] : subscription_shipping_address_first_name"
+    - "shipping_address[last_name] : subscription_shipping_address_last_name"
+    - "shipping_address[email] : subscription_shipping_address_email"
+    - "shipping_address[line1] : subscription_shipping_address_line1"
+    - "shipping_address[city] : subscription_shipping_address_city"
+    - "shipping_address[zip] : subscription_shipping_address_zip"
+    - "shipping_address[country] : subscription_shipping_address_country"
+    - "subscription_items[item_price_id][0] : item_item_price_id[0]"
     - "subscription_items[quantity][0] : item_quantity[0]"
     - "subscription_items[unit_price][0] : item_unit_price[0]"
-
-
 
   # ------------------   INVOICES INFORMATION   ------------------
   # Mapping Source Columns vs : Destination Columns
 
   Invoices_SourceFile:
-    "/Users/cb-muneendra/Desktop/stormboard_invoice_expected.xlsx"
+    "/Users/cb-muneendra/Downloads/SourceDataForQA/invoice_cb_template.csv"
 
   Invoices_DestinationFile:
-    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/stormboard_AllInvoices.xlsx"
+    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/Xpendy_DS3_AllInvoices.xlsx"
 
   Invoices_KeyColumns:
     - "invoice[id] : invoice_id"
@@ -108,22 +106,42 @@ ChargeBee Automation Configuration:
     - "invoice[subscription_id] : invoice_subscription_id"
     - "invoice[status] : invoice_status"
     - "invoice[date] : invoice_date"
+    - "invoice[price_type] : invoice_price_type"
     - "invoice[total] : invoice_total"
+    - "billing_address[zip] : invoice_billing_address_zip"
+    - "billing_address[country] : invoice_billing_address_country"
+    - "shipping_address[first_name] : invoice_shipping_address_first_name"
+    - "shipping_address[last_name] : invoice_shipping_address_last_name"
+    - "shipping_address[line2] : invoice_shipping_address_line2"
+    - "shipping_address[city] : invoice_shipping_address_city"
+    - "shipping_address[zip] : invoice_shipping_address_zip"
+    - "shipping_address[country] : invoice_shipping_address_country"
+    - "taxes[amount][0] : line_items_taxes_tax_amount[0]"
     - "line_items[entity_type][0] : line_items_entity_type[0]"
     - "line_items[entity_id][0] : line_items_entity_id[0]"
     - "line_items[description][0] : line_items_description[0]"
-    - "line_items[quantity][0] : line_items_quantity[0]"
     - "line_items[date_from][0] : line_items_date_from[0]"
     - "line_items[date_to][0] : line_items_date_to[0]"
+    - "line_items[quantity][0] : line_items_quantity[0]"
+    - "line_items[unit_amount][0] : line_items_unit_amount[0]"
     - "line_items[amount][0] : line_items_amount[0]"
-    - "payments[amount][0] : payments_txn_amount[0]"
-    - "payments[date][0] : payments_txn_date[0]"
+    - "line_items[entity_type][1] : line_items_entity_type[1]"
+    - "line_items[entity_id][1] : line_items_entity_id[1]"
+    - "line_items[description][1] : line_items_description[1]"
+    - "line_items[date_from][1] : line_items_date_from[1]"
+    - "line_items[date_to][1] : line_items_date_to[1]"
+    - "line_items[quantity][1] : line_items_quantity[1]"
+    - "line_items[unit_amount][1] : line_items_unit_amount[1]"
+    - "line_items[amount][1] : line_items_amount[1]"
+    - "line_items[tax_name][0] : line_items_taxes_tax_name[0]"
+    - "line_items[tax_amount][0] : line_items_tax_amount[0]"
 
   String_Columns:
     - "line_items[id] : Line_Item_Id"
     - "invoice[id] : Invoice_Number"
 
   Date_Columns:
+    - "created_at : customer_created_at"
     - "subscription[start_date] : subscription_start_date"
     - "invoice[date] : invoice[date]"
     - "line_items[date_from][0] : line_items[date_from][0]"
@@ -304,8 +322,11 @@ ChargeBee Automation Configuration:
     - "customer[email] : Email"
     - "customer[email] : customer_email"
     - "billing_address[email] : customer_billing_address_email"
+    - "shipping_address[email] : subscription_shipping_address_email"
 
   Zip_Columns:
+    - "billing_address[zip] : invoice_billing_address_zip"
+    - "shipping_address[zip] : invoice_shipping_address_zip"
     - "billing_address[zip] : customer_billing_address_zip"
     - "billing_address[zip] : Billing_Address_Zip"
     - "shipping_address[zip] : subscription_shipping_address_zip"

@@ -1,7 +1,7 @@
 # importing libraries
 import pandas as pd
 
-dataFile = '/Users/cb-muneendra/Desktop/leeto_Live_subscription_expected.xlsx'
+dataFile = '/Users/cb-muneendra/Downloads/SourceDataForQA/invoice_cb_template.csv'
 
 if dataFile.endswith('csv'):
     df = pd.read_csv(dataFile)
@@ -35,4 +35,6 @@ for col in list(df.head()):
     col = col.replace("_7", "[7]")
     col = col.replace("_8", "[8]")
     col = col.replace("_9", "[9]")
+    col = col.replace("billing_address_","customer_billing_address_")
+    col = col.replace("shipping_address_","subscription_shipping_address_")
     print(col)
