@@ -6,7 +6,7 @@ from SupportingFunctions import *
 
 
 def customer_prevalidation_check(src_df, columns):
-    # str_source_columns, str_destination_columns, = get_columns("String_Columns")
+    print("Currently we are in customers_prevalidation_check")
     str_source_columns, str_destination_columns, = get_columns("Customers_Columns")
     str_columns = str_source_columns + str_destination_columns
     date_source_columns, date_destination_columns, = get_columns("Date_Columns")
@@ -28,7 +28,7 @@ def customer_prevalidation_check(src_df, columns):
             try:
                 print("Converting ", col)
                 src_df[col] = pd.to_datetime(src_df[col])
-                src_df[col] = src_df[col].apply(lambda x: pd.Timestamp(x).strftime(dateformet))
+                src_df[col] = src_df[col].apply(lambda x: pd.Timestamp(x).strftime(dateformet) if pd.isna(x) != True else None)
             except Exception as e:
                 print("Exception for column : {} and exception is : {}".format(col, e))
 
@@ -80,7 +80,7 @@ def customer_prevalidation_check(src_df, columns):
         if ((col in list(src_df.columns.values)) and (col in str_columns)):
             try:
                 src_df[col] = src_df[col].str.lower()
-                src_df[col] = src_df[col].astype(str).apply(lambda x: x.replace('.0', ''))
+                src_df[col] = src_df[col].astype(str).apply(lambda x: x.replace(r'\.0$', '', regex=True))
             except Exception as e:
                 print("Exception for column : {} and exception is : {}".format(col, e))
 
