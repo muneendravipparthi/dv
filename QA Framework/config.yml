@@ -61,11 +61,8 @@ ChargeBee Automation Configuration:
   Subscriptions_SourceFile:
     "/Users/cb-muneendra/Desktop/dfsa_sub_DS1.xlsx"
 
-#    "/Users/cb-muneendra/Downloads/LiveMigration-Leeto - Subscriptions_new.csv"
-
   Subscriptions_DestinationFile:
     "/Users/cb-muneendra/Desktop/dfsa_sub_DS2.xlsx"
-#    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/Leeto_AllSubscriptions.xlsx"
 
   Subscriptions_KeyColumns:
     - "subscription[id] : subscription_id"
@@ -118,10 +115,6 @@ ChargeBee Automation Configuration:
     - "line_items[amount][0] : line_items_amount[0]"
     - "payments[amount][0] : payments_txn_amount[0]"
     - "payments[date][0] : payments_txn_date[0]"
-
-  String_Columns:
-    - "line_items[id] : Line_Item_Id"
-    - "invoice[id] : Invoice_Number"
 
   Date_Columns:
     - "subscription[start_date] : subscription_start_date"
