@@ -83,8 +83,10 @@ def invoices_prevalidation_check(src_df, columns):
         if ((col in list(src_df.columns.values)) and (col in str_columns)):
             try:
                 src_df[col] = src_df[col].str.lower()
-                src_df[col] = src_df[col].astype(str).apply(lambda x: x.replace(r'\.0$', '', regex=True))
+                # src_df[col] = src_df[col].astype(str).apply(lambda x: x.replace('.0', ''))
             except Exception as e:
                 print("Exception for column : {} and exception is : {}".format(col, e))
+
+    src_df = src_df.replace(r'\.0$', '', regex=True)
 
     return src_df
