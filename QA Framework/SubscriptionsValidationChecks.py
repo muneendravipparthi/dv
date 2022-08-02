@@ -20,7 +20,7 @@ def subscriptions_prevalidation_check(src_df, columns):
     zip_source_columns, zip_destination_columns, = get_columns("Zip_Columns")
     zip_columns = list(set(zip_source_columns + zip_destination_columns))
     dateformet = str(mapping_data['dateFormet'])
-    print("Currently we are in src_customer_prevalidation_check")
+    
 
     # Precondition for dates
     for col in tqdm(columns, desc='Precondition for dates'):
