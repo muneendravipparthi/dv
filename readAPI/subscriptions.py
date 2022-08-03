@@ -36,7 +36,7 @@ logger = logging.getLogger()
 # Now we are going to Set the threshold of logger to DEBUG
 logger.setLevel(logging.DEBUG)
 outputFile = "_DS3_AllSubscriptions.xlsx"
-RequireAPIExecution = False
+RequireAPIExecution = True
 
 
 class SubscriptionExecution:
@@ -169,7 +169,9 @@ class SubscriptionExecution:
 
                 centsToDollerlist = ["subscription_mrr", "items_unit_price[0]", "items_amount[0]",
                                      "items_unit_price[1]", "items_amount[1]", "items_unit_price[2]",
-                                     "items_amount[2]", "discount_amount[0]", "discount_amount[1]"]
+                                     "items_amount[2]", "discount_amount[0]", "discount_amount[1]", "item_unit_price[0]",
+                                     "item_amount[0]", "item_unit_price[1]", "item_amount[1]", "item_unit_price[2]",
+                                     "item_amount[2]"]
 
                 for col in tqdm(centsToDollerlist, desc='centsToDollerlist'):
                     if col in list(centsToDoller.head()):

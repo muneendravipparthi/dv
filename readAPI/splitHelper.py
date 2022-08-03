@@ -271,7 +271,7 @@ class SplitHelper:
         return dfpayment
 
     def invoice_discount_split(self, dfdata):
-        df = dfdata[["invoice_id", "invoice_line_items_discounts"]]
+        df = dfdata[["invoice_id", "invoice_line_item_discounts"]]
         dfs = pd.DataFrame
         dfl = pd.DataFrame
         df['invoice_line_item_discounts'] = df['invoice_line_item_discounts'].replace("'", '"', regex=True)

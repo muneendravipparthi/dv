@@ -36,7 +36,7 @@ logger = logging.getLogger()
 # Now we are going to Set the threshold of logger to DEBUG
 logger.setLevel(logging.DEBUG)
 outputFile = "_DS3_AllInvoices.xlsx"
-RequireAPIExecution = True
+RequireAPIExecution = False
 
 
 class InvoiceExecution:
@@ -139,7 +139,8 @@ class InvoiceExecution:
                                      "line_items_amount[5]", "line_items_tax_amount[5]", "line_items_unit_amount[6]",
                                      "line_items_amount[6]", "line_items_tax_amount[6]", "line_items_unit_amount[7]",
                                      "line_items_amount[7]", "line_items_tax_amount[7]", "applied_amount", "txn_amount",
-                                     "payments_txn_amount[0]", "payments_txn_amount[1]"]
+                                     "payments_txn_amount[0]", "payments_txn_amount[1]", "discounts_discount_amount[0]",
+                                     "discounts_discount_amount[1]", "discounts_discount_amount[2]"]
                 for col in tqdm(centsToDollerlist, desc='centsToDollerlist'):
                     if col in list(tdf.head()):
                         centsToDoller[col] = centsToDoller[col].div(100)
