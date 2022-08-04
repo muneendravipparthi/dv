@@ -1,9 +1,9 @@
 ChargeBee Automation Configuration:
   Site: 'test'
-  ClientName: 'stormboard'
+  ClientName: 'Aiwyn'
 
-  Customers_Validation: False
-  Subscriptions_Validation: True
+  Customers_Validation: True
+  Subscriptions_Validation: False
   Invoices_Validation: False
 
   IsRecurly: False
@@ -22,23 +22,19 @@ ChargeBee Automation Configuration:
   # Mapping Source Columns vs : Destination Columns
 
   Customers_SourceFile:
-    "/Users/cb-muneendra/Desktop/Leeto_Live_Customers_expected.xlsx"
+    "/Users/cb-muneendra/Downloads/Anduinai_Cust_Test_CB_Template.xlsx"
   Customers_DestinationFile:
-    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/Leeto_AllCustomers.xlsx"
+    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/Aiwyn_DS3_AllCustomers.xlsx"
 
   Customers_KeyColumns:
     - "customer[id] : customer_id"
 
   Customers_Columns:
     - "customer[id] : customer_id"
-    - "customer[created_at] : customer_created_at"
-    - "customer[first_name] : customer_first_name"
-    - "customer[last_name] : customer_last_name"
     - "customer[company] : customer_company"
-    - "customer[preferred_currency_code] : customer_preferred_currency_code"
-    - "customer[email] : customer_email"
     - "customer[allow_direct_debit] : customer_allow_direct_debit"
     - "customer[auto_collection] : customer_auto_collection"
+    - "customer[offline_payment_method] : customer_offline_payment_method"
     - "customer[taxability] : customer_taxability"
     - "customer[net_term_days] : customer_net_term_days"
     - "customer[locale] : customer_locale"
@@ -46,12 +42,14 @@ ChargeBee Automation Configuration:
     - "billing_address[last_name] : customer_billing_address_last_name"
     - "billing_address[email] : customer_billing_address_email"
     - "billing_address[company] : customer_billing_address_company"
+    - "billing_address[phone] : customer_billing_address_phone"
     - "billing_address[line1] : customer_billing_address_line1"
     - "billing_address[city] : customer_billing_address_city"
+    - "billing_address[state_code] : customer_billing_address_state_code"
     - "billing_address[state] : customer_billing_address_state"
     - "billing_address[zip] : customer_billing_address_zip"
     - "billing_address[country] : customer_billing_address_country"
-    - "customer[cf_siren] : customer_cf_siren"
+    - "custom_field : customer_cf_qbo_id"
 
 
 
