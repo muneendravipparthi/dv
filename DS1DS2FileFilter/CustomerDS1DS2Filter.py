@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 import os
 from jproperties import Properties
 
@@ -19,7 +20,7 @@ ds2File = '/Users/cb-muneendra/Downloads/customer DS2/customer DS2.csv'
 #               "customer[preferred_currency_code]", "customer[meta_data]", "billing_address[first_name]",
 #               "billing_address[last_name]", "billing_address[line1]", "billing_address[state]", "billing_address[zip]",
 #               "billing_address[country]"]
-Ds1ColList = ["id", "created", "name", "email", "phone", "currency", "metadata", "name", "shipping.address.line1", "address.postal_code", "shipping.address.country"]
+Ds1ColList = ["id", "created", "name", "email", "phone", "currency", "metadata", "name", "address.line1", "address.postal_code", "address.country"]
 Ds2ColList = ["customer[id]", "customer[created_at]", "customer[first_name]", "customer[last_name]", "customer[email]", "customer[phone]", "customer[preferred_currency_code]", "customer[meta_data]", "billing_address[first_name]", "billing_address[last_name]", "billing_address[line1]", "billing_address[zip]", "billing_address[country]"]
 # Ds1ColList = ["id", "created", "name", "email", "currency", "metadata", "name", "address.line1", "address.line2",
 #               "address.city", "address.state", "address.postal_code", "address.country"]
@@ -51,9 +52,25 @@ if ds2File.endswith('csv'):
 elif ds2File.endswith('xlsx'):
     df2 = pd.read_excel(ds2File, sheet_name="DS1_batch1")
 df2 = df2[Ds2ColList]
-df2['customer[name]'] = df2["customer[first_name]"].str.lower() + " " + df2["customer[last_name]"].str.lower()
-df2['billing_address[name]'] = df2["billing_address[first_name]"].str.lower() + " " + df2[
-    "billing_address[last_name]"].str.lower()
+df2["customer[first_name]"] = df2["customer[first_name]"].replace(r'^\s+$', np.nan, regex=True)
+df2["customer[first_name]"] = df2["customer[first_name]"].replace(np.nan , "_!_", regex=True)
+df2["customer[last_name]"] = df2["customer[last_name]"].replace(r'^\s+$', np.nan, regex=True)
+df2["customer[last_name]"] = df2["customer[last_name]"].replace(np.nan , "_!_", regex=True)
+df2["billing_address[first_name]"] = df2["billing_address[first_name]"].replace(r'^\s+$', np.nan, regex=True)
+df2["billing_address[first_name]"] = df2["billing_address[first_name]"].replace(np.nan , "_!_", regex=True)
+df2["billing_address[last_name]"] = df2["billing_address[last_name]"].replace(r'^\s+$', np.nan, regex=True)
+df2["billing_address[last_name]"] = df2["billing_address[last_name]"].replace(np.nan , "_!_", regex=True)
+
+df2['customer[name]'] = df2["customer[first_name]"]+ " " + df2["customer[last_name]"]
+df2['customer[name]'] = df2['customer[name]'].replace('_!_', "", regex=True)
+df2['customer[name]']  = df2['customer[name]'].str.lower()
+df2['customer[name]']  = df2['customer[name]'].str.strip()
+
+df2['billing_address[name]'] = df2["billing_address[first_name]"] + " " + df2["billing_address[last_name]"]
+df2["billing_address[name]"] = df2["billing_address[name]"].replace('_!_', "", regex=True)
+df2['billing_address[name]'] = df2['billing_address[name]'].str.lower()
+df2['billing_address[name]'] = df2['billing_address[name]'].str.strip()
+
 # Ds2UpdatedColList = ["customer[id]", "customer[created_at]", "customer[name]", "customer[email]",
 #                      "customer[preferred_currency_code]", "customer[meta_data]", "customer[name]",
 #                      "billing_address[line1]", "billing_address[state]", "billing_address[zip]",

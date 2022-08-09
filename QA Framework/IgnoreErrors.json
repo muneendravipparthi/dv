@@ -36,7 +36,9 @@
     "None --> BLANK": "",
     "none --> None": "",
     "charge_automatically --> on": "on",
-    "payment due --> payment_due": "payment_due"
+    "payment due --> payment_due": "payment_due",
+    "none --> BLANK": "",
+    "canceled --> cancelled" : "cancelled"
   },
   "withRegEx": {
     "nan [-->]": "BLANK -",
