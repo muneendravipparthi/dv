@@ -1,12 +1,12 @@
 # importing libraries
 import pandas as pd
 
-dataFile = '/Users/cb-muneendra/Desktop/leeto_Live_subscription_expected.xlsx'
+dataFile = '/Users/cb-muneendra/Downloads/subscription DS2/subscription DS2.csv'
 
 if dataFile.endswith('csv'):
     df = pd.read_csv(dataFile)
 elif dataFile.endswith('xlsx'):
-    df = pd.read_excel(dataFile)
+    df = pd.read_excel(dataFile, sheet_name = 'DS1_batch1')
 columnsData = list(df.columns.values)
 dic = df.count()
 print(dic)
