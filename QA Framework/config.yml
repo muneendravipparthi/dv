@@ -2,7 +2,7 @@ ChargeBee Automation Configuration:
   Site: 'test'
   ClientName: 'bookkeeper360'
 
-  Customers_Validation: True
+  Customers_Validation: False
   Subscriptions_Validation: True
   Invoices_Validation: False
 
@@ -14,9 +14,9 @@ ChargeBee Automation Configuration:
       - DS1vsDS2
 #    - DS2vsDS3
   dateFormet:
-    - "%Y-%m-%d %H:%M:%S"
+#    - "%Y-%m-%d %H:%M:%S"
   #    - "%Y-%m-%d %H:%M"
-  #    - "%Y-%m-%d"
+      - "%Y-%m-%d"
 
   # ------------------   CUSTOMER INFORMATION   ------------------
   # Mapping Source Columns vs : Destination Columns
@@ -60,7 +60,7 @@ ChargeBee Automation Configuration:
     - "customer : customer[id]"
     - "id : subscription[id]"
     - "created : subscription[created_at]"
-    - "items.data[0].plan.id : subscription_items[item_price_id][0]"
+    - "items.data[0].plan.id : subscription[plan_id]org"
     - "items.data[0].quantity : subscription_items[quantity][0]"
     - "items.data[0].price.unit_amount : subscription_items[unit_price][0]"
     - "status : subscription[status]"
@@ -71,7 +71,7 @@ ChargeBee Automation Configuration:
     - "current_period_end : subscription[current_term_end]"
     - "canceled_at : subscription[cancelled_at]"
     - "collection_method : subscription[auto_collection]"
-    - "discount.coupon.id : coupon_ids[0]"
+    - "discount.coupon.id : coupon_ids[0]org"
     - "metadata : subscription[meta_data]"
 
 
