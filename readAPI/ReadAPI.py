@@ -37,11 +37,13 @@ class ReadAPIExecution:
         # my_datetime = datetime.fromtimestamp(epochtimestamp, tz=pytz.timezone("UTC"))
         # my_datetime = datetime.fromtimestamp(epochtimestamp)
         modified = my_datetime.strftime(datetimeformat)
-        if modified.endswith(':59') and addonesecond == "True":
+        if modified.endswith('59:59') and addonesecond == "True":
             expected_date = datetime.strptime(modified, '%Y-%m-%d %H:%M:%S')
             expected_date += timedelta(seconds=1)
             modified = expected_date.strftime(datetimeformat)
-        return modified
+            return modified
+        else:
+            return modified
 
     def getDataFromAPI(self, url, user, logger):
         page = 0
