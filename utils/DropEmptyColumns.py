@@ -1,7 +1,7 @@
 # importing libraries
 import pandas as pd
 
-dataFile = '/Users/cb-muneendra/Desktop/leeto_Live_subscription_expected.xlsx'
+dataFile = '/Users/cb-muneendra/Downloads/Test Aug 8 Top Echelon  TAM - LMH - QA for subs.csv'
 
 if dataFile.endswith('csv'):
     df = pd.read_csv(dataFile)
