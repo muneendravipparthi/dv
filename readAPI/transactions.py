@@ -34,7 +34,7 @@ logger = logging.getLogger()
 
 # Now we are going to Set the threshold of logger to DEBUG
 logger.setLevel(logging.DEBUG)
-outputFile = "_AllTransactions.xlsx"
+outputFile = "_DS3_AllTransactions.xlsx"
 
 class TransactionExecution:
     def getAllTransactions(self):

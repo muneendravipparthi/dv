@@ -3,8 +3,8 @@ ChargeBee Automation Configuration:
   ClientName: 'DFSArmy'
 
   Customers_Validation: False
-  Subscriptions_Validation: True
-  Invoices_Validation: False
+  Subscriptions_Validation: False
+  Invoices_Validation: True
 
   IsRecurly: False
   IsRecurlyDS1vsDS2: False
@@ -71,11 +71,8 @@ ChargeBee Automation Configuration:
   Subscriptions_SourceFile:
     "/Users/cb-muneendra/Desktop/dfsa_sub_DS1.xlsx"
 
-#    "/Users/cb-muneendra/Downloads/LiveMigration-Leeto - Subscriptions_new.csv"
-
   Subscriptions_DestinationFile:
     "/Users/cb-muneendra/Desktop/dfsa_sub_DS2.xlsx"
-#    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/Leeto_AllSubscriptions.xlsx"
 
 
   Subscriptions_KeyColumns:
@@ -121,37 +118,91 @@ ChargeBee Automation Configuration:
   # Mapping Source Columns vs : Destination Columns
 
   Invoices_SourceFile:
-    "/Users/cb-muneendra/Desktop/stormboard_invoice_expected.xlsx"
+#    "/Users/cb-muneendra/Downloads/stripe_data/stripe_data.xlsx"
+    "/Users/cb-muneendra/Downloads/DSSA_DS2_Invoice/DSSA_DS2_Invoice.csv"
 
   Invoices_DestinationFile:
-    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/stormboard_AllInvoices.xlsx"
+#    "/Users/cb-muneendra/Downloads/DSSA_DS2_Invoice/DSSA_DS2_Invoice.csv"
+    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/dfsarmy_DS3_AllInvoices.xlsx"
 
   Invoices_KeyColumns:
+#    - "id : invoice[id]"
     - "invoice[id] : invoice_id"
 
   Invoices_Columns:
+#    - "id : invoice[id]"
+#    - "Batch : Batch"
+#    - "customer_email : billing_address[email]"
+#    - "customer_name : billing_address[first_name]"
+#    - "customer_phone : billing_address[phone]"
+#    - "total_discount_amounts[0].amount : discounts[amount][0]"
+#    - "discount.coupon.id : discounts[entity_id][0]"
+#    - "currency : invoice[currency_code]"
+#    - "customer : invoice[customer_id]"
+#    - "created : invoice[date]"
+#    - "status : invoice[status]"
+#    - "subscription : invoice[subscription_id]"
+#    - "total : invoice[total]"
+#    - "lines.data[0].amount : line_items[amount][0]"
+#    - "lines.data[0].period.start : line_items[date_from][0]"
+#    - "lines.data[0].period.end : line_items[date_to][0]"
+#    - "lines.data[0].description : line_items[description][0]"
+#    - "lines.data[0].plan.id : line_items[entity_id][0]"
+#    - "lines.data[0].id : line_items[id][0]"
+#    - "lines.data[0].quantity : line_items[quantity][0]"
+#    - "amount_paid : payments[amount][0]"
+#    - "status_transitions.paid_at : payments[date][0]"
+#    - "default_payment_method : payments[payment_method][0]"
+#    - "lines.data[1].amount : line_items[amount][1]"
+#    - "lines.data[1].period.start : line_items[date_from][1]"
+#    - "lines.data[1].period.end : line_items[date_to][1]"
+#    - "lines.data[1].description : line_items[description][1]"
+#    - "lines.data[1].plan.id : line_items[entity_id][1]"
+#    - "lines.data[1].id : line_items[id][1]"
+#    - "lines.data[1].quantity : line_items[quantity][1]"
+#    - "lines.data[1].discount_amounts[0].amount : line_items[item_level_discount1_amount][0]"
+#    - "lines.data[1].discount_amounts[0].discount : line_items[item_level_discount1_entity_id][0]"
+
     - "invoice[id] : invoice_id"
+    - "Batch : Batch"
     - "invoice[currency_code] : invoice_currency_code"
     - "invoice[customer_id] : invoice_customer_id"
-    - "invoice[subscription_id] : invoice_subscription_id"
-    - "invoice[status] : invoice_status"
     - "invoice[date] : invoice_date"
+    - "invoice[status] : invoice_status"
+    - "invoice[subscription_id] : invoice_subscription_id"
     - "invoice[total] : invoice_total"
-    - "line_items[entity_type][0] : line_items_entity_type[0]"
-    - "line_items[entity_id][0] : line_items_entity_id[0]"
-    - "line_items[description][0] : line_items_description[0]"
-    - "line_items[quantity][0] : line_items_quantity[0]"
+    - "line_items[amount][0] : line_items_amount[0]"
     - "line_items[date_from][0] : line_items_date_from[0]"
     - "line_items[date_to][0] : line_items_date_to[0]"
-    - "line_items[amount][0] : line_items_amount[0]"
+    - "line_items[description][0] : line_items_description[0]"
+    - "line_items[entity_id][0] : line_items_entity_id[0]"
+    - "line_items[entity_type][0] : line_items_entity_type[0]"
+    - "line_items[id][0] : line_items_id[0]"
+    - "line_items[quantity][0] : line_items_quantity[0]"
     - "payments[amount][0] : payments_txn_amount[0]"
     - "payments[date][0] : payments_txn_date[0]"
-
-  String_Columns:
-    - "line_items[id] : Line_Item_Id"
-    - "invoice[id] : Invoice_Number"
+    - "line_items[amount][1] : line_items_amount[1]"
+    - "line_items[date_from][1] : line_items_date_from[1]"
+    - "line_items[date_to][1] : line_items_date_to[1]"
+    - "line_items[description][1] : line_items_description[1]"
+    - "line_items[entity_id][1] : line_items_entity_id[1]"
+    - "line_items[entity_type][1] : line_items_entity_type[1]"
+    - "line_items[id][1] : line_items_id[1]"
+    - "line_items[quantity][1] : line_items_quantity[1]"
+    - "line_items[item_level_discount1_amount][0] : line_items_item_level_discount_amount[0]"
+    - "line_items[item_level_discount1_entity_id][0] : discounts_entity_id[0]"
 
   Date_Columns:
+    - "line_items[date_from][0] : line_items_date_from[0]"
+    - "line_items[date_to][0] : line_items_date_to[0]"
+    - "line_items[date_from][1] : line_items_date_from[1]"
+    - "line_items[date_to][1] : line_items_date_to[1]"
+    - "created : invoice[date]"
+    - "lines.data[0].period.start : line_items[date_from][0]"
+    - "lines.data[0].period.end : line_items[date_to][0]"
+    - "status_transitions.paid_at : payments[date][0]"
+    - "lines.data[1].period.start : line_items[date_from][1]"
+    - "lines.data[1].period.end : line_items[date_to][1]"
     - "created : subscription[created_at]"
     - "trial_start : subscription[trial_start]"
     - "trial_end : subscription[trial_end]"
