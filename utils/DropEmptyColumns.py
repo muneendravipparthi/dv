@@ -1,7 +1,8 @@
 # importing libraries
 import pandas as pd
 
-dataFile = '/Users/cb-muneendra/Desktop/leeto_Live_subscription_expected.xlsx'
+dataFile = '/Users/cb-muneendra/Desktop/FFC_Subscription_DS2.xlsx'
+
 
 if dataFile.endswith('csv'):
     df = pd.read_csv(dataFile)
