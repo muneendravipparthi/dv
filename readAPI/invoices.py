@@ -106,6 +106,17 @@ class InvoiceExecution:
                 logger.error("exception at invoice_line_item_discounts:" + str(e))
                 logger.exception(e)
 
+            try:
+                if "invoice_discounts" in list(df_nested_list.head()):
+                    df_splitdiscounts = pd.read_excel(excelDir + '/' + configs.get("clientName").data + outputFile)
+                    df_splitdiscounts = SplitHelper.invoice_discount_split(self, df_splitdiscounts)
+                    df_splitdiscounts.to_excel(excelDir + '/' + configs.get("clientName").data + outputFile,
+                                               index=False)
+            except Exception as e:
+                logger.info(e)
+                logger.error("exception at invoice_line_item_discounts:" + str(e))
+                logger.exception(e)
+
             tdf = pd.read_excel(excelDir + '/' + configs.get("clientName").data + outputFile)
             dateconvertioncollist = ["invoice_date", "invoice_due_date", "invoice_paid_at", "invoice_updated_at",
                                      "invoice_generated_at", "line_items_date_from[0]", "line_items_date_to[0]",
