@@ -308,3 +308,43 @@ class SplitHelper:
                 dfs = dfl
         dfpayment = pd.merge(dfdata, dfs, how='inner', left_on=['invoice_id'], right_on=['invoice_id'])
         return dfpayment
+
+    def invoice_discounts_split(self, dfdata):
+        df = dfdata[["invoice_id", "invoice_discounts"]]
+        dfs = pd.DataFrame
+        dfl = pd.DataFrame
+        df['invoice_discounts'] = df['invoice_discounts'].replace("'", '"', regex=True)
+        df['invoice_discounts'] = df['invoice_discounts'].replace(": False,", ': "False",',
+                                                                                      regex=True)
+        df['invoice_discounts'] = df['invoice_discounts'].replace(": True,", ': "True",',
+                                                                                      regex=True)
+        for i, j in tqdm(zip(df['invoice_id'], df['invoice_discounts']), total=len(df['invoice_id']),
+                         desc='invoice_discounts'):
+            logger.info("splitting for '{}' invoice id and the date is :{}".format(i, j))
+            if not pd.isna(j) and j != '[]':
+                data = json.loads(j)
+                for k in range(len(data)):
+                    prefix = "discounts_"
+                    dfli = pd.json_normalize(data[k])
+                    sufix = "[" + str(k) + "]"
+                    headers = list(dfli.head())
+                    newheaders = {}
+                    for ch in headers:
+                        newheaders[ch] = prefix + ch + sufix
+                    dfli.rename(columns=newheaders, inplace=True)
+                    dfli['invoice_id'] = [i]
+                    if k == 0:
+                        dfl = dfli
+                    else:
+                        dfl = pd.merge(dfl, dfli, left_on="invoice_id", right_on="invoice_id", how='inner')
+                        # dfl = dfl.append(dfli)
+            else:
+                wdata = {'invoice_id': [i]}
+                dfl = pd.DataFrame(wdata)
+            try:
+                dfs = dfs.append(dfl)
+            except:
+                dfs = dfl
+        dfdiscounts = pd.merge(dfdata, dfs, how='inner', left_on=['invoice_id'], right_on=['invoice_id'])
+        return dfdiscounts
+

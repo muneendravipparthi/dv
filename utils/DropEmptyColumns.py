@@ -1,12 +1,12 @@
 # importing libraries
 import pandas as pd
 
-dataFile = '/Users/cb-muneendra/Downloads/customer DS2/customer DS2.csv'
+dataFile = '/Users/cb-muneendra/Desktop/Bookkeeper360_DS2_Invoice.xlsx'
 
 if dataFile.endswith('csv'):
     df = pd.read_csv(dataFile)
 elif dataFile.endswith('xlsx'):
-    df = pd.read_excel(dataFile, sheet_name = 'DS1_batch1')
+    df = pd.read_excel(dataFile)
 columnsData = list(df.columns.values)
 dic = df.count()
 print(dic)
