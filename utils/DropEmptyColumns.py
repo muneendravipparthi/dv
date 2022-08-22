@@ -1,7 +1,7 @@
 # importing libraries
 import pandas as pd
 
-dataFile = '/Users/cb-muneendra/Desktop/leeto_Live_subscription_expected.xlsx'
+dataFile = '/Users/cb-muneendra/Desktop/EqipmentShare_DS2_Subscriptions.xlsx'
 
 if dataFile.endswith('csv'):
     df = pd.read_csv(dataFile)
@@ -11,9 +11,9 @@ columnsData = list(df.columns.values)
 dic = df.count()
 print(dic)
 
-for col in columnsData:
-    if dic.get(col) <= 0:
-        df = df.drop(col, axis=1)
+# for col in columnsData:
+#     if dic.get(col) <= 0:
+#         df = df.drop(col, axis=1)
 # print(list(df.head()))
 # df.to_excel("Inv_liv1.xlsx", index=False)
 
