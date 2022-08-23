@@ -22,7 +22,31 @@ ChargeBee Automation Configuration:
   # Mapping Source Columns vs : Destination Columns
 
   Customers_SourceFile:
-    "/Users/cb-muneendra/Downloads/nlziet-customers/nlziet-customers.csv"
+#    "/Users/cb-muneendra/Downloads/nlziet-customers/nlziet-customers.csv"
+#    "/Users/cb-muneendra/Downloads/nlziet-customers/customers-23 (1).csv"
+#    "/Users/cb-muneendra/Downloads/nlziet-customers/customers-15 (1).csv"
+#    "/Users/cb-muneendra/Downloads/nlziet-customers/customers-6 (1).csv"
+#    "/Users/cb-muneendra/Downloads/nlziet-customers/customers-14 (1).csv"
+#    "/Users/cb-muneendra/Downloads/nlziet-customers/customers-22 (1).csv"
+#    "/Users/cb-muneendra/Downloads/nlziet-customers/customers-16 (1).csv"
+#    "/Users/cb-muneendra/Downloads/nlziet-customers/customers-5 (1).csv"
+#    "/Users/cb-muneendra/Downloads/nlziet-customers/customers-20 (1).csv"
+#    "/Users/cb-muneendra/Downloads/nlziet-customers/customers-8 (2).csv"
+#    "/Users/cb-muneendra/Downloads/nlziet-customers/customers-21 (1).csv"
+#    "/Users/cb-muneendra/Downloads/nlziet-customers/customers-17 (1).csv"
+#    "/Users/cb-muneendra/Downloads/nlziet-customers/customers-1 (2).csv"
+#    "/Users/cb-muneendra/Downloads/nlziet-customers/customers-12 (1).csv"
+#    "/Users/cb-muneendra/Downloads/nlziet-customers/customers-4 (2).csv"
+#    "/Users/cb-muneendra/Downloads/nlziet-customers/customers-9 (1).csv"
+#    "/Users/cb-muneendra/Downloads/nlziet-customers/customers-0 (1).csv"
+#    "/Users/cb-muneendra/Downloads/nlziet-customers/customers-13 (1).csv"
+#    "/Users/cb-muneendra/Downloads/nlziet-customers/customers-18 (1).csv"
+#    "/Users/cb-muneendra/Downloads/nlziet-customers/customers-2 (1).csv"
+#    "/Users/cb-muneendra/Downloads/nlziet-customers/customers-7 (2).csv"
+#    "/Users/cb-muneendra/Downloads/nlziet-customers/customers-11 (1).csv"
+#    "/Users/cb-muneendra/Downloads/nlziet-customers/customers-3 (1).csv"
+#    "/Users/cb-muneendra/Downloads/nlziet-customers/customers-10 (1).csv"
+    "/Users/cb-muneendra/Downloads/nlziet-customers/customers-19 (1).csv"
   Customers_DestinationFile:
     "/Users/cb-muneendra/Downloads/customers_nlzietdemo-test_23_Aug_2022_07_15_07/Customers.csv"
 
