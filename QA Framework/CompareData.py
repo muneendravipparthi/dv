@@ -26,6 +26,9 @@ def filterData(src_df, des_df, src_key, des_key):
         des_df[des_key] = des_df[des_key].str.lower()
     except Exception as e:
         print("exception in :", e)
+    src_df.to_excel("src_df.xlsx")
+    des_df.to_excel("des_df.xlsx")
+
     srcmerged = pd.merge(src_df, des_df, how='inner', left_on=[src_key],
                          right_on=[des_key], suffixes=('', '_DROP')).filter(regex='^(?!.*_DROP)')
     desmerged = pd.merge(des_df, src_df, how='inner', left_on=[des_key],
@@ -42,8 +45,9 @@ def filterData(src_df, des_df, src_key, des_key):
     # desmerged = pd.merge(des_df, src_df,
     #                      how='inner', left_on=[des_key],
     #                      right_on=[src_key])
-    sorcedf = srcmerged[srchead]
-    sorcedf.to_excel("testingsorcedf.xlsx")
-    destdf = desmerged[deshead]
-    destdf.to_excel("testingdestdf.xlsx")
-    return sorcedf, destdf
+    # sorcedf = srcmerged[srchead]
+    # sorcedf.to_excel("testingsorcedf.xlsx")
+    # destdf = desmerged[deshead]
+    # destdf.to_excel("testingdestdf.xlsx")
+    # return sorcedf, destdf
+    return src_df, des_df
