@@ -2,9 +2,9 @@ ChargeBee Automation Configuration:
   Site: 'Test'
   ClientName: 'nlziet'
 
-  Customers_Validation: True
+  Customers_Validation: False
   Subscriptions_Validation: False
-  Invoices_Validation: False
+  Invoices_Validation: True
 
   IsRecurly: False
   IsRecurlyDS1vsDS2: False
@@ -14,8 +14,8 @@ ChargeBee Automation Configuration:
     #    - DS1vsDS2
     - DS2vsDS3
   dateFormet:
-    - "%Y-%m-%d %H:%M:%S"
-  #    - "%Y-%m-%d %H:%M"
+#    - "%Y-%m-%d %H:%M:%S"
+      - "%Y-%m-%d %H:%M"
   #    - "%Y-%m-%d"
 
   # ------------------   CUSTOMER INFORMATION   ------------------
@@ -23,30 +23,14 @@ ChargeBee Automation Configuration:
 
   Customers_SourceFile:
 #    "/Users/cb-muneendra/Downloads/nlziet-customers/nlziet-customers.csv"
-#    "/Users/cb-muneendra/Downloads/nlziet-customers/customers-23 (1).csv"
-#    "/Users/cb-muneendra/Downloads/nlziet-customers/customers-15 (1).csv"
-#    "/Users/cb-muneendra/Downloads/nlziet-customers/customers-6 (1).csv"
-#    "/Users/cb-muneendra/Downloads/nlziet-customers/customers-14 (1).csv"
-#    "/Users/cb-muneendra/Downloads/nlziet-customers/customers-22 (1).csv"
 #    "/Users/cb-muneendra/Downloads/nlziet-customers/customers-16 (1).csv"
 #    "/Users/cb-muneendra/Downloads/nlziet-customers/customers-5 (1).csv"
-#    "/Users/cb-muneendra/Downloads/nlziet-customers/customers-20 (1).csv"
-#    "/Users/cb-muneendra/Downloads/nlziet-customers/customers-8 (2).csv"
-#    "/Users/cb-muneendra/Downloads/nlziet-customers/customers-21 (1).csv"
-#    "/Users/cb-muneendra/Downloads/nlziet-customers/customers-17 (1).csv"
-#    "/Users/cb-muneendra/Downloads/nlziet-customers/customers-1 (2).csv"
-#    "/Users/cb-muneendra/Downloads/nlziet-customers/customers-12 (1).csv"
-#    "/Users/cb-muneendra/Downloads/nlziet-customers/customers-4 (2).csv"
-#    "/Users/cb-muneendra/Downloads/nlziet-customers/customers-9 (1).csv"
-#    "/Users/cb-muneendra/Downloads/nlziet-customers/customers-0 (1).csv"
 #    "/Users/cb-muneendra/Downloads/nlziet-customers/customers-13 (1).csv"
-#    "/Users/cb-muneendra/Downloads/nlziet-customers/customers-18 (1).csv"
-#    "/Users/cb-muneendra/Downloads/nlziet-customers/customers-2 (1).csv"
 #    "/Users/cb-muneendra/Downloads/nlziet-customers/customers-7 (2).csv"
 #    "/Users/cb-muneendra/Downloads/nlziet-customers/customers-11 (1).csv"
 #    "/Users/cb-muneendra/Downloads/nlziet-customers/customers-3 (1).csv"
-#    "/Users/cb-muneendra/Downloads/nlziet-customers/customers-10 (1).csv"
-    "/Users/cb-muneendra/Downloads/nlziet-customers/customers-19 (1).csv"
+    "/Users/cb-muneendra/Downloads/nlziet-customers/customers-10 (1).csv"
+#    "/Users/cb-muneendra/Downloads/nlziet-customers/customers-19 (1).csv"
   Customers_DestinationFile:
     "/Users/cb-muneendra/Downloads/customers_nlzietdemo-test_23_Aug_2022_07_15_07/Customers.csv"
 
@@ -82,7 +66,7 @@ ChargeBee Automation Configuration:
   Subscriptions_Columns:
     - "subscription[id] : subscription_id"
     - "customer[id] : customer_id"
-    - "subscription[status] : subscription_status"
+    gf- "subscription[status] : subscription_status"
     - "subscription[trial_start] : subscription_trial_start"
     - "subscription[trial_end] : subscription_trial_end"
     - "subscription[started_at] : subscription_started_at"
@@ -97,13 +81,24 @@ ChargeBee Automation Configuration:
   # Mapping Source Columns vs : Destination Columns
 
   Invoices_SourceFile:
-    "/Users/cb-muneendra/Desktop/stormboard_invoice_expected.xlsx"
+#      "/Users/cb-muneendra/Downloads/nlziet-invoices/invoices-6 (1).csv"
+#      "/Users/cb-muneendra/Downloads/nlziet-invoices/invoices-10 (2).csv"
+#      "/Users/cb-muneendra/Downloads/nlziet-invoices/invoices-4 (1).csv"
+#      "/Users/cb-muneendra/Downloads/nlziet-invoices/invoices-0 (2).csv"
+#      "/Users/cb-muneendra/Downloads/nlziet-invoices/invoices-5 (2).csv"
+#      "/Users/cb-muneendra/Downloads/nlziet-invoices/invoices-9 (1).csv"
+#      "/Users/cb-muneendra/Downloads/nlziet-invoices/invoices-8 (1).csv"
+#      "/Users/cb-muneendra/Downloads/nlziet-invoices/invoices-1 (1).csv"
+#      "/Users/cb-muneendra/Downloads/nlziet-invoices/invoices-3 (1).csv"
+#      "/Users/cb-muneendra/Downloads/nlziet-invoices/invoices-7 (2).csv"
+      "/Users/cb-muneendra/Downloads/nlziet-invoices/invoices-2 (1).csv"
 
   Invoices_DestinationFile:
-    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/stormboard_AllInvoices.xlsx"
+    "/Users/cb-muneendra/Git/cb_data_validation/utils/converted_nlziet_DS3_AllInvoices.xlsx"
 
   Invoices_KeyColumns:
     - "invoice[id] : invoice_id"
+#    - "invoice[id] : Invoice_Number"
 
   Invoices_Columns:
     - "invoice[id] : invoice_id"
@@ -112,18 +107,33 @@ ChargeBee Automation Configuration:
     - "invoice[subscription_id] : invoice_subscription_id"
     - "invoice[status] : invoice_status"
     - "invoice[date] : invoice_date"
+    - "invoice[price_type] : invoice_price_type"
     - "invoice[total] : invoice_total"
     - "line_items[entity_type][0] : line_items_entity_type[0]"
     - "line_items[entity_id][0] : line_items_entity_id[0]"
     - "line_items[description][0] : line_items_description[0]"
-    - "line_items[quantity][0] : line_items_quantity[0]"
     - "line_items[date_from][0] : line_items_date_from[0]"
     - "line_items[date_to][0] : line_items_date_to[0]"
     - "line_items[amount][0] : line_items_amount[0]"
-    - "payments[amount][0] : payments_txn_amount[0]"
-    - "payments[date][0] : payments_txn_date[0]"
+    - "line_items[tax1_amount][0] : line_items_tax_amount[0]"
+    - "billing_address[country] : invoice_billing_address_country"
+#    - "invoice[id] : Invoice_Number"
+#    - "invoice[currency_code] : Currency"
+#    - "invoice[customer_id] : Customer_Id"
+#    - "invoice[subscription_id] : Subscription_Id"
+#    - "invoice[status] : Status"
+#    - "invoice[date] : Invoice_Date"
+#    - "invoice[total] : Amount"
+#    - "taxes[amount][0] : Tax_Total"
+#    - "payments[amount][0] : Payments"
+#    - "payments[date][0] : Paid_On"
+#    - "billing_address[country] : Customer_Billing_Country"
 
   Date_Columns:
+    - "line_items[date_from][0] : line_items_date_from[0]"
+    - "line_items[date_to][0] : line_items_date_to[0]"
+    - "invoice[date] : Invoice_Date"
+    - "payments[date][0] : Paid_On"
     - "subscription[start_date] : subscription_start_date"
     - "invoice[date] : invoice[date]"
     - "line_items[date_from][0] : line_items[date_from][0]"

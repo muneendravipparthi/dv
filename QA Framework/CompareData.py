@@ -45,9 +45,9 @@ def filterData(src_df, des_df, src_key, des_key):
     # desmerged = pd.merge(des_df, src_df,
     #                      how='inner', left_on=[des_key],
     #                      right_on=[src_key])
-    # sorcedf = srcmerged[srchead]
-    # sorcedf.to_excel("testingsorcedf.xlsx")
-    # destdf = desmerged[deshead]
-    # destdf.to_excel("testingdestdf.xlsx")
-    # return sorcedf, destdf
-    return src_df, des_df
+    sorcedf = srcmerged[srchead]
+    sorcedf.to_excel("testingsorcedf.xlsx")
+    destdf = desmerged[deshead]
+    destdf.to_excel("testingdestdf.xlsx")
+    return sorcedf, destdf
+    # return src_df, des_df

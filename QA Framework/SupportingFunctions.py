@@ -54,11 +54,23 @@ def read_data_from_file(files, columns_names):
             df = pd.read_excel(file)
         elif file.endswith('.csv'):
             df = pd.read_csv(file)
+        headers = list(df.head())
+        newheaders = {}
+        for ch in headers:
+            newheaders[ch] = ch.replace(" ", "_")
+        df.rename(columns=newheaders, inplace=True)
+
         for column in columns_names:
             # print(column)
             if column in df.columns:
                 # print(" {} COLUMN is present in  {} ".format(column, file))
                 dataframe[column] = df[column].copy()
+
+        amountconvertcol = ["Amount","Tax_Total","Payments"]
+        for col in amountconvertcol:
+            if col in df.columns:
+                dataframe[col] = dataframe[col]*100
+
     return dataframe
 
 
