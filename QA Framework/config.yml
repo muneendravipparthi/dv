@@ -1,6 +1,6 @@
 ChargeBee Automation Configuration:
   Site: 'test'
-  ClientName: 'stormboard'
+  ClientName: 'Darrenhardy'
 
   Customers_Validation: False
   Subscriptions_Validation: True
@@ -22,36 +22,25 @@ ChargeBee Automation Configuration:
   # Mapping Source Columns vs : Destination Columns
 
   Customers_SourceFile:
-    "/Users/cb-muneendra/Desktop/Leeto_Live_Customers_expected.xlsx"
+    "/Users/cb-muneendra/Downloads/DH_Reimport_2508 - Customers_QA.csv"
   Customers_DestinationFile:
-    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/Leeto_AllCustomers.xlsx"
+    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/Darrenhardy_DS3_AllCustomers.xlsx"
 
   Customers_KeyColumns:
     - "customer[id] : customer_id"
 
   Customers_Columns:
     - "customer[id] : customer_id"
-    - "customer[created_at] : customer_created_at"
-    - "customer[first_name] : customer_first_name"
-    - "customer[last_name] : customer_last_name"
-    - "customer[company] : customer_company"
-    - "customer[preferred_currency_code] : customer_preferred_currency_code"
     - "customer[email] : customer_email"
-    - "customer[allow_direct_debit] : customer_allow_direct_debit"
-    - "customer[auto_collection] : customer_auto_collection"
-    - "customer[taxability] : customer_taxability"
-    - "customer[net_term_days] : customer_net_term_days"
-    - "customer[locale] : customer_locale"
     - "billing_address[first_name] : customer_billing_address_first_name"
     - "billing_address[last_name] : customer_billing_address_last_name"
-    - "billing_address[email] : customer_billing_address_email"
-    - "billing_address[company] : customer_billing_address_company"
     - "billing_address[line1] : customer_billing_address_line1"
+    - "billing_address[line2] : customer_billing_address_line2"
     - "billing_address[city] : customer_billing_address_city"
-    - "billing_address[state] : customer_billing_address_state"
-    - "billing_address[zip] : customer_billing_address_zip"
     - "billing_address[country] : customer_billing_address_country"
-    - "customer[cf_siren] : customer_cf_siren"
+    - "customer[auto_collection] : customer_auto_collection"
+    - "customer[created_at] : customer_created_at"
+    - "Taxability : customer_taxability"
 
 
 
@@ -59,30 +48,27 @@ ChargeBee Automation Configuration:
   # Mapping Source Columns vs : Destination Columns
 
   Subscriptions_SourceFile:
-    "/Users/cb-muneendra/Desktop/dfsa_sub_DS1.xlsx"
+    "/Users/cb-muneendra/Downloads/DH_Reimport_2508 - Subscription_QA.csv"
 
   Subscriptions_DestinationFile:
-    "/Users/cb-muneendra/Desktop/dfsa_sub_DS2.xlsx"
+    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/Darrenhardy_DS3_AllSubscriptions.xlsx"
 
   Subscriptions_KeyColumns:
     - "subscription[id] : subscription_id"
 
   Subscriptions_Columns:
-    - "subscription[id] : subscription_id"
-    - "subscription[cf_contract_number_sf] : subscription_cf_contract_number_sf"
     - "customer[id] : customer_id"
-    - "subscription[cf_siren] : subscription_cf_siren"
-    - "subscription[cf_original_opportunity_sf] : subscription_cf_original_opportunity_sf"
+    - "subscription[id] : subscription_id"
     - "subscription[status] : subscription_status"
     - "subscription[created_at] : subscription_created_at"
-    - "subscription[start_date] : subscription_start_date"
+    - "subscription[cancelled_at] : subscription_cancelled_at"
     - "subscription[started_at] : subscription_started_at"
     - "subscription[current_term_start] : subscription_current_term_start"
     - "subscription[current_term_end] : subscription_current_term_end"
-    - "subscription[cancelled_at] : subscription_cancelled_at"
-    - "subscription_items[item_price_id][0] : item_price_id[0]"
+    - "subscription_items[item_price_id][0] : item_item_price_id[0]"
     - "subscription_items[quantity][0] : item_quantity[0]"
     - "subscription_items[unit_price][0] : item_unit_price[0]"
+    - "subscription_items[billing_cycles][0] : item_billing_cycles[0]"
 
 
 
