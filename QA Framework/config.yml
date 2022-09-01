@@ -1,6 +1,6 @@
 ChargeBee Automation Configuration:
   Site: 'test'
-  ClientName: 'stormboard'
+  ClientName: 'JoinUnlock'
 
   Customers_Validation: False
   Subscriptions_Validation: True
@@ -22,16 +22,15 @@ ChargeBee Automation Configuration:
   # Mapping Source Columns vs : Destination Columns
 
   Customers_SourceFile:
-    "/Users/cb-muneendra/Desktop/Leeto_Live_Customers_expected.xlsx"
+    "/Users/cb-muneendra/Desktop/JoinUnlock_DS2_Customer.xlsx"
   Customers_DestinationFile:
-    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/Leeto_AllCustomers.xlsx"
+    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/JoinUnlock_DS3_AllCustomers.xlsx"
 
   Customers_KeyColumns:
     - "customer[id] : customer_id"
 
   Customers_Columns:
     - "customer[id] : customer_id"
-    - "customer[created_at] : customer_created_at"
     - "customer[first_name] : customer_first_name"
     - "customer[last_name] : customer_last_name"
     - "customer[company] : customer_company"
@@ -47,11 +46,12 @@ ChargeBee Automation Configuration:
     - "billing_address[email] : customer_billing_address_email"
     - "billing_address[company] : customer_billing_address_company"
     - "billing_address[line1] : customer_billing_address_line1"
+    - "billing_address[line2] : customer_billing_address_line2"
+    - "billing_address[line3] : customer_billing_address_line3"
     - "billing_address[city] : customer_billing_address_city"
     - "billing_address[state] : customer_billing_address_state"
     - "billing_address[zip] : customer_billing_address_zip"
     - "billing_address[country] : customer_billing_address_country"
-    - "customer[cf_siren] : customer_cf_siren"
 
 
 
@@ -59,30 +59,50 @@ ChargeBee Automation Configuration:
   # Mapping Source Columns vs : Destination Columns
 
   Subscriptions_SourceFile:
-    "/Users/cb-muneendra/Desktop/dfsa_sub_DS1.xlsx"
+    "/Users/cb-muneendra/Desktop/JoinUnlock_DS2_Subscriptions.xlsx"
 
   Subscriptions_DestinationFile:
-    "/Users/cb-muneendra/Desktop/dfsa_sub_DS2.xlsx"
+    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/JoinUnlock_DS3_AllSubscriptions.xlsx"
 
   Subscriptions_KeyColumns:
     - "subscription[id] : subscription_id"
 
   Subscriptions_Columns:
-    - "subscription[id] : subscription_id"
-    - "subscription[cf_contract_number_sf] : subscription_cf_contract_number_sf"
     - "customer[id] : customer_id"
-    - "subscription[cf_siren] : subscription_cf_siren"
-    - "subscription[cf_original_opportunity_sf] : subscription_cf_original_opportunity_sf"
+    - "subscription[id] : subscription_id"
     - "subscription[status] : subscription_status"
-    - "subscription[created_at] : subscription_created_at"
-    - "subscription[start_date] : subscription_start_date"
     - "subscription[started_at] : subscription_started_at"
     - "subscription[current_term_start] : subscription_current_term_start"
     - "subscription[current_term_end] : subscription_current_term_end"
     - "subscription[cancelled_at] : subscription_cancelled_at"
-    - "subscription_items[item_price_id][0] : item_price_id[0]"
+    - "subscription_items[item_price_id][0] : item_item_price_id[0]"
     - "subscription_items[quantity][0] : item_quantity[0]"
     - "subscription_items[unit_price][0] : item_unit_price[0]"
+    - "item_tiers[item_price_id][0] : item_tiers_item_price_id[0]"
+    - "item_tiers[starting_unit][0] : item_tiers_starting_unit[0]"
+    - "item_tiers[ending_unit][0] : item_tiers_ending_unit[0]"
+    - "item_tiers[price][0] : item_tiers_price[0]"
+    - "item_tiers[item_price_id][1] : item_tiers_item_price_id[1]"
+    - "item_tiers[starting_unit][1] : item_tiers_starting_unit[1]"
+    - "item_tiers[ending_unit][1] : item_tiers_ending_unit[1]"
+    - "item_tiers[price][1] : item_tiers_price[1]"
+    - "item_tiers[item_price_id][2] : item_tiers_item_price_id[2]"
+    - "item_tiers[starting_unit][2] : item_tiers_starting_unit[2]"
+    - "item_tiers[ending_unit][2] : item_tiers_ending_unit[2]"
+    - "item_tiers[price][2] : item_tiers_price[2]"
+    - "item_tiers[item_price_id][3] : item_tiers_item_price_id[3]"
+    - "item_tiers[starting_unit][3] : item_tiers_starting_unit[3]"
+    - "item_tiers[ending_unit][3] : item_tiers_ending_unit[3]"
+    - "item_tiers[price][3] : item_tiers_price[3]"
+    - "item_tiers[item_price_id][4] : item_tiers_item_price_id[4]"
+    - "item_tiers[starting_unit][4] : item_tiers_starting_unit[4]"
+    - "item_tiers[ending_unit][4] : item_tiers_ending_unit[4]"
+    - "item_tiers[price][4] : item_tiers_price[4]"
+    - "item_tiers[item_price_id][5] : item_tiers_item_price_id[5]"
+    - "item_tiers[starting_unit][5] : item_tiers_starting_unit[5]"
+    - "item_tiers[price][5] : item_tiers_price[5]"
+    - "coupon_ids[0] : subscription_coupon"
+
 
 
 
