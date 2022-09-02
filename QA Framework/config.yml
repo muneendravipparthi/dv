@@ -22,7 +22,7 @@ ChargeBee Automation Configuration:
   # Mapping Source Columns vs : Destination Columns
 
   Customers_SourceFile:
-    "/Users/cb-muneendra/Desktop/Numerad_B2_DS2_Customer.xlsx"
+    "/Users/cb-muneendra/Git/cb_data_validation/utils/numerade_test_cust_DS2.xlsx"
   Customers_DestinationFile:
     "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/numerade_DS3_AllCustomers.xlsx"
 
@@ -31,6 +31,7 @@ ChargeBee Automation Configuration:
 
   Customers_Columns:
     - "customer[id] : customer_id"
+    - "Batch : Batch"
     - "customer[created_at] : customer_created_at"
     - "customer[first_name] : customer_first_name"
     - "customer[last_name] : customer_last_name"
@@ -43,6 +44,8 @@ ChargeBee Automation Configuration:
     - "billing_address[state] : customer_billing_address_state"
     - "billing_address[zip] : customer_billing_address_zip"
     - "billing_address[country] : customer_billing_address_country"
+    - "customer[auto_collection] : customer_auto_collection"
+
 
 
 
@@ -50,7 +53,7 @@ ChargeBee Automation Configuration:
   # Mapping Source Columns vs : Destination Columns
 
   Subscriptions_SourceFile:
-    "/Users/cb-muneendra/Desktop/numerade_I2_B1_DS2_subscriptions.xlsx"
+    "/Users/cb-muneendra/Git/cb_data_validation/utils/numerade_test_subs_DS2.xlsx"
 
   Subscriptions_DestinationFile:
     "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/numerade_DS3_AllSubscriptions.xlsx"
@@ -59,8 +62,9 @@ ChargeBee Automation Configuration:
     - "subscription[id] : subscription_id"
 
   Subscriptions_Columns:
-    - "subscription[id] : subscription_id"
     - "customer[id] : customer_id"
+    - "subscription[id] : subscription_id"
+    - "Batch : Batch"
     - "subscription[created_at] : subscription_created_at"
     - "subscription_items[item_price_id][0] : item_item_price_id[0]"
     - "subscription_items[quantity][0] : item_quantity[0]"
@@ -70,6 +74,8 @@ ChargeBee Automation Configuration:
     - "subscription[current_term_start] : subscription_current_term_start"
     - "subscription[current_term_end] : subscription_current_term_end"
     - "subscription[cancelled_at] : subscription_cancelled_at"
+    - "subscription[pause_date] : subscription_pause_date"
+    - "subscription[resume_date] : subscription_resume_date"
     - "subscription[auto_collection] : subscription_auto_collection"
     - "coupon_ids[0] : subscription_coupon"
     - "subscription[meta_data] : subscription_meta_data"
