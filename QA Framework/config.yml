@@ -22,9 +22,9 @@ ChargeBee Automation Configuration:
   # Mapping Source Columns vs : Destination Columns
 
   Customers_SourceFile:
-    "/Users/cb-muneendra/dataValidation/data_validation_qa/ds1Tods2/NumeradeDS1_Cus.xlsx"
+    "/Users/cb-muneendra/dataValidation/data_validation_qa/ds1Tods2/numeradeDS1_Cus.xlsx"
   Customers_DestinationFile:
-    "/Users/cb-muneendra/dataValidation/data_validation_qa/ds1Tods2/NumeradeB2_DS2_Cus.xlsx"
+    "/Users/cb-muneendra/dataValidation/data_validation_qa/ds1Tods2/numeradeDS2_Cus.xlsx"
 
   Customers_KeyColumns:
     - "id : customer[id]"
@@ -42,15 +42,14 @@ ChargeBee Automation Configuration:
     - "address.postal_code : billing_address[zip]"
     - "address.country : billing_address[country]"
 
-
   # ------------------   SUBSCRIPTIONS INFORMATION   ------------------
   # Mapping Source Columns vs : Destination Columns
 
   Subscriptions_SourceFile:
-    "/Users/cb-muneendra/dataValidation/data_validation_qa/ds1Tods2/Numerade_I2_B1_DS1_Subs.xlsx"
+    "/Users/cb-muneendra/dataValidation/data_validation_qa/ds1Tods2/Numerade_DS1_Subs.xlsx"
 
   Subscriptions_DestinationFile:
-    "/Users/cb-muneendra/dataValidation/data_validation_qa/ds1Tods2/Numerade_I2_B1_DS2_Subs.xlsx"
+    "/Users/cb-muneendra/dataValidation/data_validation_qa/ds1Tods2/Numerade_DS2_Subs.xlsx"
 
   Subscriptions_KeyColumns:
     - "id : subscription[id]"
@@ -59,9 +58,9 @@ ChargeBee Automation Configuration:
     - "customer : customer[id]"
     - "id : subscription[id]"
 #    - "created : subscription[created_at]"
-    - "items.data(0).plan.id : subscription_items[item_price_id][0]"
-    - "items.data(0).quantity : subscription_items[quantity][0]"
-    - "items.data(0).plan.amount : subscription_items[unit_price][0]"
+    - "items.data[0].plan.id : subscription[plan_id]"
+    - "items.data[0].quantity : subscription_items[quantity][0]"
+    - "items.data[0].plan.amount : subscription_items[unit_price][0]"
     - "status : subscription[status]"
     - "start_date : subscription[started_at]"
     - "current_period_start : subscription[current_term_start]"
