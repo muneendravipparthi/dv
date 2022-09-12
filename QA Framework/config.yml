@@ -3,8 +3,8 @@ ChargeBee Automation Configuration:
   ClientName: 'Anisworld'
 
   Customers_Validation: True
-  Subscriptions_Validation: False
-  Invoices_Validation: False
+  Subscriptions_Validation: True
+  Invoices_Validation: True
 
   IsRecurly: False
   IsRecurlyDS1vsDS2: False
@@ -23,9 +23,9 @@ ChargeBee Automation Configuration:
 
   Customers_SourceFile:
     #Moille validation requires "Customers" & "FinalPayments" files
-    "/Users/cb-muneendra/Desktop/Leeto_Live_Customers_expected.xlsx"
+    "/Users/cb-muneendra/Downloads/drive-download-20220912T085306Z-001/input_files/comma_seperated/customers.csv, /Users/cb-muneendra/Downloads/drive-download-20220912T085306Z-001/input_files/comma_seperated/FinalPayments.csv"
   Customers_DestinationFile:
-    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/Leeto_AllCustomers.xlsx"
+    "/Users/cb-muneendra/Downloads/drive-download-20220912T085306Z-001/output_files/customer_cb_template.csv"
 
   Customers_KeyColumns:
     - "External_ID : Custom_Field_1"
@@ -56,10 +56,10 @@ ChargeBee Automation Configuration:
 
   Subscriptions_SourceFile:
     #Moille validation requires "Subscriptions" & "Transactions" files
-    "/Users/cb-muneendra/Desktop/dfsa_sub_DS1.xlsx"
+    "/Users/cb-muneendra/Downloads/drive-download-20220912T085306Z-001/input_files/comma_seperated/subscriptions.csv, /Users/cb-muneendra/Downloads/drive-download-20220912T085306Z-001/input_files/comma_seperated/transactions.csv"
 
   Subscriptions_DestinationFile:
-    "/Users/cb-muneendra/Desktop/dfsa_sub_DS2.xlsx"
+    "/Users/cb-muneendra/Downloads/drive-download-20220912T085306Z-001/output_files/subscription_cb_template.csv"
 
   Subscriptions_KeyColumns:
     - "Subscription_ID : subscription[id]"
@@ -91,10 +91,11 @@ ChargeBee Automation Configuration:
 
   Invoices_SourceFile:
     #Moille validation requires "invoice-lines", "Subscriptions" & "Transactions" files and need to configure scheduled for date
-    "/Users/cb-muneendra/Desktop/stormboard_invoice_expected.xlsx"
+    "/Users/cb-muneendra/Downloads/drive-download-20220912T085306Z-001/input_files/comma_seperated/invoice_lines.csv, /Users/cb-muneendra/Downloads/drive-download-20220912T085306Z-001/input_files/comma_seperated/subscriptions.csv, 
+    /Users/cb-muneendra/Downloads/drive-download-20220912T085306Z-001/input_files/comma_seperated/transactions.csv"
 
   Invoices_DestinationFile:
-    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/stormboard_AllInvoices.xlsx"
+    "/Users/cb-muneendra/Downloads/drive-download-20220912T085306Z-001/output_files/invoice_output8700595242792634332/invoice_cb_template.csv"
 
   Invoices_KeyColumns:
     - "Invoice_Number : invoice[id]"
