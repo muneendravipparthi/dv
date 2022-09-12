@@ -80,7 +80,7 @@ def get_customers_data(source_files, source_columns):
         merge_df['mandateId'] = merge_df[['External_ID', 'mandateId']].apply(
             lambda x: "/".join(x) if pd.isna(x.mandateId) != True else None, axis=1)
         merge_df['auto_collection'] = merge_df['mandateId'].apply(lambda x: 'OFF' if pd.isna(x) else 'ON')
-        merge_df['allow_direct_debit'] = merge_df['Method'].apply(lambda x: 'TRUE' if x == 'directdebit' else None)
+        merge_df['allow_direct_debit'] = merge_df['method'].apply(lambda x: 'TRUE' if x == 'directdebit' else None)
     else:
         merge_df = customer_df
     # return merge_df[source_columns]
