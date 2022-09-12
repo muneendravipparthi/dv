@@ -22,6 +22,8 @@ ChargeBee Automation Configuration:
   # Mapping Source Columns vs : Destination Columns
 
   Customers_SourceFile:
+    #Moille validation requires "Customers" & "FinalPayments" files
+    #Recurly validation requires "CustomerAddressOfAccount" & "CustomerAddressOfBilling" files
     "/Users/cb-muneendra/Desktop/Leeto_Live_Customers_expected.xlsx"
   Customers_DestinationFile:
     "/Users/cb-muneendra/Git/cb_data_validation/readAPI/Leeto_AllCustomers.xlsx"
@@ -59,6 +61,8 @@ ChargeBee Automation Configuration:
   # Mapping Source Columns vs : Destination Columns
 
   Subscriptions_SourceFile:
+    #Moille validation requires "Subscriptions" & "Transactions" files
+    #Recurly validation requires "Addon_Columns" & "Coupon_Columns" files
     "/Users/cb-muneendra/Desktop/dfsa_sub_DS1.xlsx"
 
   Subscriptions_DestinationFile:
@@ -90,6 +94,8 @@ ChargeBee Automation Configuration:
   # Mapping Source Columns vs : Destination Columns
 
   Invoices_SourceFile:
+    #Moille validation requires "invoice-lines", "Subscriptions" & "Transactions" files and need to configure scheduled for date
+    #Recurly validation requires "Invoice_Adjustment_Columns" & "Payment_Merge_Columns" files
     "/Users/cb-muneendra/Desktop/stormboard_invoice_expected.xlsx"
 
   Invoices_DestinationFile:
