@@ -192,7 +192,7 @@ def get_currenttermdate_data(transaction_df):
 
 def get_current_term_dates_data(transaction_df):
     print("working on get_current_term_dates_data function")
-    systemdate = datetime.datetime.today() - datetime.timedelta(days=5)
+    systemdate = datetime.datetime.today() - datetime.timedelta(days=0)
     today = systemdate.strftime('%Y-%m-%d')
     transaction_df['system_date'] = systemdate
 
