@@ -1,57 +1,53 @@
 ChargeBee Automation Configuration:
   Site: 'test'
-  ClientName: 'stormboard'
+  ClientName: 'Anisworld'
 
-  Customers_Validation: False
-  Subscriptions_Validation: True
+  Customers_Validation: True
+  Subscriptions_Validation: False
   Invoices_Validation: False
 
   IsRecurly: False
   IsRecurlyDS1vsDS2: False
-  IsMollie: False
-  IsMollieDS1vsDS2: False
+  IsMollie: True
+  IsMollieDS1vsDS2: True
   type:
-    #    - DS1vsDS2
-    - DS2vsDS3
+      - DS1vsDS2
+#    - DS2vsDS3
   dateFormet:
-    - "%Y-%m-%d %H:%M:%S"
+#    - "%Y-%m-%d %H:%M:%S"
   #    - "%Y-%m-%d %H:%M"
-  #    - "%Y-%m-%d"
+      - "%Y-%m-%d"
 
   # ------------------   CUSTOMER INFORMATION   ------------------
   # Mapping Source Columns vs : Destination Columns
 
   Customers_SourceFile:
+    #Moille validation requires "Customers" & "FinalPayments" files
     "/Users/cb-muneendra/Desktop/Leeto_Live_Customers_expected.xlsx"
   Customers_DestinationFile:
     "/Users/cb-muneendra/Git/cb_data_validation/readAPI/Leeto_AllCustomers.xlsx"
 
   Customers_KeyColumns:
-    - "customer[id] : customer_id"
+    - "External_ID : Custom_Field_1"
 
   Customers_Columns:
-    - "customer[id] : customer_id"
-    - "customer[created_at] : customer_created_at"
-    - "customer[first_name] : customer_first_name"
-    - "customer[last_name] : customer_last_name"
-    - "customer[company] : customer_company"
-    - "customer[preferred_currency_code] : customer_preferred_currency_code"
-    - "customer[email] : customer_email"
-    - "customer[allow_direct_debit] : customer_allow_direct_debit"
-    - "customer[auto_collection] : customer_auto_collection"
-    - "customer[taxability] : customer_taxability"
-    - "customer[net_term_days] : customer_net_term_days"
-    - "customer[locale] : customer_locale"
-    - "billing_address[first_name] : customer_billing_address_first_name"
-    - "billing_address[last_name] : customer_billing_address_last_name"
-    - "billing_address[email] : customer_billing_address_email"
-    - "billing_address[company] : customer_billing_address_company"
-    - "billing_address[line1] : customer_billing_address_line1"
-    - "billing_address[city] : customer_billing_address_city"
-    - "billing_address[state] : customer_billing_address_state"
-    - "billing_address[zip] : customer_billing_address_zip"
-    - "billing_address[country] : customer_billing_address_country"
-    - "customer[cf_siren] : customer_cf_siren"
+    - "Customer_ID : customer[id]"
+    - "First_name : customer[first_name]"
+    - "Last_name : customer[last_name]"
+    - "Email_address : customer[email]"
+    - "method : payment_method[type]"
+    - "mandateId : payment_method[reference_id]"
+    - "First_name : billing_address[first_name]"
+    - "Last_name : billing_address[last_name]"
+    - "Email_address : billing_address[email]"
+    - "Street : billing_address[line3]"
+    - "City : billing_address[city]"
+    - "Zipcode : billing_address[zip]"
+    - "Country : billing_address[country]"
+    - "Created_at : created_at"
+    - "External_ID : Custom_Field_1"
+    - "auto_collection : customer[auto_collection]"
+    - "allow_direct_debit : customer[allow_direct_debit]"
 
 
 
@@ -59,62 +55,75 @@ ChargeBee Automation Configuration:
   # Mapping Source Columns vs : Destination Columns
 
   Subscriptions_SourceFile:
+    #Moille validation requires "Subscriptions" & "Transactions" files
     "/Users/cb-muneendra/Desktop/dfsa_sub_DS1.xlsx"
 
   Subscriptions_DestinationFile:
     "/Users/cb-muneendra/Desktop/dfsa_sub_DS2.xlsx"
 
   Subscriptions_KeyColumns:
-    - "subscription[id] : subscription_id"
+    - "Subscription_ID : subscription[id]"
 
   Subscriptions_Columns:
-    - "subscription[id] : subscription_id"
-    - "subscription[cf_contract_number_sf] : subscription_cf_contract_number_sf"
-    - "customer[id] : customer_id"
-    - "subscription[cf_siren] : subscription_cf_siren"
-    - "subscription[cf_original_opportunity_sf] : subscription_cf_original_opportunity_sf"
-    - "subscription[status] : subscription_status"
-    - "subscription[created_at] : subscription_created_at"
-    - "subscription[start_date] : subscription_start_date"
-    - "subscription[started_at] : subscription_started_at"
-    - "subscription[current_term_start] : subscription_current_term_start"
-    - "subscription[current_term_end] : subscription_current_term_end"
-    - "subscription[cancelled_at] : subscription_cancelled_at"
-    - "subscription_items[item_price_id][0] : item_price_id[0]"
-    - "subscription_items[quantity][0] : item_quantity[0]"
-    - "subscription_items[unit_price][0] : item_unit_price[0]"
-
+    - "Subscription_ID : subscription[id]"
+    - "Customer_ID : customer[id]"
+    - "Status : subscription[status]"
+    - "Start_date : subscription[start_date]"
+    - "Activated_on_(CEST) : subscription[started_at]"
+    - "current_term_start : subscription[current_term_start]"
+    - "current_term_end : subscription[current_term_end]"
+    - "(Will_be)_Cancelled_on : subscription[cancelled_at]"
+    - "First_name : shipping_address[first_name]"
+    - "Last_name : shipping_address[last_name]"
+    - "Email : shipping_address[email]"
+    - "Street : shipping_address[line1]"
+    - "City : shipping_address[city]"
+    - "Zipcode : shipping_address[zip]"
+    - "Country : shipping_address[country]"
+    - "Mandate_type : Custom_Field_1"
+    - "Mandate_code : Custom_Field_2"
+    - "Subscriptionplan_ID : subscription_items[item_price_id][0]"
+    - "amount_incl : subscription_items[unit_price][0]"
 
 
   # ------------------   INVOICES INFORMATION   ------------------
   # Mapping Source Columns vs : Destination Columns
 
   Invoices_SourceFile:
+    #Moille validation requires "invoice-lines", "Subscriptions" & "Transactions" files and need to configure scheduled for date
     "/Users/cb-muneendra/Desktop/stormboard_invoice_expected.xlsx"
 
   Invoices_DestinationFile:
     "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/stormboard_AllInvoices.xlsx"
 
   Invoices_KeyColumns:
-    - "invoice[id] : invoice_id"
+    - "Invoice_Number : invoice[id]"
 
   Invoices_Columns:
-    - "invoice[id] : invoice_id"
-    - "invoice[currency_code] : invoice_currency_code"
-    - "invoice[customer_id] : invoice_customer_id"
-    - "invoice[subscription_id] : invoice_subscription_id"
-    - "invoice[status] : invoice_status"
-    - "invoice[date] : invoice_date"
-    - "invoice[total] : invoice_total"
-    - "line_items[entity_type][0] : line_items_entity_type[0]"
-    - "line_items[entity_id][0] : line_items_entity_id[0]"
-    - "line_items[description][0] : line_items_description[0]"
-    - "line_items[quantity][0] : line_items_quantity[0]"
-    - "line_items[date_from][0] : line_items_date_from[0]"
-    - "line_items[date_to][0] : line_items_date_to[0]"
-    - "line_items[amount][0] : line_items_amount[0]"
-    - "payments[amount][0] : payments_txn_amount[0]"
-    - "payments[date][0] : payments_txn_date[0]"
+    - "Invoice_Number : invoice[id]"
+    - "Customer_ID : invoice[customer_id]"
+    - "Subscription_ID : invoice[subscription_id]"
+    - "Status : invoice[status]"
+    - "Created_Date : invoice[date]"
+    - "amount_incl_ : invoice[total]"
+    - "Zipcode : billing_address[zip]"
+    - "Country : billing_address[country]"
+    - "First_Name : shipping_address[first_name]"
+    - "Last_Name : shipping_address[last_name]"
+    - "Street : shipping_address[line2]"
+    - "City : shipping_address[city]"
+    - "Zipcode : shipping_address[zip]"
+    - "Country : shipping_address[country]"
+#    - "VAT_% : taxes[rate][0]"
+    - "VAT : taxes[amount][0]"
+    - "Subscriptionplan_ID : line_items[entity_id][0]"
+#    - "Description : line_items[description][0]"
+    - "current_term_start : line_items[date_from][0]"
+    - "current_term_end : line_items[date_to][0]"
+#    - "Quantity : line_items[quantity][0]"
+    - "amount_excl_ : line_items[unit_amount][0]"
+    - "amount_excl_ : line_items[amount][0]"
+    - "VAT : line_items[tax_amount][0]"
 
   Date_Columns:
     - "subscription[start_date] : subscription_start_date"
@@ -299,6 +308,7 @@ ChargeBee Automation Configuration:
     - "billing_address[email] : customer_billing_address_email"
 
   Zip_Columns:
+    - "Zipcode : shipping_address[zip]"
     - "billing_address[zip] : customer_billing_address_zip"
     - "billing_address[zip] : Billing_Address_Zip"
     - "shipping_address[zip] : subscription_shipping_address_zip"
