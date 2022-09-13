@@ -6,7 +6,7 @@ import pandas as pd
 from jproperties import Properties
 from tqdm import tqdm
 
-from readAPI.ReadAPI import ReadAPIExecution
+from ReadAPI import ReadAPIExecution
 
 configs = Properties()
 home_folder = os.getenv('HOME')
