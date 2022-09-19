@@ -2,9 +2,9 @@ ChargeBee Automation Configuration:
   Site: 'test'
   ClientName: 'Anisworld'
 
-  Customers_Validation: False
-  Subscriptions_Validation: False
-  Invoices_Validation: True
+  Customers_Validation: True
+  Subscriptions_Validation: True
+  Invoices_Validation: False
 
   IsRecurly: False
   IsRecurlyDS1vsDS2: False
@@ -23,9 +23,9 @@ ChargeBee Automation Configuration:
 
   Customers_SourceFile:
     #Moille validation requires "Customers" & "FinalPayments" files
-    "/Users/cb-muneendra/Downloads/drive-download-20220912T085306Z-001/input_files/comma_seperated/customers.csv, /Users/cb-muneendra/Downloads/drive-download-20220912T085306Z-001/input_files/comma_seperated/FinalPayments.csv"
+    "/Users/cb-muneendra/Git/cb_data_validation/utils/mollieData/customers.csv, /Users/cb-muneendra/Downloads/drive-download-20220912T085306Z-001/input_files/comma_seperated/FinalPayments.csv"
   Customers_DestinationFile:
-    "/Users/cb-muneendra/Downloads/drive-download-20220912T085306Z-001/output_files/customer_cb_template.csv"
+    "/Users/cb-muneendra/Desktop/Anisworld_DS2_customer.xlsx"
 
   Customers_KeyColumns:
     - "Customer_ID : customer[id]"
@@ -56,10 +56,10 @@ ChargeBee Automation Configuration:
 
   Subscriptions_SourceFile:
     #Moille validation requires "Subscriptions" & "Transactions" files
-    "/Users/cb-muneendra/Downloads/drive-download-20220912T085306Z-001/input_files/comma_seperated/subscriptions.csv, /Users/cb-muneendra/Downloads/drive-download-20220912T085306Z-001/input_files/comma_seperated/transactions.csv"
+    "/Users/cb-muneendra/Git/cb_data_validation/utils/mollieData/subscriptions.csv, /Users/cb-muneendra/Git/cb_data_validation/utils/mollieData/transactions.csv"
 
   Subscriptions_DestinationFile:
-    "/Users/cb-muneendra/Downloads/drive-download-20220912T085306Z-001/output_files/subscription_cb_template.csv"
+    "/Users/cb-muneendra/Desktop/Anisworld_DS2_Subscription.xlsx"
 
   Subscriptions_KeyColumns:
     - "Subscription_ID : subscription[id]"
@@ -126,6 +126,12 @@ ChargeBee Automation Configuration:
     - "VAT : line_items[tax_amount][0]"
 
   Date_Columns:
+    - "Start_date : subscription[start_date]"
+    - "Activated_on_(CEST) : subscription[started_at]"
+    - "current_term_start : subscription[current_term_start]"
+    - "current_term_end : subscription[current_term_end]"
+    - "(Will_be)_Cancelled_on : subscription[cancelled_at]"
+    - "Created_at : created_at"
     - "subscription[start_date] : subscription_start_date"
     - "invoice[date] : invoice[date]"
     - "line_items[date_from][0] : line_items[date_from][0]"
