@@ -2,7 +2,7 @@ ChargeBee Automation Configuration:
   Site: 'test'
   ClientName: 'theapplicantmanager'
 
-  Customers_Validation: False
+  Customers_Validation: True
   Subscriptions_Validation: True
   Invoices_Validation: False
 
@@ -22,7 +22,7 @@ ChargeBee Automation Configuration:
   # Mapping Source Columns vs : Destination Columns
 
   Customers_SourceFile:
-    "/Users/cb-muneendra/Downloads/Test Aug 8 Top Echelon  TAM - LMH - Customers (3).csv"
+    "/Users/cb-muneendra/Downloads/12 Sep TAM  - Customers (2).csv"
   Customers_DestinationFile:
     "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/theapplicantmanager_DS3_AllCustomers.xlsx"
 
@@ -59,7 +59,7 @@ ChargeBee Automation Configuration:
   # Mapping Source Columns vs : Destination Columns
 
   Subscriptions_SourceFile:
-    "/Users/cb-muneendra/Downloads/Test Aug 8 Top Echelon  TAM - LMH - QA for subs.csv"
+    "/Users/cb-muneendra/Downloads/12 Sep TAM  - subs_QA.csv"
 
   Subscriptions_DestinationFile:
     "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/theapplicantmanager_DS3_AllSubscriptions.xlsx"
