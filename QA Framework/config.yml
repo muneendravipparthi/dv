@@ -2,8 +2,8 @@ ChargeBee Automation Configuration:
   Site: 'test'
   ClientName: 'microshareltd_uk'
 
-  Customers_Validation: False
-  Subscriptions_Validation: True
+  Customers_Validation: True
+  Subscriptions_Validation: False
   Invoices_Validation: False
 
   IsRecurly: False
@@ -24,36 +24,25 @@ ChargeBee Automation Configuration:
   Customers_SourceFile:
     #Moille validation requires "Customers" & "FinalPayments" files
     #Recurly validation requires "CustomerAddressOfAccount" & "CustomerAddressOfBilling" files
-    "/Users/cb-muneendra/Desktop/Leeto_Live_Customers_expected.xlsx"
+    "/Users/cb-muneendra/Downloads/Microshare_QA - Customers-US.csv"
   Customers_DestinationFile:
-    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/Leeto_AllCustomers.xlsx"
+    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/microshareltd_uk_DS3_AllCustomers.xlsx"
 
   Customers_KeyColumns:
     - "customer[id] : customer_id"
 
   Customers_Columns:
     - "customer[id] : customer_id"
-    - "customer[created_at] : customer_created_at"
-    - "customer[first_name] : customer_first_name"
-    - "customer[last_name] : customer_last_name"
     - "customer[company] : customer_company"
     - "customer[preferred_currency_code] : customer_preferred_currency_code"
     - "customer[email] : customer_email"
-    - "customer[allow_direct_debit] : customer_allow_direct_debit"
-    - "customer[auto_collection] : customer_auto_collection"
     - "customer[taxability] : customer_taxability"
-    - "customer[net_term_days] : customer_net_term_days"
-    - "customer[locale] : customer_locale"
-    - "billing_address[first_name] : customer_billing_address_first_name"
-    - "billing_address[last_name] : customer_billing_address_last_name"
     - "billing_address[email] : customer_billing_address_email"
     - "billing_address[company] : customer_billing_address_company"
     - "billing_address[line1] : customer_billing_address_line1"
     - "billing_address[city] : customer_billing_address_city"
-    - "billing_address[state] : customer_billing_address_state"
     - "billing_address[zip] : customer_billing_address_zip"
     - "billing_address[country] : customer_billing_address_country"
-    - "customer[cf_siren] : customer_cf_siren"
 
 
 
@@ -63,10 +52,10 @@ ChargeBee Automation Configuration:
   Subscriptions_SourceFile:
     #Moille validation requires "Subscriptions" & "Transactions" files
     #Recurly validation requires "Addon_Columns" & "Coupon_Columns" files
-    "/Users/cb-muneendra/Desktop/dfsa_sub_DS1.xlsx"
+    "/Users/cb-muneendra/Downloads/Microshare_QA - Subscriptions-UK.csv"
 
   Subscriptions_DestinationFile:
-    "/Users/cb-muneendra/Desktop/dfsa_sub_DS2.xlsx"
+    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/microshareltd_uk_DS3_AllSubscriptions.xlsx"
 
   Subscriptions_KeyColumns:
     - "subscription[id] : subscription_id"
@@ -96,10 +85,10 @@ ChargeBee Automation Configuration:
   Invoices_SourceFile:
     #Moille validation requires "invoice-lines", "Subscriptions" & "Transactions" files and need to configure scheduled for date
     #Recurly validation requires "Invoice_Adjustment_Columns" & "Payment_Merge_Columns" files
-    "/Users/cb-muneendra/Desktop/stormboard_invoice_expected.xlsx"
+    "/Users/cb-muneendra/Downloads/Microshare_QA - Invoice-UK.csv"
 
   Invoices_DestinationFile:
-    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/stormboard_AllInvoices.xlsx"
+    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/microshareltd_uk_DS3_AllInvoices.xlsx"
 
   Invoices_KeyColumns:
     - "invoice[id] : invoice_id"
