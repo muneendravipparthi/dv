@@ -1,6 +1,6 @@
 ChargeBee Automation Configuration:
   Site: 'test'
-  ClientName: 'stormboard'
+  ClientName: 'microshareltd_uk'
 
   Customers_Validation: False
   Subscriptions_Validation: True
