@@ -1,9 +1,9 @@
 ChargeBee Automation Configuration:
   Site: 'test'
-  ClientName: 'stormboard'
+  ClientName: 'revtaxgroup'
 
-  Customers_Validation: False
-  Subscriptions_Validation: True
+  Customers_Validation: True
+  Subscriptions_Validation: False
   Invoices_Validation: False
 
   IsRecurly: False
@@ -12,7 +12,8 @@ ChargeBee Automation Configuration:
   IsMollieDS1vsDS2: False
   type:
     #    - DS1vsDS2
-    - DS2vsDS3
+#    - DS2vsDS3
+   - DS2vsDS1
   dateFormet:
     - "%Y-%m-%d %H:%M:%S"
   #    - "%Y-%m-%d %H:%M"
@@ -24,36 +25,37 @@ ChargeBee Automation Configuration:
   Customers_SourceFile:
     #Moille validation requires "Customers" & "FinalPayments" files
     #Recurly validation requires "CustomerAddressOfAccount" & "CustomerAddressOfBilling" files
-    "/Users/cb-muneendra/Desktop/Leeto_Live_Customers_expected.xlsx"
+    "/Users/cb-muneendra/Desktop/Revtaxgroup_Customers_DS2.xlsx"
   Customers_DestinationFile:
-    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/Leeto_AllCustomers.xlsx"
+    "/Users/cb-muneendra/Desktop/Revtaxgroup_Customers_DS1.xlsx"
 
   Customers_KeyColumns:
-    - "customer[id] : customer_id"
+    - "customer[email] : email"
+#    - "customer[id] : customer_id"
 
   Customers_Columns:
-    - "customer[id] : customer_id"
-    - "customer[created_at] : customer_created_at"
-    - "customer[first_name] : customer_first_name"
-    - "customer[last_name] : customer_last_name"
-    - "customer[company] : customer_company"
-    - "customer[preferred_currency_code] : customer_preferred_currency_code"
-    - "customer[email] : customer_email"
-    - "customer[allow_direct_debit] : customer_allow_direct_debit"
-    - "customer[auto_collection] : customer_auto_collection"
-    - "customer[taxability] : customer_taxability"
-    - "customer[net_term_days] : customer_net_term_days"
-    - "customer[locale] : customer_locale"
-    - "billing_address[first_name] : customer_billing_address_first_name"
-    - "billing_address[last_name] : customer_billing_address_last_name"
-    - "billing_address[email] : customer_billing_address_email"
-    - "billing_address[company] : customer_billing_address_company"
-    - "billing_address[line1] : customer_billing_address_line1"
-    - "billing_address[city] : customer_billing_address_city"
-    - "billing_address[state] : customer_billing_address_state"
-    - "billing_address[zip] : customer_billing_address_zip"
-    - "billing_address[country] : customer_billing_address_country"
-    - "customer[cf_siren] : customer_cf_siren"
+    - "customer[first_name] : name"
+    - "billing_address[line1] : Address"
+    - "customer[email] : email"
+    - "customer[phone] : phone"
+#    - "customer[id] : customer_id"
+#    - "customer[created_at] : customer_created_at"
+#    - "customer[first_name] : customer_first_name"
+#    - "customer[last_name] : customer_last_name"
+#    - "customer[phone] : customer_phone"
+#    - "customer[email] : customer_email"
+#    - "customer[preferred_currency_code] : customer_preferred_currency_code"
+#    - "customer[allow_direct_debit] : customer_allow_direct_debit"
+#    - "customer[auto_collection] : customer_auto_collection"
+#    - "billing_address[first_name] : customer_billing_address_first_name"
+#    - "billing_address[last_name] : customer_billing_address_last_name"
+#    - "billing_address[email] : customer_billing_address_email"
+#    - "billing_address[company] : customer_billing_address_company"
+#    - "billing_address[line1] : customer_billing_address_line1"
+#    - "billing_address[city] : customer_billing_address_city"
+#    - "billing_address[state] : customer_billing_address_state"
+#    - "billing_address[zip] : customer_billing_address_zip"
+#    - "billing_address[country] : customer_billing_address_country"
 
 
 
@@ -63,28 +65,23 @@ ChargeBee Automation Configuration:
   Subscriptions_SourceFile:
     #Moille validation requires "Subscriptions" & "Transactions" files
     #Recurly validation requires "Addon_Columns" & "Coupon_Columns" files
-    "/Users/cb-muneendra/Desktop/dfsa_sub_DS1.xlsx"
+    "/Users/cb-muneendra/Desktop/Revtaxgroup_Subscriptions_DS2.xlsx"
 
   Subscriptions_DestinationFile:
-    "/Users/cb-muneendra/Desktop/dfsa_sub_DS2.xlsx"
+    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/Revtaxgroup_DS3_AllSubscriptions.xlsx"
 
   Subscriptions_KeyColumns:
     - "subscription[id] : subscription_id"
 
   Subscriptions_Columns:
-    - "subscription[id] : subscription_id"
-    - "subscription[cf_contract_number_sf] : subscription_cf_contract_number_sf"
     - "customer[id] : customer_id"
-    - "subscription[cf_siren] : subscription_cf_siren"
-    - "subscription[cf_original_opportunity_sf] : subscription_cf_original_opportunity_sf"
+    - "subscription[id] : subscription_id"
     - "subscription[status] : subscription_status"
-    - "subscription[created_at] : subscription_created_at"
     - "subscription[start_date] : subscription_start_date"
     - "subscription[started_at] : subscription_started_at"
     - "subscription[current_term_start] : subscription_current_term_start"
     - "subscription[current_term_end] : subscription_current_term_end"
-    - "subscription[cancelled_at] : subscription_cancelled_at"
-    - "subscription_items[item_price_id][0] : item_price_id[0]"
+    - "subscription_items[item_price_id][0] : item_item_price_id[0]"
     - "subscription_items[quantity][0] : item_quantity[0]"
     - "subscription_items[unit_price][0] : item_unit_price[0]"
 
@@ -96,17 +93,16 @@ ChargeBee Automation Configuration:
   Invoices_SourceFile:
     #Moille validation requires "invoice-lines", "Subscriptions" & "Transactions" files and need to configure scheduled for date
     #Recurly validation requires "Invoice_Adjustment_Columns" & "Payment_Merge_Columns" files
-    "/Users/cb-muneendra/Desktop/stormboard_invoice_expected.xlsx"
+    "/Users/cb-muneendra/Desktop/Revtaxgroup_Invoices_DS2.xlsx"
 
   Invoices_DestinationFile:
-    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/stormboard_AllInvoices.xlsx"
+    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/Revtaxgroup_DS3_AllInvoices.xlsx"
 
   Invoices_KeyColumns:
     - "invoice[id] : invoice_id"
 
   Invoices_Columns:
     - "invoice[id] : invoice_id"
-    - "invoice[currency_code] : invoice_currency_code"
     - "invoice[customer_id] : invoice_customer_id"
     - "invoice[subscription_id] : invoice_subscription_id"
     - "invoice[status] : invoice_status"
@@ -115,14 +111,18 @@ ChargeBee Automation Configuration:
     - "line_items[entity_type][0] : line_items_entity_type[0]"
     - "line_items[entity_id][0] : line_items_entity_id[0]"
     - "line_items[description][0] : line_items_description[0]"
-    - "line_items[quantity][0] : line_items_quantity[0]"
     - "line_items[date_from][0] : line_items_date_from[0]"
     - "line_items[date_to][0] : line_items_date_to[0]"
+    - "line_items[quantity][0] : line_items_quantity[0]"
+    - "line_items[unit_amount][0] : line_items_unit_amount[0]"
     - "line_items[amount][0] : line_items_amount[0]"
     - "payments[amount][0] : payments_txn_amount[0]"
     - "payments[date][0] : payments_txn_date[0]"
+    - "billing_address[line1] : invoice_billing_address_line1"
 
   Date_Columns:
+    - "line_items[date_from][0] : line_items_date_from[0]"
+    - "line_items[date_to][0] : line_items_date_to[0]"
     - "subscription[start_date] : subscription_start_date"
     - "invoice[date] : invoice[date]"
     - "line_items[date_from][0] : line_items[date_from][0]"
