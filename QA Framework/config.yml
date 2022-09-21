@@ -1,9 +1,9 @@
 ChargeBee Automation Configuration:
   Site: 'test'
-  ClientName: 'microshareltd_uk'
+  ClientName: 'microshareltd_us'
 
   Customers_Validation: True
-  Subscriptions_Validation: False
+  Subscriptions_Validation: True
   Invoices_Validation: False
 
   IsRecurly: False
@@ -26,7 +26,7 @@ ChargeBee Automation Configuration:
     #Recurly validation requires "CustomerAddressOfAccount" & "CustomerAddressOfBilling" files
     "/Users/cb-muneendra/Downloads/Microshare_QA - Customers-US.csv"
   Customers_DestinationFile:
-    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/microshareltd_uk_DS3_AllCustomers.xlsx"
+    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/microshareltd_us_DS3_AllCustomers.xlsx"
 
   Customers_KeyColumns:
     - "customer[id] : customer_id"
@@ -52,10 +52,10 @@ ChargeBee Automation Configuration:
   Subscriptions_SourceFile:
     #Moille validation requires "Subscriptions" & "Transactions" files
     #Recurly validation requires "Addon_Columns" & "Coupon_Columns" files
-    "/Users/cb-muneendra/Downloads/Microshare_QA - Subscriptions-UK.csv"
+    "/Users/cb-muneendra/Downloads/Microshare_QA - Subscriptions-US.csv"
 
   Subscriptions_DestinationFile:
-    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/microshareltd_uk_DS3_AllSubscriptions.xlsx"
+    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/microshareltd_us_DS3_AllSubscriptions.xlsx"
 
   Subscriptions_KeyColumns:
     - "subscription[id] : subscription_id"
@@ -88,7 +88,7 @@ ChargeBee Automation Configuration:
     "/Users/cb-muneendra/Downloads/Microshare_QA - Invoice-UK.csv"
 
   Invoices_DestinationFile:
-    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/microshareltd_uk_DS3_AllInvoices.xlsx"
+    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/microshareltd_us_DS3_AllInvoices.xlsx"
 
   Invoices_KeyColumns:
     - "invoice[id] : invoice_id"
