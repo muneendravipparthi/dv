@@ -2,7 +2,7 @@ ChargeBee Automation Configuration:
   Site: 'test'
   ClientName: 'microshareltd_us'
 
-  Customers_Validation: True
+  Customers_Validation: False
   Subscriptions_Validation: True
   Invoices_Validation: False
 
@@ -89,7 +89,7 @@ ChargeBee Automation Configuration:
     - "discounts[apply_on][0] : discount_apply_on[0]"
     - "discounts[duration_type][0] : discount_duration_type[0]"
     - "discounts[amount][0] : discount_amount[0]"
-    - "coupon_ids[0] : discount_id[0]"
+    - "coupon_ids[0] : subscription_coupon"
 
 
 
