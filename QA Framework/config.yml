@@ -1,6 +1,6 @@
 ChargeBee Automation Configuration:
   Site: 'test'
-  ClientName: 'microshareltd_uk'
+  ClientName: 'microshareltd_us'
 
   Customers_Validation: True
   Subscriptions_Validation: False
