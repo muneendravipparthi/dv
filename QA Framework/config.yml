@@ -1,9 +1,9 @@
 ChargeBee Automation Configuration:
   Site: 'test'
-  ClientName: 'stormboard'
+  ClientName: 'Faceup'
 
-  Customers_Validation: False
-  Subscriptions_Validation: True
+  Customers_Validation: True
+  Subscriptions_Validation: False
   Invoices_Validation: False
 
   IsRecurly: False
@@ -24,37 +24,50 @@ ChargeBee Automation Configuration:
   Customers_SourceFile:
     #Moille validation requires "Customers" & "FinalPayments" files
     #Recurly validation requires "CustomerAddressOfAccount" & "CustomerAddressOfBilling" files
-    "/Users/cb-muneendra/Desktop/Leeto_Live_Customers_expected.xlsx"
+    "/Users/cb-muneendra/Downloads/Chargebee Migration Template (PC 2.0)_faceup - Account hierarchy .csv"
   Customers_DestinationFile:
-    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/Leeto_AllCustomers.xlsx"
+    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/Faceup_DS3_AllCustomers.xlsx"
 
   Customers_KeyColumns:
     - "customer[id] : customer_id"
 
   Customers_Columns:
-    - "customer[id] : customer_id"
-    - "customer[created_at] : customer_created_at"
-    - "customer[first_name] : customer_first_name"
-    - "customer[last_name] : customer_last_name"
-    - "customer[company] : customer_company"
-    - "customer[preferred_currency_code] : customer_preferred_currency_code"
-    - "customer[email] : customer_email"
-    - "customer[allow_direct_debit] : customer_allow_direct_debit"
-    - "customer[auto_collection] : customer_auto_collection"
-    - "customer[taxability] : customer_taxability"
-    - "customer[net_term_days] : customer_net_term_days"
-    - "customer[locale] : customer_locale"
-    - "billing_address[first_name] : customer_billing_address_first_name"
-    - "billing_address[last_name] : customer_billing_address_last_name"
-    - "billing_address[email] : customer_billing_address_email"
-    - "billing_address[company] : customer_billing_address_company"
-    - "billing_address[line1] : customer_billing_address_line1"
-    - "billing_address[city] : customer_billing_address_city"
-    - "billing_address[state] : customer_billing_address_state"
-    - "billing_address[zip] : customer_billing_address_zip"
-    - "billing_address[country] : customer_billing_address_country"
-    - "customer[cf_siren] : customer_cf_siren"
+#    - "customer[id] : customer_id"
+#    - "customer[created_at] : customer_created_at"
+#    - "customer[first_name] : customer_first_name"
+#    - "customer[last_name] : customer_last_name"
+#    - "customer[phone] : customer_phone"
+#    - "customer[company] : customer_company"
+#    - "customer[preferred_currency_code] : customer_preferred_currency_code"
+#    - "customer[email] : customer_email"
+#    - "customer[auto_collection] : customer_auto_collection"
+#    - "customer[offline_payment_method] : customer_offline_payment_method"
+#    - "customer[taxability] : customer_taxability"
+#    - "customer[vat_number] : customer_vat_number"
+#    - "customer[net_term_days] : customer_net_term_days"
+#    - "customer[locale] : customer_locale"
+#    - "billing_address[first_name] : customer_billing_address_first_name"
+#    - "billing_address[last_name] : customer_billing_address_last_name"
+#    - "billing_address[email] : customer_billing_address_email"
+#    - "billing_address[company] : customer_billing_address_company"
+#    - "billing_address[phone] : customer_billing_address_phone"
+#    - "billing_address[line1] : customer_billing_address_line1"
+#    - "billing_address[city] : customer_billing_address_city"
+#    - "billing_address[zip] : customer_billing_address_zip"
+#    - "billing_address[country] : customer_billing_address_country"
 
+    - "customer[id] : customer_id"
+    - "customer[use_default_hierarchy_settings] : customer_use_default_hierarchy_settings"
+    - "parent_account_access[portal_edit_child_subscriptions] : customer_parent_account_access_portal_edit_child_subscriptions"
+    - "parent_account_access[portal_download_child_invoices] : customer_parent_account_access_portal_download_child_invoices"
+    - "parent_account_access[send_subscription_emails] : customer_parent_account_access_send_subscription_emails"
+    - "parent_account_access[send_payment_emails] : customer_parent_account_access_send_payment_emails"
+    - "parent_account_access[send_invoice_emails] : customer_parent_account_access_send_invoice_emails"
+    - "child_account_access[portal_edit_subscriptions] : customer_child_account_access_portal_edit_subscriptions"
+    - "child_account_access[portal_download_invoices] : customer_child_account_access_portal_download_invoices"
+    - "child_account_access[send_subscription_emails] : customer_child_account_access_send_subscription_emails"
+    - "child_account_access[send_payment_emails] : customer_child_account_access_send_payment_emails"
+    - "child_account_access[send_invoice_emails] : customer_child_account_access_send_invoice_emails"
 
 
   # ------------------   SUBSCRIPTIONS INFORMATION   ------------------
@@ -63,30 +76,44 @@ ChargeBee Automation Configuration:
   Subscriptions_SourceFile:
     #Moille validation requires "Subscriptions" & "Transactions" files
     #Recurly validation requires "Addon_Columns" & "Coupon_Columns" files
-    "/Users/cb-muneendra/Desktop/dfsa_sub_DS1.xlsx"
+    "/Users/cb-muneendra/Downloads/Chargebee Migration Template (PC 2.0)_faceup - Subscriptions for customers.csv"
 
   Subscriptions_DestinationFile:
-    "/Users/cb-muneendra/Desktop/dfsa_sub_DS2.xlsx"
+    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/Faceup_DS3_AllSubscriptions.xlsx"
 
   Subscriptions_KeyColumns:
     - "subscription[id] : subscription_id"
 
   Subscriptions_Columns:
-    - "subscription[id] : subscription_id"
-    - "subscription[cf_contract_number_sf] : subscription_cf_contract_number_sf"
     - "customer[id] : customer_id"
-    - "subscription[cf_siren] : subscription_cf_siren"
-    - "subscription[cf_original_opportunity_sf] : subscription_cf_original_opportunity_sf"
+    - "subscription[id] : subscription_id"
     - "subscription[status] : subscription_status"
     - "subscription[created_at] : subscription_created_at"
-    - "subscription[start_date] : subscription_start_date"
+    - "subscription[trial_start] : subscription_trial_start"
+    - "subscription[trial_end] : subscription_trial_end"
     - "subscription[started_at] : subscription_started_at"
     - "subscription[current_term_start] : subscription_current_term_start"
     - "subscription[current_term_end] : subscription_current_term_end"
     - "subscription[cancelled_at] : subscription_cancelled_at"
-    - "subscription_items[item_price_id][0] : item_price_id[0]"
+    - "subscription_items[item_price_id][0] : item_item_price_id[0]"
     - "subscription_items[quantity][0] : item_quantity[0]"
-    - "subscription_items[unit_price][0] : item_unit_price[0]"
+    - "item_tiers[item_price_id][0] : item_tiers_item_price_id[0]"
+    - "item_tiers[starting_unit][0] : item_tiers_starting_unit[0]"
+    - "item_tiers[ending_unit][0] : item_tiers_ending_unit[0]"
+    - "item_tiers[price][0] : item_tiers_price[0]"
+    - "item_tiers[item_price_id][1] : item_tiers_item_price_id[1]"
+    - "item_tiers[starting_unit][1] : item_tiers_starting_unit[1]"
+    - "item_tiers[ending_unit][1] : item_tiers_ending_unit[1]"
+    - "item_tiers[price][1] : item_tiers_price[1]"
+    - "item_tiers[item_price_id][2] : item_tiers_item_price_id[2]"
+    - "item_tiers[starting_unit][2] : item_tiers_starting_unit[2]"
+    - "item_tiers[ending_unit][2] : item_tiers_ending_unit[2]"
+    - "item_tiers[price][2] : item_tiers_price[2]"
+    - "item_tiers[item_price_id][3] : item_tiers_item_price_id[3]"
+    - "item_tiers[starting_unit][3] : item_tiers_starting_unit[3]"
+    - "item_tiers[price][3] : item_tiers_price[3]"
+    - "coupon_ids[0] : subscription_coupon"
+    - "subscription[po_number] : subscription_po_number"
 
 
 
@@ -96,10 +123,10 @@ ChargeBee Automation Configuration:
   Invoices_SourceFile:
     #Moille validation requires "invoice-lines", "Subscriptions" & "Transactions" files and need to configure scheduled for date
     #Recurly validation requires "Invoice_Adjustment_Columns" & "Payment_Merge_Columns" files
-    "/Users/cb-muneendra/Desktop/stormboard_invoice_expected.xlsx"
+    "/Users/cb-muneendra/Downloads/Chargebee Migration Template (PC 2.0)_faceup - Current term Invoice.csv"
 
   Invoices_DestinationFile:
-    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/stormboard_AllInvoices.xlsx"
+    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/Faceup_DS3_AllInvoices.xlsx"
 
   Invoices_KeyColumns:
     - "invoice[id] : invoice_id"
@@ -111,18 +138,40 @@ ChargeBee Automation Configuration:
     - "invoice[subscription_id] : invoice_subscription_id"
     - "invoice[status] : invoice_status"
     - "invoice[date] : invoice_date"
+    - "invoice[po_number] : invoice_po_number"
+    - "invoice[price_type] : invoice_price_type"
+    - "invoice[vat_number] : invoice_vat_number"
     - "invoice[total] : invoice_total"
+    - "invoice[due_date] : invoice_due_date"
+    - "invoice[net_term_days] : invoice_net_term_days"
+    - "line_items[id][0] : line_items_id[0]"
     - "line_items[entity_type][0] : line_items_entity_type[0]"
     - "line_items[entity_id][0] : line_items_entity_id[0]"
     - "line_items[description][0] : line_items_description[0]"
-    - "line_items[quantity][0] : line_items_quantity[0]"
     - "line_items[date_from][0] : line_items_date_from[0]"
     - "line_items[date_to][0] : line_items_date_to[0]"
+    - "line_items[quantity][0] : line_items_quantity[0]"
     - "line_items[amount][0] : line_items_amount[0]"
+    - "discounts[entity_type][0] : discounts_discount_type[0]"
+    - "discounts[amount][0] : discounts_discount_amount[0]"
+    - "discounts[entity_id][0] : discounts_entity_id[0]"
+    - "taxes[name][0] : line_items_taxes_tax_name[0]"
+    - "taxes[rate][0] : line_items_taxes_tax_rate[0]"
+    - "taxes[amount][0] : line_items_taxes_tax_amount[0]"
     - "payments[amount][0] : payments_txn_amount[0]"
     - "payments[date][0] : payments_txn_date[0]"
+    - "billing_address[first_name] : invoice_billing_address_first_name"
+    - "billing_address[last_name] : invoice_billing_address_last_name"
+    - "billing_address[email] : invoice_billing_address_email"
+    - "billing_address[company] : invoice_billing_address_company"
+    - "billing_address[phone] : invoice_billing_address_phone"
+    - "billing_address[line1] : invoice_billing_address_line1"
+    - "billing_address[zip] : invoice_billing_address_zip"
+    - "billing_address[country] : invoice_billing_address_country"
 
   Date_Columns:
+    - "line_items[date_from][0] : line_items_date_from[0]"
+    - "line_items[date_to][0] : line_items_date_to[0]"
     - "subscription[start_date] : subscription_start_date"
     - "invoice[date] : invoice[date]"
     - "line_items[date_from][0] : line_items[date_from][0]"
@@ -220,6 +269,7 @@ ChargeBee Automation Configuration:
     - 'lines.data[3].period.end : line_items[date_to][3]'
 
   Int_Columns:
+    - "billing_address[phone] : invoice_billing_address_phone"
     - "customer[phone] : customer_phone"
     - "billing_address[phone] : customer_billing_address_phone"
     - "payments[amount][0] : payments_txn_amount[0]"
@@ -300,6 +350,7 @@ ChargeBee Automation Configuration:
     - "subscription_items[unit_price][5] : item_unit_price[5]"
 
   Email_Columns:
+    - "billing_address[email] : invoice_billing_address_email"
     - "customer[email] : Email"
     - "customer[email] : customer_email"
     - "billing_address[email] : customer_billing_address_email"

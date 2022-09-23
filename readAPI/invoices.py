@@ -36,7 +36,7 @@ logger = logging.getLogger()
 # Now we are going to Set the threshold of logger to DEBUG
 logger.setLevel(logging.DEBUG)
 outputFile = "_DS3_AllInvoices.xlsx"
-RequireAPIExecution = True
+RequireAPIExecution = False
 
 
 class InvoiceExecution:
@@ -109,12 +109,12 @@ class InvoiceExecution:
             try:
                 if "invoice_discounts" in list(df_nested_list.head()):
                     df_splitdiscounts = pd.read_excel(excelDir + '/' + configs.get("clientName").data + outputFile)
-                    df_splitdiscounts = SplitHelper.invoice_discount_split(self, df_splitdiscounts)
+                    df_splitdiscounts = SplitHelper.invoice_discounts_split(self, df_splitdiscounts)
                     df_splitdiscounts.to_excel(excelDir + '/' + configs.get("clientName").data + outputFile,
                                                index=False)
             except Exception as e:
                 logger.info(e)
-                logger.error("exception at invoice_line_item_discounts:" + str(e))
+                logger.error("exception at invoice_discounts:" + str(e))
                 logger.exception(e)
 
             tdf = pd.read_excel(excelDir + '/' + configs.get("clientName").data + outputFile)
