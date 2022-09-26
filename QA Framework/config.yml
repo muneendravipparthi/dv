@@ -1,6 +1,6 @@
 ChargeBee Automation Configuration:
   Site: 'test'
-  ClientName: 'Tubules'
+  ClientName: 'mintago'
 
   Customers_Validation: False
   Subscriptions_Validation: True
