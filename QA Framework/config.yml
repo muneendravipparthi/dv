@@ -62,9 +62,10 @@ ChargeBee Automation Configuration:
     "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/FCUrban_DS3_AllSubscriptions.xlsx"
 
   Subscriptions_KeyColumns:
-    - "customer[id] : customer_id"
+    - "subscription[id] : subscription_id"
 
   Subscriptions_Columns:
+    - "subscription[id] : subscription_id"
     - "customer[id] : customer_id"
     - "subscription[status] : subscription_status"
     - "subscription[created_at] : subscription_created_at"
