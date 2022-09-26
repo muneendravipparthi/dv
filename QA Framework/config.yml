@@ -3,8 +3,8 @@ ChargeBee Automation Configuration:
   ClientName: 'mintago'
 
   Customers_Validation: False
-  Subscriptions_Validation: True
-  Invoices_Validation: False
+  Subscriptions_Validation: False
+  Invoices_Validation: True
 
   IsRecurly: False
   IsRecurlyDS1vsDS2: False
@@ -24,36 +24,30 @@ ChargeBee Automation Configuration:
   Customers_SourceFile:
     #Moille validation requires "Customers" & "FinalPayments" files
     #Recurly validation requires "CustomerAddressOfAccount" & "CustomerAddressOfBilling" files
-    "/Users/cb-muneendra/Desktop/Leeto_Live_Customers_expected.xlsx"
+    "/Users/cb-muneendra/Downloads/Chargebee Migration Template (PC 2.0)_Mintago (completed).xlsx - Customers with payment method.csv"
   Customers_DestinationFile:
-    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/Leeto_AllCustomers.xlsx"
+    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/mintago_DS3_AllCustomers.xlsx"
 
   Customers_KeyColumns:
-    - "customer[id] : customer_id"
+    - "customer[email] : customer_email"
 
   Customers_Columns:
-    - "customer[id] : customer_id"
-    - "customer[created_at] : customer_created_at"
+    - "ref : customer_id"
     - "customer[first_name] : customer_first_name"
     - "customer[last_name] : customer_last_name"
     - "customer[company] : customer_company"
-    - "customer[preferred_currency_code] : customer_preferred_currency_code"
     - "customer[email] : customer_email"
+    - "payment_method[type] : payment_method_type"
+    - "payment_method[gateway_account_id] : payment_method_gateway_account_id"
+    - "payment_method[reference_id] : payment_method_reference_id"
     - "customer[allow_direct_debit] : customer_allow_direct_debit"
     - "customer[auto_collection] : customer_auto_collection"
     - "customer[taxability] : customer_taxability"
-    - "customer[net_term_days] : customer_net_term_days"
-    - "customer[locale] : customer_locale"
     - "billing_address[first_name] : customer_billing_address_first_name"
     - "billing_address[last_name] : customer_billing_address_last_name"
     - "billing_address[email] : customer_billing_address_email"
     - "billing_address[company] : customer_billing_address_company"
-    - "billing_address[line1] : customer_billing_address_line1"
-    - "billing_address[city] : customer_billing_address_city"
-    - "billing_address[state] : customer_billing_address_state"
-    - "billing_address[zip] : customer_billing_address_zip"
     - "billing_address[country] : customer_billing_address_country"
-    - "customer[cf_siren] : customer_cf_siren"
 
 
 
@@ -63,30 +57,32 @@ ChargeBee Automation Configuration:
   Subscriptions_SourceFile:
     #Moille validation requires "Subscriptions" & "Transactions" files
     #Recurly validation requires "Addon_Columns" & "Coupon_Columns" files
-    "/Users/cb-muneendra/Desktop/dfsa_sub_DS1.xlsx"
+    "/Users/cb-muneendra/Downloads/Chargebee Migration Template (PC 2.0)_Mintago (completed).xlsx - sub import.csv"
 
   Subscriptions_DestinationFile:
-    "/Users/cb-muneendra/Desktop/dfsa_sub_DS2.xlsx"
+    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/mintago_DS3_AllSubscriptions.xlsx"
 
   Subscriptions_KeyColumns:
     - "subscription[id] : subscription_id"
 
   Subscriptions_Columns:
-    - "subscription[id] : subscription_id"
-    - "subscription[cf_contract_number_sf] : subscription_cf_contract_number_sf"
     - "customer[id] : customer_id"
-    - "subscription[cf_siren] : subscription_cf_siren"
-    - "subscription[cf_original_opportunity_sf] : subscription_cf_original_opportunity_sf"
+    - "subscription[id] : subscription_id"
     - "subscription[status] : subscription_status"
     - "subscription[created_at] : subscription_created_at"
-    - "subscription[start_date] : subscription_start_date"
     - "subscription[started_at] : subscription_started_at"
     - "subscription[current_term_start] : subscription_current_term_start"
     - "subscription[current_term_end] : subscription_current_term_end"
     - "subscription[cancelled_at] : subscription_cancelled_at"
-    - "subscription_items[item_price_id][0] : item_price_id[0]"
+    - "subscription_items[item_price_id][0] : item_item_price_id[0]"
     - "subscription_items[quantity][0] : item_quantity[0]"
     - "subscription_items[unit_price][0] : item_unit_price[0]"
+    - "contract_term[created_at] : subscription_contract_term_created_at"
+    - "contract_term[contract_start] : subscription_contract_term_contract_start"
+    - "contract_term[billing_cycle] : subscription_contract_term_billing_cycle"
+    - "contract_term[action_at_term_end]  : subscription_contract_term_action_at_term_end"
+    - "contract_term[cancellation_cutoff_period] : subscription_contract_term_cancellation_cutoff_period"
+    - "[contract_term_billing_cycle_on_renewal] : subscription_contract_term_billing_cycle_on_renewal"
 
 
 
@@ -96,10 +92,10 @@ ChargeBee Automation Configuration:
   Invoices_SourceFile:
     #Moille validation requires "invoice-lines", "Subscriptions" & "Transactions" files and need to configure scheduled for date
     #Recurly validation requires "Invoice_Adjustment_Columns" & "Payment_Merge_Columns" files
-    "/Users/cb-muneendra/Desktop/stormboard_invoice_expected.xlsx"
+    "/Users/cb-muneendra/Downloads/Chargebee Migration Template (PC 2.0)_Mintago (completed).xlsx - invoice-import.csv"
 
   Invoices_DestinationFile:
-    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/stormboard_AllInvoices.xlsx"
+    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/mintago_DS3_AllInvoices.xlsx"
 
   Invoices_KeyColumns:
     - "invoice[id] : invoice_id"
@@ -111,18 +107,27 @@ ChargeBee Automation Configuration:
     - "invoice[subscription_id] : invoice_subscription_id"
     - "invoice[status] : invoice_status"
     - "invoice[date] : invoice_date"
+    - "invoice[price_type] : invoice_price_type"
     - "invoice[total] : invoice_total"
     - "line_items[entity_type][0] : line_items_entity_type[0]"
     - "line_items[entity_id][0] : line_items_entity_id[0]"
     - "line_items[description][0] : line_items_description[0]"
-    - "line_items[quantity][0] : line_items_quantity[0]"
     - "line_items[date_from][0] : line_items_date_from[0]"
     - "line_items[date_to][0] : line_items_date_to[0]"
+    - "line_items[quantity][0] : line_items_quantity[0]"
+    - "line_items[unit_amount][0] : line_items_unit_amount[0]"
     - "line_items[amount][0] : line_items_amount[0]"
+#    - "line_items[tax1_name][0] : line_items_taxes_tax_name[0]"
+    - "line_items[tax1_amount][0] : line_items_tax_amount[0]"
+    - "taxes[name][0] : line_items_taxes_tax_name[0]"
+    - "taxes[rate][0] : line_items_taxes_tax_rate[0]"
+    - "taxes[amount][0] : line_items_taxes_tax_amount[0]"
     - "payments[amount][0] : payments_txn_amount[0]"
     - "payments[date][0] : payments_txn_date[0]"
 
   Date_Columns:
+    - "line_items[date_from][0] : line_items_date_from[0]"
+    - "line_items[date_to][0] : line_items_date_to[0]"
     - "subscription[start_date] : subscription_start_date"
     - "invoice[date] : invoice[date]"
     - "line_items[date_from][0] : line_items[date_from][0]"
