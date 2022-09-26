@@ -1,10 +1,10 @@
 ChargeBee Automation Configuration:
   Site: 'test'
-  ClientName: 'Tubules'
+  ClientName: 'Rewaatech'
 
-  Customers_Validation: True
-  Subscriptions_Validation: True
-  Invoices_Validation: False
+  Customers_Validation: False
+  Subscriptions_Validation: False
+  Invoices_Validation: True
 
   IsRecurly: False
   IsRecurlyDS1vsDS2: False
@@ -24,19 +24,19 @@ ChargeBee Automation Configuration:
   Customers_SourceFile:
     #Moille validation requires "Customers" & "FinalPayments" files
     #Recurly validation requires "CustomerAddressOfAccount" & "CustomerAddressOfBilling" files
-    "/Users/cb-muneendra/Downloads/Tubules_Chargebee Migration Template (PC 2.0) - Customers.csv"
+    "/Users/cb-muneendra/Downloads/Rewaatech - Chargebee Migration Template (PC 2.0) - Customers-phase 5.csv"
   Customers_DestinationFile:
-    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/Tubules_DS3_AllSubscriptions.xlsx"
+    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/Rewaatech_DS3_AllCustomers.xlsx"
 
   Customers_KeyColumns:
     - "customer[id] : customer_id"
 
   Customers_Columns:
     - "customer[id] : customer_id"
-    - "customer[created_at] : customer_created_at"
+#    - "customer[created_at] : customer_created_at"
     - "customer[first_name] : customer_first_name"
     - "customer[last_name] : customer_last_name"
-    - "customer[preferred_currency_code] : customer_preferred_currency_code"
+#    - "customer[preferred_currency_code] : customer_preferred_currency_code"
     - "customer[email] : customer_email"
     - "payment_method[type] : payment_method_type"
     - "payment_method[gateway_account_id] : payment_method_gateway_account_id"
@@ -44,6 +44,12 @@ ChargeBee Automation Configuration:
     - "customer[allow_direct_debit] : customer_allow_direct_debit"
     - "customer[auto_collection] : customer_auto_collection"
     - "customer[locale] : customer_locale"
+    - "billing_address[line1] : customer_billing_address_line1"
+    - "billing_address[city] : customer_billing_address_city"
+    - "billing_address[state_code] : customer_billing_address_state_code"
+    - "billing_address[state] : customer_billing_address_state"
+    - "billing_address[zip] : customer_billing_address_zip"
+    - "billing_address[country] : customer_billing_address_country"
 
 
 
@@ -53,10 +59,10 @@ ChargeBee Automation Configuration:
   Subscriptions_SourceFile:
     #Moille validation requires "Subscriptions" & "Transactions" files
     #Recurly validation requires "Addon_Columns" & "Coupon_Columns" files
-    "/Users/cb-muneendra/Downloads/Tubules_Chargebee Migration Template (PC 2.0) - Subscriptions for customers.csv"
+    "/Users/cb-muneendra/Downloads/Rewaatech - Chargebee Migration Template (PC 2.0) - subs-phase5.csv"
 
   Subscriptions_DestinationFile:
-    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/Tubules_DS3_AllSubscriptions.xlsx"
+    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/Rewaatech_DS3_AllSubscriptions.xlsx"
 
   Subscriptions_KeyColumns:
     - "subscription[id] : subscription_id"
@@ -71,9 +77,26 @@ ChargeBee Automation Configuration:
     - "subscription[started_at] : subscription_started_at"
     - "subscription[current_term_start] : subscription_current_term_start"
     - "subscription[current_term_end] : subscription_current_term_end"
-    - "subscription_items[item_price_id][0] : item_item_price_id[0]"
-    - "subscription_items[quantity][0] : item_quantity[0]"
-    - "subscription_items[unit_price][0] : item_unit_price[0]"
+    - "subscription[cancelled_at] : subscription_cancelled_at"
+    - "subscription[plan_id] : subscription_plan_id"
+    - "subscription_items[quantity][0] : subscription_plan_quantity"
+    - "subscription_items[unit_price][0] : subscription_plan_unit_price"
+    - "subscription_items[item_price_id][1] : addon_id[0]"
+    - "subscription_items[quantity][1] : addon_quantity[0]"
+    - "subscription_items[unit_price][1] : addon_unit_price[0]"
+    - "subscription_items[item_price_id][2] : addon_id[1]"
+    - "subscription_items[quantity][2] : addon_quantity[1]"
+    - "subscription_items[unit_price][2] : addon_unit_price[1]"
+    - "shipping_address[first_name] : subscription_shipping_address_first_name"
+    - "shipping_address[last_name] : subscription_shipping_address_last_name"
+    - "shipping_address[email] : subscription_shipping_address_email"
+    - "shipping_address[company] : subscription_shipping_address_company"
+    - "shipping_address[phone] : subscription_shipping_address_phone"
+    - "shipping_address[line1] : subscription_shipping_address_line1"
+    - "shipping_address[line2] : subscription_shipping_address_line2"
+    - "shipping_address[city] : subscription_shipping_address_city"
+    - "shipping_address[zip] : subscription_shipping_address_zip"
+    - "shipping_address[country] : subscription_shipping_address_country"
 
 
 
@@ -83,10 +106,10 @@ ChargeBee Automation Configuration:
   Invoices_SourceFile:
     #Moille validation requires "invoice-lines", "Subscriptions" & "Transactions" files and need to configure scheduled for date
     #Recurly validation requires "Invoice_Adjustment_Columns" & "Payment_Merge_Columns" files
-    "/Users/cb-muneendra/Desktop/stormboard_invoice_expected.xlsx"
+    "/Users/cb-muneendra/Git/cb_data_validation/utils/Rewaatech_Inv_DS2.xlsx"
 
   Invoices_DestinationFile:
-    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/stormboard_AllInvoices.xlsx"
+    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/Rewaatech_DS3_AllInvoices.xlsx"
 
   Invoices_KeyColumns:
     - "invoice[id] : invoice_id"
@@ -98,18 +121,38 @@ ChargeBee Automation Configuration:
     - "invoice[subscription_id] : invoice_subscription_id"
     - "invoice[status] : invoice_status"
     - "invoice[date] : invoice_date"
+    - "invoice[price_type] : invoice_price_type"
     - "invoice[total] : invoice_total"
     - "line_items[entity_type][0] : line_items_entity_type[0]"
     - "line_items[entity_id][0] : line_items_entity_id[0]"
     - "line_items[description][0] : line_items_description[0]"
-    - "line_items[quantity][0] : line_items_quantity[0]"
     - "line_items[date_from][0] : line_items_date_from[0]"
     - "line_items[date_to][0] : line_items_date_to[0]"
     - "line_items[amount][0] : line_items_amount[0]"
+    - "line_items[item_level_discount1_amount][0] : line_items_item_level_discount_amount[0]"
+    - "line_items[tax1_amount][0] : line_items_tax_amount[0]"
+    - "taxes[name][0] : line_items_taxes_tax_name[0]"
+    - "taxes[rate][0] : line_items_taxes_tax_rate[0]"
+    - "taxes[amount][0] : line_items_taxes_tax_amount[0]"
     - "payments[amount][0] : payments_txn_amount[0]"
     - "payments[date][0] : payments_txn_date[0]"
+    - "line_items[entity_type][1] : line_items_entity_type[1]"
+    - "line_items[entity_id][1] : line_items_entity_id[1]"
+    - "line_items[description][1] : line_items_description[1]"
+    - "line_items[date_from][1] : line_items_date_from[1]"
+    - "line_items[date_to][1] : line_items_date_to[1]"
+    - "line_items[quantity][1] : line_items_quantity[1]"
+    - "line_items[unit_amount][1] : line_items_unit_amount[1]"
+    - "line_items[amount][1] : line_items_amount[1]"
+    - "line_items[item_level_discount1_amount][1] : line_items_item_level_discount_amount[1]"
+    - "line_items[tax1_amount][1] : line_items_tax_amount[1]"
+    - "billing_address[country] : invoice_billing_address_country"
 
   Date_Columns:
+    - "line_items[date_from][0] : line_items_date_from[0]"
+    - "line_items[date_to][0] : line_items_date_to[0]"
+    - "line_items[date_from][1] : line_items_date_from[1]"
+    - "line_items[date_to][1] : line_items_date_to[1]"
     - "subscription[start_date] : subscription_start_date"
     - "invoice[date] : invoice[date]"
     - "line_items[date_from][0] : line_items[date_from][0]"
