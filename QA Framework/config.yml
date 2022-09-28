@@ -24,29 +24,34 @@ ChargeBee Automation Configuration:
   Customers_SourceFile:
     #Moille validation requires "Customers" & "FinalPayments" files
     #Recurly validation requires "CustomerAddressOfAccount" & "CustomerAddressOfBilling" files
-    "/Users/cb-muneendra/Desktop/QA _FC Urban_DS2_Customers.xlsx"
+    "/Users/cb-muneendra/Downloads/QA _Fc Urban - Customers Data.csv"
   Customers_DestinationFile:
     "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/FCUrban_DS3_AllCustomers.xlsx"
 
   Customers_KeyColumns:
-    - "customer[id] : customer_id"
+    - "Customer_Id : customer_id"
 
   Customers_Columns:
-    - "customer[id] : customer_id"
-    - "OGcustomer[created_at] : customer_created_at"
-    - "customer[first_name] : customer_first_name"
-    - "customer[last_name] : customer_last_name"
-    - "customer[email] : customer_email"
-    - "OGpayment_method[type] : customer_payment_method_type"
-    - "Ogpayment_method[reference_id] : customer_payment_method_reference_id"
-    - "billing_address[first_name] : customer_billing_address_first_name"
-    - "billing_address[last_name] : customer_billing_address_last_name"
-    - "billing_address[email] : customer_billing_address_email"
-    - "billing_address[line1] : customer_billing_address_line1"
-    - "billing_address[line2] : customer_billing_address_line2"
-    - "billing_address[city] : customer_billing_address_city"
-    - "billing_address[zip] : customer_billing_address_zip"
-    - "billing_address[country] : customer_billing_address_country"
+    - "Customer_Id : customer_id"
+    - "Email : customer_email"
+    - "First_Name : customer_first_name"
+    - "Last_Name : customer_last_name"
+    - "Company : customer_company"
+    - "Phone : customer_phone"
+    - "Billing_Address_Line1 : customer_billing_address_line1"
+    - "Billing_Address_Line2 : customer_billing_address_line2"
+    - "Billing_Address_City : customer_billing_address_city"
+    - "Billing_Address_State : customer_billing_address_state"
+    - "Billing_Address_Country : customer_billing_address_country"
+    - "Billing_Address_Zip : customer_billing_address_zip"
+    - "Auto_Collection : customer_auto_collection"
+    - "Created_At : customer_created_at"
+    - "Billing_Address_State_Code : customer_billing_address_state_code"
+    - "Billing_Address_First_Name : customer_billing_address_first_name"
+    - "Billing_Address_Last_Name : customer_billing_address_last_name"
+    - "Billing_Address_Email : customer_billing_address_email"
+    - "Billing_Address_Company : customer_billing_address_company"
+    - "Billing_Address_Phone : customer_billing_address_phone"
 
 
 
@@ -56,7 +61,7 @@ ChargeBee Automation Configuration:
   Subscriptions_SourceFile:
     #Moille validation requires "Subscriptions" & "Transactions" files
     #Recurly validation requires "Addon_Columns" & "Coupon_Columns" files
-    "/Users/cb-muneendra/Downloads/QA _FC Urban - Subscription Data.csv"
+    "/Users/cb-muneendra/Downloads/QA _Fc Urban - Subscriptions data.csv"
 
   Subscriptions_DestinationFile:
     "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/FCUrban_DS3_AllSubscriptions.xlsx"
@@ -74,12 +79,13 @@ ChargeBee Automation Configuration:
     - "subscription[current_term_end] : subscription_current_term_end"
     - "subscription_items[item_price_id][0] : item_item_price_id[0]"
     - "subscription_items[unit_price][0] : item_unit_price[0]"
-    - "Billing_Street_Address_1 : customer_billing_address_line1"
-    - "Billing_Street_Address_2 : customer_billing_address_line2"
-    - "Billing_City : customer_billing_address_city"
-    - "Billing_ZIP_Code : customer_billing_address_zip"
-    - "Billing_E-mail_Address : customer_billing_address_email"
-    - "Billing_Country : customer_billing_address_country"
+    - "subscription_items[quantity][0] : item_quantity[0]"
+#    - "Billing_Street_Address_1 : customer_billing_address_line1"
+#    - "Billing_Street_Address_2 : customer_billing_address_line2"
+#    - "Billing_City : customer_billing_address_city"
+#    - "Billing_ZIP_Code : customer_billing_address_zip"
+#    - "Billing_E-mail_Address : customer_billing_address_email"
+#    - "Billing_Country : customer_billing_address_country"
 
 
 
