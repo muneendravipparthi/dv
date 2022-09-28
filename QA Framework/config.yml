@@ -1,9 +1,9 @@
 ChargeBee Automation Configuration:
   Site: 'test'
-  ClientName: 'Numerade_P2_B2'
+  ClientName: 'Numerade'
 
-  Customers_Validation: True
-  Subscriptions_Validation: False
+  Customers_Validation: False
+  Subscriptions_Validation: True
   Invoices_Validation: False
 
   IsRecurly: False
@@ -53,7 +53,7 @@ ChargeBee Automation Configuration:
   # Mapping Source Columns vs : Destination Columns
 
   Subscriptions_SourceFile:
-    "/Users/cb-muneendra/Git/cb_data_validation/utils/numerade_test_subs_DS2.xlsx"
+    "/Users/cb-muneendra/Downloads/numerade_test_GBP_subs_correction_QA - ds2.csv"
 
   Subscriptions_DestinationFile:
     "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/numerade_DS3_AllSubscriptions.xlsx"
