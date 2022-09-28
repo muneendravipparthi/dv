@@ -1,6 +1,6 @@
 ChargeBee Automation Configuration:
   Site: 'test'
-  ClientName: 'Rewaatech'
+  ClientName: 'Rewaatech_inv-p4(2)-fixed'
 
   Customers_Validation: False
   Subscriptions_Validation: False
@@ -24,7 +24,7 @@ ChargeBee Automation Configuration:
   Customers_SourceFile:
     #Moille validation requires "Customers" & "FinalPayments" files
     #Recurly validation requires "CustomerAddressOfAccount" & "CustomerAddressOfBilling" files
-    "/Users/cb-muneendra/Downloads/Rewaatech - Chargebee Migration Template (PC 2.0) - Customers-phase 5.csv"
+    "/Users/cb-muneendra/Downloads/Rewaatech - Chargebee Migration Template (PC 2.0) - customers-phase4.csv"
   Customers_DestinationFile:
     "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/Rewaatech_DS3_AllCustomers.xlsx"
 
@@ -59,7 +59,7 @@ ChargeBee Automation Configuration:
   Subscriptions_SourceFile:
     #Moille validation requires "Subscriptions" & "Transactions" files
     #Recurly validation requires "Addon_Columns" & "Coupon_Columns" files
-    "/Users/cb-muneendra/Downloads/Rewaatech - Chargebee Migration Template (PC 2.0) - subs-phase5.csv"
+    "/Users/cb-muneendra/Downloads/Rewaatech - Chargebee Migration Template (PC 2.0) - subs-phase4.csv"
 
   Subscriptions_DestinationFile:
     "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/Rewaatech_DS3_AllSubscriptions.xlsx"
@@ -106,7 +106,7 @@ ChargeBee Automation Configuration:
   Invoices_SourceFile:
     #Moille validation requires "invoice-lines", "Subscriptions" & "Transactions" files and need to configure scheduled for date
     #Recurly validation requires "Invoice_Adjustment_Columns" & "Payment_Merge_Columns" files
-    "/Users/cb-muneendra/Git/cb_data_validation/utils/Rewaatech_Inv_DS2.xlsx"
+    "/Users/cb-muneendra/Downloads/Rewaatech - Chargebee Migration Template (PC 2.0) - inv-p4(2)-fixed.csv"
 
   Invoices_DestinationFile:
     "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/Rewaatech_DS3_AllInvoices.xlsx"
@@ -133,7 +133,7 @@ ChargeBee Automation Configuration:
     - "line_items[tax1_amount][0] : line_items_tax_amount[0]"
     - "taxes[name][0] : line_items_taxes_tax_name[0]"
     - "taxes[rate][0] : line_items_taxes_tax_rate[0]"
-    - "taxes[amount][0] : line_items_taxes_tax_amount[0]"
+    - "taxes[amount][0] : invoice_tax"
     - "payments[amount][0] : payments_txn_amount[0]"
     - "payments[date][0] : payments_txn_date[0]"
     - "line_items[entity_type][1] : line_items_entity_type[1]"
