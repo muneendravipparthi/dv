@@ -2,8 +2,8 @@ ChargeBee Automation Configuration:
   Site: 'test'
   ClientName: 'mintago'
 
-  Customers_Validation: False
-  Subscriptions_Validation: False
+  Customers_Validation: True
+  Subscriptions_Validation: True
   Invoices_Validation: True
 
   IsRecurly: False
