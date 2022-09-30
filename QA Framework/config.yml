@@ -1,6 +1,6 @@
 ChargeBee Automation Configuration:
-  Site: 'Test'
-  ClientName: 'thymetax'
+  Site: 'Live'
+  ClientName: 'fireflylearning'
 
   Customers_Validation: True
   Subscriptions_Validation: True
@@ -24,38 +24,33 @@ ChargeBee Automation Configuration:
   Customers_SourceFile:
     #Moille validation requires "Customers" & "FinalPayments" files
     #Recurly validation requires "CustomerAddressOfAccount" & "CustomerAddressOfBilling" files
-    "/Users/cb-muneendra/Downloads/Thymetax- Chargebee Migration Template (PC 2.0) - copy of customers.csv"
+    "/Users/cb-muneendra/Downloads/Firefly AU Test QA - Customers.csv"
   Customers_DestinationFile:
-    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/thymetax_DS3_AllCustomers.xlsx"
+    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/fireflylearning_DS3_AllCustomers.xlsx"
 
   Customers_KeyColumns:
     - "customer[id] : customer_id"
 
   Customers_Columns:
     - "customer[id] : customer_id"
+    - "customer[company] : customer_company"
+    - "customer[created_at] : customer_created_at"
+    - "customer[email] : customer_email"
     - "customer[first_name] : customer_first_name"
     - "customer[last_name] : customer_last_name"
-    - "customer[company] : customer_company"
-    - "customer[preferred_currency_code] : customer_preferred_currency_code"
-    - "customer[email] : customer_email"
-    - "payment_method[type] : customer_payment_method_type"
-    - "payment_method[gateway_account_id] : customer_payment_method_gateway_account_id"
-    - "payment_method[reference_id] : customer_payment_method_reference_id"
-    - "customer[allow_direct_debit] : customer_allow_direct_debit"
-    - "customer[auto_collection] : customer_auto_collection"
-    - "customer[taxability] : customer_taxability"
-    - "customer[net_term_days] : customer_net_term_days"
+    - "customer[phone] : customer_phone"
     - "billing_address[first_name] : customer_billing_address_first_name"
     - "billing_address[last_name] : customer_billing_address_last_name"
-    - "billing_address[company] : customer_billing_address_company"
+    - "billing_address[email] : customer_billing_address_email"
     - "billing_address[phone] : customer_billing_address_phone"
     - "billing_address[line1] : customer_billing_address_line1"
-    - "billing_address[line2] : customer_billing_address_line2"
-    - "billing_address[line3] : customer_billing_address_line3"
     - "billing_address[city] : customer_billing_address_city"
     - "billing_address[state] : customer_billing_address_state"
-    - "billing_address[zip] : customer_billing_address_zip"
     - "billing_address[country] : customer_billing_address_country"
+    - "billing_address[zip] : customer_billing_address_zip"
+    - "customer[auto_collection] : customer_auto_collection"
+    - "customer[net_term_days] : customer_net_term_days"
+    - "customer[taxability] : customer_taxability"
 
 
 
@@ -65,10 +60,10 @@ ChargeBee Automation Configuration:
   Subscriptions_SourceFile:
     #Moille validation requires "Subscriptions" & "Transactions" files
     #Recurly validation requires "Addon_Columns" & "Coupon_Columns" files
-    "/Users/cb-muneendra/Downloads/Thymetax- Chargebee Migration Template (PC 2.0) - copy of subs.csv"
+    "/Users/cb-muneendra/Downloads/Firefly AU Test QA - Subscriptions.csv"
 
   Subscriptions_DestinationFile:
-    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/thymetax_DS3_AllSubscriptions.xlsx"
+    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/fireflylearning_DS3_AllSubscriptions.xlsx"
 
   Subscriptions_KeyColumns:
     - "subscription[id] : subscription_id"
@@ -81,8 +76,16 @@ ChargeBee Automation Configuration:
     - "subscription[started_at] : subscription_started_at"
     - "subscription[current_term_start] : subscription_current_term_start"
     - "subscription[current_term_end] : subscription_current_term_end"
+    - "contract_term[created_at] : subscription_contract_term_created_at"
+    - "contract_term[contract_start] : subscription_contract_term_contract_start"
+    - "contract_term[billing_cycle] : subscription_contract_term_billing_cycle"
+#    - "contract_term[total_amount_raised] : subscription_contract_term_total_contract_value"
+    - "contract_term[action_at_term_end]  : subscription_contract_term_action_at_term_end"
+    - "contract_term[cancellation_cutoff_period] : subscription_contract_term_cancellation_cutoff_period"
+    - "subscription[contract_term_billing_cycle_on_renewal] : subscription_contract_term_billing_cycle_on_renewal"
     - "subscription_items[item_price_id][0] : item_item_price_id[0]"
     - "subscription_items[quantity][0] : item_quantity[0]"
+    - "subscription_items[unit_price][0] : item_unit_price[0]"
 
 
 
