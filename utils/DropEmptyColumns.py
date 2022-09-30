@@ -1,7 +1,7 @@
 # importing libraries
 import pandas as pd
 
-dataFile = '/Users/cb-muneendra/Downloads/Chargebee Migration Template (PC 2.0)_Mintago (completed).xlsx - invoice-import.csv'
+dataFile = '/Users/cb-muneendra/Downloads/Thymetax- Chargebee Migration Template (PC 2.0) - copy of subs.csv'
 
 if dataFile.endswith('csv'):
     df = pd.read_csv(dataFile)
