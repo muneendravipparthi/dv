@@ -60,7 +60,7 @@ ChargeBee Automation Configuration:
   Subscriptions_SourceFile:
     #Moille validation requires "Subscriptions" & "Transactions" files
     #Recurly validation requires "Addon_Columns" & "Coupon_Columns" files
-    "/Users/cb-muneendra/Downloads/Firefly AU Test QA - Subscriptions.csv"
+    "/Users/cb-muneendra/Downloads/Firefly AU LIVE QA - Subscriptions.csv"
 
   Subscriptions_DestinationFile:
     "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/fireflylearning_DS3_AllSubscriptions.xlsx"
