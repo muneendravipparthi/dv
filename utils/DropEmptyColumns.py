@@ -1,7 +1,7 @@
 # importing libraries
 import pandas as pd
 
-dataFile = '/Users/cb-muneendra/Git/cb_data_validation/utils/numerade_test_subs_DS2.xlsx'
+dataFile = '/Users/cb-muneendra/Downloads/numerade_test_cust_phase2_batch4_QA - DS2_batch1.csv'
 #
 
 if dataFile.endswith('csv'):
@@ -36,9 +36,9 @@ for col in list(df.head()):
     col = col.replace("_7", "[7]")
     col = col.replace("_8", "[8]")
     col = col.replace("_9", "[9]")
-    # col = col.replace("billing_address", "customer_billing_address")
-    col = col.replace("billing_address", "subscription_billing_address")
-    col = col.replace("shipping_address", "subscription_shipping_address")
+    col = col.replace("billing_address", "customer_billing_address")
+    # col = col.replace("billing_address", "subscription_billing_address")
+    # col = col.replace("shipping_address", "subscription_shipping_address")
     # col = col.replace("billing_address", "invoice_billing_address")
     # col = col.replace("shipping_address", "invoice_shipping_address")
     print(col)

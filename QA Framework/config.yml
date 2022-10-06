@@ -1,9 +1,9 @@
 ChargeBee Automation Configuration:
-  Site: 'test'
-  ClientName: 'Numerade'
+  Site: 'Test'
+  ClientName: 'Numerade_phase2_batch4'
 
-  Customers_Validation: False
-  Subscriptions_Validation: True
+  Customers_Validation: True
+  Subscriptions_Validation: False
   Invoices_Validation: False
 
   IsRecurly: False
@@ -22,29 +22,28 @@ ChargeBee Automation Configuration:
   # Mapping Source Columns vs : Destination Columns
 
   Customers_SourceFile:
-    "/Users/cb-muneendra/Desktop/phase2_ds2_batch2.xlsx"
+#    "/Users/cb-muneendra/Downloads/numerade_test_cust_phase2_batch4_QA - DS2_batch1.csv"
+    "/Users/cb-muneendra/Downloads/numerade_test_cust_phase2_batch4_QA - DS2_bacth2.csv"
   Customers_DestinationFile:
-    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/numerade_DS3_AllCustomers.xlsx"
+    "/Users/cb-muneendra/Downloads/customers_numerade-test_06_Oct_2022_08_23_23/Customers.csv"
 
   Customers_KeyColumns:
-    - "customer[id] : customer_id"
+    - "customer[id] : Customer_Id"
 
   Customers_Columns:
-    - "customer[id] : customer_id"
-    - "Batch : Batch"
-    - "customer[created_at] : customer_created_at"
-    - "customer[first_name] : customer_first_name"
-    - "customer[last_name] : customer_last_name"
-    - "customer[email] : customer_email"
-    - "customer[preferred_currency_code] : customer_preferred_currency_code"
-    - "customer[meta_data] : customer_meta_data"
-    - "billing_address[first_name] : customer_billing_address_first_name"
-    - "billing_address[last_name] : customer_billing_address_last_name"
-    - "billing_address[line1] : customer_billing_address_line1"
-    - "billing_address[state] : customer_billing_address_state"
-    - "billing_address[zip] : customer_billing_address_zip"
-    - "billing_address[country] : customer_billing_address_country"
-    - "customer[auto_collection] : customer_auto_collection"
+    - "customer[id] : Customer_Id"
+    - "customer[created_at] : Created_At"
+    - "customer[first_name] : First_Name"
+    - "customer[last_name] : Last_Name"
+    - "customer[email] : Email"
+    - "customer[taxability] : Taxability"
+    - "billing_address[first_name] : Billing_Address_First_Name"
+    - "billing_address[last_name] : Billing_Address_Last_Name"
+    - "billing_address[line1] : Billing_Address_Line1"
+    - "billing_address[city] : Billing_Address_City"
+    - "billing_address[state] : Billing_Address_State"
+    - "billing_address[zip] : Billing_Address_Zip"
+    - "billing_address[country] : Billing_Address_Country"
 
 
 
@@ -301,6 +300,7 @@ ChargeBee Automation Configuration:
     - "billing_address[email] : customer_billing_address_email"
 
   Zip_Columns:
+    - "billing_address[zip] : Billing_Address_Zip"
     - "billing_address[zip] : customer_billing_address_zip"
     - "billing_address[zip] : Billing_Address_Zip"
     - "shipping_address[zip] : subscription_shipping_address_zip"
