@@ -3,16 +3,16 @@ ChargeBee Automation Configuration:
   ClientName: 'thedinnerdaily'
 
   Customers_Validation: False
-  Subscriptions_Validation: False
-  Invoices_Validation: True
+  Subscriptions_Validation: True
+  Invoices_Validation: False
 
   IsRecurly: False
   IsRecurlyDS1vsDS2: False
   IsMollie: False
   IsMollieDS1vsDS2: False
   type:
-    #    - DS1vsDS2
-    - DS2vsDS3
+     - DS2vsDS1
+#    - DS2vsDS3
   dateFormet:
     - "%Y-%m-%d %H:%M:%S"
   #    - "%Y-%m-%d %H:%M"
@@ -24,29 +24,24 @@ ChargeBee Automation Configuration:
   Customers_SourceFile:
     #Moille validation requires "Customers" & "FinalPayments" files
     #Recurly validation requires "CustomerAddressOfAccount" & "CustomerAddressOfBilling" files
-    "/Users/cb-muneendra/Downloads/the dinner daily - QA - DS2 Customers.csv"
+    "/Users/cb-muneendra/dataValidation/data_validation_qa/ds1Tods2/thedinnerdailyDS2_Cus.xlsx"
   Customers_DestinationFile:
-    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/thedinnerdaily_DS3_AllCustomers.xlsx"
+    "/Users/cb-muneendra/dataValidation/data_validation_qa/ds1Tods2/thedinnerdailyDS1_Cus.xlsx"
 
   Customers_KeyColumns:
-    - "customer[id] : customer_id"
+    - "customer[id] : id"
 
   Customers_Columns:
-    - "customer[id] : customer_id"
-    - "customer[created_at] : customer_created_at"
-    - "customer[first_name] : customer_first_name"
-    - "customer[last_name] : customer_last_name"
-    - "customer[email] : customer_email"
-    - "customer[taxability] : customer_taxability"
-    - "customer[preferred_currency_code] : customer_preferred_currency_code"
-    - "customer[meta_data] : customer_meta_data"
-    - "billing_address[first_name] : customer_billing_address_first_name"
-    - "billing_address[last_name] : customer_billing_address_last_name"
-    - "billing_address[line1] : customer_billing_address_line1"
-    - "billing_address[city] : customer_billing_address_city"
-    - "billing_address[state] : customer_billing_address_state"
-    - "billing_address[zip] : customer_billing_address_zip"
-    - "billing_address[country] : customer_billing_address_country"
+    - "customer[id] : id"
+    - "customer[created_at] : created"
+    - "customer[name] : name"
+    - "customer[email] : email"
+    - "customer[preferred_currency_code] : currency"
+    - "customer[meta_data] : metadata"
+    - "billing_address[line1] : address.line1"
+    - "billing_address[state] : address.state"
+    - "billing_address[zip] : address.postal_code"
+    - "billing_address[country] : address.country"
 
 
 
@@ -56,39 +51,30 @@ ChargeBee Automation Configuration:
   Subscriptions_SourceFile:
     #Moille validation requires "Subscriptions" & "Transactions" files
     #Recurly validation requires "Addon_Columns" & "Coupon_Columns" files
-    "/Users/cb-muneendra/Downloads/the dinner daily - QA - DS2 Subscriptions.csv"
+    "/Users/cb-muneendra/dataValidation/data_validation_qa/ds1Tods2/thedinnerdaily_DS2_Subs.xlsx"
 
   Subscriptions_DestinationFile:
-    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/thedinnerdaily_DS3_AllSubscriptions.xlsx"
+    "/Users/cb-muneendra/dataValidation/data_validation_qa/ds1Tods2/thedinnerdaily_DS1_Subs.xlsx"
 
   Subscriptions_KeyColumns:
-    - "subscription[id] : subscription_id"
+    - "subscription[id] : id"
 
   Subscriptions_Columns:
-    - "subscription[id] : subscription_id"
-    - "customer[id] : customer_id"
-    - "subscription[created_at] : subscription_created_at"
-    - "subscription_items[item_price_id][0] : item_item_price_id[0]"
-    - "subscription_items[quantity][0] : item_quantity[0]"
-    - "subscription_items[unit_price][0] : item_unit_price[0]"
-    - "subscription[status] : subscription_status"
-    - "subscription[trial_start] : subscription_trial_start"
-    - "subscription[trial_end] : subscription_trial_end"
-    - "subscription[started_at] : subscription_started_at"
-    - "subscription[current_term_start] : subscription_current_term_start"
-    - "subscription[current_term_end] : subscription_current_term_end"
-    - "subscription[cancelled_at] : subscription_cancelled_at"
-    - "subscription[auto_collection] : subscription_auto_collection"
-    - "coupon_ids[0] : subscription_coupon"
-    - "subscription[meta_data] : subscription_meta_data"
-    - "shipping_address[first_name] : subscription_shipping_address_first_name"
-    - "shipping_address[last_name] : subscription_shipping_address_last_name"
-    - "shipping_address[line1] : subscription_shipping_address_line1"
-    - "shipping_address[city] : subscription_shipping_address_city"
-    - "shipping_address[state] : subscription_shipping_address_state"
-    - "shipping_address[zip] : subscription_shipping_address_zip"
-    - "shipping_address[country] : subscription_shipping_address_country"
-
+    - "customer[id] : customer"
+    - "subscription[id] : id"
+    - "subscription[created_at] : created"
+    - "subscription_items[item_price_id][0] : items.data[0].price.id"
+    - "subscription_items[quantity][0] : items.data[0].quantity"
+    - "subscription_items[unit_price][0] : items.data[0].price.unit_amount"
+    - "subscription[status] : status"
+    - "subscription[trial_start] : trial_start"
+    - "subscription[trial_end] : trial_end"
+    - "subscription[started_at] : start_date"
+    - "subscription[current_term_start] : current_period_start"
+    - "subscription[current_term_end] : current_period_end"
+    - "subscription[auto_collection] : collection_method"
+    - "coupon_ids[0] : discount.coupon.id"
+    - "subscription[meta_data] : metadata"
 
 
   # ------------------   INVOICES INFORMATION   ------------------
@@ -135,6 +121,12 @@ ChargeBee Automation Configuration:
     - "payments[date][1] : payments_txn_date[1]"
 
   Date_Columns:
+    - "subscription[created_at] : created"
+    - "subscription[current_term_start] : current_period_start"
+    - "subscription[current_term_end] : current_period_end"
+    - "subscription[trial_start] : trial_start"
+    - "subscription[trial_end] : trial_end"
+    - "subscription[started_at] : start_date"
     - "line_items[date_from][0] : line_items_date_from[0]"
     - "line_items[date_to][0] : line_items_date_to[0]"
     - "subscription[start_date] : subscription_start_date"
