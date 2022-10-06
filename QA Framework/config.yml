@@ -20,11 +20,11 @@ ChargeBee Automation Configuration:
 
   # ------------------   CUSTOMER INFORMATION   ------------------
   # Mapping Source Columns vs : Destination Columns
-  ClientName: 'Numerade_p2_b1'
+  ClientName: 'Numerade_p2_b4.2'
   Customers_SourceFile:
-    "/Users/cb-muneendra/dataValidation/data_validation_qa/ds1Tods2/numerade_phase2_batch1DS1_Cus.xlsx"
+    "/Users/cb-muneendra/dataValidation/data_validation_qa/ds1Tods2/numerade_phase2_batch4DS1_Cus.xlsx"
   Customers_DestinationFile:
-    "/Users/cb-muneendra/dataValidation/data_validation_qa/ds1Tods2/numerade_phase2_batch1DS2_Cus.xlsx"
+    "/Users/cb-muneendra/dataValidation/data_validation_qa/ds1Tods2/numerade_phase2_batch4.2DS2_Cus.xlsx"
 
   Customers_KeyColumns:
     - "id : customer[id]"
