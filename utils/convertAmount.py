@@ -1,14 +1,14 @@
 import pandas as pd
 
-file = "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/Rewaatech_DS3_AllInvoices.xlsx"
+file = "/Users/cb-muneendra/Downloads/Rewaatech - Chargebee Migration Template (PC 2.0) - invoices-phase6.csv"
 
-df = pd.read_excel(file)
-# df = pd.read_csv(file)
+# df = pd.read_excel(file)
+df = pd.read_csv(file)
 
-clist = ["invoice_total", "line_items_amount[0]", "line_items_item_level_discount_amount[0]", "line_items_tax_amount[0]", "invoice_tax", "payments_txn_amount[0]", "line_items_unit_amount[1]", "line_items_amount[1]", "line_items_item_level_discount_amount[1]", "line_items_tax_amount[1]"]
+clist = ["invoice[total]", "line_items[amount][0]", "line_items[item_level_discount1_amount][0]", "line_items[tax1_amount][0]", "taxes[amount][0]", "payments[amount][0]", "line_items[unit_amount][1]", "line_items[amount][1]", "line_items[item_level_discount1_amount][1]", "line_items[tax1_amount][1]"]
 
 for col in clist:
-    df[col] = df[col].div(100)
-    # df[col] = df[col]*100
+    # df[col] = df[col].div(100)
+    df[col] = df[col]*100
 
-df.to_excel("updated_Rewaatech_DS3_AllInvoices.xlsx", index=False)
+df.to_excel("Chargebee Migration Template (PC 2.0) - invoices-phase6.xlsx", index=False)

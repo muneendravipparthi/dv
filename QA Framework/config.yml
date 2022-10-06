@@ -1,6 +1,6 @@
 ChargeBee Automation Configuration:
-  Site: 'test'
-  ClientName: 'Rewaatech_inv-p4(2)-fixed'
+  Site: 'Test'
+  ClientName: 'Rewaatech_phase6_SAR'
 
   Customers_Validation: False
   Subscriptions_Validation: False
@@ -24,7 +24,7 @@ ChargeBee Automation Configuration:
   Customers_SourceFile:
     #Moille validation requires "Customers" & "FinalPayments" files
     #Recurly validation requires "CustomerAddressOfAccount" & "CustomerAddressOfBilling" files
-    "/Users/cb-muneendra/Downloads/Rewaatech - Chargebee Migration Template (PC 2.0) - customers-phase4.csv"
+    "/Users/cb-muneendra/Downloads/Rewaatech - Chargebee Migration Template (PC 2.0) - customers-phase6.csv"
   Customers_DestinationFile:
     "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/Rewaatech_DS3_AllCustomers.xlsx"
 
@@ -59,7 +59,7 @@ ChargeBee Automation Configuration:
   Subscriptions_SourceFile:
     #Moille validation requires "Subscriptions" & "Transactions" files
     #Recurly validation requires "Addon_Columns" & "Coupon_Columns" files
-    "/Users/cb-muneendra/Downloads/Rewaatech - Chargebee Migration Template (PC 2.0) - subs-phase4.csv"
+    "/Users/cb-muneendra/Downloads/Rewaatech - Chargebee Migration Template (PC 2.0) - subs-phase 6.csv"
 
   Subscriptions_DestinationFile:
     "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/Rewaatech_DS3_AllSubscriptions.xlsx"
@@ -106,10 +106,10 @@ ChargeBee Automation Configuration:
   Invoices_SourceFile:
     #Moille validation requires "invoice-lines", "Subscriptions" & "Transactions" files and need to configure scheduled for date
     #Recurly validation requires "Invoice_Adjustment_Columns" & "Payment_Merge_Columns" files
-    "/Users/cb-muneendra/Downloads/Rewaatech - Chargebee Migration Template (PC 2.0) - inv-p4(2)-fixed.csv"
+    "/Users/cb-muneendra/Git/cb_data_validation/utils/Chargebee Migration Template (PC 2.0) - invoices-phase6.xlsx"
 
   Invoices_DestinationFile:
-    "/Users/cb-muneendra/Git/cb_data_validation/readAPI/ds3files/Rewaatech_DS3_AllInvoices.xlsx"
+    "/Users/cb-muneendra/Downloads/Rewaatech_DS3_AllInvoices.xlsx"
 
   Invoices_KeyColumns:
     - "invoice[id] : invoice_id"
